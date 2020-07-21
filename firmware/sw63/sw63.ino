@@ -10,6 +10,10 @@
 #include <TinyWireM.h>
 #include <TimeLib.h>
 
+#define SW63_1_0 1
+#define SW63_2_0 2
+#define SW63_VERSION SW63_2_0
+
 // pin definitions - see schematic
 #define PIN_ENABLE 3
 #define PIN_LED_DATA 2
@@ -90,7 +94,6 @@ bool _pm = true;
 // how often should brightness check occur
 #define BRIGHTNESS_CHECK_INTERVAL 50
 unsigned long lastTimeBrightnessCheck = 0;
-
 
 void setup()
 {
@@ -225,20 +228,20 @@ void sleep()
     digitalWrite(PIN_LED_PWM, true);
 
     delay(100);
-    GIMSK |= _BV(PCIE0);                 
-    PCMSK0 |= _BV(PCINT5);               
-    ADCSRA &= ~_BV(ADEN);                
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN); 
-    sleep_enable();                      
-    sei();                               
-    sleep_cpu();                         
+    GIMSK |= _BV(PCIE0);
+    PCMSK0 |= _BV(PCINT5);
+    ADCSRA &= ~_BV(ADEN);
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    sleep_enable();
+    sei();
+    sleep_cpu();
 
     // NOW WAKING UP
-    cli();                  
-    PCMSK0 &= ~_BV(PCINT5); 
-    sleep_disable();        
-    ADCSRA |= _BV(ADEN);    
-    sei();                  
+    cli();
+    PCMSK0 &= ~_BV(PCINT5);
+    sleep_disable();
+    ADCSRA |= _BV(ADEN);
+    sei();
 
     nextAnimationIsAt = 0;
     analogWrite(PIN_LED_PWM, 254);
@@ -414,7 +417,11 @@ void settingsButtonLongPress()
 void updateBrightness()
 {
     int val = analogRead(PIN_LIGHT_SENSOR);
+#if SW63_VERSION == SW63_2_0
+    val = val * 2.5; // version 2.0 uses a different light sensor
+#else
     val = val * 4;
+#endif
     if (val > 1023)
     {
         val = 1023;
@@ -485,8 +492,8 @@ void readTime()
     int mm = t.Minute;
 
     byte aftercoef = 0; // how "quarter after" modifies hours
-    byte halfcoef = 0; // how "half past" modifies hours
-    byte tocoef = 0; // "how quarter to" modifies hours
+    byte halfcoef = 0;  // how "half past" modifies hours
+    byte tocoef = 0;    // "how quarter to" modifies hours
 
     if (language == CZECH || language == HUNGARIAN)
     {

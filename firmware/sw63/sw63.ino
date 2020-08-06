@@ -23,20 +23,38 @@
 #define PIN_LIGHT_SENSOR A7
 #define PIN_BUTTON 5
 
+// modes
+#define MODE_DISPLAY 0
+#define MODE_SETTING 1
+#define MODE_SECRET 2
+byte mode = MODE_DISPLAY;
+
+// display settings
+#define SPEED_COUNT 6
+byte currentSpeed = 0;
+unsigned int speedHoldDigits[SPEED_COUNT] = {1000, 800, 600, 300, 200, 150};
+unsigned int speedHold[SPEED_COUNT] = {800, 600, 350, 250, 200, 150};
+unsigned int speedPause[SPEED_COUNT] = {150, 100, 80, 40, 40, 40};
+unsigned int speedHoldCompressed[SPEED_COUNT] = {2000, 1200, 800, 600, 400, 300};
+#define COMPRESSED compressedActive
+bool compressedActive = false;
+#define SAVER saverActive
+bool saverActive = false;
+
 // how long in ms LEDs should stay on
-#define HOLD_DIGITS 1000
-#define HOLD 800
-#define PAUSE 150
+#define HOLD_COMPRESSED speedHoldCompressed[currentSpeed]
+#define HOLD_DIGITS speedHoldDigits[currentSpeed]
+#define HOLD speedHold[currentSpeed]
+#define PAUSE speedPause[currentSpeed]
 #define SKIP 1
 
 // language defintions
-#define LANGUAGES_COUNT 6
+#define LANGUAGES_COUNT 5
 #define CZECH 1
 #define ENGLISH 2
 #define GERMAN 3
-#define FRENCH 4
-#define POLISH 5
-#define HUNGARIAN 6
+#define POLISH 4
+#define HUNGARIAN 5
 
 // default language
 byte language = CZECH;
@@ -52,7 +70,6 @@ WatchFace watchFace = WatchFace();
 #include "animations/AnimationPast.cpp"
 #include "animations/AnimationTo.cpp"
 #include "animations/AnimationIntro.cpp"
-#include "animations/AnimationFrench.cpp"
 Animation *animation;
 
 // button and timings
@@ -60,11 +77,15 @@ bool buttonPressed = false;
 unsigned long lastTimeButton = 0;
 unsigned long smashingStarted = 0;
 byte smashingCount = 0;
+bool ignoreNextPress = false;
+bool ignoreNextLongPress = false;
 #define SMASH_INTERVAL 2000
 #define SMASH_COUNT 3
 #define LONG_PRESS 1500
 #define XLONG_PRESS 4000
 #define DEBOUNCE_PRESS 10
+#define BUTTON_PRESSED (!digitalRead(PIN_BUTTON))
+#define SETTINGS_TIMEOUT 15000
 
 // animation timings
 unsigned long nextAnimationIsAt = 0;
@@ -80,9 +101,7 @@ bool paused = true;
 #define SETTING_PASTTO 3
 #define SETTING_MINUTES 4
 #define SETTING_PM 5
-bool settingTime = false;
 byte currentSetting = 0;
-bool ignoreFirstSettingClick = false;
 
 // variables for storing when setting time
 byte _face = 1;
@@ -90,6 +109,14 @@ byte _hours = 1;
 byte _minutes = 1;
 int _pastTo = 1;
 bool _pm = true;
+
+// secret menu
+bool waitForSecretMenu = false;
+bool secretOpened = false;
+#define SECRET_ITEMS 4
+#define SECRET_SPEED 0
+#define SECRET_COMPRESSED 1
+#define SECRET_SAVER 2
 
 // how often should brightness check occur
 #define BRIGHTNESS_CHECK_INTERVAL 50
@@ -108,7 +135,7 @@ void setup()
     digitalWrite(PIN_ENABLE, true);
 
     delay(10);
-    setClock(0, 0); // 00:00
+    setClock(0, 0);
     delay(10);
 
     updateBrightness();
@@ -127,72 +154,108 @@ void setClock(byte hr, byte min)
     RTC.write(tm);
 }
 
-void loop()
+void displayTimeLoop()
 {
-    if (!settingTime)
+    if (reloadTime)
     {
-        if (reloadTime)
-        {
-            if (language == FRENCH)
-            {
-                readTimeFr();
-            }
-            else
-            {
-                readTime();
-            }
-            reloadTime = false;
-        }
-        if (!paused && nextPauseIsAt < millis() && !buttonPressed)
-        {
-            paused = true;
-            watchFace.clearLeds();
-            watchFace.drawLeds();
-        }
-        if (reloadTime || (nextAnimationIsAt < millis() && !buttonPressed))
-        {
-            int res = animation->draw();
-            watchFace.drawLeds();
-            if (res > 0)
-            {
-                nextAnimationIsAt = millis() + res + PAUSE;
-                nextPauseIsAt = millis() + res;
-                paused = false;
-            }
-            else
-            {
-                reloadTime = true;
-                sleep();
-            }
-        }
-
-        checkButtons();
+        readTime();
+        reloadTime = false;
     }
-    else
+    if (!paused && nextPauseIsAt < millis() && (!buttonPressed || ignoreNextPress))
+    {
+        paused = true;
+        watchFace.clearLeds();
+        watchFace.drawLeds();
+    }
+    if (reloadTime || (nextAnimationIsAt < millis() && (!buttonPressed || ignoreNextPress)))
+    {
+        int res = animation->draw();
+        watchFace.drawLeds();
+        if (res > 0)
+        {
+            nextAnimationIsAt = millis() + res + PAUSE;
+            nextPauseIsAt = millis() + res;
+            paused = false;
+        }
+        else
+        {
+            reloadTime = true;
+            sleep();
+        }
+    }
+}
+
+void settingTimeLoop()
+{
+    switch (currentSetting)
+    {
+    case SETTING_LANGUAGE:
+        watchFace.updateLeds(0, 0, false, 0, language, 0, true);
+        break;
+    case SETTING_FACE:
+        watchFace.updateLeds(0, 0, true, 0, 0, _face, 0);
+        break;
+    case SETTING_HOURS:
+        watchFace.updateLeds(0, 0, true, 0, _hours, 0, 0);
+        break;
+    case SETTING_PASTTO:
+        watchFace.updateLeds(_pastTo<0, _pastTo> 0, 0, true, 0, 0, 0);
+        break;
+    case SETTING_MINUTES:
+        watchFace.updateLeds(_pastTo == -1, _pastTo == 1, 0, true, _minutes, 0, 0);
+        break;
+    case SETTING_PM:
+        watchFace.updateLeds(0, 0, 0, 0, 0, 0, _pm);
+        break;
+    }
+    watchFace.drawLeds();
+}
+
+void secretMenuLoop()
+{
+    byte val = 0;
+    if (secretOpened)
     {
         switch (currentSetting)
         {
-        case SETTING_LANGUAGE:
-            watchFace.updateLeds(0, 0, false, 0, language, 0, true);
+        case SECRET_SPEED:
+            val = currentSpeed + 1;
             break;
-        case SETTING_FACE:
-            watchFace.updateLeds(0, 0, true, 0, 0, _face, 0);
+        case SECRET_COMPRESSED:
+            val = compressedActive ? 2 : 1;
             break;
-        case SETTING_HOURS:
-            watchFace.updateLeds(0, 0, true, 0, _hours, 0, 0);
-            break;
-        case SETTING_PASTTO:
-            watchFace.updateLeds(_pastTo<0, _pastTo> 0, 0, true, 0, 0, 0);
-            break;
-        case SETTING_MINUTES:
-            watchFace.updateLeds(_pastTo == -1, _pastTo == 1, 0, true, _minutes, 0, 0);
-            break;
-        case SETTING_PM:
-            watchFace.updateLeds(0, 0, 0, 0, 0, 0, _pm);
+        case SECRET_SAVER:
+            val = saverActive ? 2 : 1;
             break;
         }
-        checkButtonWhileSetting();
-        watchFace.drawLeds();
+    }
+    watchFace.updateLeds(currentSetting == 3, currentSetting == 2, currentSetting == 1, currentSetting == 0, val, 0, secretOpened);
+    watchFace.drawLeds();
+}
+
+void checkForMenuExit(){
+    if (millis() - lastTimeButton > SETTINGS_TIMEOUT)
+    {
+        setMode(MODE_DISPLAY);
+        return;
+    }
+}
+
+void loop()
+{
+    switch (mode)
+    {
+    case MODE_DISPLAY:
+        displayTimeLoop();
+        break;
+    case MODE_SETTING:
+        settingTimeLoop();
+        checkForMenuExit();
+        break;
+    case MODE_SECRET:
+        secretMenuLoop();
+        checkForMenuExit();
+        break;
     }
 
     if (millis() > lastTimeBrightnessCheck + BRIGHTNESS_CHECK_INTERVAL)
@@ -200,6 +263,8 @@ void loop()
         updateBrightness();
         lastTimeBrightnessCheck = millis();
     }
+
+    checkButtons();
 }
 
 /*
@@ -254,43 +319,125 @@ void sleep()
     lastTimeBrightnessCheck = millis();
 }
 
+bool shortButtonPress()
+{
+    switch (mode)
+    {
+    case MODE_DISPLAY:
+        reloadTime = true;
+        nextAnimationIsAt = 0;
+        watchFace.clearLeds();
+        watchFace.drawLeds();
+        smashCheck();
+        delay(40);
+        return true;
+    case MODE_SECRET:
+        if (secretOpened)
+        {
+            switch (currentSetting)
+            {
+            case SECRET_SPEED:
+                currentSpeed++;
+                if (currentSpeed >= SPEED_COUNT)
+                {
+                    currentSpeed = 0;
+                }
+                break;
+            case SECRET_COMPRESSED:
+                compressedActive = !compressedActive;
+                break;
+            case SECRET_SAVER:
+                saverActive = !saverActive;
+                break;
+            }
+        }
+        else
+        {
+            currentSetting++;
+            if (currentSetting >= SECRET_ITEMS)
+            {
+                currentSetting = 0;
+            }
+        }
+        delay(40);
+        return true;
+    case MODE_SETTING:
+        settingsButtonClick();
+        return true;
+    }
+    return false;
+}
+
+bool longButtonPress()
+{
+    switch (mode)
+    {
+    case MODE_SETTING:
+        settingsButtonLongPress();
+        return true;
+    case MODE_SECRET:
+        if (currentSetting == 3)
+        {
+            setMode(MODE_DISPLAY);
+        }
+        else
+        {
+            secretOpened = !secretOpened;
+        }
+        ignoreNextPress = true;
+        return true;
+    }
+    return false;
+}
+
+bool xlongButtonPress()
+{
+    switch (mode)
+    {
+    case MODE_DISPLAY:
+        setMode(MODE_SETTING);
+        ignoreNextLongPress = true;
+        return true;
+    case MODE_SETTING:
+        setMode(MODE_SECRET);
+        return true;
+    }
+    return false;
+}
+
 void checkButtons()
 {
 
-    if (!digitalRead(PIN_BUTTON) && !buttonPressed)
+    if (BUTTON_PRESSED && !buttonPressed)
     {
         buttonPressed = true;
         lastTimeButton = millis();
     }
 
-    if (!digitalRead(PIN_BUTTON) && buttonPressed)
+    if (BUTTON_PRESSED && buttonPressed)
     {
-        if (millis() - lastTimeButton > XLONG_PRESS)
+        unsigned long diff = millis() - lastTimeButton;
+        if (diff > LONG_PRESS && !ignoreNextLongPress)
         {
-            _face = 1;
-            _hours = 1;
-            _minutes = 1;
-            _pastTo = 1;
-            _pm = true;
-            nextAnimationIsAt = 0;
-            reloadTime = true;
-            settingTime = true;
-            ignoreFirstSettingClick = true;
-            currentSetting = 0;
+            buttonPressed = !longButtonPress();
+        }
+        if (diff > XLONG_PRESS)
+        {
+            buttonPressed = !xlongButtonPress();
         }
     }
-    if (digitalRead(PIN_BUTTON) && buttonPressed)
+    if (!BUTTON_PRESSED && buttonPressed)
     {
-        if (millis() - lastTimeButton > DEBOUNCE_PRESS)
+        if (millis() - lastTimeButton > DEBOUNCE_PRESS && millis() - lastTimeButton < LONG_PRESS)
         {
-            reloadTime = true;
+            if (!ignoreNextPress)
+            {
+                shortButtonPress();
+            }
+            ignoreNextPress = false;
             buttonPressed = false;
-            nextAnimationIsAt = 0;
-            watchFace.clearLeds();
-            watchFace.drawLeds();
-            smashCheck();
-            delay(40);
         }
+        ignoreNextLongPress = false;
     }
 }
 
@@ -312,39 +459,6 @@ void smashCheck()
     {
         smashingCount = 0;
         smashingStarted = millis();
-    }
-}
-
-void checkButtonWhileSetting()
-{
-    if (!digitalRead(PIN_BUTTON) && !buttonPressed)
-    {
-        buttonPressed = true;
-        lastTimeButton = millis();
-    }
-    if (!digitalRead(PIN_BUTTON) && buttonPressed)
-    {
-        if (millis() - lastTimeButton > LONG_PRESS)
-        {
-            if (!ignoreFirstSettingClick)
-            {
-                settingsButtonLongPress();
-            }
-            ignoreFirstSettingClick = true;
-            buttonPressed = false;
-        }
-    }
-    if (digitalRead(PIN_BUTTON) && buttonPressed)
-    {
-        if (millis() - lastTimeButton > DEBOUNCE_PRESS && millis() - lastTimeButton < LONG_PRESS)
-        {
-            if (!ignoreFirstSettingClick)
-            {
-                settingsButtonClick();
-            }
-            ignoreFirstSettingClick = false;
-            buttonPressed = false;
-        }
     }
 }
 
@@ -399,6 +513,7 @@ void settingsButtonClick()
 
 void settingsButtonLongPress()
 {
+    ignoreNextPress = true;
     currentSetting++;
     if (_pastTo == 0 && currentSetting == SETTING_MINUTES)
     {
@@ -407,8 +522,22 @@ void settingsButtonLongPress()
     if (currentSetting == SETTING_STEPS)
     {
         finishSetTime();
-        settingTime = false;
+        setMode(MODE_DISPLAY);
     }
+}
+
+void setMode(byte newMode)
+{
+    _face = 1;
+    _hours = 1;
+    _minutes = 1;
+    _pastTo = 1;
+    _pm = true;
+    nextAnimationIsAt = 0;
+    reloadTime = true;
+    currentSetting = 0;
+    ignoreNextPress = true;
+    mode = newMode;
 }
 
 /**
@@ -446,7 +575,7 @@ void finishSetTime()
             hr--;
         }
     }
-    else if (language == ENGLISH || language == FRENCH)
+    else if (language == ENGLISH)
     {
         if (_face > 3 || mn < 0)
         {
@@ -585,18 +714,6 @@ void readTime()
 }
 
 /**
- * Special time read for French
- */
-void readTimeFr()
-{
-    tmElements_t t;
-    RTC.read(t);
-    animation = new AnimationFrench();
-    animation->setTime(t.Hour % 12, t.Minute, 0, t.Hour > 12);
-    animation->setup();
-}
-
-/**
  * Shows intro animation which testes all diodes
  */
 void showIntro()
@@ -607,7 +724,7 @@ void showIntro()
     int waitFor = 0;
     do
     {
-        waitFor = animation->draw();
+        waitFor = animation->drawRegular();
         watchFace.drawLeds();
         delay(waitFor);
     } while (waitFor != 0);

@@ -66,9 +66,9 @@ void WatchFace::drawLeds()
 
     for (byte i = 0; i < 12; i++)
     {
-        digitalWrite(PIN_LED_DATA, (i >= 12 - _digit));
+        digitalWrite(PIN_LED_DATA, !SAVER ? (i >= 12 - _digit) : (i == 12 - _digit));
         doClock();
     }
-    
+
     digitalWrite(PIN_LED_LATCH, HIGH);
 }

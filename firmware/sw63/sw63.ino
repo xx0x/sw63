@@ -135,8 +135,7 @@ void setup()
     digitalWrite(PIN_ENABLE, true);
 
     delay(10);
-   // setClock(0, 0);
-   setClock(16, 35);
+    setClock(0, 0);
 
     delay(10);
 
@@ -235,7 +234,8 @@ void secretMenuLoop()
     watchFace.drawLeds();
 }
 
-void checkForMenuExit(){
+void checkForMenuExit()
+{
     if (millis() - lastTimeButton > SETTINGS_TIMEOUT)
     {
         setMode(MODE_DISPLAY);

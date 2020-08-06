@@ -32,10 +32,10 @@ byte mode = MODE_DISPLAY;
 // display settings
 #define SPEED_COUNT 6
 byte currentSpeed = 0;
-unsigned int speedHoldDigits[SPEED_COUNT] = {1000, 800, 600, 300, 200, 150};
-unsigned int speedHold[SPEED_COUNT] = {800, 600, 350, 250, 200, 150};
-unsigned int speedPause[SPEED_COUNT] = {150, 100, 80, 40, 40, 40};
-unsigned int speedHoldCompressed[SPEED_COUNT] = {2000, 1200, 800, 600, 400, 300};
+unsigned int speedHoldDigits[SPEED_COUNT] = {1000, 800, 600, 400, 300, 150};
+unsigned int speedHold[SPEED_COUNT] = {800, 640, 480, 320, 240, 120};
+unsigned int speedPause[SPEED_COUNT] = {150, 120, 90, 60, 45, 23};
+unsigned int speedHoldCompressed[SPEED_COUNT] = {2000, 1600, 1200, 800, 600, 300};
 #define COMPRESSED compressedActive
 bool compressedActive = false;
 #define SAVER saverActive
@@ -135,7 +135,9 @@ void setup()
     digitalWrite(PIN_ENABLE, true);
 
     delay(10);
-    setClock(0, 0);
+   // setClock(0, 0);
+   setClock(16, 35);
+
     delay(10);
 
     updateBrightness();

@@ -10,7 +10,7 @@ public:
         currentStep = 0;
     }
 
-    int draw()
+    int drawRegular()
     {
         if (currentStep < 12)
         {
@@ -45,6 +45,4 @@ public:
         return 0;
     }
 
-private:
-    byte currentStep;
 };

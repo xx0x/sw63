@@ -8,9 +8,10 @@ public:
     void setup()
     {
         currentStep = 0;
+        sign = 1;
     }
 
-    int draw()
+    int drawRegular()
     {
         int delayFor = 0;
 
@@ -93,6 +94,4 @@ public:
         return delayFor;
     }
 
-private:
-    byte currentStep;
 };

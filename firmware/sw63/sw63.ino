@@ -83,8 +83,8 @@ bool ignoreNextLongPress = false;
 #define SMASH_COUNT 3
 #define LONG_PRESS 1500
 #define XLONG_PRESS 4000
-#define DEBOUNCE_PRESS 10
-#define BUTTON_PRESSED (!digitalRead(PIN_BUTTON))
+#define DEBOUNCE_PRESS 50
+#define BUTTON_PRESSED_NOW (!digitalRead(PIN_BUTTON))
 #define SETTINGS_TIMEOUT 15000
 
 // animation timings
@@ -131,6 +131,9 @@ void setup()
     pinMode(PIN_LED_PWM, OUTPUT);
     pinMode(PIN_BUTTON, INPUT_PULLUP);
     pinMode(PIN_LIGHT_SENSOR, INPUT);
+
+    GIMSK |= _BV(PCIE0);
+    PCMSK0 |= _BV(PCINT5);
 
     digitalWrite(PIN_ENABLE, true);
 
@@ -275,6 +278,12 @@ void loop()
 
 ISR(PCINT0_vect)
 {
+    if (millis() - lastTimeButton < DEBOUNCE_PRESS)
+    {
+        return;
+    }
+    buttonPressed = true;
+    lastTimeButton = millis();
 }
 
 /* 
@@ -295,8 +304,7 @@ void sleep()
     digitalWrite(PIN_LED_PWM, true);
 
     delay(100);
-    GIMSK |= _BV(PCIE0);
-    PCMSK0 |= _BV(PCINT5);
+
     ADCSRA &= ~_BV(ADEN);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();
@@ -305,7 +313,6 @@ void sleep()
 
     // NOW WAKING UP
     cli();
-    PCMSK0 &= ~_BV(PCINT5);
     sleep_disable();
     ADCSRA |= _BV(ADEN);
     sei();
@@ -380,6 +387,9 @@ bool longButtonPress()
     case MODE_SECRET:
         if (currentSetting == 3)
         {
+            watchFace.clearLeds();
+            watchFace.drawLeds();
+            delay(500);
             setMode(MODE_DISPLAY);
         }
         else
@@ -399,7 +409,8 @@ bool xlongButtonPress()
     case MODE_DISPLAY:
         setMode(MODE_SETTING);
         ignoreNextLongPress = true;
-        return true;
+        lastTimeButton = millis();
+        return false;
     case MODE_SETTING:
         setMode(MODE_SECRET);
         return true;
@@ -409,14 +420,7 @@ bool xlongButtonPress()
 
 void checkButtons()
 {
-
-    if (BUTTON_PRESSED && !buttonPressed)
-    {
-        buttonPressed = true;
-        lastTimeButton = millis();
-    }
-
-    if (BUTTON_PRESSED && buttonPressed)
+    if (buttonPressed)
     {
         unsigned long diff = millis() - lastTimeButton;
         if (diff > LONG_PRESS && !ignoreNextLongPress)
@@ -428,9 +432,9 @@ void checkButtons()
             buttonPressed = !xlongButtonPress();
         }
     }
-    if (!BUTTON_PRESSED && buttonPressed)
+    if (!BUTTON_PRESSED_NOW && buttonPressed)
     {
-        if (millis() - lastTimeButton > DEBOUNCE_PRESS && millis() - lastTimeButton < LONG_PRESS)
+        if (millis() - lastTimeButton < LONG_PRESS)
         {
             if (!ignoreNextPress)
             {

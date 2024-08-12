@@ -1,2 +1,8 @@
 /.build
 /.vscode
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+*.b#?
+*.s#?

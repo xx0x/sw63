@@ -2126,6 +2126,26 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <text x="0" y="-2.54" size="0.8" layer="25" font="fixed" ratio="15" rot="R180" align="center">&gt;NAME</text>
 <text x="0" y="3.81" size="0.8" layer="27" font="fixed" ratio="15" align="center">&gt;VALUE</text>
 </package>
+<package name="TEMT6200FX01" urn="urn:adsk.eagle:footprint:45107110/1" library_version="24">
+<text x="0" y="1.27" size="0.8128" layer="25" ratio="15" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.27" size="0.8128" layer="27" ratio="15" rot="R180" align="bottom-center">&gt;VALUE</text>
+<wire x1="1.55" y1="-0.975" x2="1.55" y2="0.975" width="0.05" layer="39"/>
+<wire x1="-1.55" y1="0.975" x2="-1.55" y2="-0.975" width="0.05" layer="39"/>
+<wire x1="-1" y1="0.625" x2="-1" y2="-0.625" width="0.127" layer="51"/>
+<wire x1="-1" y1="-0.625" x2="1" y2="-0.625" width="0.127" layer="51"/>
+<wire x1="1" y1="-0.625" x2="1" y2="0.625" width="0.127" layer="51"/>
+<wire x1="1" y1="0.625" x2="-1" y2="0.625" width="0.127" layer="51"/>
+<wire x1="1.55" y1="0.975" x2="-1.55" y2="0.975" width="0.05" layer="39"/>
+<wire x1="-1.55" y1="-0.975" x2="1.55" y2="-0.975" width="0.05" layer="39"/>
+<wire x1="0.127" y1="0.254" x2="-0.127" y2="0" width="0.127" layer="21"/>
+<wire x1="-0.127" y1="0" x2="0.127" y2="-0.254" width="0.127" layer="21"/>
+<wire x1="0.127" y1="-0.254" x2="0.127" y2="-0.127" width="0.127" layer="21"/>
+<wire x1="0.127" y1="-0.127" x2="0.127" y2="0.254" width="0.127" layer="21"/>
+<wire x1="0.127" y1="0.254" x2="0" y2="0" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="0.127" y2="-0.127" width="0.127" layer="21"/>
+<smd name="C" x="0.8" y="0" dx="1" dy="1.45" layer="1"/>
+<smd name="E" x="-0.8" y="0" dx="1" dy="1.45" layer="1"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="SOT23" urn="urn:adsk.eagle:package:32975863/4" type="model" library_version="22">
@@ -2136,6 +2156,11 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <package3d name="TO92" urn="urn:adsk.eagle:package:32975861/1" type="box" library_version="22">
 <packageinstances>
 <packageinstance name="TO92"/>
+</packageinstances>
+</package3d>
+<package3d name="TEMT6200FX01" urn="urn:adsk.eagle:package:45107112/2" type="model" library_version="24">
+<packageinstances>
+<packageinstance name="TEMT6200FX01"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -2189,6 +2214,42 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pin name="E" x="2.54" y="-5.08" visible="off" length="short" direction="pas" swaplevel="3" rot="R90"/>
 <text x="-10.16" y="7.62" size="1.778" layer="95">&gt;NAME</text>
 <text x="-10.16" y="5.08" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+<symbol name="TEMT6200FX01" urn="urn:adsk.eagle:symbol:45107111/1" library_version="24">
+<wire x1="-4.953" y1="2.54" x2="-3.175" y2="0.762" width="0.1524" layer="94"/>
+<wire x1="-3.175" y1="0.762" x2="-4.318" y2="1.143" width="0.1524" layer="94"/>
+<wire x1="-4.318" y1="1.143" x2="-3.556" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="-3.556" y1="1.905" x2="-3.175" y2="0.762" width="0.1524" layer="94"/>
+<wire x1="2.286" y1="-2.286" x2="2.54" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="1.905" x2="0" y2="0.635" width="0.254" layer="94"/>
+<wire x1="0" y1="0.635" x2="0" y2="-0.635" width="0.254" layer="94"/>
+<wire x1="0" y1="-0.635" x2="0" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="0" y1="-0.635" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="0.635" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-4.953" y1="0.635" x2="-3.175" y2="-1.143" width="0.1524" layer="94"/>
+<wire x1="-3.175" y1="-1.143" x2="-4.318" y2="-0.762" width="0.1524" layer="94"/>
+<wire x1="-4.318" y1="-0.762" x2="-3.556" y2="0" width="0.1524" layer="94"/>
+<wire x1="-3.556" y1="0" x2="-3.175" y2="-1.143" width="0.1524" layer="94"/>
+<text x="-10.1556" y="3.8122" size="1.779540625" layer="95">&gt;NAME</text>
+<text x="-10.1508" y="-2.54" size="1.78121875" layer="96" align="top-left">&gt;VALUE</text>
+<polygon width="0.1524" layer="94">
+<vertex x="-4.318" y="1.143"/>
+<vertex x="-3.175" y="0.762"/>
+<vertex x="-3.556" y="1.905"/>
+</polygon>
+<polygon width="0.254" layer="94">
+<vertex x="2.54" y="-2.54"/>
+<vertex x="2.286" y="-1.524"/>
+<vertex x="1.524" y="-2.54"/>
+</polygon>
+<polygon width="0.1524" layer="94">
+<vertex x="-4.318" y="-0.762"/>
+<vertex x="-3.175" y="-1.143"/>
+<vertex x="-3.556" y="0"/>
+</polygon>
+<circle x="1.27" y="0" radius="3.175" width="0.254" layer="94"/>
+<pin name="E" x="2.54" y="-7.62" visible="pad" length="middle" direction="pas" rot="R90"/>
+<pin name="C" x="2.54" y="7.62" visible="pad" length="middle" direction="pas" rot="R270"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -2252,6 +2313,36 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <technologies>
 <technology name="">
 <attribute name="TYPE" value="THT"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="TEMT6200FX01" urn="urn:adsk.eagle:component:45107113/2" prefix="Q" library_version="24">
+<description>Phototransistors 550nm Top View 0805 (2012 Metric)  &lt;a href="https://pricing.snapeda.com/parts/TEMT6200FX01/Vishay%20Semiconductor/view-part?ref=eda"&gt;Check availability&lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="TEMT6200FX01" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TEMT6200FX01">
+<connects>
+<connect gate="G$1" pin="C" pad="C"/>
+<connect gate="G$1" pin="E" pad="E"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45107112/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="AVAILABILITY" value="In Stock"/>
+<attribute name="CHECK_PRICES" value="https://www.snapeda.com/parts/TEMT6200FX01/Vishay+Semiconductor+Opto+Division/view-part/?ref=eda"/>
+<attribute name="DESCRIPTION" value=" Phototransistors 550nm Top View 0805 (2012 Metric) "/>
+<attribute name="MF" value="Vishay Semiconductor"/>
+<attribute name="MP" value="TEMT6200FX01"/>
+<attribute name="PACKAGE" value="0805 Vishay"/>
+<attribute name="PRICE" value="None"/>
+<attribute name="PURCHASE-URL" value="https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=43955&amp;manufacturer=Vishay Semiconductor&amp;part_name=TEMT6200FX01&amp;search_term=temt6200fx01"/>
+<attribute name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/TEMT6200FX01/Vishay+Semiconductor+Opto+Division/view-part/?ref=snap"/>
 </technology>
 </technologies>
 </device>
@@ -2401,6 +2492,68 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 </deviceset>
 </devicesets>
 </library>
+<library name="BASTL_PINHEADERS" urn="urn:adsk.eagle:library:32976504">
+<packages>
+<package name="TEST_PIN_1.27" urn="urn:adsk.eagle:footprint:41964515/4" library_version="72">
+<smd name="P$1" x="0" y="0" dx="1.27" dy="1.27" layer="1" roundness="100"/>
+<text x="0" y="1.27" size="0.8128" layer="25" ratio="15" align="center">&gt;NAME</text>
+</package>
+<package name="TEST_PIN_2.0" urn="urn:adsk.eagle:footprint:43479612/2" library_version="72">
+<smd name="P$1" x="0" y="0" dx="2" dy="2" layer="1" roundness="100"/>
+<text x="0" y="1.651" size="0.8128" layer="25" ratio="15" align="center">&gt;NAME</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="TEST_PIN" urn="urn:adsk.eagle:package:41964516/5" type="empty" library_version="72">
+<packageinstances>
+<packageinstance name="TEST_PIN_1.27"/>
+</packageinstances>
+</package3d>
+<package3d name="TEST_PIN_2.0" urn="urn:adsk.eagle:package:43479613/3" type="empty" library_version="72">
+<packageinstances>
+<packageinstance name="TEST_PIN_2.0"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="TEST_PIN" urn="urn:adsk.eagle:symbol:41964513/2" library_version="72">
+<pin name="P$1" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
+<text x="-1.524" y="0" size="1.27" layer="95" align="center-right">&gt;NAME</text>
+<circle x="0" y="0" radius="0.762" width="0" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TEST_PIN" urn="urn:adsk.eagle:component:41964517/7" prefix="TP" library_version="72">
+<gates>
+<gate name="G$1" symbol="TEST_PIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TEST_PIN_1.27">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:41964516/5"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="_LARGE" package="TEST_PIN_2.0">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43479613/3"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2429,18 +2582,17 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="LD10" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD11" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD12" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
-<part name="LD13" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="LD14" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="LD15" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="LD16" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="LD17" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="LD18" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="LD19" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="LD20" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="LD21" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-3MM_ALT" package3d_urn="urn:adsk.eagle:package:45095771/2"/>
+<part name="PLUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+<part name="MINUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+<part name="HOURS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+<part name="MINUTES" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+<part name="UP" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<part name="RIGHT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<part name="DOWN" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<part name="LEFT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<part name="PM" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-3MM_ALT" package3d_urn="urn:adsk.eagle:package:45095771/2"/>
 <part name="SW1" library="BASTL_SWITCHES" library_urn="urn:adsk.eagle:library:32903743" deviceset="KSC3XXJ" device="" package3d_urn="urn:adsk.eagle:package:40210534/2" value="KSC321JLFS"/>
 <part name="U6" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MIC5504YM5-TR" device="" package3d_urn="urn:adsk.eagle:package:34025889/5"/>
-<part name="LD22" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_0805" package3d_urn="urn:adsk.eagle:package:35858335/2"/>
 <part name="SWD" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="2X3POGO" device="NO_VIA" package3d_urn="urn:adsk.eagle:package:32904263/3"/>
 <part name="U7" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MCP73831T-2ACI" device="" package3d_urn="urn:adsk.eagle:package:34025889/5" value="MCP73832T-2ACI/OT"/>
 <part name="F1" library="BASTL_FUSES" library_urn="urn:adsk.eagle:library:32977952" deviceset="PTC" device="" package3d_urn="urn:adsk.eagle:package:32977962/4" value="500mA"/>
@@ -2504,6 +2656,18 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="R12" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="5k1"/>
 <part name="R13" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="10k"/>
 <part name="GND15" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="GND16" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="GND17" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="SUPPLY3" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="VDD" device=""/>
+<part name="GND18" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="SUPPLY4" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="VDD" device=""/>
+<part name="GND19" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="Q4" library="BASTL_TRANZISTORS" library_urn="urn:adsk.eagle:library:32975847" deviceset="TEMT6200FX01" device="" package3d_urn="urn:adsk.eagle:package:45107112/2"/>
+<part name="R14" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="10k"/>
+<part name="GND20" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
+<part name="B+" library="BASTL_PINHEADERS" library_urn="urn:adsk.eagle:library:32976504" deviceset="TEST_PIN" device="_LARGE" package3d_urn="urn:adsk.eagle:package:43479613/3" value="TEST_PIN_LARGE"/>
+<part name="B-" library="BASTL_PINHEADERS" library_urn="urn:adsk.eagle:library:32976504" deviceset="TEST_PIN" device="_LARGE" package3d_urn="urn:adsk.eagle:package:43479613/3" value="TEST_PIN_LARGE"/>
+<part name="GND21" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2535,73 +2699,73 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <attribute name="NAME" x="-160.02" y="73.66" size="1.778" layer="95" rot="SR0" align="top-center"/>
 <attribute name="VALUE" x="-160.02" y="71.12" size="1.778" layer="96" rot="SR0" align="top-center"/>
 </instance>
-<instance part="LD1" gate="G$1" x="0" y="139.7" smashed="yes">
-<attribute name="NAME" x="3.556" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD1" gate="G$1" x="63.5" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="59.944" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD2" gate="G$1" x="7.62" y="139.7" smashed="yes">
-<attribute name="NAME" x="11.176" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD2" gate="G$1" x="55.88" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="52.324" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD3" gate="G$1" x="15.24" y="139.7" smashed="yes">
-<attribute name="NAME" x="18.796" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD3" gate="G$1" x="48.26" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="44.704" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD4" gate="G$1" x="22.86" y="139.7" smashed="yes">
-<attribute name="NAME" x="26.416" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD4" gate="G$1" x="40.64" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="37.084" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD5" gate="G$1" x="30.48" y="139.7" smashed="yes">
-<attribute name="NAME" x="34.036" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD5" gate="G$1" x="33.02" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="29.464" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD6" gate="G$1" x="38.1" y="139.7" smashed="yes">
-<attribute name="NAME" x="41.656" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD6" gate="G$1" x="25.4" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="21.844" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD7" gate="G$1" x="45.72" y="139.7" smashed="yes">
-<attribute name="NAME" x="49.276" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD7" gate="G$1" x="17.78" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="14.224" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD8" gate="G$1" x="53.34" y="139.7" smashed="yes">
-<attribute name="NAME" x="56.896" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD8" gate="G$1" x="10.16" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="6.604" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD9" gate="G$1" x="60.96" y="139.7" smashed="yes">
-<attribute name="NAME" x="64.516" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD9" gate="G$1" x="2.54" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-1.016" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD10" gate="G$1" x="68.58" y="139.7" smashed="yes">
-<attribute name="NAME" x="72.136" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD10" gate="G$1" x="-5.08" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-8.636" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD11" gate="G$1" x="76.2" y="139.7" smashed="yes">
-<attribute name="NAME" x="79.756" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD11" gate="G$1" x="-12.7" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-16.256" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD12" gate="G$1" x="83.82" y="139.7" smashed="yes">
-<attribute name="NAME" x="87.376" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LD12" gate="G$1" x="-20.32" y="139.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-23.876" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD13" gate="G$1" x="-63.5" y="139.7" smashed="yes">
-<attribute name="NAME" x="-59.944" y="135.128" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-57.785" y="135.128" size="1.778" layer="96" rot="R90"/>
+<instance part="PLUS" gate="G$1" x="86.36" y="53.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="82.804" y="48.768" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="80.645" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="LD14" gate="G$1" x="-55.88" y="139.7" smashed="yes">
-<attribute name="NAME" x="-52.324" y="135.128" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-50.165" y="135.128" size="1.778" layer="96" rot="R90"/>
+<instance part="MINUS" gate="G$1" x="78.74" y="53.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="75.184" y="48.768" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="73.025" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="LD15" gate="G$1" x="-48.26" y="139.7" smashed="yes">
-<attribute name="NAME" x="-44.704" y="135.128" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-42.545" y="135.128" size="1.778" layer="96" rot="R90"/>
+<instance part="HOURS" gate="G$1" x="71.12" y="53.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="67.564" y="48.768" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="65.405" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="LD16" gate="G$1" x="-40.64" y="139.7" smashed="yes">
-<attribute name="NAME" x="-37.084" y="135.128" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-34.925" y="135.128" size="1.778" layer="96" rot="R90"/>
+<instance part="MINUTES" gate="G$1" x="63.5" y="53.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="59.944" y="48.768" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="57.785" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="LD17" gate="G$1" x="134.62" y="139.7" smashed="yes">
-<attribute name="NAME" x="138.176" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="UP" gate="G$1" x="180.34" y="137.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="176.784" y="132.588" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD18" gate="G$1" x="142.24" y="139.7" smashed="yes">
-<attribute name="NAME" x="145.796" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="RIGHT" gate="G$1" x="172.72" y="137.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="169.164" y="132.588" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD19" gate="G$1" x="149.86" y="139.7" smashed="yes">
-<attribute name="NAME" x="153.416" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="DOWN" gate="G$1" x="165.1" y="137.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="161.544" y="132.588" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD20" gate="G$1" x="157.48" y="139.7" smashed="yes">
-<attribute name="NAME" x="161.036" y="135.128" size="1.778" layer="95" rot="R90"/>
+<instance part="LEFT" gate="G$1" x="157.48" y="137.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="153.924" y="132.588" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="LD21" gate="G$1" x="167.64" y="139.7" smashed="yes">
-<attribute name="NAME" x="171.196" y="135.128" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="173.355" y="135.128" size="1.778" layer="96" rot="R90"/>
+<instance part="PM" gate="G$1" x="147.32" y="137.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="143.764" y="132.588" size="1.778" layer="95" rot="MR90"/>
+<attribute name="VALUE" x="141.605" y="132.588" size="1.778" layer="96" rot="MR90"/>
 </instance>
 <instance part="SW1" gate="G$1" x="127" y="27.94" smashed="yes">
 <attribute name="NAME" x="124.46" y="30.48" size="1.778" layer="95"/>
@@ -2610,10 +2774,6 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="U6" gate="G$1" x="-124.46" y="-66.04" smashed="yes">
 <attribute name="NAME" x="-124.46" y="-59.452" size="2.0828" layer="95" ratio="10" rot="SR0" align="bottom-center"/>
 <attribute name="VALUE" x="-124.46" y="-72.58" size="2.0828" layer="96" ratio="10" rot="SR0" align="top-center"/>
-</instance>
-<instance part="LD22" gate="G$1" x="-66.04" y="48.26" smashed="yes">
-<attribute name="NAME" x="-62.484" y="43.688" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-60.325" y="43.688" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="SWD" gate="G$1" x="149.86" y="-15.24" smashed="yes">
 <attribute name="VALUE" x="147.32" y="-22.86" size="1.778" layer="96"/>
@@ -2766,8 +2926,8 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="GNDPWR4" gate="G$1" x="45.72" y="91.44" smashed="yes" rot="R180">
 <attribute name="VALUE" x="45.72" y="93.98" size="1.778" layer="96" rot="R180" align="top-center"/>
 </instance>
-<instance part="GNDPWR5" gate="G$1" x="101.6" y="91.44" smashed="yes" rot="R180">
-<attribute name="VALUE" x="101.6" y="93.98" size="1.778" layer="96" rot="R180" align="top-center"/>
+<instance part="GNDPWR5" gate="G$1" x="99.06" y="93.98" smashed="yes" rot="R180">
+<attribute name="VALUE" x="99.06" y="96.52" size="1.778" layer="96" rot="R180" align="top-center"/>
 </instance>
 <instance part="GNDPWR6" gate="G$1" x="162.56" y="91.44" smashed="yes" rot="R180">
 <attribute name="VALUE" x="162.56" y="93.98" size="1.778" layer="96" rot="R180" align="top-center"/>
@@ -2797,8 +2957,8 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="VDDLEDS4" gate="G$1" x="228.6" y="86.36" smashed="yes" rot="R270">
 <attribute name="VALUE" x="231.775" y="88.265" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="VDDLEDS5" gate="G$1" x="149.86" y="144.78" smashed="yes">
-<attribute name="VALUE" x="147.955" y="147.955" size="1.778" layer="96"/>
+<instance part="VDDLEDS5" gate="G$1" x="165.1" y="142.24" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="167.005" y="145.415" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="SW2" gate="G$1" x="149.86" y="22.86" smashed="yes">
 <attribute name="NAME" x="147.32" y="25.4" size="1.778" layer="95"/>
@@ -2807,23 +2967,23 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="GND14" gate="1" x="154.94" y="20.32" smashed="yes">
 <attribute name="VALUE" x="152.4" y="17.78" size="1.778" layer="96"/>
 </instance>
-<instance part="C9" gate="G$1" x="-43.18" y="-15.24" smashed="yes" rot="R180">
-<attribute name="NAME" x="-50.8" y="-15.24" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-50.8" y="-17.78" size="1.778" layer="96"/>
+<instance part="C9" gate="G$1" x="35.56" y="20.32" smashed="yes" rot="MR90">
+<attribute name="NAME" x="35.56" y="25.4" size="1.778" layer="95"/>
+<attribute name="VALUE" x="35.56" y="22.86" size="1.778" layer="96"/>
 </instance>
-<instance part="C10" gate="G$1" x="-60.96" y="-15.24" smashed="yes" rot="R180">
-<attribute name="NAME" x="-71.12" y="-15.24" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-71.12" y="-17.78" size="1.778" layer="96"/>
+<instance part="C10" gate="G$1" x="27.94" y="2.54" smashed="yes" rot="R180">
+<attribute name="NAME" x="30.48" y="2.794" size="1.778" layer="95"/>
+<attribute name="VALUE" x="30.48" y="0.254" size="1.778" layer="96"/>
 </instance>
-<instance part="C11" gate="G$1" x="-60.96" y="-30.48" smashed="yes" rot="R180">
-<attribute name="NAME" x="-71.12" y="-30.48" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-71.12" y="-33.02" size="1.778" layer="96"/>
+<instance part="C11" gate="G$1" x="38.1" y="2.54" smashed="yes" rot="MR180">
+<attribute name="NAME" x="41.656" y="2.794" size="1.778" layer="95"/>
+<attribute name="VALUE" x="41.656" y="0.254" size="1.778" layer="96"/>
 </instance>
-<instance part="VDDLEDS6" gate="G$1" x="68.58" y="144.78" smashed="yes">
-<attribute name="VALUE" x="66.675" y="147.955" size="1.778" layer="96"/>
+<instance part="VDDLEDS6" gate="G$1" x="-5.08" y="144.78" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="-3.175" y="147.955" size="1.778" layer="96" rot="MR0"/>
 </instance>
-<instance part="VDDLEDS7" gate="G$1" x="-48.26" y="144.78" smashed="yes">
-<attribute name="VALUE" x="-50.165" y="147.955" size="1.778" layer="96"/>
+<instance part="VDDLEDS7" gate="G$1" x="71.12" y="58.42" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="73.025" y="61.595" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="R12" gate="G$1" x="-116.84" y="55.88" smashed="yes" rot="R90">
 <attribute name="NAME" x="-114.3" y="55.88" size="1.778" layer="95"/>
@@ -2836,6 +2996,44 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="GND15" gate="1" x="-116.84" y="35.56" smashed="yes">
 <attribute name="VALUE" x="-119.38" y="33.02" size="1.778" layer="96"/>
 </instance>
+<instance part="GND16" gate="1" x="45.72" y="17.78" smashed="yes">
+<attribute name="VALUE" x="43.18" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="GND17" gate="1" x="38.1" y="-7.62" smashed="yes">
+<attribute name="VALUE" x="35.56" y="-10.16" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY3" gate="G$1" x="33.02" y="10.16" smashed="yes">
+<attribute name="VALUE" x="31.115" y="13.335" size="1.778" layer="96"/>
+</instance>
+<instance part="GND18" gate="1" x="15.24" y="-43.18" smashed="yes">
+<attribute name="VALUE" x="12.7" y="-45.72" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY4" gate="G$1" x="142.24" y="-10.16" smashed="yes">
+<attribute name="VALUE" x="140.335" y="-6.985" size="1.778" layer="96"/>
+</instance>
+<instance part="GND19" gate="1" x="142.24" y="-20.32" smashed="yes">
+<attribute name="VALUE" x="139.7" y="-22.86" size="1.778" layer="96"/>
+</instance>
+<instance part="Q4" gate="G$1" x="-58.42" y="-58.42" smashed="yes">
+<attribute name="NAME" x="-50.7956" y="-59.6878" size="1.779540625" layer="95"/>
+<attribute name="VALUE" x="-50.7908" y="-60.96" size="1.78121875" layer="96" align="top-left"/>
+</instance>
+<instance part="R14" gate="G$1" x="-55.88" y="-71.12" smashed="yes" rot="R90">
+<attribute name="NAME" x="-53.34" y="-71.12" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-53.34" y="-73.66" size="1.778" layer="96"/>
+</instance>
+<instance part="GND20" gate="1" x="-55.88" y="-78.74" smashed="yes">
+<attribute name="VALUE" x="-58.42" y="-81.28" size="1.778" layer="96"/>
+</instance>
+<instance part="B+" gate="G$1" x="-111.76" y="0" smashed="yes" rot="R90">
+<attribute name="NAME" x="-111.76" y="-1.524" size="1.27" layer="95" rot="R90" align="center-right"/>
+</instance>
+<instance part="B-" gate="G$1" x="-99.06" y="10.16" smashed="yes" rot="R270">
+<attribute name="NAME" x="-99.06" y="11.684" size="1.27" layer="95" rot="R270" align="center-right"/>
+</instance>
+<instance part="GND21" gate="1" x="-99.06" y="2.54" smashed="yes">
+<attribute name="VALUE" x="-101.6" y="0" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -2846,12 +3044,22 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="-147.32" y1="63.5" x2="-142.24" y2="63.5" width="0.1524" layer="91"/>
 <label x="-142.24" y="63.5" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>
+<segment>
+<wire x1="15.24" y1="-10.16" x2="17.78" y2="-10.16" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA27"/>
+<label x="17.78" y="-10.16" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
 </net>
 <net name="D-" class="0">
 <segment>
 <pinref part="J1" gate="G$1" pin="D-"/>
 <wire x1="-147.32" y1="60.96" x2="-142.24" y2="60.96" width="0.1524" layer="91"/>
 <label x="-142.24" y="60.96" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+<segment>
+<wire x1="15.24" y1="-12.7" x2="17.78" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA25"/>
+<label x="17.78" y="-12.7" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -2992,6 +3200,38 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="R13" gate="G$1" pin="1"/>
 <pinref part="GND15" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="C11" gate="G$1" pin="1"/>
+<pinref part="GND17" gate="1" pin="GND"/>
+<pinref part="C10" gate="G$1" pin="1"/>
+<wire x1="27.94" y1="-2.54" x2="38.1" y2="-2.54" width="0.1524" layer="91"/>
+<junction x="38.1" y="-2.54"/>
+<wire x1="38.1" y1="-2.54" x2="38.1" y2="-5.08" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND16" gate="1" pin="GND"/>
+<pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="40.64" y1="20.32" x2="45.72" y2="20.32" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="EP"/>
+<pinref part="GND18" gate="1" pin="GND"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
+<wire x1="15.24" y1="-40.64" x2="15.24" y2="-38.1" width="0.1524" layer="91"/>
+<junction x="15.24" y="-40.64"/>
+</segment>
+<segment>
+<pinref part="SWD" gate="G$1" pin="5"/>
+<pinref part="GND19" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="R14" gate="G$1" pin="1"/>
+<pinref part="GND20" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="B-" gate="G$1" pin="P$1"/>
+<pinref part="GND21" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="N$2" class="0">
 <segment>
@@ -3015,15 +3255,23 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="-127" y1="10.16" x2="-124.46" y2="10.16" width="0.1524" layer="91"/>
 <label x="-124.46" y="10.16" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="PA10"/>
+<wire x1="-20.32" y1="-27.94" x2="-25.4" y2="-27.94" width="0.1524" layer="91"/>
+<label x="-25.4" y="-27.94" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="BAT" class="0">
 <segment>
 <pinref part="U7" gate="A" pin="VBAT"/>
 <wire x1="-127" y1="5.08" x2="-124.46" y2="5.08" width="0.1524" layer="91"/>
-<label x="-119.38" y="5.08" size="1.27" layer="95" ratio="12" xref="yes"/>
+<label x="-109.22" y="5.08" size="1.27" layer="95" ratio="12" xref="yes"/>
 <pinref part="C2" gate="G$1" pin="1"/>
-<wire x1="-124.46" y1="5.08" x2="-119.38" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="-124.46" y1="5.08" x2="-111.76" y2="5.08" width="0.1524" layer="91"/>
 <junction x="-124.46" y="5.08"/>
+<pinref part="B+" gate="G$1" pin="P$1"/>
+<wire x1="-111.76" y1="5.08" x2="-109.22" y2="5.08" width="0.1524" layer="91"/>
+<junction x="-111.76" y="5.08"/>
 </segment>
 <segment>
 <wire x1="-144.78" y1="-43.18" x2="-144.78" y2="-40.64" width="0.1524" layer="91"/>
@@ -3074,6 +3322,26 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="111.76" y1="0" x2="109.22" y2="0" width="0.1524" layer="91"/>
 <junction x="109.22" y="0"/>
 </segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="VDDIN"/>
+<pinref part="C10" gate="G$1" pin="2"/>
+<wire x1="15.24" y1="7.62" x2="20.32" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="VDDANA"/>
+<wire x1="20.32" y1="7.62" x2="27.94" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="10.16" x2="20.32" y2="10.16" width="0.1524" layer="91"/>
+<junction x="27.94" y="7.62"/>
+<pinref part="C11" gate="G$1" pin="2"/>
+<wire x1="27.94" y1="7.62" x2="33.02" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="SUPPLY3" gate="G$1" pin="VDD"/>
+<wire x1="33.02" y1="7.62" x2="38.1" y2="7.62" width="0.1524" layer="91"/>
+<junction x="33.02" y="7.62"/>
+<wire x1="20.32" y1="10.16" x2="20.32" y2="7.62" width="0.1524" layer="91"/>
+<junction x="20.32" y="7.62"/>
+</segment>
+<segment>
+<pinref part="SWD" gate="G$1" pin="1"/>
+<pinref part="SUPPLY4" gate="G$1" pin="VDD"/>
+</segment>
 </net>
 <net name="VDDLEDS" class="0">
 <segment>
@@ -3105,66 +3373,66 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="VDDLEDS4" gate="G$1" pin="VDDLEDS"/>
 </segment>
 <segment>
-<pinref part="LD21" gate="G$1" pin="A"/>
-<pinref part="LD20" gate="G$1" pin="A"/>
-<wire x1="157.48" y1="142.24" x2="167.64" y2="142.24" width="0.1524" layer="91"/>
-<junction x="157.48" y="142.24"/>
-<pinref part="LD19" gate="G$1" pin="A"/>
-<wire x1="149.86" y1="142.24" x2="157.48" y2="142.24" width="0.1524" layer="91"/>
-<junction x="149.86" y="142.24"/>
+<pinref part="PM" gate="G$1" pin="A"/>
+<pinref part="LEFT" gate="G$1" pin="A"/>
+<wire x1="157.48" y1="139.7" x2="147.32" y2="139.7" width="0.1524" layer="91"/>
+<junction x="157.48" y="139.7"/>
+<pinref part="DOWN" gate="G$1" pin="A"/>
+<wire x1="165.1" y1="139.7" x2="157.48" y2="139.7" width="0.1524" layer="91"/>
+<junction x="165.1" y="139.7"/>
 <pinref part="VDDLEDS5" gate="G$1" pin="VDDLEDS"/>
-<pinref part="LD18" gate="G$1" pin="A"/>
-<wire x1="142.24" y1="142.24" x2="149.86" y2="142.24" width="0.1524" layer="91"/>
-<junction x="142.24" y="142.24"/>
-<pinref part="LD17" gate="G$1" pin="A"/>
-<wire x1="134.62" y1="142.24" x2="142.24" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="RIGHT" gate="G$1" pin="A"/>
+<wire x1="172.72" y1="139.7" x2="165.1" y2="139.7" width="0.1524" layer="91"/>
+<junction x="172.72" y="139.7"/>
+<pinref part="UP" gate="G$1" pin="A"/>
+<wire x1="180.34" y1="139.7" x2="172.72" y2="139.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="LD1" gate="G$1" pin="A"/>
-<wire x1="0" y1="142.24" x2="7.62" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="142.24" x2="55.88" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="LD2" gate="G$1" pin="A"/>
-<wire x1="7.62" y1="142.24" x2="15.24" y2="142.24" width="0.1524" layer="91"/>
-<junction x="7.62" y="142.24"/>
+<wire x1="55.88" y1="142.24" x2="48.26" y2="142.24" width="0.1524" layer="91"/>
+<junction x="55.88" y="142.24"/>
 <pinref part="LD3" gate="G$1" pin="A"/>
-<wire x1="15.24" y1="142.24" x2="22.86" y2="142.24" width="0.1524" layer="91"/>
-<junction x="15.24" y="142.24"/>
+<wire x1="48.26" y1="142.24" x2="40.64" y2="142.24" width="0.1524" layer="91"/>
+<junction x="48.26" y="142.24"/>
 <pinref part="LD4" gate="G$1" pin="A"/>
-<wire x1="22.86" y1="142.24" x2="30.48" y2="142.24" width="0.1524" layer="91"/>
-<junction x="22.86" y="142.24"/>
+<wire x1="40.64" y1="142.24" x2="33.02" y2="142.24" width="0.1524" layer="91"/>
+<junction x="40.64" y="142.24"/>
 <pinref part="LD5" gate="G$1" pin="A"/>
-<wire x1="30.48" y1="142.24" x2="38.1" y2="142.24" width="0.1524" layer="91"/>
-<junction x="30.48" y="142.24"/>
+<wire x1="33.02" y1="142.24" x2="25.4" y2="142.24" width="0.1524" layer="91"/>
+<junction x="33.02" y="142.24"/>
 <pinref part="LD6" gate="G$1" pin="A"/>
-<wire x1="38.1" y1="142.24" x2="45.72" y2="142.24" width="0.1524" layer="91"/>
-<junction x="38.1" y="142.24"/>
+<wire x1="25.4" y1="142.24" x2="17.78" y2="142.24" width="0.1524" layer="91"/>
+<junction x="25.4" y="142.24"/>
 <pinref part="LD7" gate="G$1" pin="A"/>
-<wire x1="45.72" y1="142.24" x2="53.34" y2="142.24" width="0.1524" layer="91"/>
-<junction x="45.72" y="142.24"/>
+<wire x1="17.78" y1="142.24" x2="10.16" y2="142.24" width="0.1524" layer="91"/>
+<junction x="17.78" y="142.24"/>
 <pinref part="LD8" gate="G$1" pin="A"/>
-<wire x1="53.34" y1="142.24" x2="60.96" y2="142.24" width="0.1524" layer="91"/>
-<junction x="53.34" y="142.24"/>
+<wire x1="10.16" y1="142.24" x2="2.54" y2="142.24" width="0.1524" layer="91"/>
+<junction x="10.16" y="142.24"/>
 <pinref part="LD9" gate="G$1" pin="A"/>
-<wire x1="60.96" y1="142.24" x2="68.58" y2="142.24" width="0.1524" layer="91"/>
-<junction x="60.96" y="142.24"/>
+<wire x1="2.54" y1="142.24" x2="-5.08" y2="142.24" width="0.1524" layer="91"/>
+<junction x="2.54" y="142.24"/>
 <pinref part="LD10" gate="G$1" pin="A"/>
-<wire x1="68.58" y1="142.24" x2="76.2" y2="142.24" width="0.1524" layer="91"/>
-<junction x="68.58" y="142.24"/>
+<wire x1="-5.08" y1="142.24" x2="-12.7" y2="142.24" width="0.1524" layer="91"/>
+<junction x="-5.08" y="142.24"/>
 <pinref part="LD11" gate="G$1" pin="A"/>
-<wire x1="76.2" y1="142.24" x2="83.82" y2="142.24" width="0.1524" layer="91"/>
-<junction x="76.2" y="142.24"/>
+<wire x1="-12.7" y1="142.24" x2="-20.32" y2="142.24" width="0.1524" layer="91"/>
+<junction x="-12.7" y="142.24"/>
 <pinref part="LD12" gate="G$1" pin="A"/>
 <pinref part="VDDLEDS6" gate="G$1" pin="VDDLEDS"/>
 </segment>
 <segment>
-<pinref part="LD16" gate="G$1" pin="A"/>
-<pinref part="LD13" gate="G$1" pin="A"/>
-<wire x1="-63.5" y1="142.24" x2="-55.88" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="LD14" gate="G$1" pin="A"/>
-<junction x="-55.88" y="142.24"/>
-<wire x1="-55.88" y1="142.24" x2="-48.26" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="LD15" gate="G$1" pin="A"/>
-<wire x1="-48.26" y1="142.24" x2="-40.64" y2="142.24" width="0.1524" layer="91"/>
-<junction x="-48.26" y="142.24"/>
+<pinref part="MINUTES" gate="G$1" pin="A"/>
+<pinref part="PLUS" gate="G$1" pin="A"/>
+<wire x1="86.36" y1="55.88" x2="78.74" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="MINUS" gate="G$1" pin="A"/>
+<junction x="78.74" y="55.88"/>
+<wire x1="78.74" y1="55.88" x2="71.12" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="HOURS" gate="G$1" pin="A"/>
+<wire x1="71.12" y1="55.88" x2="63.5" y2="55.88" width="0.1524" layer="91"/>
+<junction x="71.12" y="55.88"/>
 <pinref part="VDDLEDS7" gate="G$1" pin="VDDLEDS"/>
 </segment>
 </net>
@@ -3201,7 +3469,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <segment>
 <pinref part="R8" gate="G$1" pin="1"/>
 <pinref part="GNDPWR5" gate="G$1" pin="GNDLEDS"/>
-<wire x1="101.6" y1="88.9" x2="99.06" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="91.44" x2="99.06" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
@@ -3213,26 +3481,16 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="GNDPWR7" gate="G$1" pin="GNDLEDS"/>
 </segment>
 </net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<pinref part="U2" gate="G$1" pin="SDA"/>
-<wire x1="63.5" y1="-17.78" x2="68.58" y2="-17.78" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$7" class="0">
-<segment>
-<pinref part="R5" gate="G$1" pin="2"/>
-<pinref part="U2" gate="G$1" pin="SCL"/>
-<wire x1="53.34" y1="-17.78" x2="53.34" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="-5.08" x2="68.58" y2="-5.08" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="BTN" class="0">
 <segment>
 <pinref part="SW1" gate="G$1" pin="2"/>
 <wire x1="132.08" y1="27.94" x2="132.08" y2="38.1" width="0.1524" layer="91"/>
 <label x="132.08" y="38.1" size="1.27" layer="95" ratio="12" rot="R90" xref="yes"/>
+</segment>
+<segment>
+<wire x1="-20.32" y1="-2.54" x2="-25.4" y2="-2.54" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA00"/>
+<label x="-25.4" y="-2.54" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -3271,14 +3529,25 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="205.74" y1="91.44" x2="200.66" y2="91.44" width="0.1524" layer="91"/>
 <label x="200.66" y="91.44" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 </segment>
+<segment>
+<wire x1="-55.88" y1="-45.72" x2="-60.96" y2="-45.72" width="0.1524" layer="91"/>
+<label x="-60.96" y="-45.72" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+<pinref part="Q4" gate="G$1" pin="C"/>
+<wire x1="-55.88" y1="-45.72" x2="-55.88" y2="-50.8" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="-20.32" y1="-10.16" x2="-25.4" y2="-10.16" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA03"/>
+<label x="-25.4" y="-10.16" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="N$12" class="0">
 <segment>
 <pinref part="U4" gate="G$1" pin="SDO"/>
 <pinref part="U5" gate="G$1" pin="SDI"/>
-<wire x1="88.9" y1="86.36" x2="106.68" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="86.36" x2="106.68" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="88.9" x2="119.38" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="86.36" x2="111.76" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="86.36" x2="111.76" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="88.9" x2="119.38" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$13" class="0">
@@ -3295,6 +3564,11 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="U3" gate="G$1" pin="SDI"/>
 <wire x1="2.54" y1="88.9" x2="-5.08" y2="88.9" width="0.1524" layer="91"/>
 <label x="-5.08" y="88.9" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<wire x1="-20.32" y1="-17.78" x2="-25.4" y2="-17.78" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA06"/>
+<label x="-25.4" y="-17.78" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="CLK" class="0">
@@ -3313,12 +3587,17 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <label x="116.84" y="86.36" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 <pinref part="U5" gate="G$1" pin="CLK"/>
 </segment>
+<segment>
+<wire x1="-20.32" y1="-20.32" x2="-25.4" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA07"/>
+<label x="-25.4" y="-20.32" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="LAT" class="0">
 <segment>
 <pinref part="U3" gate="G$1" pin="LATCH"/>
-<wire x1="2.54" y1="83.82" x2="-5.08" y2="83.82" width="0.1524" layer="91"/>
 <label x="-5.08" y="83.82" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+<wire x1="2.54" y1="83.82" x2="-5.08" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="58.42" y1="83.82" x2="55.88" y2="83.82" width="0.1524" layer="91"/>
@@ -3329,6 +3608,11 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="119.38" y1="83.82" x2="116.84" y2="83.82" width="0.1524" layer="91"/>
 <label x="116.84" y="83.82" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 <pinref part="U5" gate="G$1" pin="LATCH"/>
+</segment>
+<segment>
+<wire x1="-20.32" y1="-15.24" x2="-25.4" y2="-15.24" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA05"/>
+<label x="-25.4" y="-15.24" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="BRIGHT" class="0">
@@ -3347,6 +3631,11 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="U5" gate="G$1" pin="!OE"/>
 <label x="152.4" y="83.82" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>
+<segment>
+<wire x1="17.78" y1="-25.4" x2="15.24" y2="-25.4" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA18"/>
+<label x="17.78" y="-25.4" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
 </net>
 <net name="N$14" class="0">
 <segment>
@@ -3358,48 +3647,46 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <net name="N$15" class="0">
 <segment>
 <pinref part="U5" gate="G$1" pin="OUT7"/>
-<wire x1="149.86" y1="81.28" x2="167.64" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="167.64" y1="81.28" x2="167.64" y2="134.62" width="0.1524" layer="91"/>
-<pinref part="LD21" gate="G$1" pin="C"/>
+<wire x1="149.86" y1="81.28" x2="165.1" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="PM" gate="G$1" pin="C"/>
+<wire x1="165.1" y1="81.28" x2="165.1" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="165.1" y1="119.38" x2="147.32" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="119.38" x2="147.32" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$17" class="0">
 <segment>
 <pinref part="U5" gate="G$1" pin="OUT6"/>
-<wire x1="149.86" y1="78.74" x2="170.18" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="78.74" x2="170.18" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="124.46" x2="157.48" y2="124.46" width="0.1524" layer="91"/>
-<pinref part="LD20" gate="G$1" pin="C"/>
-<wire x1="157.48" y1="134.62" x2="157.48" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="78.74" x2="167.64" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="LEFT" gate="G$1" pin="C"/>
+<wire x1="167.64" y1="78.74" x2="167.64" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="121.92" x2="157.48" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="121.92" x2="157.48" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$16" class="0">
 <segment>
 <pinref part="U5" gate="G$1" pin="OUT5"/>
-<wire x1="149.86" y1="76.2" x2="172.72" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="172.72" y1="76.2" x2="172.72" y2="127" width="0.1524" layer="91"/>
-<wire x1="172.72" y1="127" x2="149.86" y2="127" width="0.1524" layer="91"/>
-<pinref part="LD19" gate="G$1" pin="C"/>
-<wire x1="149.86" y1="127" x2="149.86" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="76.2" x2="170.18" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="DOWN" gate="G$1" pin="C"/>
+<wire x1="170.18" y1="76.2" x2="170.18" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="124.46" x2="165.1" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="165.1" y1="124.46" x2="165.1" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">
 <segment>
 <pinref part="U5" gate="G$1" pin="OUT4"/>
-<wire x1="149.86" y1="73.66" x2="175.26" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="73.66" x2="175.26" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="129.54" x2="142.24" y2="129.54" width="0.1524" layer="91"/>
-<pinref part="LD18" gate="G$1" pin="C"/>
-<wire x1="142.24" y1="129.54" x2="142.24" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="73.66" x2="172.72" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="RIGHT" gate="G$1" pin="C"/>
+<wire x1="172.72" y1="73.66" x2="172.72" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$19" class="0">
 <segment>
-<pinref part="LD17" gate="G$1" pin="C"/>
-<wire x1="134.62" y1="134.62" x2="134.62" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="134.62" y1="132.08" x2="177.8" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="177.8" y1="132.08" x2="177.8" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="177.8" y1="66.04" x2="114.3" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="UP" gate="G$1" pin="C"/>
+<wire x1="180.34" y1="132.08" x2="180.34" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="66.04" x2="114.3" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="U5" gate="G$1" pin="OUT3"/>
 <wire x1="114.3" y1="66.04" x2="114.3" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="73.66" x2="119.38" y2="73.66" width="0.1524" layer="91"/>
@@ -3421,49 +3708,10 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="SW2" gate="G$1" pin="1"/>
 <label x="144.78" y="27.94" size="1.27" layer="95" ratio="12" rot="R90" xref="yes"/>
 </segment>
-</net>
-<net name="N$20" class="0">
 <segment>
-<pinref part="U4" gate="G$1" pin="OUT7"/>
-<wire x1="88.9" y1="81.28" x2="96.52" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="81.28" x2="96.52" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="50.8" x2="-20.32" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="-20.32" y1="50.8" x2="-20.32" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="-20.32" y1="129.54" x2="0" y2="129.54" width="0.1524" layer="91"/>
-<pinref part="LD1" gate="G$1" pin="C"/>
-<wire x1="0" y1="129.54" x2="0" y2="134.62" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="LD13" gate="G$1" pin="C"/>
-<wire x1="-63.5" y1="76.2" x2="-63.5" y2="134.62" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="OUT2"/>
-<wire x1="2.54" y1="76.2" x2="-63.5" y2="76.2" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$22" class="0">
-<segment>
-<pinref part="LD14" gate="G$1" pin="C"/>
-<wire x1="-55.88" y1="78.74" x2="-55.88" y2="134.62" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="OUT1"/>
-<wire x1="2.54" y1="78.74" x2="-55.88" y2="78.74" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$23" class="0">
-<segment>
-<pinref part="LD15" gate="G$1" pin="C"/>
-<pinref part="U3" gate="G$1" pin="OUT0"/>
-<wire x1="-48.26" y1="81.28" x2="-48.26" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="2.54" y1="81.28" x2="-48.26" y2="81.28" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$24" class="0">
-<segment>
-<pinref part="U3" gate="G$1" pin="OUT3"/>
-<pinref part="LD16" gate="G$1" pin="C"/>
-<wire x1="2.54" y1="73.66" x2="-40.64" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="-40.64" y1="73.66" x2="-40.64" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-15.24" x2="142.24" y2="-15.24" width="0.1524" layer="91"/>
+<pinref part="SWD" gate="G$1" pin="3"/>
+<label x="137.16" y="-15.24" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="VBUS_DTCT" class="0">
@@ -3474,6 +3722,250 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="-116.84" y1="50.8" x2="-106.68" y2="50.8" width="0.1524" layer="91"/>
 <junction x="-116.84" y="50.8"/>
 <label x="-106.68" y="50.8" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+<segment>
+<wire x1="-25.4" y1="-12.7" x2="-20.32" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA04"/>
+<label x="-25.4" y="-12.7" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="N$26" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="VDDCORE"/>
+<wire x1="15.24" y1="12.7" x2="25.4" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="12.7" x2="25.4" y2="20.32" width="0.1524" layer="91"/>
+<pinref part="C9" gate="G$1" pin="2"/>
+<wire x1="25.4" y1="20.32" x2="30.48" y2="20.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="SDA" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="PA08"/>
+<wire x1="-20.32" y1="-22.86" x2="-25.4" y2="-22.86" width="0.1524" layer="91"/>
+<label x="-25.4" y="-22.86" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<pinref part="U2" gate="G$1" pin="SDA"/>
+<wire x1="63.5" y1="-17.78" x2="68.58" y2="-17.78" width="0.1524" layer="91"/>
+<label x="63.5" y="-17.78" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="SCL" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="PA09"/>
+<wire x1="-20.32" y1="-25.4" x2="-25.4" y2="-25.4" width="0.1524" layer="91"/>
+<label x="-25.4" y="-25.4" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="R5" gate="G$1" pin="2"/>
+<pinref part="U2" gate="G$1" pin="SCL"/>
+<wire x1="53.34" y1="-17.78" x2="53.34" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="-5.08" x2="68.58" y2="-5.08" width="0.1524" layer="91"/>
+<label x="53.34" y="-5.08" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="SWDIO" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="PA31"/>
+<wire x1="15.24" y1="-2.54" x2="17.78" y2="-2.54" width="0.1524" layer="91"/>
+<label x="17.78" y="-2.54" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+<segment>
+<wire x1="157.48" y1="-12.7" x2="160.02" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="SWD" gate="G$1" pin="2"/>
+<label x="160.02" y="-12.7" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+</net>
+<net name="SWCLK" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="PA30"/>
+<wire x1="15.24" y1="-5.08" x2="17.78" y2="-5.08" width="0.1524" layer="91"/>
+<label x="17.78" y="-5.08" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+<segment>
+<wire x1="157.48" y1="-15.24" x2="160.02" y2="-15.24" width="0.1524" layer="91"/>
+<pinref part="SWD" gate="G$1" pin="4"/>
+<label x="160.02" y="-15.24" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+</net>
+<net name="LIGHT_SENS" class="0">
+<segment>
+<pinref part="Q4" gate="G$1" pin="E"/>
+<pinref part="R14" gate="G$1" pin="2"/>
+<wire x1="-55.88" y1="-66.04" x2="-48.26" y2="-66.04" width="0.1524" layer="91"/>
+<junction x="-55.88" y="-66.04"/>
+<label x="-48.26" y="-66.04" size="1.27" layer="95" ratio="12" xref="yes"/>
+</segment>
+<segment>
+<wire x1="-25.4" y1="-7.62" x2="-20.32" y2="-7.62" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="PA02"/>
+<label x="-25.4" y="-7.62" size="1.27" layer="95" ratio="12" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="OUT3"/>
+<wire x1="2.54" y1="73.66" x2="-20.32" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="LD12" gate="G$1" pin="C"/>
+<wire x1="-20.32" y1="73.66" x2="-20.32" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="LD11" gate="G$1" pin="C"/>
+<wire x1="-12.7" y1="134.62" x2="-12.7" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="-12.7" y1="132.08" x2="-17.78" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="OUT2"/>
+<wire x1="-17.78" y1="132.08" x2="-17.78" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="76.2" x2="2.54" y2="76.2" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="OUT1"/>
+<wire x1="2.54" y1="78.74" x2="-15.24" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="78.74" x2="-15.24" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="129.54" x2="-5.08" y2="129.54" width="0.1524" layer="91"/>
+<pinref part="LD10" gate="G$1" pin="C"/>
+<wire x1="-5.08" y1="129.54" x2="-5.08" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="OUT0"/>
+<wire x1="2.54" y1="81.28" x2="-12.7" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="-12.7" y1="81.28" x2="-12.7" y2="127" width="0.1524" layer="91"/>
+<wire x1="-12.7" y1="127" x2="2.54" y2="127" width="0.1524" layer="91"/>
+<pinref part="LD9" gate="G$1" pin="C"/>
+<wire x1="2.54" y1="127" x2="2.54" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$22" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="OUT4"/>
+<wire x1="33.02" y1="73.66" x2="33.02" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="66.04" x2="-22.86" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="-22.86" y1="66.04" x2="-22.86" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-22.86" y1="124.46" x2="10.16" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="LD8" gate="G$1" pin="C"/>
+<wire x1="10.16" y1="124.46" x2="10.16" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$23" class="0">
+<segment>
+<pinref part="LD7" gate="G$1" pin="C"/>
+<wire x1="17.78" y1="134.62" x2="17.78" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="121.92" x2="-25.4" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="121.92" x2="-25.4" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="63.5" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="63.5" x2="35.56" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="OUT5"/>
+<wire x1="35.56" y1="76.2" x2="33.02" y2="76.2" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$24" class="0">
+<segment>
+<pinref part="U3" gate="G$1" pin="OUT6"/>
+<wire x1="33.02" y1="78.74" x2="38.1" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="78.74" x2="38.1" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="60.96" x2="-27.94" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="-27.94" y1="60.96" x2="-27.94" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-27.94" y1="119.38" x2="25.4" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="LD6" gate="G$1" pin="C"/>
+<wire x1="25.4" y1="119.38" x2="25.4" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$25" class="0">
+<segment>
+<pinref part="LD5" gate="G$1" pin="C"/>
+<wire x1="33.02" y1="134.62" x2="33.02" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="116.84" x2="-30.48" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="-30.48" y1="116.84" x2="-30.48" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="-30.48" y1="58.42" x2="40.64" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="58.42" x2="40.64" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="OUT7"/>
+<wire x1="40.64" y1="81.28" x2="33.02" y2="81.28" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT4"/>
+<wire x1="88.9" y1="73.66" x2="109.22" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="73.66" x2="109.22" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="114.3" x2="40.64" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="LD4" gate="G$1" pin="C"/>
+<wire x1="40.64" y1="114.3" x2="40.64" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$28" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT5"/>
+<wire x1="88.9" y1="76.2" x2="106.68" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="76.2" x2="106.68" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="116.84" x2="48.26" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="LD3" gate="G$1" pin="C"/>
+<wire x1="48.26" y1="116.84" x2="48.26" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="LD2" gate="G$1" pin="C"/>
+<wire x1="55.88" y1="134.62" x2="55.88" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="119.38" x2="104.14" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="119.38" x2="104.14" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="OUT6"/>
+<wire x1="104.14" y1="78.74" x2="88.9" y2="78.74" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT7"/>
+<wire x1="88.9" y1="81.28" x2="101.6" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="81.28" x2="101.6" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="121.92" x2="63.5" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="LD1" gate="G$1" pin="C"/>
+<wire x1="63.5" y1="121.92" x2="63.5" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$31" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT3"/>
+<wire x1="58.42" y1="73.66" x2="53.34" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="73.66" x2="53.34" y2="45.72" width="0.1524" layer="91"/>
+<pinref part="MINUTES" gate="G$1" pin="C"/>
+<wire x1="53.34" y1="45.72" x2="63.5" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="45.72" x2="63.5" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$32" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT2"/>
+<wire x1="58.42" y1="76.2" x2="50.8" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="76.2" x2="50.8" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="43.18" x2="71.12" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="HOURS" gate="G$1" pin="C"/>
+<wire x1="71.12" y1="43.18" x2="71.12" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$33" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="OUT1"/>
+<wire x1="58.42" y1="78.74" x2="48.26" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="78.74" x2="48.26" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="40.64" x2="78.74" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="MINUS" gate="G$1" pin="C"/>
+<wire x1="78.74" y1="40.64" x2="78.74" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<wire x1="86.36" y1="38.1" x2="45.72" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="38.1" x2="45.72" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="OUT0"/>
+<wire x1="45.72" y1="81.28" x2="58.42" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="38.1" x2="86.36" y2="48.26" width="0.1524" layer="91"/>
+<pinref part="PLUS" gate="G$1" pin="C"/>
 </segment>
 </net>
 </nets>

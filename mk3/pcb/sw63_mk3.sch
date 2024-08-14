@@ -703,7 +703,7 @@ SCT2167CSSG</description>
 </library>
 <library name="BASTL_CONNECTORS" urn="urn:adsk.eagle:library:32904192">
 <packages>
-<package name="USB-C_FULL_SMT" urn="urn:adsk.eagle:footprint:45095757/3" library_version="112">
+<package name="USB-C_FULL_SMT" urn="urn:adsk.eagle:footprint:45095757/4" library_version="116">
 <smd name="A1-B12" x="-3.2" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
 <smd name="A4-B9" x="-2.4" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
 <smd name="B8" x="-1.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
@@ -716,10 +716,10 @@ SCT2167CSSG</description>
 <smd name="B5" x="1.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
 <smd name="B4-A9" x="2.4" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
 <smd name="B1-A12" x="3.2" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
-<smd name="13" x="-5.1" y="-1.089" dx="1.6" dy="2.1" layer="1" rot="R90"/>
-<smd name="14" x="5.1" y="-1.089" dx="1.6" dy="2.1" layer="1" rot="R90"/>
-<smd name="15" x="-5.1" y="2.9108" dx="1.5" dy="2.1" layer="1" rot="R90"/>
-<smd name="16" x="5.1" y="2.9108" dx="1.5" dy="2.1" layer="1" rot="R90"/>
+<smd name="13" x="-4.95" y="-1.089" dx="1.6" dy="1.9" layer="1" rot="R90"/>
+<smd name="14" x="4.95" y="-1.089" dx="1.6" dy="1.9" layer="1" rot="R90"/>
+<smd name="15" x="-4.95" y="2.9108" dx="1.5" dy="1.9" layer="1" rot="R90"/>
+<smd name="16" x="4.95" y="2.9108" dx="1.5" dy="1.9" layer="1" rot="R90"/>
 <polygon width="0.0254" layer="39">
 <vertex x="5.1689" y="4.445"/>
 <vertex x="5.1689" y="-4.2418"/>
@@ -788,7 +788,7 @@ SCT2167CSSG</description>
 </package>
 </packages>
 <packages3d>
-<package3d name="USB-C_FULL_SMT" urn="urn:adsk.eagle:package:45095758/4" type="model" library_version="112">
+<package3d name="USB-C_FULL_SMT" urn="urn:adsk.eagle:package:45095758/5" type="model" library_version="116">
 <packageinstances>
 <packageinstance name="USB-C_FULL_SMT"/>
 </packageinstances>
@@ -879,7 +879,7 @@ SCT2167CSSG</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="USB-C_2.0_SMT" urn="urn:adsk.eagle:component:45095759/3" prefix="J" library_version="112">
+<deviceset name="USB-C_2.0_SMT" urn="urn:adsk.eagle:component:45095759/4" prefix="J" library_version="116">
 <description>LCSC:&lt;br /&gt; 
 SHOU HAN TYPE-C 16P QTGM027 (C2681552)&lt;br /&gt;
 SHOU HAN TYPE-C 16P QTWT (C5187472)&lt;br /&gt;
@@ -903,7 +903,7 @@ USB4110-GF-A</description>
 <connect gate="G$1" pin="VBUS" pad="A4-B9 B4-A9"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45095758/4"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45095758/5"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -2569,7 +2569,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="U4" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U5" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U2" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="DS3231MZ+" device="" package3d_urn="urn:adsk.eagle:package:32977849/5"/>
-<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT" device="" package3d_urn="urn:adsk.eagle:package:45095758/4"/>
+<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT" device="" package3d_urn="urn:adsk.eagle:package:45095758/5"/>
 <part name="LD1" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD2" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD3" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>

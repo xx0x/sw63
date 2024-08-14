@@ -1134,6 +1134,38 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <wire x1="0" y1="0.635" x2="0.127" y2="0.635" width="0.1016" layer="21"/>
 <wire x1="0.127" y1="0.635" x2="0.127" y2="0.508" width="0.1016" layer="21"/>
 </package>
+<package name="LED_5MM_RED" urn="urn:adsk.eagle:footprint:45109715/1" library_version="63">
+<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
+<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
+<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
+<wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
+<wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
+</package>
+<package name="LED_5MM_BLUE" urn="urn:adsk.eagle:footprint:45109717/1" library_version="63">
+<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
+<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
+<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
+<wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
+<wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
+</package>
+<package name="LED_5MM_GREEN" urn="urn:adsk.eagle:footprint:45109716/1" library_version="63">
+<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
+<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
+<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
+<wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
+<wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
+</package>
+<package name="LED_5MM_YELLOW" urn="urn:adsk.eagle:footprint:45109718/1" library_version="63">
+<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
+<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
+<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
+<wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
+<wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="LED_0603" urn="urn:adsk.eagle:package:32977709/2" type="model" library_version="59">
@@ -1193,6 +1225,26 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <package3d name="LED_RECT_3.2X2" urn="urn:adsk.eagle:package:45095773/2" type="model" library_version="61">
 <packageinstances>
 <packageinstance name="LED_RECT_3.2X2"/>
+</packageinstances>
+</package3d>
+<package3d name="LED_5MM_RED" urn="urn:adsk.eagle:package:45109722/2" type="model" library_version="63">
+<packageinstances>
+<packageinstance name="LED_5MM_RED"/>
+</packageinstances>
+</package3d>
+<package3d name="LED_5MM_BLUE" urn="urn:adsk.eagle:package:45109720/2" type="model" library_version="63">
+<packageinstances>
+<packageinstance name="LED_5MM_BLUE"/>
+</packageinstances>
+</package3d>
+<package3d name="LED_5MM_GREEN" urn="urn:adsk.eagle:package:45109721/2" type="model" library_version="63">
+<packageinstances>
+<packageinstance name="LED_5MM_GREEN"/>
+</packageinstances>
+</package3d>
+<package3d name="LED_5MM_YELLOW" urn="urn:adsk.eagle:package:45109719/2" type="model" library_version="63">
+<packageinstances>
+<packageinstance name="LED_5MM_YELLOW"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -1351,7 +1403,7 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="LED_THT" urn="urn:adsk.eagle:component:32977722/10" prefix="LD" uservalue="yes" library_version="61">
+<deviceset name="LED_THT" urn="urn:adsk.eagle:component:32977722/12" prefix="LD" uservalue="yes" library_version="63">
 <description>[color]_[diameter]_[difused/clear]
 
 
@@ -1431,6 +1483,54 @@ R_3mm_D</description>
 </connects>
 <package3dinstances>
 <package3dinstance package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-5MM_R" package="LED_5MM_RED">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="K"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109722/2"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-5MM_B" package="LED_5MM_BLUE">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="K"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109720/2"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-5MM_G" package="LED_5MM_GREEN">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="K"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109721/2"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-5MM_Y" package="LED_5MM_YELLOW">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="K"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109719/2"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -2582,10 +2682,10 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="LD10" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD11" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD12" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
-<part name="PLUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="MINUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="HOURS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
-<part name="MINUTES" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_ALT" package3d_urn="urn:adsk.eagle:package:45095770/2"/>
+<part name="MINUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_R" package3d_urn="urn:adsk.eagle:package:45109722/2"/>
+<part name="PLUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_G" package3d_urn="urn:adsk.eagle:package:45109721/2"/>
+<part name="HOURS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_B" package3d_urn="urn:adsk.eagle:package:45109720/2"/>
+<part name="MINUTES" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_Y" package3d_urn="urn:adsk.eagle:package:45109719/2"/>
 <part name="UP" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
 <part name="RIGHT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
 <part name="DOWN" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
@@ -2737,11 +2837,11 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <instance part="LD12" gate="G$1" x="-20.32" y="139.7" smashed="yes" rot="MR0">
 <attribute name="NAME" x="-23.876" y="135.128" size="1.778" layer="95" rot="MR90"/>
 </instance>
-<instance part="PLUS" gate="G$1" x="86.36" y="53.34" smashed="yes" rot="MR0">
+<instance part="MINUS" gate="G$1" x="86.36" y="53.34" smashed="yes" rot="MR0">
 <attribute name="NAME" x="82.804" y="48.768" size="1.778" layer="95" rot="MR90"/>
 <attribute name="VALUE" x="80.645" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
-<instance part="MINUS" gate="G$1" x="78.74" y="53.34" smashed="yes" rot="MR0">
+<instance part="PLUS" gate="G$1" x="78.74" y="53.34" smashed="yes" rot="MR0">
 <attribute name="NAME" x="75.184" y="48.768" size="1.778" layer="95" rot="MR90"/>
 <attribute name="VALUE" x="73.025" y="48.768" size="1.778" layer="96" rot="MR90"/>
 </instance>
@@ -3435,9 +3535,9 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 </segment>
 <segment>
 <pinref part="MINUTES" gate="G$1" pin="A"/>
-<pinref part="PLUS" gate="G$1" pin="A"/>
-<wire x1="86.36" y1="55.88" x2="78.74" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="MINUS" gate="G$1" pin="A"/>
+<wire x1="86.36" y1="55.88" x2="78.74" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="PLUS" gate="G$1" pin="A"/>
 <junction x="78.74" y="55.88"/>
 <wire x1="78.74" y1="55.88" x2="71.12" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="HOURS" gate="G$1" pin="A"/>
@@ -3964,7 +4064,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <wire x1="58.42" y1="78.74" x2="48.26" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="78.74" x2="48.26" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="40.64" x2="78.74" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="MINUS" gate="G$1" pin="C"/>
+<pinref part="PLUS" gate="G$1" pin="C"/>
 <wire x1="78.74" y1="40.64" x2="78.74" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -3975,7 +4075,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <pinref part="U4" gate="G$1" pin="OUT0"/>
 <wire x1="45.72" y1="81.28" x2="58.42" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="38.1" x2="86.36" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="PLUS" gate="G$1" pin="C"/>
+<pinref part="MINUS" gate="G$1" pin="C"/>
 </segment>
 </net>
 </nets>

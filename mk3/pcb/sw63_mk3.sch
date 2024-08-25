@@ -78,7 +78,7 @@
 <layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="63" fill="1" visible="yes" active="yes"/>
 <layer number="99" name="SpiceOrder" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="100" name="Muster" color="7" fill="1" visible="no" active="yes"/>
 <layer number="101" name="Patch_Top" color="7" fill="1" visible="no" active="yes"/>
@@ -2775,6 +2775,12 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <plain>
 <text x="238.76" y="76.2" size="1.27" layer="94" ratio="12">Kinda weird but works.</text>
 <text x="24.384" y="-19.05" size="1.27" layer="94" ratio="12">Just for layout.</text>
+<text x="81.28" y="10.16" size="3.048" layer="98">TODO FIX:
+VBAT -&gt; GND
+VCC -&gt; VDD</text>
+<text x="25.4" y="-48.26" size="3.048" layer="98">TODO FIX:
+PA25-&gt;D+
+PA24-&gt;D-</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="-2.54" y="-15.24" smashed="yes">
@@ -4084,6 +4090,10 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)

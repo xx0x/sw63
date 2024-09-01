@@ -3,11 +3,7 @@
 
 #include "Arduino.h"
 #include "Hardware.h"
-#include "animations/Animation.h"
-#include "animations/AnimationIntro.h"
-#include "animations/AnimationExact.h"
-#include "animations/AnimationTo.h"
-#include "animations/AnimationPast.h"
+#include "AnimationProcessor.h"
 #include "types.h"
 
 namespace SW63
@@ -18,17 +14,13 @@ namespace SW63
         void Init(voidFuncPtr button_callback);
         void Process();
         void ButtonCallback();
-
-        void SetAnimation(AnimationType type);
+        void DisplayTime();
+        void SmartDelay(uint32_t ms);
 
     private:
         Hardware hw_;
-        Animation *current_animation_;
-        Animation *animations_[AT_COUNT] = {
-            new AnimationIntro(),
-            new AnimationExact(),
-            new AnimationTo(),
-            new AnimationPast()};
+        bool button_pressed_;
+        AnimationProcessor ap_;
     };
 
 }

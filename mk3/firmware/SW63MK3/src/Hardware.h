@@ -58,7 +58,7 @@ namespace SW63
             BP_4,
         };
 
-        void Init(voidFuncPtr button_callback);
+        void Init(voidFuncPtr button_callback, voidFuncPtr charge_callback);
         void SetLeds(bool minus, bool plus, bool hours, bool minutes, uint32_t digit, ClockFace face, bool pm);
         void ClearLeds();
         void TransferLeds();
@@ -66,10 +66,12 @@ namespace SW63
         bool GetButtonState();
         void AutoBrightness();
         void Sleep();
+        bool IsCharging();
+        bool IsChargerConnected();
 
     private:
         uint32_t led_buffer_ = 0;
-        void InitPins(bool init_button);
+        void InitPins(bool init_interrupts);
         void SetBrightness(uint8_t brightness);
         uint16_t GetLightSensorValue();
     };

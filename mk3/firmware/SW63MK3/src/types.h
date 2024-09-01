@@ -21,15 +21,6 @@ namespace SW63
         CF_DOWN,
         CF_LEFT
     };
-
-    enum AnimationType
-    {
-        AT_INTRO,
-        AT_EXACT,
-        AT_TO,
-        AT_PAST,
-        AT_COUNT
-    };
 }
 
 #endif

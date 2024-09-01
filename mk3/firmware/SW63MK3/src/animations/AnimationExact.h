@@ -12,45 +12,35 @@ namespace SW63
     {
 
     public:
-        void Init(Hardware *hw)
+        uint32_t Process()
         {
-            hw_ = hw;
-            Reset();
-        }
-
-        void Reset()
-        {
-            current_step_ = 0;
-        }
-
-        int Process()
-        {
-            int delayFor = 0;
+            uint32_t delay_for = 0;
+            length_ = 4;
 
             switch (current_step_)
             {
             case 0:
                 hw_->SetLeds(false, false, false, false, 0, face_, false); // pul
-                delayFor = Config::TIME_HOLD;
+                delay_for = Config::TIME_HOLD;
                 break;
             case 1:
                 hw_->SetLeds(false, false, false, false, hours_, CF_NONE, false); // ctvrte
-                delayFor = Config::TIME_HOLD_DIGITS;
+                delay_for = Config::TIME_HOLD_DIGITS;
                 break;
             case 2:
                 hw_->SetLeds(false, false, true, false, 0, CF_NONE, false); // hodiny
-                delayFor = Config::TIME_HOLD;
+                delay_for = Config::TIME_HOLD;
                 break;
             case 3:
                 if (pm_)
                 {
                     hw_->SetLeds(false, false, false, false, 0, CF_NONE, true); // PM
-                    delayFor = Config::TIME_HOLD;
+                    delay_for = Config::TIME_HOLD;
                 }
                 break;
             }
             current_step_++;
-            return delayFor;
+            return delay_for;
         }
     };
 

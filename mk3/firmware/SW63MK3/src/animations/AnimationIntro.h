@@ -11,19 +11,10 @@ namespace SW63
     {
 
     public:
-        void Init(Hardware *hw)
+        uint32_t Process()
         {
-            hw_ = hw;
-            Reset();
-        }
-
-        void Reset()
-        {
-            current_step_ = 0;
-        }
-
-        int Process()
-        {
+            length_ = 26;
+            
             if (current_step_ < 12)
             {
                 hw_->SetLeds(current_step_ % 2 == 0, current_step_ % 5 == 0, current_step_ % 3 == 0, current_step_ % 4 == 0, current_step_ + 1, CF_NONE, false);

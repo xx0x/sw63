@@ -6,6 +6,7 @@
 #include "animations/AnimationExact.h"
 #include "animations/AnimationTo.h"
 #include "animations/AnimationPast.h"
+#include "animations/AnimationCharge.h"
 #include "types.h"
 
 namespace SW63
@@ -14,23 +15,33 @@ namespace SW63
     {
     public:
         void Init(Hardware *hw);
-        void SetAnimation(AnimationType type);
-        void SetAnimation(AnimationType type, uint32_t hours, uint32_t minutes, ClockFace face, bool pm);
+        void SetAnimation(Animation::Type type);
+        void SetAnimation(Animation::Type type, uint32_t hours, uint32_t minutes, ClockFace face, bool pm);
         uint32_t Process();
         void Reset();
-        AnimationType GetAnimationType();
+        bool IsFinished()
+        {
+            return animations_[animation_type_]->IsFinished();
+        }
         bool PauseBetweenFrames()
         {
-            return animation_type_ != AT_INTRO;
+            return IsShowingTime();
+        }
+        bool IsShowingTime()
+        {
+            return animation_type_ == Animation::EXACT ||
+                   animation_type_ == Animation::TO ||
+                   animation_type_ == Animation::PAST;
         }
 
     private:
-        AnimationType animation_type_;
-        Animation *animations_[AT_COUNT] = {
+        Animation::Type animation_type_;
+        Animation *animations_[Animation::COUNT] = {
             new AnimationIntro(),
             new AnimationExact(),
             new AnimationTo(),
-            new AnimationPast()};
+            new AnimationPast(),
+            new AnimationCharge()};
     };
 
 }

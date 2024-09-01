@@ -55,7 +55,7 @@
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
@@ -2505,7 +2505,7 @@
 <wire x1="22.300625" y1="30.59" x2="22.300625" y2="31.27" width="0.3048" layer="16"/>
 <wire x1="21.69" y1="29.979375" x2="21.69" y2="28.5538" width="0.3048" layer="16"/>
 </signal>
-<signal name="N$6">
+<signal name="VSEL">
 <contactref element="D1" pad="C"/>
 <contactref element="U6" pad="1"/>
 <contactref element="Q1" pad="2"/>

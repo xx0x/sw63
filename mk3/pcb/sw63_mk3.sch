@@ -2781,6 +2781,9 @@ VCC -&gt; VDD</text>
 <text x="25.4" y="-48.26" size="3.048" layer="98">TODO FIX:
 PA25-&gt;D+
 PA24-&gt;D-</text>
+<text x="231.14" y="106.68" size="3.048" layer="98">REWORK THIS SECTION:
+REPLACE VBUS_FUSED
+WITH VSEL</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="-2.54" y="-15.24" smashed="yes">
@@ -3403,7 +3406,7 @@ PA24-&gt;D-</text>
 <wire x1="-170.18" y1="7.62" x2="-157.48" y2="7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="VSEL" class="0">
 <segment>
 <pinref part="D1" gate="G$1" pin="C"/>
 <pinref part="U6" gate="G$1" pin="VIN"/>
@@ -3417,6 +3420,7 @@ PA24-&gt;D-</text>
 <wire x1="-144.78" y1="-68.58" x2="-134.62" y2="-68.58" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G$1" pin="1"/>
 <junction x="-144.78" y="-68.58"/>
+<label x="-139.7" y="-63.5" size="1.778" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
 <net name="VDD" class="0">

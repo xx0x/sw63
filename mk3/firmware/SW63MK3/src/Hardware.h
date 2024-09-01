@@ -2,6 +2,7 @@
 #define SW63_HARDWARE_H
 
 #include <Arduino.h>
+#include "types.h"
 
 namespace SW63
 {
@@ -57,16 +58,7 @@ namespace SW63
             BP_4,
         };
 
-        enum ClockFace
-        {
-            CF_NONE,
-            CF_UP,
-            CF_RIGHT,
-            CF_DOWN,
-            CF_LEFT
-        };
-
-        void Init(voidFuncPtr button_press_callback);
+        void Init(voidFuncPtr button_callback);
         void SetLeds(bool minus, bool plus, bool hours, bool minutes, uint32_t digit, ClockFace face, bool pm);
         void ClearLeds();
         void TransferLeds();

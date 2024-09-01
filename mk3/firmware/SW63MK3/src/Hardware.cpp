@@ -86,7 +86,7 @@ namespace SW63
     void Hardware::TransferLeds()
     {
         digitalWrite(PIN_LAT, 0);
-        for (size_t i = 0; i < 24; i++)
+        for (uint32_t i = 0; i < 24; i++)
         {
             digitalWrite(PIN_DAT, (led_buffer_ & (1 << i)));
             digitalWrite(PIN_CLK, 1);
@@ -145,6 +145,9 @@ namespace SW63
         pinMode(PIN_SDA, INPUT);
         pinMode(PIN_CHARGING, INPUT);
 
+        // Wait a bit
+        delay(100);
+        
         // Go to sleep
         USBDevice.detach();
         SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;

@@ -12,20 +12,11 @@ namespace SW63
     {
 
     public:
-        void Init(Hardware *hw)
-        {
-            hw_ = hw;
-            Reset();
-        }
-
-        void Reset()
-        {
-            current_step_ = 0;
-        }
-
-        int Process()
+        uint32_t Process()
         {
             int delay_for = 0;
+            length_ = 7;
+
             switch (current_step_)
             {
             case 0:

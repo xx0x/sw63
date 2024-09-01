@@ -4,18 +4,19 @@
 namespace SW63
 {
 
-    void Application::Init(voidFuncPtr button_callback)
+    void Application::Init(voidFuncPtr button_callback, voidFuncPtr charge_callback)
     {
         button_pressed_ = false;
+        charging_started_ = false;
 
         Config::SetSpeed(0);
         Config::SetLanguage(LANG_CZECH);
 
-        hw_.Init(button_callback);
+        hw_.Init(button_callback, charge_callback);
         ap_.Init(&hw_);
 
         // Set intro animation
-        ap_.SetAnimation(AT_INTRO);
+        ap_.SetAnimation(Animation::INTRO);
 
         // Check brightness on startup
         hw_.AutoBrightness();
@@ -29,8 +30,14 @@ namespace SW63
             button_pressed_ = false;
         }
 
+        if(charging_started_)
+        {
+            ap_.SetAnimation(Animation::CHARGE);
+            charging_started_ = false;
+        }
+
         uint32_t wait = ap_.Process();
-        if (wait > 0)
+        if (!ap_.IsFinished())
         {
             hw_.TransferLeds();
             SmartDelay(wait);
@@ -45,10 +52,17 @@ namespace SW63
         }
         else
         {
-            ap_.Reset();
-            hw_.Sleep();
+            if (hw_.IsCharging())
+            {
+                ap_.SetAnimation(Animation::CHARGE);
+            }
+            else
+            {
+                ap_.Reset();
+                hw_.Sleep();
+            }
 
-            // Check brightness on wakeup
+            // Check brightness
             hw_.AutoBrightness();
         }
     }
@@ -56,6 +70,11 @@ namespace SW63
     void Application::ButtonCallback()
     {
         button_pressed_ = true;
+    }
+
+    void Application::ChargeCallback()
+    {
+        charging_started_ = true;
     }
 
     void Application::SmartDelay(uint32_t ms)
@@ -107,51 +126,51 @@ namespace SW63
 
         if (minutes == 0)
         {
-            ap_.SetAnimation(AT_EXACT, hours, 0, CF_UP, pm);
+            ap_.SetAnimation(Animation::EXACT, hours, 0, CF_UP, pm);
         }
         else if (minutes < 11)
         {
-            ap_.SetAnimation(AT_PAST, hours, minutes, CF_UP, pm);
+            ap_.SetAnimation(Animation::PAST, hours, minutes, CF_UP, pm);
         }
         else if (minutes < 15)
         {
-            ap_.SetAnimation(AT_TO, hours + aftercoef, 15 - minutes, CF_RIGHT, pm);
+            ap_.SetAnimation(Animation::TO, hours + aftercoef, 15 - minutes, CF_RIGHT, pm);
         }
         else if (minutes == 15)
         {
-            ap_.SetAnimation(AT_EXACT, hours + aftercoef, 0, CF_RIGHT, pm);
+            ap_.SetAnimation(Animation::EXACT, hours + aftercoef, 0, CF_RIGHT, pm);
         }
         else if (minutes < 20)
         {
-            ap_.SetAnimation(AT_PAST, hours + aftercoef, minutes - 15, CF_RIGHT, pm);
+            ap_.SetAnimation(Animation::PAST, hours + aftercoef, minutes - 15, CF_RIGHT, pm);
         }
         else if (minutes < 30)
         {
-            ap_.SetAnimation(AT_TO, hours + halfcoef, 30 - minutes, CF_DOWN, pm);
+            ap_.SetAnimation(Animation::TO, hours + halfcoef, 30 - minutes, CF_DOWN, pm);
         }
         else if (minutes == 30)
         {
-            ap_.SetAnimation(AT_EXACT, hours + halfcoef, 0, CF_DOWN, pm);
+            ap_.SetAnimation(Animation::EXACT, hours + halfcoef, 0, CF_DOWN, pm);
         }
         else if (minutes < 41)
         {
-            ap_.SetAnimation(AT_PAST, hours + halfcoef, minutes - 30, CF_DOWN, pm);
+            ap_.SetAnimation(Animation::PAST, hours + halfcoef, minutes - 30, CF_DOWN, pm);
         }
         else if (minutes < 45)
         {
-            ap_.SetAnimation(AT_TO, hours + tocoef, 45 - minutes, CF_LEFT, pm);
+            ap_.SetAnimation(Animation::TO, hours + tocoef, 45 - minutes, CF_LEFT, pm);
         }
         else if (minutes == 45)
         {
-            ap_.SetAnimation(AT_EXACT, hours + tocoef, 0, CF_LEFT, pm);
+            ap_.SetAnimation(Animation::EXACT, hours + tocoef, 0, CF_LEFT, pm);
         }
         else if (minutes < 50)
         {
-            ap_.SetAnimation(AT_PAST, hours + tocoef, minutes - 45, CF_LEFT, pm);
+            ap_.SetAnimation(Animation::PAST, hours + tocoef, minutes - 45, CF_LEFT, pm);
         }
         else
         {
-            ap_.SetAnimation(AT_TO, hours + 1, 60 - minutes, CF_UP, pm);
+            ap_.SetAnimation(Animation::TO, hours + 1, 60 - minutes, CF_UP, pm);
         }
     }
 }

@@ -10,9 +10,26 @@ namespace SW63
     class Animation
     {
     public:
-        virtual void Init(Hardware *hw) = 0;
-        virtual void Reset() = 0;
-        virtual int Process() = 0;
+        enum Type
+        {
+            INTRO,
+            EXACT,
+            TO,
+            PAST,
+            CHARGE,
+            COUNT
+        };
+
+        void Init(Hardware *hw)
+        {
+            hw_ = hw;
+            Reset();
+        }
+
+        void Reset()
+        {
+            current_step_ = 0;
+        }
 
         void SetTime(uint32_t hours, uint32_t minutes, ClockFace face, bool pm)
         {
@@ -26,6 +43,13 @@ namespace SW63
             pm_ = pm;
         }
 
+        bool IsFinished()
+        {
+            return current_step_ >= length_;
+        }
+
+        virtual uint32_t Process() = 0;
+
     protected:
         Hardware *hw_;
         uint32_t hours_ = 0;
@@ -33,6 +57,7 @@ namespace SW63
         ClockFace face_ = CF_NONE;
         bool pm_ = false;
         uint32_t current_step_ = 0;
+        uint32_t length_ = 0;
     };
 
 }

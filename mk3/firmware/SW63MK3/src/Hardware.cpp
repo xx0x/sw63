@@ -2,15 +2,17 @@
 
 namespace SW63
 {
-    void Hardware::Init(voidFuncPtr button_press_callback)
+    void Hardware::Init(voidFuncPtr button_callback, voidFuncPtr charge_callback)
     {
         InitPins(true);
         SetActive(true);
         SetBrightness(128);
 
         // Set up button interrupt and sleep
-        byte interruptPin = digitalPinToInterrupt(PIN_BTN);
-        attachInterrupt(interruptPin, button_press_callback, FALLING);
+        byte buttonInterruptPin = digitalPinToInterrupt(PIN_BTN);
+        attachInterrupt(buttonInterruptPin, button_callback, FALLING);
+        byte chargeInterruptPin = digitalPinToInterrupt(PIN_CHARGING);
+        attachInterrupt(chargeInterruptPin, charge_callback, FALLING);
 
         // enable EIC clock
         GCLK->CLKCTRL.bit.CLKEN = 0; // disable GCLK module
@@ -30,15 +32,18 @@ namespace SW63
             ;
 
         // Enable wakeup capability on pin in case being used during sleep
-        EIC->WAKEUP.reg |= (1 << interruptPin);
+        EIC->WAKEUP.reg |= (1 << buttonInterruptPin);
+        EIC->WAKEUP.reg |= (1 << chargeInterruptPin);
     }
 
-    void Hardware::InitPins(bool init_button)
+    void Hardware::InitPins(bool init_interrupts)
     {
-        if (init_button)
+        if (init_interrupts)
         {
             pinMode(PIN_BTN, INPUT_PULLUP);
+            pinMode(PIN_CHARGING, INPUT_PULLUP);
         }
+        pinMode(PIN_VBUS_DTCT, INPUT);
         pinMode(PIN_ACTIVE, OUTPUT);
         pinMode(PIN_LAT, OUTPUT);
         pinMode(PIN_DAT, OUTPUT);
@@ -143,11 +148,10 @@ namespace SW63
         pinMode(PIN_VBUS_DTCT, INPUT);
         pinMode(PIN_SCL, INPUT);
         pinMode(PIN_SDA, INPUT);
-        pinMode(PIN_CHARGING, INPUT);
 
         // Wait a bit
         delay(100);
-        
+
         // Go to sleep
         USBDevice.detach();
         SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
@@ -158,5 +162,15 @@ namespace SW63
         USBDevice.attach();
         InitPins(false);
         SetActive(true);
+    }
+
+    bool Hardware::IsCharging()
+    {
+        return !digitalRead(PIN_CHARGING);
+    }
+
+    bool Hardware::IsChargerConnected()
+    {
+        return digitalRead(PIN_VBUS_DTCT);
     }
 }

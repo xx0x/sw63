@@ -1,6 +1,8 @@
 #ifndef SW63_HARDWARE_H
 #define SW63_HARDWARE_H
 
+#include <Arduino.h>
+
 namespace SW63
 {
     class Hardware
@@ -64,16 +66,18 @@ namespace SW63
             CF_LEFT
         };
 
-        void Init();
+        void Init(voidFuncPtr button_press_callback);
         void SetLeds(bool minus, bool plus, bool hours, bool minutes, uint32_t digit, ClockFace face, bool pm);
         void ClearLeds();
         void TransferLeds();
         void SetActive(bool active);
         bool GetButtonState();
         void AutoBrightness();
+        void Sleep();
 
     private:
         uint32_t led_buffer_ = 0;
+        void InitPins(bool init_button);
         void SetBrightness(uint8_t brightness);
         uint16_t GetLightSensorValue();
     };

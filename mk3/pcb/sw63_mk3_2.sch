@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -410,7 +410,7 @@
 </package3d>
 </packages3d>
 <symbols>
-<symbol name="ATSAMD21E18A-MU" urn="urn:adsk.eagle:symbol:42842753/1" library_version="129">
+<symbol name="ATSAMD21E18A-MU" urn="urn:adsk.eagle:symbol:42842753/2" library_version="137">
 <wire x1="12.7" y1="-27.94" x2="-12.7" y2="-27.94" width="0.254" layer="94"/>
 <wire x1="-12.7" y1="-27.94" x2="-12.7" y2="30.48" width="0.254" layer="94"/>
 <wire x1="-12.7" y1="30.48" x2="12.7" y2="30.48" width="0.254" layer="94"/>
@@ -439,15 +439,15 @@
 <pin name="PA19" x="17.78" y="-7.62" length="middle" rot="R180"/>
 <pin name="PA22" x="17.78" y="-5.08" length="middle" rot="R180"/>
 <pin name="PA23" x="17.78" y="-2.54" length="middle" rot="R180"/>
-<pin name="PA24" x="17.78" y="0" length="middle" rot="R180"/>
-<pin name="PA25" x="17.78" y="2.54" length="middle" rot="R180"/>
+<pin name="D-/PA24" x="17.78" y="0" length="middle" rot="R180"/>
+<pin name="D+/PA25" x="17.78" y="2.54" length="middle" rot="R180"/>
 <pin name="PA27" x="17.78" y="5.08" length="middle" rot="R180"/>
 <pin name="!RESET" x="-17.78" y="17.78" length="middle" direction="in"/>
 <pin name="PA28" x="17.78" y="7.62" length="middle" rot="R180"/>
 <pin name="VDDCORE" x="17.78" y="27.94" length="middle" direction="pwr" rot="R180"/>
 <pin name="VDDIN" x="17.78" y="22.86" length="middle" direction="pwr" rot="R180"/>
-<pin name="PA30" x="17.78" y="10.16" length="middle" rot="R180"/>
-<pin name="PA31" x="17.78" y="12.7" length="middle" rot="R180"/>
+<pin name="SWCLK/PA30" x="17.78" y="10.16" length="middle" rot="R180"/>
+<pin name="SWDIO/PA31" x="17.78" y="12.7" length="middle" rot="R180"/>
 <pin name="EP" x="17.78" y="-25.4" length="middle" direction="pwr" rot="R180"/>
 </symbol>
 <symbol name="TLC5916" urn="urn:adsk.eagle:symbol:45095736/1" library_version="129">
@@ -518,7 +518,7 @@
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="ATSAMD21E18A-MU" urn="urn:adsk.eagle:component:42842756/3" prefix="IC" library_version="129">
+<deviceset name="ATSAMD21E18A-MU" urn="urn:adsk.eagle:component:42842756/4" prefix="IC" library_version="137">
 <description>SAMD21E Series 256 KB Flash 32 KB SRAM 48 MHz 32-Bit Microcontroller - QFN-32 </description>
 <gates>
 <gate name="G$1" symbol="ATSAMD21E18A-MU" x="0" y="0"/>
@@ -527,6 +527,8 @@
 <device name="" package="QFN50P500X500X100-33N">
 <connects>
 <connect gate="G$1" pin="!RESET" pad="26"/>
+<connect gate="G$1" pin="D+/PA25" pad="24"/>
+<connect gate="G$1" pin="D-/PA24" pad="23"/>
 <connect gate="G$1" pin="EP" pad="33"/>
 <connect gate="G$1" pin="GND" pad="10 28"/>
 <connect gate="G$1" pin="PA00" pad="1"/>
@@ -549,12 +551,10 @@
 <connect gate="G$1" pin="PA19" pad="20"/>
 <connect gate="G$1" pin="PA22" pad="21"/>
 <connect gate="G$1" pin="PA23" pad="22"/>
-<connect gate="G$1" pin="PA24" pad="23"/>
-<connect gate="G$1" pin="PA25" pad="24"/>
 <connect gate="G$1" pin="PA27" pad="25"/>
 <connect gate="G$1" pin="PA28" pad="27"/>
-<connect gate="G$1" pin="PA30" pad="31"/>
-<connect gate="G$1" pin="PA31" pad="32"/>
+<connect gate="G$1" pin="SWCLK/PA30" pad="31"/>
+<connect gate="G$1" pin="SWDIO/PA31" pad="32"/>
 <connect gate="G$1" pin="VDDANA" pad="9"/>
 <connect gate="G$1" pin="VDDCORE" pad="29"/>
 <connect gate="G$1" pin="VDDIN" pad="30"/>
@@ -1070,15 +1070,6 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
 <wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
 </package>
-<package name="LED_5MM_NICE" urn="urn:adsk.eagle:footprint:43822023/2" library_version="59">
-<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.4224"/>
-<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.4224"/>
-<text x="0" y="4.056" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
-<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
-<circle x="0" y="0" radius="2.5" width="0.2" layer="21"/>
-<wire x1="2.54" y1="-1.9" x2="2.54" y2="1.9" width="0.2" layer="21"/>
-<wire x1="2.54" y1="-1.9" x2="2.54" y2="1.9" width="0.2" layer="21" curve="-286.6"/>
-</package>
 <package name="LED_3MM_ALT" urn="urn:adsk.eagle:footprint:45095768/1" library_version="59">
 <pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
 <pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
@@ -1109,9 +1100,9 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <wire x1="2.5" y1="-1" x2="-2.5" y2="-1" width="0.127" layer="253"/>
 <wire x1="-2.5" y1="-1" x2="-2.5" y2="1" width="0.127" layer="253"/>
 </package>
-<package name="LED_RECT_3.2X2" urn="urn:adsk.eagle:footprint:45095772/1" library_version="59">
-<pad name="A" x="-1.27" y="0" drill="0.6"/>
-<pad name="K" x="1.27" y="0" drill="0.6"/>
+<package name="LED_RECT_3.2X2" urn="urn:adsk.eagle:footprint:45095772/2" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8" diameter="1.2"/>
+<pad name="K" x="1.27" y="0" drill="0.8" diameter="1.2"/>
 <text x="0" y="1.524" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
 <text x="0" y="-1.651" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;VALUE</text>
 <wire x1="-1.6" y1="1" x2="1.6" y2="1" width="0.127" layer="21"/>
@@ -1134,37 +1125,46 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <wire x1="0" y1="0.635" x2="0.127" y2="0.635" width="0.1016" layer="21"/>
 <wire x1="0.127" y1="0.635" x2="0.127" y2="0.508" width="0.1016" layer="21"/>
 </package>
-<package name="LED_5MM_RED" urn="urn:adsk.eagle:footprint:45109715/1" library_version="63">
-<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
-<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<package name="LED_5MM_RED" urn="urn:adsk.eagle:footprint:45109715/2" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8"/>
+<pad name="K" x="1.27" y="0" drill="0.8"/>
 <text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
 <circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
 <wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
 <wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
 </package>
-<package name="LED_5MM_BLUE" urn="urn:adsk.eagle:footprint:45109717/1" library_version="63">
-<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
-<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<package name="LED_5MM_BLUE" urn="urn:adsk.eagle:footprint:45109717/2" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8"/>
+<pad name="K" x="1.27" y="0" drill="0.8"/>
 <text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
 <circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
 <wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
 <wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
 </package>
-<package name="LED_5MM_GREEN" urn="urn:adsk.eagle:footprint:45109716/1" library_version="63">
-<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
-<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<package name="LED_5MM_GREEN" urn="urn:adsk.eagle:footprint:45109716/2" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8"/>
+<pad name="K" x="1.27" y="0" drill="0.8"/>
 <text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
 <circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
 <wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
 <wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
 </package>
-<package name="LED_5MM_YELLOW" urn="urn:adsk.eagle:footprint:45109718/1" library_version="63">
-<pad name="A" x="-1.27" y="0" drill="0.7" diameter="1.143"/>
-<pad name="K" x="1.27" y="0" drill="0.7" diameter="1.143"/>
+<package name="LED_5MM_YELLOW" urn="urn:adsk.eagle:footprint:45109718/2" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8"/>
+<pad name="K" x="1.27" y="0" drill="0.8"/>
 <text x="0" y="3.294" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
 <circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
 <wire x1="2" y1="1.5" x2="2" y2="-1.5" width="0.1524" layer="21"/>
 <wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.1524" layer="21" curve="-286.260205"/>
+</package>
+<package name="LED_5MM_NICE" urn="urn:adsk.eagle:footprint:43822023/3" library_version="72">
+<pad name="A" x="-1.27" y="0" drill="0.8" diameter="1.4224"/>
+<pad name="K" x="1.27" y="0" drill="0.8" diameter="1.4224"/>
+<text x="0" y="4.056" size="0.8" layer="25" font="fixed" ratio="15" align="center">&gt;NAME</text>
+<circle x="0" y="0" radius="2.501" width="0.1016" layer="253"/>
+<circle x="0" y="0" radius="2.5" width="0.2" layer="21"/>
+<wire x1="2.54" y1="-1.9" x2="2.54" y2="1.9" width="0.2" layer="21"/>
+<wire x1="2.54" y1="-1.9" x2="2.54" y2="1.9" width="0.2" layer="21" curve="-286.6"/>
 </package>
 </packages>
 <packages3d>
@@ -1200,13 +1200,6 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <packageinstance name="LED_5MM"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_5MM_NICE" urn="urn:adsk.eagle:package:43822024/3" type="model" library_version="59">
-<description>Radial LED (Round), 2.54 mm pitch, 5.65 mm body diameter, 8.60 mm body height
-&lt;p&gt;Radial LED (Round) package with 2.54 mm pitch (lead spacing), 0.60 mm lead diameter, 5.65 mm body diameter and 8.60 mm body height&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LED_5MM_NICE"/>
-</packageinstances>
-</package3d>
 <package3d name="LED_3MM_ALT" urn="urn:adsk.eagle:package:45095771/2" type="model" library_version="61">
 <packageinstances>
 <packageinstance name="LED_3MM_ALT"/>
@@ -1222,29 +1215,34 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <packageinstance name="LED_RECT"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_RECT_3.2X2" urn="urn:adsk.eagle:package:45095773/2" type="model" library_version="61">
+<package3d name="LED_RECT_3.2X2" urn="urn:adsk.eagle:package:45095773/3" type="model" library_version="72">
 <packageinstances>
 <packageinstance name="LED_RECT_3.2X2"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_5MM_RED" urn="urn:adsk.eagle:package:45109722/2" type="model" library_version="63">
+<package3d name="LED_5MM_RED" urn="urn:adsk.eagle:package:45109722/3" type="model" library_version="72">
 <packageinstances>
 <packageinstance name="LED_5MM_RED"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_5MM_BLUE" urn="urn:adsk.eagle:package:45109720/2" type="model" library_version="63">
+<package3d name="LED_5MM_BLUE" urn="urn:adsk.eagle:package:45109720/3" type="model" library_version="72">
 <packageinstances>
 <packageinstance name="LED_5MM_BLUE"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_5MM_GREEN" urn="urn:adsk.eagle:package:45109721/2" type="model" library_version="63">
+<package3d name="LED_5MM_GREEN" urn="urn:adsk.eagle:package:45109721/3" type="model" library_version="72">
 <packageinstances>
 <packageinstance name="LED_5MM_GREEN"/>
 </packageinstances>
 </package3d>
-<package3d name="LED_5MM_YELLOW" urn="urn:adsk.eagle:package:45109719/2" type="model" library_version="63">
+<package3d name="LED_5MM_YELLOW" urn="urn:adsk.eagle:package:45109719/3" type="model" library_version="72">
 <packageinstances>
 <packageinstance name="LED_5MM_YELLOW"/>
+</packageinstances>
+</package3d>
+<package3d name="LED_5MM_NICE" urn="urn:adsk.eagle:package:43822024/4" type="model" library_version="72">
+<packageinstances>
+<packageinstance name="LED_5MM_NICE"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -1403,7 +1401,7 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="LED_THT" urn="urn:adsk.eagle:component:32977722/12" prefix="LD" uservalue="yes" library_version="63">
+<deviceset name="LED_THT" urn="urn:adsk.eagle:component:32977722/13" prefix="LD" uservalue="yes" library_version="72">
 <description>[color]_[diameter]_[difused/clear]
 
 
@@ -1458,7 +1456,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:43822024/3"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43822024/4"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -1494,7 +1492,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45109722/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109722/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -1506,7 +1504,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45109720/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109720/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -1518,7 +1516,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45109721/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109721/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -1530,7 +1528,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45109719/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45109719/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -1538,7 +1536,7 @@ R_3mm_D</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="LED_RECT" urn="urn:adsk.eagle:component:32977715/5" library_version="61">
+<deviceset name="LED_RECT" urn="urn:adsk.eagle:component:32977715/6" library_version="72">
 <gates>
 <gate name="G$1" symbol="LED" x="0" y="0"/>
 </gates>
@@ -1563,7 +1561,7 @@ R_3mm_D</description>
 <connect gate="G$1" pin="C" pad="K"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45095773/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -2719,14 +2717,14 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="LD10" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD11" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD12" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
-<part name="MINUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_R" package3d_urn="urn:adsk.eagle:package:45109722/2"/>
-<part name="PLUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_G" package3d_urn="urn:adsk.eagle:package:45109721/2"/>
-<part name="HOURS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_B" package3d_urn="urn:adsk.eagle:package:45109720/2"/>
-<part name="MINUTES" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_Y" package3d_urn="urn:adsk.eagle:package:45109719/2"/>
-<part name="UP" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="RIGHT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="DOWN" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
-<part name="LEFT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/2"/>
+<part name="MINUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_R" package3d_urn="urn:adsk.eagle:package:45109722/3"/>
+<part name="PLUS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_G" package3d_urn="urn:adsk.eagle:package:45109721/3"/>
+<part name="HOURS" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_B" package3d_urn="urn:adsk.eagle:package:45109720/3"/>
+<part name="MINUTES" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-5MM_Y" package3d_urn="urn:adsk.eagle:package:45109719/3"/>
+<part name="UP" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/3"/>
+<part name="RIGHT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/3"/>
+<part name="DOWN" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/3"/>
+<part name="LEFT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/3"/>
 <part name="PM" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-3MM_ALT" package3d_urn="urn:adsk.eagle:package:45095771/2"/>
 <part name="SW1" library="BASTL_SWITCHES" library_urn="urn:adsk.eagle:library:32903743" deviceset="KSC3XXJ" device="" package3d_urn="urn:adsk.eagle:package:40210534/2" value="KSC321JLFS"/>
 <part name="U6" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MIC5504YM5-TR" device="" package3d_urn="urn:adsk.eagle:package:34025889/5"/>
@@ -3204,7 +3202,7 @@ WITH VSEL</text>
 </segment>
 <segment>
 <wire x1="15.24" y1="-12.7" x2="17.78" y2="-12.7" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="PA25"/>
+<pinref part="U1" gate="G$1" pin="D+/PA25"/>
 <label x="17.78" y="-12.7" size="1.27" layer="95" ratio="15" xref="yes"/>
 </segment>
 </net>
@@ -3216,7 +3214,7 @@ WITH VSEL</text>
 </segment>
 <segment>
 <wire x1="15.24" y1="-15.24" x2="17.78" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="PA24"/>
+<pinref part="U1" gate="G$1" pin="D-/PA24"/>
 <label x="17.78" y="-15.24" size="1.27" layer="95" ratio="15" xref="yes"/>
 </segment>
 </net>
@@ -3919,7 +3917,7 @@ WITH VSEL</text>
 </net>
 <net name="SWDIO" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="PA31"/>
+<pinref part="U1" gate="G$1" pin="SWDIO/PA31"/>
 <wire x1="15.24" y1="-2.54" x2="17.78" y2="-2.54" width="0.1524" layer="91"/>
 <label x="17.78" y="-2.54" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>
@@ -3931,7 +3929,7 @@ WITH VSEL</text>
 </net>
 <net name="SWCLK" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="PA30"/>
+<pinref part="U1" gate="G$1" pin="SWCLK/PA30"/>
 <wire x1="15.24" y1="-5.08" x2="17.78" y2="-5.08" width="0.1524" layer="91"/>
 <label x="17.78" y="-5.08" size="1.27" layer="95" ratio="12" xref="yes"/>
 </segment>

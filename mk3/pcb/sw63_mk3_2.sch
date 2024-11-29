@@ -703,38 +703,45 @@ SCT2167CSSG</description>
 </library>
 <library name="BASTL_CONNECTORS" urn="urn:adsk.eagle:library:32904192">
 <packages>
-<package name="USB-C_FULL_SMT" urn="urn:adsk.eagle:footprint:45095757/4" library_version="116">
-<smd name="A1-B12" x="-3.2" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
-<smd name="A4-B9" x="-2.4" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
-<smd name="B8" x="-1.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="A5" x="-1.25" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="B7" x="-0.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="A6" x="-0.25" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="A7" x="0.25" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="B6" x="0.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="A8" x="1.25" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="B5" x="1.75" y="3.5814" dx="0.3048" dy="1.3716" layer="1"/>
-<smd name="B4-A9" x="2.4" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
-<smd name="B1-A12" x="3.2" y="3.5814" dx="0.5842" dy="1.3716" layer="1"/>
-<smd name="13" x="-4.95" y="-1.089" dx="1.6" dy="1.9" layer="1" rot="R90"/>
-<smd name="14" x="4.95" y="-1.089" dx="1.6" dy="1.9" layer="1" rot="R90"/>
-<smd name="15" x="-4.95" y="2.9108" dx="1.5" dy="1.9" layer="1" rot="R90"/>
-<smd name="16" x="4.95" y="2.9108" dx="1.5" dy="1.9" layer="1" rot="R90"/>
+<package name="USB-C_FULL_SMT_WS" urn="urn:adsk.eagle:footprint:45908690/1" library_version="132">
+<description>Weather sealed fully SMT USB-C&lt;br/&gt;
+GT-USB-7070C</description>
+<smd name="A1-B12" x="-3.2" y="4.79" dx="0.6" dy="1.2" layer="1"/>
+<smd name="A4-B9" x="-2.4" y="4.79" dx="0.6" dy="1.2" layer="1"/>
+<smd name="B8" x="-1.75" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="A5" x="-1.25" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="B7" x="-0.75" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="A6" x="-0.25" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="A7" x="0.25" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="B6" x="0.75" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="A8" x="1.25" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="B5" x="1.75" y="4.79" dx="0.3" dy="1.2" layer="1"/>
+<smd name="B4-A9" x="2.4" y="4.79" dx="0.6" dy="1.2" layer="1"/>
+<smd name="B1-A12" x="3.2" y="4.79" dx="0.6" dy="1.2" layer="1"/>
+<smd name="13" x="-5.72" y="0" dx="1.25" dy="1.2" layer="1"/>
+<smd name="14" x="5.72" y="0" dx="1.25" dy="1.2" layer="1"/>
+<smd name="15" x="-5.72" y="3" dx="1.25" dy="1.2" layer="1"/>
+<smd name="16" x="5.72" y="3" dx="1.25" dy="1.2" layer="1"/>
 <polygon width="0.0254" layer="39">
-<vertex x="5.1689" y="4.445"/>
-<vertex x="5.1689" y="-4.2418"/>
-<vertex x="-5.1689" y="-4.2418"/>
-<vertex x="-5.1689" y="4.445"/>
+<vertex x="5.1689" y="5.534"/>
+<vertex x="5.1689" y="-3.1528"/>
+<vertex x="-5.1689" y="-3.1528"/>
+<vertex x="-5.1689" y="5.534"/>
 </polygon>
-<wire x1="-4.9276" y1="-2.0066" x2="-4.9276" y2="-3.9878" width="0.1524" layer="21"/>
-<wire x1="4.9276" y1="-0.0254" x2="4.9276" y2="2.032" width="0.1524" layer="21"/>
-<wire x1="-4.9276" y1="-3.9878" x2="4.9276" y2="-3.9878" width="0.1524" layer="21"/>
-<wire x1="4.9276" y1="-3.9878" x2="4.9276" y2="-2.0066" width="0.1524" layer="21"/>
-<wire x1="-4.9276" y1="2.032" x2="-4.9276" y2="-0.0254" width="0.1524" layer="21"/>
-<text x="0" y="-0.762" size="0.8128" layer="27" ratio="15" rot="SR0" align="center">&gt;VALUE</text>
-<text x="0" y="0.762" size="0.8128" layer="25" ratio="15" rot="SR0" align="center">&gt;NAME</text>
-<hole x="2.8956" y="2.413" drill="0.65"/>
-<hole x="-2.8956" y="2.413" drill="0.65"/>
+<wire x1="-4.47" y1="-1.88" x2="-4.47" y2="-3.08" width="0.1524" layer="21"/>
+<wire x1="-4.47" y1="-3.08" x2="4.47" y2="-3.08" width="0.1524" layer="21"/>
+<wire x1="4.47" y1="-3.08" x2="4.47" y2="-1.88" width="0.1524" layer="21"/>
+<wire x1="-5" y1="4.77" x2="-5" y2="-1.88" width="0.1524" layer="21"/>
+<wire x1="-4.47" y1="-1.88" x2="-5" y2="-1.88" width="0.1524" layer="21"/>
+<wire x1="-3.7" y1="4.77" x2="-5" y2="4.77" width="0.1524" layer="21"/>
+<wire x1="5" y1="4.77" x2="5" y2="-1.88" width="0.1524" layer="21"/>
+<wire x1="4.47" y1="-1.88" x2="5" y2="-1.88" width="0.1524" layer="21"/>
+<wire x1="5.012" y1="4.77" x2="5" y2="4.77" width="0.1524" layer="21"/>
+<wire x1="5" y1="4.77" x2="3.7" y2="4.77" width="0.1524" layer="21"/>
+<text x="0" y="0.327" size="0.8128" layer="27" ratio="15" rot="SR0" align="center">&gt;VALUE</text>
+<text x="0" y="1.851" size="0.8128" layer="25" ratio="15" rot="SR0" align="center">&gt;NAME</text>
+<hole x="3.25" y="2.92" drill="0.95"/>
+<hole x="-3.25" y="2.92" drill="0.95"/>
 </package>
 <package name="2X3_POGO" urn="urn:adsk.eagle:footprint:32904225/1" library_version="112">
 <wire x1="-0.635" y1="1.27" x2="-1.27" y2="1.905" width="0.127" layer="21"/>
@@ -788,9 +795,11 @@ SCT2167CSSG</description>
 </package>
 </packages>
 <packages3d>
-<package3d name="USB-C_FULL_SMT" urn="urn:adsk.eagle:package:45095758/5" type="model" library_version="116">
+<package3d name="USB-C_FULL_SMT_WS" urn="urn:adsk.eagle:package:45908691/2" type="model" library_version="132">
+<description>Weather sealed fully SMT USB-C&lt;br/&gt;
+GT-USB-7070C</description>
 <packageinstances>
-<packageinstance name="USB-C_FULL_SMT"/>
+<packageinstance name="USB-C_FULL_SMT_WS"/>
 </packageinstances>
 </package3d>
 <package3d name="2X3_POGO" urn="urn:adsk.eagle:package:32904274/2" type="empty" library_version="112">
@@ -879,22 +888,18 @@ SCT2167CSSG</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="USB-C_2.0_SMT" urn="urn:adsk.eagle:component:45095759/4" prefix="J" library_version="116">
-<description>LCSC:&lt;br /&gt; 
-SHOU HAN TYPE-C 16P QTGM027 (C2681552)&lt;br /&gt;
-SHOU HAN TYPE-C 16P QTWT (C5187472)&lt;br /&gt;
-&lt;br /&gt;
-Other:&lt;br /&gt;
-USB4110-GF-A</description>
+<deviceset name="USB-C_2.0_SMT_WS" urn="urn:adsk.eagle:component:45908692/2" prefix="J" library_version="132">
+<description>Weather sealed fully SMT USB-C&lt;br /&gt;
+GT-USB-7070C</description>
 <gates>
 <gate name="G$1" symbol="USB-C_2.0" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="USB-C_FULL_SMT">
+<device name="" package="USB-C_FULL_SMT_WS">
 <connects>
 <connect gate="G$1" pin="CC1" pad="A5"/>
 <connect gate="G$1" pin="CC2" pad="B5"/>
-<connect gate="G$1" pin="D+" pad="A6 B6" route="any"/>
+<connect gate="G$1" pin="D+" pad="A6 B6"/>
 <connect gate="G$1" pin="D-" pad="A7 B7"/>
 <connect gate="G$1" pin="GND" pad="A1-B12 B1-A12"/>
 <connect gate="G$1" pin="SBU1" pad="A8"/>
@@ -903,7 +908,7 @@ USB4110-GF-A</description>
 <connect gate="G$1" pin="VBUS" pad="A4-B9 B4-A9"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45095758/5"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45908691/2"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -2704,7 +2709,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="U4" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U5" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U2" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="DS3231MZ+" device="" package3d_urn="urn:adsk.eagle:package:32977849/5"/>
-<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT" device="" package3d_urn="urn:adsk.eagle:package:45095758/5"/>
+<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT_WS" device="" package3d_urn="urn:adsk.eagle:package:45908691/2"/>
 <part name="LD1" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD2" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD3" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
@@ -2807,6 +2812,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="D3" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
 <part name="D4" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
 <part name="D5" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
+<part name="GND23" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2815,6 +2821,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <text x="231.14" y="106.68" size="3.048" layer="98">REWORK THIS SECTION:
 REPLACE VBUS_FUSED
 WITH VSEL</text>
+<text x="-39.116" y="-34.29" size="1.27" layer="94" ratio="12">Just for layout.</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="-2.54" y="-15.24" smashed="yes">
@@ -3190,6 +3197,9 @@ WITH VSEL</text>
 <attribute name="NAME" x="27.432" y="-33.5534" size="1.778" layer="95"/>
 <attribute name="VALUE" x="27.432" y="-36.0934" size="1.778" layer="96"/>
 </instance>
+<instance part="GND23" gate="1" x="-25.4" y="-38.1" smashed="yes">
+<attribute name="VALUE" x="-27.94" y="-40.64" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -3387,6 +3397,12 @@ WITH VSEL</text>
 <segment>
 <pinref part="Q2" gate="G$1" pin="SOURCE"/>
 <pinref part="GND13" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="GND23" gate="1" pin="GND"/>
+<pinref part="U1" gate="G$1" pin="PA14"/>
+<wire x1="-25.4" y1="-35.56" x2="-25.4" y2="-33.02" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="-33.02" x2="-20.32" y2="-33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">

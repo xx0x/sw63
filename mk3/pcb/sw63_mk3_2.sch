@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -795,7 +795,7 @@ GT-USB-7070C</description>
 </package>
 </packages>
 <packages3d>
-<package3d name="USB-C_FULL_SMT_WS" urn="urn:adsk.eagle:package:45908691/2" type="model" library_version="132">
+<package3d name="USB-C_FULL_SMT_WS" urn="urn:adsk.eagle:package:45908691/3" type="model" library_version="136">
 <description>Weather sealed fully SMT USB-C&lt;br/&gt;
 GT-USB-7070C</description>
 <packageinstances>
@@ -888,7 +888,7 @@ GT-USB-7070C</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="USB-C_2.0_SMT_WS" urn="urn:adsk.eagle:component:45908692/2" prefix="J" library_version="132">
+<deviceset name="USB-C_2.0_SMT_WS" urn="urn:adsk.eagle:component:45908692/3" prefix="J" library_version="136">
 <description>Weather sealed fully SMT USB-C&lt;br /&gt;
 GT-USB-7070C</description>
 <gates>
@@ -908,7 +908,7 @@ GT-USB-7070C</description>
 <connect gate="G$1" pin="VBUS" pad="A4-B9 B4-A9"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:45908691/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:45908691/3"/>
 </package3dinstances>
 <technologies>
 <technology name=""/>
@@ -2709,7 +2709,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="U4" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U5" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="TLC5916" device="IPW" package3d_urn="urn:adsk.eagle:package:35867227/3"/>
 <part name="U2" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="DS3231MZ+" device="" package3d_urn="urn:adsk.eagle:package:32977849/5"/>
-<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT_WS" device="" package3d_urn="urn:adsk.eagle:package:45908691/2"/>
+<part name="J1" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="USB-C_2.0_SMT_WS" device="" package3d_urn="urn:adsk.eagle:package:45908691/3" value="GT-USB-7070C"/>
 <part name="LD1" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD2" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
 <part name="LD3" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_SMT" device="_1206" package3d_urn="urn:adsk.eagle:package:45095787/2"/>
@@ -2732,10 +2732,10 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="LEFT" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_RECT" device="-3.2X2" package3d_urn="urn:adsk.eagle:package:45095773/3"/>
 <part name="PM" library="BASTL_LEDS" library_urn="urn:adsk.eagle:library:32977677" deviceset="LED_THT" device="-3MM_ALT" package3d_urn="urn:adsk.eagle:package:45095771/2"/>
 <part name="SW1" library="BASTL_SWITCHES" library_urn="urn:adsk.eagle:library:32903743" deviceset="KSC3XXJ" device="" package3d_urn="urn:adsk.eagle:package:40210534/2" value="KSC321JLFS"/>
-<part name="U6" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MIC5504YM5-TR" device="" package3d_urn="urn:adsk.eagle:package:34025889/5"/>
+<part name="U6" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MIC5504YM5-TR" device="" package3d_urn="urn:adsk.eagle:package:34025889/5" value="ME6211C33M5G-N"/>
 <part name="SWD" library="BASTL_CONNECTORS" library_urn="urn:adsk.eagle:library:32904192" deviceset="2X3POGO" device="NO_VIA" package3d_urn="urn:adsk.eagle:package:32904263/3"/>
 <part name="U7" library="BASTL_ICS" library_urn="urn:adsk.eagle:library:32977748" deviceset="MCP73831T-2ACI" device="" package3d_urn="urn:adsk.eagle:package:34025889/5" value="MCP73832T-2ACI/OT"/>
-<part name="F1" library="BASTL_FUSES" library_urn="urn:adsk.eagle:library:32977952" deviceset="PTC" device="" package3d_urn="urn:adsk.eagle:package:32977962/4" value="500mA"/>
+<part name="F1" library="BASTL_FUSES" library_urn="urn:adsk.eagle:library:32977952" deviceset="PTC" device="" package3d_urn="urn:adsk.eagle:package:32977962/4" value="BSMD0805-050-24V"/>
 <part name="GND1" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 <part name="GND2" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 <part name="R1" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="5k1"/>
@@ -2747,7 +2747,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="C1" library="BASTL_CAPACITORS" library_urn="urn:adsk.eagle:library:32978038" deviceset="CAPACITOR0805" device="" package3d_urn="urn:adsk.eagle:package:32978071/3" value="10u"/>
 <part name="C2" library="BASTL_CAPACITORS" library_urn="urn:adsk.eagle:library:32978038" deviceset="CAPACITOR0805" device="" package3d_urn="urn:adsk.eagle:package:32978071/3" value="10u"/>
 <part name="GND6" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
-<part name="Q1" library="BASTL_TRANZISTORS" library_urn="urn:adsk.eagle:library:32975847" deviceset="LGE2305" device="" package3d_urn="urn:adsk.eagle:package:32975863/4"/>
+<part name="Q1" library="BASTL_TRANZISTORS" library_urn="urn:adsk.eagle:library:32975847" deviceset="LGE2305" device="" package3d_urn="urn:adsk.eagle:package:32975863/4" value="2305"/>
 <part name="D1" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="" package3d_urn="urn:adsk.eagle:package:32978000/2" value="1N5819"/>
 <part name="R4" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="10k"/>
 <part name="GND7" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
@@ -2783,7 +2783,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="R10" library="BASTL_RESISTORS" library_urn="urn:adsk.eagle:library:32975925" deviceset="RESISTOR0603" device="" package3d_urn="urn:adsk.eagle:package:32975936/2" value="10k"/>
 <part name="VDDLEDS4" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="VDDLEDS" device=""/>
 <part name="VDDLEDS5" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="VDDLEDS" device=""/>
-<part name="SW2" library="BASTL_SWITCHES" library_urn="urn:adsk.eagle:library:32903743" deviceset="EVQ-P7J01P" device="" package3d_urn="urn:adsk.eagle:package:45099218/2"/>
+<part name="SW2" library="BASTL_SWITCHES" library_urn="urn:adsk.eagle:library:32903743" deviceset="EVQ-P7J01P" device="" package3d_urn="urn:adsk.eagle:package:45099218/2" value="TSC4A 160gf-WZ 016"/>
 <part name="GND14" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 <part name="C9" library="BASTL_CAPACITORS" library_urn="urn:adsk.eagle:library:32978038" deviceset="CAPACITOR0603" device="" package3d_urn="urn:adsk.eagle:package:32978072/2" value="1u"/>
 <part name="C10" library="BASTL_CAPACITORS" library_urn="urn:adsk.eagle:library:32978038" deviceset="CAPACITOR0603" device="" package3d_urn="urn:adsk.eagle:package:32978072/2" value="100n"/>
@@ -2807,7 +2807,7 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <part name="GND21" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 <part name="GND22" library="BASTL_SYMBOLS" library_urn="urn:adsk.eagle:library:32975873" deviceset="GND" device=""/>
 <part name="SJ1" library="BASTL_JUMPERS" library_urn="urn:adsk.eagle:library:32977727" deviceset="SMALL_NC" device="" package3d_urn="urn:adsk.eagle:package:45902385/1"/>
-<part name="Q2" library="BASTL_TRANZISTORS" library_urn="urn:adsk.eagle:library:32975847" deviceset="N-MOSFET" device="" package3d_urn="urn:adsk.eagle:package:32975863/4"/>
+<part name="Q2" library="BASTL_TRANZISTORS" library_urn="urn:adsk.eagle:library:32975847" deviceset="N-MOSFET" device="" package3d_urn="urn:adsk.eagle:package:32975863/4" value="2302"/>
 <part name="D2" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
 <part name="D3" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
 <part name="D4" library="BASTL_DIODES" library_urn="urn:adsk.eagle:library:32977972" deviceset="SCHOTTKY_DIODE" device="_SOD523" package3d_urn="urn:adsk.eagle:package:42502794/4" value="RB521S"/>
@@ -2818,9 +2818,6 @@ https://www.tme.eu/cz/details/0zcj0100ff2e/polymerove-pojistky-smd/bel-fuse/</de
 <sheet>
 <plain>
 <text x="24.384" y="-19.05" size="1.27" layer="94" ratio="12">Just for layout.</text>
-<text x="231.14" y="106.68" size="3.048" layer="98">REWORK THIS SECTION:
-REPLACE VBUS_FUSED
-WITH VSEL</text>
 <text x="-39.116" y="-34.29" size="1.27" layer="94" ratio="12">Just for layout.</text>
 </plain>
 <instances>
@@ -2933,8 +2930,8 @@ WITH VSEL</text>
 <attribute name="VALUE" x="-142.24" y="0" size="2.0828" layer="96" ratio="10" rot="SR0" align="top-center"/>
 </instance>
 <instance part="F1" gate="G$1" x="-127" y="66.04" smashed="yes">
-<attribute name="NAME" x="-127" y="69.723" size="1.778" layer="95" align="center"/>
-<attribute name="VALUE" x="-127.127" y="62.23" size="1.778" layer="96" align="center"/>
+<attribute name="NAME" x="-127" y="72.263" size="1.778" layer="95" align="center"/>
+<attribute name="VALUE" x="-122.047" y="69.85" size="1.778" layer="96" align="center"/>
 </instance>
 <instance part="GND1" gate="1" x="-167.64" y="40.64" smashed="yes">
 <attribute name="VALUE" x="-170.18" y="38.1" size="1.778" layer="96"/>
@@ -4168,10 +4165,6 @@ WITH VSEL</text>
 </schematic>
 </drawing>
 <compatibility>
-<note version="6.3" minversion="6.2.2" severity="warning">
-Since Version 6.2.2 text objects can contain more than one line,
-which will not be processed correctly with this version.
-</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)

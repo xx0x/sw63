@@ -7,25 +7,18 @@ use atsamd_hal::{
     adc::{Adc, Gain, Reference, Resolution, SampleRate},
     clock::GenericClockController,
     delay::Delay,
-    gpio::v2::{Pins, B, C, Pin, PullUpInterrupt, PA04},
-    prelude::*,
+    gpio::v2::{Pins, B, C},
     pac::{interrupt, CorePeripherals, EIC, GCLK, NVIC},
+    prelude::*,
     sercom::i2c,
     target_device::Peripherals,
     time::U32Ext,
 };
-use cortex_m::interrupt::Mutex;
+
 use cortex_m_rt::entry;
 use panic_halt as _;
-use core::cell::RefCell;
-use core::sync::atomic::{AtomicBool, Ordering};
 
 use ds3231::{Time, DS3231};
-
-// Global variables for button state
-static BUTTON_PRESSED: AtomicBool = AtomicBool::new(false);
-static G_BUTTON: Mutex<RefCell<Option<Pin<PA04, PullUpInterrupt>>>> = Mutex::new(RefCell::new(None));
-
 
 #[entry]
 fn main() -> ! {
@@ -43,10 +36,10 @@ fn main() -> ! {
 
     // Configure pins
     let pins = Pins::new(peripherals.PORT);
-    
+
     // Configure LED on PA23 and button on PA04
     let mut led_pin = pins.pa23.into_push_pull_output();
-    
+
     // Setup delay provider
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
@@ -54,24 +47,23 @@ fn main() -> ! {
     led_pin.set_high().unwrap();
     delay.delay_ms(200u32);
     led_pin.set_low().unwrap();
-    
 
     // ==================================================
     // Configure GCLK with minimal power for EIC operation
     // ==================================================
-    
+
     let gclk = unsafe { &*GCLK::ptr() };
-    
+
     // Configure GCLK1 to use OSC32K with minimal power
     unsafe {
         // First disable the clock generator
         gclk.genctrl.write(|w| w.id().bits(1).genen().clear_bit());
         while gclk.status.read().syncbusy().bit() {}
-        
+
         // Set division factor to 32 (lower power)
         gclk.gendiv.write(|w| w.id().bits(1).div().bits(32));
         while gclk.status.read().syncbusy().bit() {}
-        
+
         // Configure with OSC32K and enable in standby
         gclk.genctrl.write(|w| {
             w.id().bits(1)
@@ -81,7 +73,7 @@ fn main() -> ! {
              .runstdby().set_bit() // Must run in standby for wakeup to work
         });
         while gclk.status.read().syncbusy().bit() {}
-        
+
         // Connect GCLK1 to the EIC
         gclk.clkctrl.write(|w| {
             w.id().eic()
@@ -90,45 +82,40 @@ fn main() -> ! {
         });
         while gclk.status.read().syncbusy().bit() {}
     }
-    
+
     // Enable EIC peripheral clock
     peripherals.PM.apbamask.modify(|_, w| w.eic_().set_bit());
 
     // Get EIC access
     let eic = &peripherals.EIC;
-    
+
     // Disable EIC before configuring
     eic.ctrl.write(|w| w.enable().clear_bit());
     while eic.status.read().syncbusy().bit_is_set() {}
-    
+
     // Configure only the button interrupt (PA04 = EXTINT[4])
     // Use input filtering to avoid spurious wakeups
     eic.config[0].write(|w| w.sense4().fall().filten4().set_bit());
-    
+
     // Only enable the one interrupt we need
     eic.intenset.write(|w| w.extint4().set_bit());
-    
+
     // Only enable wakeup for the specific interrupt
     eic.wakeup.write(|w| w.wakeupen4().set_bit());
-    
+
     // Enable EIC
     eic.ctrl.write(|w| w.enable().set_bit());
     while eic.status.read().syncbusy().bit_is_set() {}
-    
+
     // Clear any pending interrupt
     eic.intflag.write(|w| w.extint4().set_bit());
 
     // Configure button pin for interrupt mode
     let button_pin = pins.pa04.into_pull_up_interrupt();
-    
-    // Store button in global variable for interrupt handler
-    cortex_m::interrupt::free(|cs| {
-        G_BUTTON.borrow(cs).replace(Some(button_pin));
-    });
 
     // Set up deep sleep mode
     core.SCB.set_sleepdeep();
-    
+
     // Enable the EIC interrupt in NVIC
     unsafe {
         NVIC::unmask(interrupt::EIC);
@@ -185,10 +172,9 @@ fn main() -> ! {
 
     // Blink count
     let mut blink_count = 0u32;
-    
+
     // Main loop
     loop {
-
         blink_count += 1u32;
         led_pin.toggle().unwrap();
 
@@ -200,42 +186,32 @@ fn main() -> ! {
 
         // Enter deep sleep after 8 blinks
         if blink_count >= 8 {
-            
             // Turn LED off before sleep
             led_pin.set_low().unwrap();
             blink_count = 0;
 
-            // Disable all peripherals to save power    
+            // Disable all peripherals to save power
             disable_peripherals(&peripherals.PM);
-        
-            // Reset button flag
-            BUTTON_PRESSED.store(false, Ordering::Relaxed);
-            
-            // Enter sleep loop - wait for button press
+
+            // Enter sleep loop - wait for any interrupt (eg. button press)
             loop {
                 // Enter standby mode (deepest sleep)
                 cortex_m::asm::wfi();
-                
-                // Check for wakeup 
-                if BUTTON_PRESSED.load(Ordering::Relaxed) {
+
+                // Check if button is pressed
+                if button_pin.is_low().unwrap() {
                     break;
                 }
             }
-            
+
             // Restore peripherals
             enable_peripherals(&peripherals.PM);
-            
-            // Reset button flag
-            BUTTON_PRESSED.store(false, Ordering::Relaxed);
         }
     }
 }
 
 #[interrupt]
 fn EIC() {
-    // Set the button pressed flag
-    BUTTON_PRESSED.store(true, Ordering::Relaxed);
-    
     // Clear the interrupt flag in the EIC
     unsafe {
         let eic = &(*EIC::ptr());
@@ -243,7 +219,6 @@ fn EIC() {
         eic.intflag.modify(|_, w| w.extint4().set_bit());
     }
 }
-
 
 fn disable_peripherals(pm: &atsamd_hal::pac::PM) {
     // AHB bus - shut down almost everything

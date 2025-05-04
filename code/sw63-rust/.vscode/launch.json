@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "Debug with J-Link",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/target/thumbv6m-none-eabi/debug/sw63-rust",
+            "servertype": "jlink",
+            "device": "ATSAMD21E18A",
+            "interface": "swd",
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceFolder}/.vscode/ATSAMD21E18A.svd",
+            "preLaunchTask": "build"
+        }
+    ]
+}

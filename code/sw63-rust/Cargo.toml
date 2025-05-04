@@ -17,8 +17,8 @@ lto = true
 codegen-units = 1
 
 [profile.dev]
+opt-level = 0
 debug = true
-opt-level = "s"
 
 [[bin]]
 name = "sw63-rust"

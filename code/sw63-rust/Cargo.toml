@@ -9,7 +9,7 @@ edition = "2021"
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 panic-halt = "0.2.0"
-atsamd-hal = { version = "0.14.0", features = ["samd21e", "unproven"] }
+atsamd-hal = { version = "0.14.0", features = ["samd21e", "unproven", "samd21e-rt"] }
 
 [profile.release]
 opt-level = "s"

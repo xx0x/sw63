@@ -6,11 +6,12 @@ mod ds3231;
 use atsamd_hal::{
     clock::GenericClockController,
     delay::Delay,
-    gpio::v2::{Pins, C},
+    gpio::v2::{Pins, C, B},
     prelude::*,
     sercom::i2c,
     target_device::Peripherals,
     time::U32Ext,
+    adc::{Adc, Reference, Resolution, SampleRate, Gain}
 };
 use cortex_m_rt::entry;
 use panic_halt as _;
@@ -83,12 +84,25 @@ fn main() -> ! {
         }
     }
 
+    // Configure PA02 as an analog input
+    let mut analog_pin = pins.pa02.into_alternate::<B>();
+
+    // ADC
+    let mut adc = Adc::adc(peripherals.ADC, &mut peripherals.PM, &mut clocks);
+    adc.reference(Reference::INTVCC1); // Internal 1/2 VDDANA reference
+    adc.resolution(Resolution::_12BIT); // 12-bit resolution
+    adc.samples(SampleRate::_8); // 8 samples
+    adc.gain(Gain::DIV2); // 1/2 gain
+
     // Main loop - blink LED and optionally read current time
     loop {
         led_pin.toggle().unwrap();
 
         // Read time
         let _current_time = rtc.get_time().unwrap();
+
+        // Read brightness from PA02
+        let _brightness: u16 = adc.read(&mut analog_pin).unwrap();
 
         // If button is pressed, read current time from RTC
         if button_pin.is_low().unwrap() {

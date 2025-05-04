@@ -5,3 +5,6 @@ Cargo.lock
 # System stuff
 .DS_Store
 Thumbs.db
+
+# Other
+/junk/

@@ -1,0 +1,7 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# System stuff
+.DS_Store
+Thumbs.db

@@ -1,0 +1,40 @@
+# justfile for SW63 Rust project targeting SAMD21E18
+
+# Default recipe to run when just is called without arguments
+default:
+    @just --list
+
+# Clean build artifacts
+clean:
+    cargo clean
+
+# Build for debug
+build:
+    cargo build
+
+# Build and generate hex file
+hex: build
+    arm-none-eabi-objcopy -O ihex target/thumbv6m-none-eabi/debug/sw63-rust target/thumbv6m-none-eabi/debug/sw63-rust.hex
+
+# Build and generate UF2 file
+uf2: hex
+    #!/usr/bin/env bash
+    UF2CONV="./tools/uf2conv.py"
+    python3 "$UF2CONV" target/thumbv6m-none-eabi/debug/sw63-rust.hex -c -f 0x68ed2b88 -o target/thumbv6m-none-eabi/debug/sw63-rust.uf2
+    echo "UF2 file generated at: target/thumbv6m-none-eabi/debug/sw63-rust.uf2"
+
+# Flash using JLink
+flash: hex
+    #!/usr/bin/env bash
+    cat > flash.jlink << EOL
+    si 1
+    device ATSAMD21E18A
+    speed 4000
+    connect
+    loadfile target/thumbv6m-none-eabi/debug/sw63-rust.hex
+    r
+    q
+    EOL
+    JLinkExe -CommandFile flash.jlink
+    rm flash.jlink
+    echo "Flashing completed!"

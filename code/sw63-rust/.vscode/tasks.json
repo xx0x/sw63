@@ -1,0 +1,52 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "just",
+            "args": [
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "uf2",
+            "type": "shell",
+            "command": "just",
+            "args": [
+                "uf2"
+            ]
+        },
+        {
+            "label": "flash",
+            "type": "shell",
+            "command": "just",
+            "args": [
+                "flash"
+            ]
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "just",
+            "args": [
+                "clean"
+            ],
+        },
+        {
+            "label": "build_and_flash",
+            "dependsOn": [
+                "build",
+                "flash"
+            ],
+            "dependsOrder": "sequence",
+        }
+    ]
+}

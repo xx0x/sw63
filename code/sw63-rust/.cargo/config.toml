@@ -1,0 +1,12 @@
+[build]
+target = "thumbv6m-none-eabi"
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+]
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = "probe-run --chip ATSAMD21E18A"
+
+# For JLink programming
+[target.thumbv6m-none-eabi]
+runner = "JLinkGDBServer -if SWD -device ATSAMD21E18A -speed 4000 -port 2331 -nogui"

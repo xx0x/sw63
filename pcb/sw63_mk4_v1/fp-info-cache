@@ -1,4 +1,4 @@
-26254770228007651
+26258316794311757
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -104244,6 +104244,13 @@ Varistor VF
 2
 2
 sw63_mk4
+BAT
+SMD BAT
+BAT
+0
+2
+2
+sw63_mk4
 GT-USB-7070C
 Weather sealed fully SMT USB-C GT-USB-7070C
 
@@ -104257,6 +104264,13 @@ mountinghole
 0
 0
 0
+sw63_mk4
+SWD_2x03_SMD
+SWD Debug Connector
+SWD Debug
+0
+6
+6
 sw63_mk4
 SW_Push_1P1T_NO_CK_KSC3xxJ
 Tactile switch, 6.2x6.25 mm, H7.68 mm, J leads, https://www.ckswitches.com/media/1972/ksc6.pdf

@@ -9461,7 +9461,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KSC6xxJ"
+		(property "Footprint" "sw63_mk4:SW_Push_1P1T_NO_CK_KSC3xxJ"
 			(at 77.47 88.9 0)
 			(effects
 				(font
@@ -14297,7 +14297,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_USB:USB_C_Receptacle_XKB_U262-16XN-4BVC11"
+		(property "Footprint" "sw63_mk4:GT-USB-7070C"
 			(at 36.83 48.26 0)
 			(effects
 				(font
@@ -14324,7 +14324,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C393939"
+		(property "LCSC" "C5446864"
 			(at 33.02 25.4 0)
 			(effects
 				(font
@@ -15106,7 +15106,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Ambient Light Sensor"
+		(property "Description" "NPN phototransistor, collector/emitter"
 			(at 157.48 176.53 0)
 			(effects
 				(font

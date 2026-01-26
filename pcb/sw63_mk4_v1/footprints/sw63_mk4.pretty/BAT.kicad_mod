@@ -1,0 +1,92 @@
+(footprint "BAT"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "SMD BAT")
+	(tags "BAT")
+	(property "Reference" "REF**"
+		(at 1 -2.11 0)
+		(layer "F.SilkS")
+		(uuid "93c8bd2e-44c8-4a07-ba81-37ab77877dfe")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "BAT"
+		(at 1 2.11 0)
+		(layer "F.Fab")
+		(uuid "bf4582f7-6180-44e6-8cde-78980c127e85")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "644334cb-0ddd-4d60-ad9f-22f3743693b1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3d968b38-d85a-467a-bcd0-2ed0f5e49014")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd exclude_from_pos_files exclude_from_bom dnp)
+	(fp_text user "${REFERENCE}"
+		(at 1 0 90)
+		(layer "F.Fab")
+		(uuid "fd386fa4-eceb-4afb-a0f7-e6d375263ed1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at 0 0)
+		(size 1.35 2.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "c1026e26-a755-404c-8b87-74db87412df7")
+	)
+	(pad "2" smd roundrect
+		(at 2 0)
+		(size 1.35 2.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "00cb2471-a351-4e33-87f4-d64948aa49df")
+	)
+	(embedded_fonts no)
+	(model "${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.00mm.3dshapes/PinHeader_2x01_P2.00mm_Vertical.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

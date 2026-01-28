@@ -14876,7 +14876,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0805_2012Metric"
+		(property "Footprint" "sw63_mk4:TEMT6200FX01"
 			(at 116.84 97.79 0)
 			(effects
 				(font

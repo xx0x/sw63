@@ -1,4 +1,4 @@
-26270704271690811
+26272473910552592
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -104326,6 +104326,13 @@ Tactile switch, 6.2x6.25 mm, H7.68 mm, J leads, https://www.ckswitches.com/media
 CK C&K SPST
 0
 4
+2
+sw63_mk4
+TEMT6200FX01
+Diode SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
+diode
+0
+2
 2
 uprobe
 IDC_2x05_P1.27mm_Horizontal

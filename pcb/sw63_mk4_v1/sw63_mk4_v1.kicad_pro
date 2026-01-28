@@ -188,7 +188,8 @@
       ],
       "track_widths": [
         0.0,
-        0.2
+        0.2,
+        0.3
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -494,13 +495,13 @@
         "diff_pair_width": 0.2,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "PWR",
+        "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.4,
-        "via_diameter": 0.8,
-        "via_drill": 0.35
+        "track_width": 0.3,
+        "via_diameter": 0.7,
+        "via_drill": 0.3
       }
     ],
     "meta": {
@@ -508,6 +509,9 @@
     },
     "net_colors": null,
     "netclass_assignments": {
+      "/GND_LED": [
+        "Power"
+      ],
       "/VBAT": [
         "Power"
       ],
@@ -529,20 +533,24 @@
     },
     "netclass_patterns": [
       {
-        "netclass": "PWR",
+        "netclass": "Power",
         "pattern": "GND"
       },
       {
-        "netclass": "PWR",
+        "netclass": "Power",
         "pattern": "VDD"
       },
       {
-        "netclass": "PWR",
+        "netclass": "Power",
         "pattern": "*VCC"
       },
       {
-        "netclass": "PWR",
+        "netclass": "Power",
         "pattern": "*VBAT"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "VSEL"
       }
     ]
   },

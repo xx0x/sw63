@@ -8805,7 +8805,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 168.91 81.28 0)
 			(effects
 				(font
@@ -9970,7 +9970,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.0mm_H2.8mm_FlatTop"
+		(property "Footprint" "sw63_mk4:LED_W3.0mm_H2.0mm_Y"
 			(at 264.16 81.28 0)
 			(effects
 				(font
@@ -10407,7 +10407,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 158.75 81.28 0)
 			(effects
 				(font
@@ -11308,7 +11308,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.0mm_H2.8mm_FlatTop"
+		(property "Footprint" "sw63_mk4:LED_W3.0mm_H2.0mm_Y"
 			(at 256.54 81.28 0)
 			(effects
 				(font
@@ -11387,7 +11387,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 153.67 81.28 0)
 			(effects
 				(font
@@ -11664,7 +11664,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 203.2 81.28 0)
 			(effects
 				(font
@@ -11873,7 +11873,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 163.83 81.28 0)
 			(effects
 				(font
@@ -11952,7 +11952,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 200.66 81.28 0)
 			(effects
 				(font
@@ -12031,7 +12031,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.0mm_H2.8mm_FlatTop"
+		(property "Footprint" "sw63_mk4:LED_W3.0mm_H2.0mm_Y"
 			(at 261.62 81.28 0)
 			(effects
 				(font
@@ -12110,7 +12110,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.0mm_H2.8mm_FlatTop"
+		(property "Footprint" "sw63_mk4:LED_W3.0mm_H2.0mm_Y"
 			(at 259.08 81.28 0)
 			(effects
 				(font
@@ -12365,7 +12365,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
+		(property "Footprint" "sw63_mk4:LED_D5.0mm_B"
 			(at 215.9 81.28 0)
 			(effects
 				(font
@@ -12444,7 +12444,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 166.37 81.28 0)
 			(effects
 				(font
@@ -12869,7 +12869,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
+		(property "Footprint" "sw63_mk4:LED_D5.0mm_Y"
 			(at 218.44 81.28 0)
 			(effects
 				(font
@@ -12948,7 +12948,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 171.45 81.28 0)
 			(effects
 				(font
@@ -13162,7 +13162,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 156.21 81.28 0)
 			(effects
 				(font
@@ -13306,7 +13306,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 161.29 81.28 0)
 			(effects
 				(font
@@ -13385,7 +13385,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
+		(property "Footprint" "sw63_mk4:LED_D5.0mm_R"
 			(at 210.82 81.28 0)
 			(effects
 				(font
@@ -13746,7 +13746,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D3.0mm"
+		(property "Footprint" "sw63_mk4:LED_D3.0mm_R"
 			(at 254 81.28 0)
 			(effects
 				(font
@@ -14362,7 +14362,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 208.28 81.28 0)
 			(effects
 				(font
@@ -14520,7 +14520,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
+		(property "Footprint" "sw63_mk4:LED_D5.0mm_G"
 			(at 213.36 81.28 0)
 			(effects
 				(font
@@ -14967,7 +14967,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+		(property "Footprint" "sw63_mk4:LED_1206_W"
 			(at 205.74 81.28 0)
 			(effects
 				(font

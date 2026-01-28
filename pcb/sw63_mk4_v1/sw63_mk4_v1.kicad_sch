@@ -4911,7 +4911,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "BAT current when MCU sleeps (BAT is 4V)\nMCP73832T: approx 21uA - little worse\nDIO5518BST5: approx 15uA (10-20 based on ambient temperature) - little better"
+	(text "BAT current when MCU sleeps (BAT is 4V)\nMCP73832T-2ACI/OT: approx 21uA - little worse\nDIO5518BST5: approx 15uA (10-20 based on ambient temperature) - little better"
 		(exclude_from_sim no)
 		(at 235.712 24.638 0)
 		(effects
@@ -9487,15 +9487,15 @@
 		(fields_autoplaced yes)
 		(uuid "2f9efe55-bcb4-4490-a746-7bce2495604e")
 		(property "Reference" "U3"
-			(at 184.15 97.4246 90)
+			(at 186.69 97.4246 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "TLC5916"
-			(at 184.15 99.9646 90)
+		(property "Value" "TLC5916IPWR"
+			(at 186.69 99.9646 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11160,15 +11160,15 @@
 		(fields_autoplaced yes)
 		(uuid "660a8b2c-e3d7-4e5f-bca2-18ad248ab4a3")
 		(property "Reference" "U4"
-			(at 231.14 97.4246 90)
+			(at 233.68 97.4246 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "TLC5916"
-			(at 231.14 99.9646 90)
+		(property "Value" "TLC5916IPWR"
+			(at 233.68 99.9646 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12151,15 +12151,15 @@
 		(fields_autoplaced yes)
 		(uuid "8e3821cc-3d33-489f-89f3-ec569ed0e203")
 		(property "Reference" "U5"
-			(at 276.86 97.4246 90)
+			(at 279.4 97.4246 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "TLC5916"
-			(at 276.86 99.9646 90)
+		(property "Value" "TLC5916IPWR"
+			(at 279.4 99.9646 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14209,7 +14209,7 @@
 				)
 			)
 		)
-		(property "Value" "USB_C_Receptacle_USB2.0_16P"
+		(property "Value" "GT-USB-7070C"
 			(at 33.02 27.94 0)
 			(effects
 				(font

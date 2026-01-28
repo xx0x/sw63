@@ -207,15 +207,15 @@
 		(uuid "43542d1b-8e0e-4bb0-a542-7c51c2334055")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/3d_models/KSC321JLFS.step"
+	(model "${KIPRJMOD}/3d_models/KSC3XXJ.step"
 		(offset
-			(xyz 0 0 2)
+			(xyz 0 0 0)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz -90 -0 -0)
+			(xyz -0 -0 -0)
 		)
 	)
 )

@@ -8072,15 +8072,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C107410"
-			(at 127.8733 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "8"
 			(uuid "8fcac79f-088c-4727-958c-20f4dbaa8017")
 		)
@@ -8166,7 +8157,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C23186"
 			(at 55.372 35.814 0)
 			(effects
 				(font
@@ -8245,7 +8236,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25804"
 			(at 172.72 53.3399 0)
 			(effects
 				(font
@@ -8389,7 +8380,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25744"
+		(property "LCSC" "C25804"
 			(at 69.85 106.6799 0)
 			(effects
 				(font
@@ -8788,7 +8779,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C315248"
+		(property "LCSC" "C15850"
 			(at 214.63 46.9899 0)
 			(effects
 				(font
@@ -8869,15 +8860,6 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 168.91 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C965828"
-			(at 167.386 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9020,15 +9002,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 109.22 176.5299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3fc0e376-8bdf-4340-9806-1e1819bdb2a1")
 		)
@@ -9164,7 +9137,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
+		(property "LCSC" "C14663"
 			(at 53.34 105.4099 0)
 			(effects
 				(font
@@ -9236,15 +9209,6 @@
 		)
 		(property "Description" "Resistor"
 			(at 171.45 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25744"
-			(at 173.99 115.5699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9473,15 +9437,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 275.59 66.0399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "aa0adc67-d772-40f2-87c9-de3828b162e2")
 		)
@@ -9552,15 +9507,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25905"
-			(at 102.87 144.7799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "c95f2b85-a4bd-44d3-9b21-758493097823")
 		)
@@ -9622,15 +9568,6 @@
 		)
 		(property "Description" "8-Channel Constant-Current LED Sink Driver"
 			(at 163.83 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C193571"
-			(at 186.69 97.4246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9741,15 +9678,6 @@
 		)
 		(property "Description" "Push button switch, generic, two pins"
 			(at 80.01 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C2798494"
-			(at 80.01 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9893,15 +9821,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C4109"
-			(at 266.7 115.5699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "22b6f654-4612-4b30-acc9-2531cad59337")
 		)
@@ -10037,7 +9956,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25804"
 			(at 64.77 62.2299 0)
 			(effects
 				(font
@@ -10259,15 +10178,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2828254"
-			(at 80.01 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "d870728f-bee9-451e-b21c-a087e7497303")
 		)
@@ -10338,7 +10248,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C315248"
+		(property "LCSC" "C15850"
 			(at 148.59 53.3399 0)
 			(effects
 				(font
@@ -10417,7 +10327,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C315248"
+		(property "LCSC" "C15850"
 			(at 71.12 35.5599 0)
 			(effects
 				(font
@@ -10637,15 +10547,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 157.226 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "9b258335-51c1-45ec-acbc-e5958c1926de")
 		)
@@ -10713,7 +10614,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25905"
+		(property "LCSC" "C23186"
 			(at 54.864 42.926 0)
 			(effects
 				(font
@@ -10792,7 +10693,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
+		(property "LCSC" "C14663"
 			(at 41.91 105.4099 0)
 			(effects
 				(font
@@ -10870,15 +10771,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 252.73 66.0399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "1860f075-fb78-464a-8a46-0cd6d639fc7b")
 		)
@@ -10942,15 +10834,6 @@
 		)
 		(property "Description" "Resistor"
 			(at 158.75 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25741"
-			(at 161.29 135.8899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11300,7 +11183,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C315248"
+		(property "LCSC" "C15850"
 			(at 121.92 54.6099 0)
 			(effects
 				(font
@@ -11436,15 +11319,6 @@
 		)
 		(property "Description" "8-Channel Constant-Current LED Sink Driver"
 			(at 210.82 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C193571"
-			(at 233.68 97.4246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11645,15 +11519,6 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 153.67 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C965828"
-			(at 152.146 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11938,15 +11803,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 201.676 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "7dfc886e-749c-464d-9498-22f5b4c5d3d3")
 		)
@@ -12222,15 +12078,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 162.306 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "52c13f33-6636-437e-b8b1-d14325b131bb")
 		)
@@ -12303,15 +12150,6 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 200.66 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C965828"
-			(at 199.136 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12538,15 +12376,6 @@
 		)
 		(property "Description" "8-Channel Constant-Current LED Sink Driver"
 			(at 256.54 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C193571"
-			(at 279.4 97.4246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12820,15 +12649,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 164.846 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2492ec87-4f92-4d35-ac21-7c0eb056633c")
 		)
@@ -12964,7 +12784,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25804"
 			(at 64.77 69.8499 0)
 			(effects
 				(font
@@ -13043,7 +12863,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C315248"
+		(property "LCSC" "C15850"
 			(at 172.72 36.8299 0)
 			(effects
 				(font
@@ -13247,15 +13067,6 @@
 		)
 		(property "Description" "Resistor"
 			(at 114.3 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25768"
-			(at 116.84 107.9499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13486,15 +13297,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 169.926 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "36dd480e-e7e8-44f2-aa5e-1b06b77d43a5")
 		)
@@ -13630,15 +13432,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25744"
-			(at 220.98 115.5699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "6e4bf3a2-2c2a-4b20-a53d-9aeef155a07c")
 		)
@@ -13711,15 +13504,6 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 156.21 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C965828"
-			(at 154.686 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13864,15 +13648,6 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 161.29 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C965828"
-			(at 159.766 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14159,15 +13934,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C150470"
-			(at 116.84 32.004 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2b3f1510-12a5-4676-917e-399cbf5f376f")
 		)
@@ -14241,7 +14007,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
+		(property "LCSC" "C14663"
 			(at 30.48 105.4099 0)
 			(effects
 				(font
@@ -14535,7 +14301,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25741"
+		(property "LCSC" "C25804"
 			(at 17.78 142.2399 0)
 			(effects
 				(font
@@ -14607,15 +14373,6 @@
 		)
 		(property "Description" "Unpolarized capacitor"
 			(at 260.35 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C1525"
-			(at 264.16 66.0399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14954,15 +14711,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 206.756 76.454 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3b529781-33e2-4fbb-906f-51afaba06153")
 		)
@@ -15033,7 +14781,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25744"
+		(property "LCSC" "C25804"
 			(at 100.33 53.3399 0)
 			(effects
 				(font
@@ -15489,15 +15237,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C143695"
-			(at 116.84 98.3106 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "2"
 			(uuid "85f0ba55-32fe-406a-8c25-8c8cfdd26ca0")
 		)
@@ -15577,15 +15316,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C965828"
-			(at 204.216 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "8eb7167d-8404-46c2-89a4-099081a8789c")
 		)
@@ -15649,15 +15379,6 @@
 		)
 		(property "Description" "N-MOSFET transistor, gate/drain/source"
 			(at 168.91 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C96613"
-			(at 175.26 132.0799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15731,15 +15452,6 @@
 		)
 		(property "Description" "Resistor"
 			(at 109.22 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25905"
-			(at 111.76 144.7799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15882,7 +15594,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25767"
+		(property "LCSC" "C25804"
 			(at 17.78 149.8599 0)
 			(effects
 				(font

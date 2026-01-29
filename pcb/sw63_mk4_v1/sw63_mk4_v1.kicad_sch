@@ -5036,6 +5036,12 @@
 		(uuid "4f920c99-d56c-4152-a197-11072fc9cc0d")
 	)
 	(junction
+		(at 62.23 67.31)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "51e16f59-d0cb-4582-83c7-a5a9c51d7271")
+	)
+	(junction
 		(at 210.82 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5917,6 +5923,16 @@
 	)
 	(wire
 		(pts
+			(xy 67.31 176.53) (xy 83.82 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ae708dc-53cc-4839-abc9-833b8a3b0656")
+	)
+	(wire
+		(pts
 			(xy 195.58 77.47) (xy 200.66 77.47)
 		)
 		(stroke
@@ -6757,6 +6773,16 @@
 	)
 	(wire
 		(pts
+			(xy 62.23 67.31) (xy 68.58 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4dcba08-19cc-4cb3-82a6-2c9029f824e2")
+	)
+	(wire
+		(pts
 			(xy 168.91 34.29) (xy 182.88 34.29)
 		)
 		(stroke
@@ -7245,6 +7271,16 @@
 		)
 		(uuid "fefbcbca-36a6-47cd-a406-c5233a74879a")
 	)
+	(label "USB_DTCT"
+		(at 68.58 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "027d74f8-51bd-4135-b4e4-797d7d258eed")
+	)
 	(label "CHRG_STAT"
 		(at 21.59 176.53 0)
 		(effects
@@ -7414,6 +7450,16 @@
 			(justify left bottom)
 		)
 		(uuid "57008edb-ca28-4eee-88d3-efa6b2236c80")
+	)
+	(label "USB_DTCT"
+		(at 83.82 176.53 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5925ee9e-f4b4-476a-9644-be2bb68711bc")
 	)
 	(label "SWCLK"
 		(at 83.82 173.99 180)
@@ -9425,7 +9471,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4k7"
+		(property "Value" "5k1"
 			(at 102.87 147.3199 0)
 			(effects
 				(font
@@ -9851,6 +9897,84 @@
 			(project "sw63_mk4_v1"
 				(path "/00a72708-0c21-4417-829d-39fe85e39324"
 					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 62.23 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3815bfa8-2bb9-4208-998d-f07f020da89e")
+		(property "Reference" "R15"
+			(at 64.262 62.484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22k"
+			(at 64.262 65.024 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 60.452 63.5 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 62.23 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 64.77 62.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "66e1d69a-6fb6-410d-83e2-d8e298dbcba6")
+		)
+		(pin "1"
+			(uuid "16913668-ecf7-491a-901b-29b5b7ebd280")
+		)
+		(instances
+			(project "sw63_mk4_v1"
+				(path "/00a72708-0c21-4417-829d-39fe85e39324"
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -11825,6 +11949,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 62.23 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7b9db6b2-325f-41a5-8782-28b56d3ca604")
+		(property "Reference" "#PWR09"
+			(at 62.23 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 62.23 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 62.23 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "abff3496-48a4-440b-966b-356bece0292d")
+		)
+		(instances
+			(project "sw63_mk4_v1"
+				(path "/00a72708-0c21-4417-829d-39fe85e39324"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 163.83 81.28 90)
 		(unit 1)
@@ -12541,6 +12731,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 62.23 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9b13f1b1-911c-49ea-8090-2f62db5a7757")
+		(property "Reference" "R16"
+			(at 64.262 70.104 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22k"
+			(at 64.262 72.644 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 60.452 71.12 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 62.23 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25804"
+			(at 64.77 69.8499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "51384e67-e42a-4bf0-8bc1-6b9a6811033b")
+		)
+		(pin "1"
+			(uuid "4933df37-fbb3-4d86-a4b9-128a47fb88c1")
+		)
+		(instances
+			(project "sw63_mk4_v1"
+				(path "/00a72708-0c21-4417-829d-39fe85e39324"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 168.91 38.1 0)
 		(unit 1)
@@ -12614,6 +12882,72 @@
 			(project "sw63_mk4_v1"
 				(path "/00a72708-0c21-4417-829d-39fe85e39324"
 					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 62.23 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a4c4dbf4-c218-4fc5-a1f6-2c4336775d1e")
+		(property "Reference" "#PWR08"
+			(at 62.23 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 62.23 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 62.23 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a2f2146f-29e6-4ad0-bedb-9db7135864ea")
+		)
+		(instances
+			(project "sw63_mk4_v1"
+				(path "/00a72708-0c21-4417-829d-39fe85e39324"
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -15089,7 +15423,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4k7"
+		(property "Value" "5k1"
 			(at 111.76 147.3199 0)
 			(effects
 				(font

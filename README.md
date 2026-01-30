@@ -1,5 +1,16 @@
-# Spacewatch SW63
+# Space Watch SW63
 
 A sci-fi inspired electornic watch.
 
-https://www.xx0x.cz
+*Currently MK4 in the development (out in 2026).*
+
+## License
+
+**Schematics, Hardware Designs**  
+CERN-OHL-P-2.0
+
+**Code**  
+MIT
+
+**Visual elements, Graphics, Documentation**  
+CC BY-SA 4.0

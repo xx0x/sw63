@@ -46,6 +46,11 @@ public:
     // Updates animation and returns true if continuing, false if done
     bool Update();
 
+    void Cancel()
+    {
+        current_type_ = Animation::Type::COUNT;
+    }
+
 private:
     Animation::Type current_type_ = Animation::Type::COUNT;
     EnumArray<Animation::Type, std::unique_ptr<Animation>> animations_;

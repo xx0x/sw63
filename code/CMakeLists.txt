@@ -114,6 +114,7 @@ set(SOURCES
     src/app/animations/AnimationCharge.cpp
     src/app/ui/LayerNormal.cpp
     src/app/ui/LayerSettings.cpp
+    src/dev/Button.cpp
     src/dev/Display.cpp
     src/dev/System.cpp
     src/dev/DS3231.cpp

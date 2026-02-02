@@ -37,6 +37,31 @@ void App::Init()
 
 void App::Loop()
 {
+    // Update button state
+    button.Update();
+
+    // Call button events here
+    if (button.ShortPressed())
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::SHORT_PRESS);
+    }
+    if (button.LongPressed())
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::LONG_PRESS);
+    }
+    if (button.MediumPressed())
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::MEDIUM_PRESS);
+    }
+    if (button.DoublePressed())
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::DOUBLE_PRESS);
+    }
+    if (button.MultiPressed())
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::MULTI_PRESS);
+    }
+
     // Process current layer
     layers_[current_layer_]->Update();
 
@@ -44,7 +69,8 @@ void App::Loop()
     if (!animation_runner.Update())
     {
         // No active animation, check for sleep
-        if (layers_[current_layer_]->SleepAllowed())
+        if (layers_[current_layer_]->SleepAllowed() &&
+            !System::GetRawButtonState())
         {
             Sleep();
         }
@@ -95,6 +121,6 @@ void App::Sleep()
     display.Init();
     battery.Init();
 
-    // Small delay for button debouncing after wakeup
-    System::Delay(50);
+    // current_layer_ = Layer::Type::NORMAL;
+    // layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
 }

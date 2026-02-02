@@ -13,6 +13,9 @@ void LayerNormal::OnEvent(Event event)
     case Event::MEDIUM_PRESS:
         App::ChangeLayer(Layer::Type::SETTINGS);
         break;
+    case Event::MULTI_PRESS:
+        App::StartIntroAnimation();
+        break;
     case Event::CHARGE_START:
         App::StartChargeAnimation();
         break;
@@ -20,18 +23,11 @@ void LayerNormal::OnEvent(Event event)
         App::DisplayTime();
         break;
     case Event::LEAVE:
-        // Handle layer leave event
+        App::animation_runner.Cancel();
         break;
     }
 }
 
 void LayerNormal::Update()
 {
-    bool current_button_state = System::GetRawButtonState();
-    if (current_button_state && !prev_button_state_)
-    {
-        // Button was just pressed
-        App::DisplayTime();
-    }
-    prev_button_state_ = current_button_state;
 }

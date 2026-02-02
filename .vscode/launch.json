@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "J-Link",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "jlink",
+            "cwd": "${workspaceRoot}",
+            "executable": "code/build/sw63.elf",
+            "armToolchainPath": "",
+            "device": "STM32L052K8",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 1,
+            },
+            "interface": "swd",
+            "serialNumber": "", //
+            "runToEntryPoint": "", // for example "main"
+            "postRestartCommands": [],
+            "postResetCommands": [],
+            "preLaunchTask": "build_and_flash",
+            "svdFile": "${workspaceRoot}/.vscode/STM32L052.svd",
+            "showDevDebugOutput": "parsed"
+        }
+    ]
+}

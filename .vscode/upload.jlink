@@ -1,0 +1,6 @@
+r
+h
+loadbin /Users/vaclav/GIT/sw63/.build/SW63MK3.ino.bin, 0x2000
+verifybin /Users/vaclav/GIT/sw63/.build/SW63MK3.ino.bin, 0x2000
+r
+q

@@ -63,7 +63,7 @@ namespace SW63
         void ClearLeds();
         void TransferLeds();
         void SetActive(bool active);
-        bool GetButtonState();
+        bool GetRawButtonState();
         void AutoBrightness();
         void Sleep();
         bool IsCharging();

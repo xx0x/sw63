@@ -110,7 +110,7 @@ namespace SW63
         analogWrite(PIN_BRIGHTNESS, 255 - brightness);
     }
 
-    bool Hardware::GetButtonState()
+    bool Hardware::GetRawButtonState()
     {
         return !digitalRead(PIN_BTN);
     }

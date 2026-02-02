@@ -1,0 +1,9 @@
+[submodule "code/lib/CMSIS_6"]
+	path = code/lib/CMSIS_6
+	url = https://github.com/ARM-software/CMSIS_6.git
+[submodule "code/lib/cmsis-device-l0"]
+	path = code/lib/cmsis-device-l0
+	url = https://github.com/STMicroelectronics/cmsis-device-l0.git
+[submodule "code/lib/stm32l0xx-hal-driver"]
+	path = code/lib/stm32l0xx-hal-driver
+	url = https://github.com/STMicroelectronics/stm32l0xx-hal-driver.git

@@ -112,6 +112,7 @@ set(SOURCES
     src/app/animations/AnimationTime.cpp
     src/app/animations/AnimationIntro.cpp
     src/app/animations/AnimationCharge.cpp
+    src/app/ui/LayerNormal.cpp
     src/dev/Display.cpp
     src/dev/System.cpp
     src/dev/DS3231.cpp

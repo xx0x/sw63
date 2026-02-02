@@ -20,5 +20,11 @@ uint32_t AnimationCharge::ProcessNextFrame()
     App::display.Update();
     current_step_++;
 
+    // Continue animation only while charging
+    if (!System::GetRawChargeState())
+    {
+        finished_ = true;
+        return 0;
+    }
     return 150; // Moderate speed for charge animation
 }

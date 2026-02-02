@@ -35,8 +35,7 @@ void App::Loop()
     uint32_t current_time = HAL_GetTick();
 
     // Process animations if one is active
-    if (!animation_runner.IsFinished() &&
-        !(animation_runner.GetCurrentAnimationType() == Animation::Type::CHARGE && !System::GetRawChargeState()))
+    if (!animation_runner.IsFinished())
     {
         // Check if it's time for the next animation frame
         if (current_time >= last_animation_update_ + animation_delay_remaining_)

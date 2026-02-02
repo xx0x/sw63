@@ -7,17 +7,17 @@ void LayerNormal::OnEvent(Event event)
 {
     switch (event)
     {
-    case Event::INIT:
-        // Initialization code here
-        break;
     case Event::SHORT_PRESS:
-        // Handle button press event
+        App::DisplayTime();
+        break;
+    case Event::MEDIUM_PRESS:
+        App::ChangeLayer(Layer::Type::SETTINGS);
         break;
     case Event::CHARGE_START:
-        // Handle charge start event
+        App::StartChargeAnimation();
         break;
     case Event::ENTER:
-        // Handle layer enter event
+        App::DisplayTime();
         break;
     case Event::LEAVE:
         // Handle layer leave event

@@ -7,6 +7,7 @@
 #include "dev/DS3231.hpp"
 #include "dev/Display.hpp"
 #include "dev/System.hpp"
+#include "ui/Layer.hpp"
 #include <cstdint>
 
 class App
@@ -28,4 +29,8 @@ public:
 
 private:
     static void Sleep();
+
+    static inline EnumArray<Layer::Type, std::unique_ptr<Layer>> layers_;
+    static inline Layer::Type current_layer_ = Layer::Type::NORMAL;
+
 };

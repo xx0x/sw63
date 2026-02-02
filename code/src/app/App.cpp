@@ -1,8 +1,13 @@
 #include "App.hpp"
+#include "app/ui/LayerNormal.hpp"
+#include "app/ui/LayerSettings.hpp"
 #include "dev/System.hpp"
 
 void App::Init()
 {
+    layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
+    layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
+
     display.Init();
     battery.Init();
     auto rtc_success = rtc.Init();
@@ -32,39 +37,16 @@ void App::Init()
 
 void App::Loop()
 {
-    // Process animations if one is active
-    if (animation_runner.Update())
-    {
-        // Animation is still running, continue
-        return;
-    }
+    // Process current layer
+    layers_[current_layer_]->Update();
 
-    // No animation running
-    // Display time every 2 seconds
-    // if (HAL_GetTick() - last_animation_update_ >= 2000)
-    //{
-    //    DisplayTime();
-    //}
-
-    if (System::GetRawChargeState())
+    // Process animations
+    if (!animation_runner.Update())
     {
-        // Start charge animation if charging
-        StartChargeAnimation();
-    }
-    else
-    {
-        // No activity, go to sleep
-        Sleep();
-
-        if (System::GetRawButtonState())
+        // No active animation, check for sleep
+        if (layers_[current_layer_]->SleepAllowed())
         {
-            // Wake up by button
-            DisplayTime();
-        }
-        else if (System::GetRawChargeState())
-        {
-            // Wake up by charging
-            StartChargeAnimation();
+            Sleep();
         }
     }
 }

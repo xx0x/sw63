@@ -32,65 +32,39 @@ void App::Init()
 
 void App::Loop()
 {
-    uint32_t current_time = HAL_GetTick();
-
     // Process animations if one is active
-    if (!animation_runner.IsFinished())
+    if (animation_runner.Update())
     {
-        // Check if it's time for the next animation frame
-        if (current_time >= last_animation_update_ + animation_delay_remaining_)
-        {
-            // Handle pause between frames for time display animations
-            if (animation_runner.ShouldPauseBetweenFrames())
-            {
-                display.Clear();
-                display.Update();
-                System::Delay(timings.GetSpeed().pause);
+        // Animation is still running, continue
+        return;
+    }
 
-                // Update display brightness based on ambient light (the lights need to be off to read it properly)
-                display.TriggerAutoBrightness();
-            }
+    // No animation running
+    // Display time every 2 seconds
+    // if (HAL_GetTick() - last_animation_update_ >= 2000)
+    //{
+    //    DisplayTime();
+    //}
 
-            // Process the next frame and get the delay until the next update
-            animation_delay_remaining_ = animation_runner.ProcessNextFrame();
-            last_animation_update_ = HAL_GetTick();
-
-            // If the animation finished, clear the display
-            if (animation_runner.IsFinished())
-            {
-                display.Clear();
-                display.Update();
-            }
-        }
+    if (System::GetRawChargeState())
+    {
+        // Start charge animation if charging
+        StartChargeAnimation();
     }
     else
     {
-        // Display time every 2 seconds
-        // if (HAL_GetTick() - last_animation_update_ >= 2000)
-        //{
-        //    DisplayTime();
-        //}
+        // No activity, go to sleep
+        Sleep();
 
-        if (System::GetRawChargeState())
+        if (System::GetRawButtonState())
         {
-            // Start charge animation if charging
-            StartChargeAnimation();
+            // Wake up by button
+            DisplayTime();
         }
-        else
+        else if (System::GetRawChargeState())
         {
-            // No activity, go to sleep
-            Sleep();
-
-            if (System::GetRawButtonState())
-            {
-                // Wake up by button
-                DisplayTime();
-            }
-            else if (System::GetRawChargeState())
-            {
-                // Wake up by charging
-                StartChargeAnimation();
-            }
+            // Wake up by charging
+            StartChargeAnimation();
         }
     }
 }
@@ -108,26 +82,18 @@ void App::DisplayTime()
 
     // Set the time animation with the processed parameters
     animation_runner.SetAnimation(Animation::Type::TIME, time_params);
-
-    // Start the animation
-    animation_delay_remaining_ = 0;
-    last_animation_update_ = HAL_GetTick();
 }
 
 void App::StartIntroAnimation()
 {
     display.TriggerAutoBrightness();
     animation_runner.SetAnimation(Animation::Type::INTRO);
-    animation_delay_remaining_ = 0;
-    last_animation_update_ = HAL_GetTick();
 }
 
 void App::StartChargeAnimation()
 {
     display.TriggerAutoBrightness();
     animation_runner.SetAnimation(Animation::Type::CHARGE);
-    animation_delay_remaining_ = 0;
-    last_animation_update_ = HAL_GetTick();
 }
 
 void App::Sleep()

@@ -1,5 +1,4 @@
 /.build
-/.vscode
 .DS_Store
 Thumbs.db
 Desktop.ini
@@ -10,3 +9,5 @@ Desktop.ini
 archive_junk/mk4/sw63_mk4_displaytestboard/sw63_mk4_displaytestboard-backups
 pcb/sw63_mk4_v1/jlcpcb/gerber
 pcb/sw63_mk4_v1/sw63_mk4_v1-backups
+.vscode/settings.json
+code/build

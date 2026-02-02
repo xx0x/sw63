@@ -1,0 +1,93 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean",
+            "type": "process",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "args": [
+                "clean"
+            ]
+        },
+        {
+            "label": "flash",
+            "type": "process",
+            "command": "make",
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+            "args": [
+                "flash"
+            ]
+        },
+        {
+            "label": "configure",
+            "type": "shell",
+            "command": "if [ -d build ]; then rm -rf build; fi && mkdir build && cd build && cmake ..",
+            "options": {
+                "cwd": "${workspaceRoot}/code"
+            },
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+        },
+        {
+            "label": "build_all",
+            "type": "process",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "args": []
+        },
+        {
+            "label": "build",
+            "type": "process",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "args": [
+                "sw63"
+            ]
+        },
+        {
+            "label": "build_and_flash",
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "dependsOn": [
+                "build",
+                "flash"
+            ],
+            "dependsOrder": "sequence"
+        },
+    ]
+}

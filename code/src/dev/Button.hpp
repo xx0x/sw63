@@ -35,9 +35,9 @@ private:
     static constexpr uint32_t kShortPressMaxMs = 2000;     // Max duration for short press
     static constexpr uint32_t kMediumPressThresholdMs = 2000; // Min duration for medium press
     static constexpr uint32_t kLongPressThresholdMs = 5000;   // Min duration for long press
-    static constexpr uint32_t kDoublePressWindowMs = 500;     // Max time between double presses
+    static constexpr uint32_t kDoublePressWindowMs = 750;     // Max time between double presses
     static constexpr uint8_t kDoublePressCount = 2;          // Number of presses for double
-    static constexpr uint8_t kMultiPressCount = 4;           // Number of presses for multi
+    static constexpr uint8_t kMultiPressCount = 6;           // Number of presses for multi
     
     State state_ = State::IDLE;
     bool previous_raw_state_ = false;

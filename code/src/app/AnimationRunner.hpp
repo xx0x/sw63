@@ -6,6 +6,8 @@
 #include "animations/AnimationIntro.hpp"
 #include "animations/AnimationTime.hpp"
 #include "dev/Display.hpp"
+#include "dev/System.hpp"
+#include "stm32l0xx_hal.h"
 #include "utils/EnumTools.hpp"
 #include <array>
 #include <memory>
@@ -27,6 +29,9 @@ public:
         {
             animation->Reset();
         }
+        // Initialize timing for new animation
+        animation_delay_remaining_ = 0;
+        last_animation_update_ = HAL_GetTick();
     }
 
     void SetAnimation(Animation::Type type, const LocaleConfig::TimeParameters &time_params)
@@ -36,6 +41,27 @@ public:
         {
             animation->SetTime(time_params);
         }
+    }
+
+    // Updates animation and returns true if continuing, false if done
+    bool Update();
+
+private:
+    Animation::Type current_type_ = Animation::Type::INTRO;
+    EnumArray<Animation::Type, std::unique_ptr<Animation>> animations_;
+
+    // Animation timing state
+    uint32_t animation_delay_remaining_ = 0;
+    uint32_t last_animation_update_ = 0;
+
+    std::unique_ptr<Animation> &GetCurrentAnimation()
+    {
+        return animations_[current_type_];
+    }
+
+    const std::unique_ptr<Animation> &GetCurrentAnimation() const
+    {
+        return animations_[current_type_];
     }
 
     // Returns delay in milliseconds until next frame, or 0 if finished
@@ -70,19 +96,5 @@ public:
     Animation::Type GetCurrentAnimationType() const
     {
         return current_type_;
-    }
-
-private:
-    Animation::Type current_type_ = Animation::Type::INTRO;
-    EnumArray<Animation::Type, std::unique_ptr<Animation>> animations_;
-
-    std::unique_ptr<Animation> &GetCurrentAnimation()
-    {
-        return animations_[current_type_];
-    }
-
-    const std::unique_ptr<Animation> &GetCurrentAnimation() const
-    {
-        return animations_[current_type_];
     }
 };

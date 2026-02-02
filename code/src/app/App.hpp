@@ -28,8 +28,4 @@ public:
 
 private:
     static void Sleep();
-
-    // Animation state
-    inline static uint32_t animation_delay_remaining_ = 0;
-    inline static uint32_t last_animation_update_ = 0;
 };

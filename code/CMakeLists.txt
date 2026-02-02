@@ -107,6 +107,7 @@ set(SOURCES
     # Application sources
     src/main.cpp
     src/app/App.cpp
+    src/app/AnimationRunner.cpp
     src/app/LocaleConfig.cpp
     src/app/animations/AnimationTime.cpp
     src/app/animations/AnimationIntro.cpp

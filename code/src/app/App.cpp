@@ -26,7 +26,7 @@ void App::Init()
     rtc.SetDateTime({0, 45, 13, 1, 18, 8, 2025});
 
     // Set default speed
-    timings.SetSpeed(0);
+    timings.SetSpeed(4);
 
     layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
     layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
@@ -41,23 +41,23 @@ void App::Loop()
     button.Update();
 
     // Call button events here
-    if (button.ShortPressed())
+    if (button.Happened(Button::Event::SHORT_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::SHORT_PRESS);
     }
-    if (button.LongPressed())
+    if (button.Happened(Button::Event::LONG_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::LONG_PRESS);
     }
-    if (button.MediumPressed())
+    if (button.Happened(Button::Event::MEDIUM_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MEDIUM_PRESS);
     }
-    if (button.DoublePressed())
+    if (button.Happened(Button::Event::DOUBLE_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::DOUBLE_PRESS);
     }
-    if (button.MultiPressed())
+    if (button.Happened(Button::Event::MULTI_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MULTI_PRESS);
     }

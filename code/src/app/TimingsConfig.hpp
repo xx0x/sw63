@@ -21,8 +21,22 @@ public:
         }
     }
 
+    void SetSpeedOverride(size_t speed_index_override)
+    {
+        speed_index_override_ = speed_index_override;
+    }
+
+    void ClearSpeedOverride()
+    {
+        speed_index_override_ = std::nullopt;
+    }
+
     Speed GetSpeed() const
     {
+        if (speed_index_override_.has_value())
+        {
+            return kSpeeds[speed_index_override_.value()];
+        }
         return kSpeeds[speed_index_];
     }
 
@@ -43,4 +57,5 @@ private:
 
     static constexpr size_t kSpeedCount = kSpeeds.size();
     size_t speed_index_ = 0;
+    std::optional<size_t> speed_index_override_ = std::nullopt;
 };

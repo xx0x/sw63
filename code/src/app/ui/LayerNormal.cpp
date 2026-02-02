@@ -10,6 +10,14 @@ void LayerNormal::OnEvent(Event event)
     case Event::SHORT_PRESS:
         if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
         {
+            App::timings.ClearSpeedOverride();
+            DisplayTime();
+        }
+        break;
+    case Event::DOUBLE_PRESS:
+        if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
+        {
+            App::timings.SetSpeedOverride(0);
             DisplayTime();
         }
         break;

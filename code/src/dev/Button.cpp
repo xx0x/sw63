@@ -17,9 +17,9 @@ void Button::Update()
         press_start_time_ = current_time;
         medium_triggered_ = false;
         long_triggered_ = false;
-        
+
         // Fire short press immediately on press
-        short_press_event_ = true;
+        events_[Event::SHORT_PRESS] = true;
     }
     else if (prev_pressed_ && !now_pressed_)
     {
@@ -44,7 +44,7 @@ void Button::Update()
                     // Check if second press was within 500ms of first press
                     if ((release_time_ - first_press_time_) <= kDoublePressWindowMs)
                     {
-                        double_press_event_ = true;
+                        events_[Event::DOUBLE_PRESS] = true;
                         state_ = State::WAITING_FOR_DOUBLE; // Continue waiting for multi-press
                     }
                     else
@@ -60,7 +60,7 @@ void Button::Update()
                     // Check if all presses were within the multipress window (5 * double press window)
                     if ((release_time_ - first_press_time_) <= (kDoublePressWindowMs * kMultiPressCount))
                     {
-                        multi_press_event_ = true;
+                        events_[Event::MULTI_PRESS] = true;
                         // Don't fire short press for multipress
                         // Don't reset state - continue accepting more presses but ignore them
                     }
@@ -94,13 +94,13 @@ void Button::Update()
         if (press_duration >= kLongPressThresholdMs && !long_triggered_)
         {
             // Long press (5+ seconds)
-            long_press_event_ = true;
+            events_[Event::LONG_PRESS] = true;
             long_triggered_ = true;
         }
         else if (press_duration >= kMediumPressThresholdMs && !medium_triggered_)
         {
             // Medium press (2+ seconds)
-            medium_press_event_ = true;
+            events_[Event::MEDIUM_PRESS] = true;
             medium_triggered_ = true;
         }
     }
@@ -108,17 +108,9 @@ void Button::Update()
     // Handle timeout for waiting states
     if (state_ == State::WAITING_FOR_DOUBLE)
     {
-        if (press_count_ >= kDoublePressCount && press_count_ < kMultiPressCount)
+        if (press_count_ >= kDoublePressCount)
         {
             // Wait for more presses or timeout for multi-press
-            if ((current_time - first_press_time_) > (kDoublePressWindowMs * kMultiPressCount))
-            {
-                ResetState();
-            }
-        }
-        else if (press_count_ >= kMultiPressCount)
-        {
-            // For multipress counts, keep accepting presses within the window
             if ((current_time - first_press_time_) > (kDoublePressWindowMs * kMultiPressCount))
             {
                 ResetState();
@@ -137,29 +129,9 @@ void Button::Update()
     prev_pressed_ = now_pressed_;
 }
 
-bool Button::ShortPressed()
+bool Button::Happened(Event event)
 {
-    return short_press_event_;
-}
-
-bool Button::MediumPressed()
-{
-    return medium_press_event_;
-}
-
-bool Button::LongPressed()
-{
-    return long_press_event_;
-}
-
-bool Button::DoublePressed()
-{
-    return double_press_event_;
-}
-
-bool Button::MultiPressed()
-{
-    return multi_press_event_;
+    return events_[event];
 }
 
 bool Button::PreventSleep()
@@ -169,11 +141,7 @@ bool Button::PreventSleep()
 
 void Button::ResetEvents()
 {
-    short_press_event_ = false;
-    medium_press_event_ = false;
-    long_press_event_ = false;
-    double_press_event_ = false;
-    multi_press_event_ = false;
+    events_.fill(false);
 }
 
 void Button::ResetState()

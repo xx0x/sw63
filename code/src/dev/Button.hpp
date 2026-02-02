@@ -1,18 +1,25 @@
 #pragma once
 
 #include "dev/System.hpp"
+#include "utils/EnumTools.hpp"
 #include <cstdint>
 
 class Button
 {
 public:
+    enum class Event
+    {
+        SHORT_PRESS,
+        MEDIUM_PRESS,
+        LONG_PRESS,
+        DOUBLE_PRESS,
+        MULTI_PRESS,
+        COUNT
+    };
+
     void Update();
     
-    bool ShortPressed();
-    bool MediumPressed();
-    bool LongPressed();
-    bool DoublePressed();
-    bool MultiPressed();
+    bool Happened(Event event);
     bool PreventSleep();
 
 private:
@@ -41,11 +48,7 @@ private:
     uint32_t release_time_ = 0;
     uint32_t first_press_time_ = 0;
     
-    bool short_press_event_ = false;
-    bool medium_press_event_ = false;
-    bool long_press_event_ = false;
-    bool double_press_event_ = false;
-    bool multi_press_event_ = false;
+    EnumArray<Event, bool> events_{};
     
     bool medium_triggered_ = false;
     bool long_triggered_ = false;

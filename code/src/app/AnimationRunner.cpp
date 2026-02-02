@@ -6,6 +6,7 @@ bool AnimationRunner::Update()
     // If no animation is running, nothing to do
     if (IsFinished())
     {
+        current_type_ = Animation::Type::COUNT;
         return false;
     }
 
@@ -34,6 +35,7 @@ bool AnimationRunner::Update()
         {
             App::display.Clear();
             App::display.Update();
+            current_type_ = Animation::Type::COUNT;
             return false; // Animation is done
         }
     }

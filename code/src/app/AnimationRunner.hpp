@@ -43,6 +43,11 @@ public:
         }
     }
 
+    Animation::Type GetAnimationType() const
+    {
+        return current_type_;
+    }
+
     // Updates animation and returns true if continuing, false if done
     bool Update();
 

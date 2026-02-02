@@ -8,4 +8,9 @@ public:
     void OnEvent(Event event) override;
     void Update() override;
     bool SleepAllowed() override { return true; }
+
+private:
+    void IntroAnimation();
+    void DisplayTime();
+    void ChargeAnimation();
 };

@@ -77,33 +77,6 @@ void App::Loop()
     }
 }
 
-void App::DisplayTime()
-{
-    auto now = rtc.GetDateTime();
-    if (!now)
-    {
-        return; // Failed to get time
-    }
-
-    // Use LocaleConfig to process the time and determine animation parameters
-    auto time_params = locale.ProcessTime(now->hour, now->minute);
-
-    // Set the time animation with the processed parameters
-    animation_runner.SetAnimation(Animation::Type::TIME, time_params);
-}
-
-void App::StartIntroAnimation()
-{
-    display.TriggerAutoBrightness();
-    animation_runner.SetAnimation(Animation::Type::INTRO);
-}
-
-void App::StartChargeAnimation()
-{
-    display.TriggerAutoBrightness();
-    animation_runner.SetAnimation(Animation::Type::CHARGE);
-}
-
 void App::Sleep()
 {
 

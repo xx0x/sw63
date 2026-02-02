@@ -8,19 +8,22 @@ void LayerNormal::OnEvent(Event event)
     switch (event)
     {
     case Event::SHORT_PRESS:
-        App::DisplayTime();
+        if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
+        {
+            DisplayTime();
+        }
         break;
     case Event::MEDIUM_PRESS:
         App::ChangeLayer(Layer::Type::SETTINGS);
         break;
     case Event::MULTI_PRESS:
-        App::StartIntroAnimation();
+        IntroAnimation();
         break;
     case Event::CHARGE_START:
-        App::StartChargeAnimation();
+        ChargeAnimation();
         break;
     case Event::ENTER:
-        App::DisplayTime();
+        DisplayTime();
         break;
     case Event::LEAVE:
         App::animation_runner.Cancel();
@@ -30,4 +33,31 @@ void LayerNormal::OnEvent(Event event)
 
 void LayerNormal::Update()
 {
+}
+
+void LayerNormal::DisplayTime()
+{
+    auto now = App::rtc.GetDateTime();
+    if (!now)
+    {
+        return; // Failed to get time
+    }
+
+    // Use LocaleConfig to process the time and determine animation parameters
+    auto time_params = App::locale.ProcessTime(now->hour, now->minute);
+
+    // Set the time animation with the processed parameters
+    App::animation_runner.SetAnimation(Animation::Type::TIME, time_params);
+}
+
+void LayerNormal::IntroAnimation()
+{
+    App::display.TriggerAutoBrightness();
+    App::animation_runner.SetAnimation(Animation::Type::INTRO);
+}
+
+void LayerNormal::ChargeAnimation()
+{
+    App::display.TriggerAutoBrightness();
+    App::animation_runner.SetAnimation(Animation::Type::CHARGE);
 }

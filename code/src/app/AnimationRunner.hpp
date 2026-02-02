@@ -47,7 +47,7 @@ public:
     bool Update();
 
 private:
-    Animation::Type current_type_ = Animation::Type::INTRO;
+    Animation::Type current_type_ = Animation::Type::COUNT;
     EnumArray<Animation::Type, std::unique_ptr<Animation>> animations_;
 
     // Animation timing state
@@ -67,6 +67,10 @@ private:
     // Returns delay in milliseconds until next frame, or 0 if finished
     uint32_t ProcessNextFrame()
     {
+        if (current_type_ == Animation::Type::COUNT)
+        {
+            return 0;
+        }
         if (auto &animation = GetCurrentAnimation())
         {
             return animation->ProcessNextFrame();
@@ -76,6 +80,10 @@ private:
 
     bool IsFinished() const
     {
+        if (current_type_ == Animation::Type::COUNT)
+        {
+            return true;
+        }
         if (auto &animation = GetCurrentAnimation())
         {
             return animation->IsFinished();

@@ -5,9 +5,6 @@
 
 void App::Init()
 {
-    layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
-    layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
-
     display.Init();
     battery.Init();
     auto rtc_success = rtc.Init();
@@ -31,7 +28,10 @@ void App::Init()
     // Set default speed
     timings.SetSpeed(0);
 
-    DisplayTime();
+    layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
+    layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
+
+    layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     // display.TestProcedure();
 }
 

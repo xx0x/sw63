@@ -11,7 +11,6 @@ public:
     };
     enum class Event
     {
-        INIT,
         SHORT_PRESS,  // under 2 seconds
         MEDIUM_PRESS, // over 2 seconds
         LONG_PRESS,   // over 5 seconds

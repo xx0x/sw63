@@ -27,10 +27,16 @@ public:
     inline static DS3231 rtc = DS3231(&System::hi2c1);
     inline static Battery battery;
 
+    static void ChangeLayer(Layer::Type layer_type)
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::LEAVE);
+        current_layer_ = layer_type;
+        layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
+    }
+
 private:
     static void Sleep();
 
     static inline EnumArray<Layer::Type, std::unique_ptr<Layer>> layers_;
     static inline Layer::Type current_layer_ = Layer::Type::NORMAL;
-
 };

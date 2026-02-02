@@ -26,7 +26,7 @@ void App::Init()
     rtc.SetDateTime({0, 45, 13, 1, 18, 8, 2025});
 
     // Set default speed
-    timings.SetSpeed(4);
+    timings.SetSpeed(5);
 
     layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
     layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();

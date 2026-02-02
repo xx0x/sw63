@@ -8,7 +8,4 @@ public:
     void OnEvent(Event event) override;
     void Update() override;
     bool SleepAllowed() override { return true; }
-
-private:
-    bool prev_button_state_ = false;
 };

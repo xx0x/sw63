@@ -39,15 +39,15 @@ public:
         GPIO_InitStruct.Pin = GPIO_PIN_6;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF5_TIM22;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
         // Configure TIM22 for PWM
-        // With 16MHz clock, prescaler 0, and period 4095:
-        // PWM frequency = 16,000,000 / (0+1) / (4095+1) = ~3.9 kHz
+        // With 16MHz clock, prescaler 15, and period 4095:
+        // PWM frequency = 16,000,000 / (7+1) / (4095+1) = ~488 Hz
         htim_.Instance = TIM22;
-        htim_.Init.Prescaler = 0; // No prescaling for maximum speed
+        htim_.Init.Prescaler = 7; // Divide by 8 to reduce EMI interference with shift register
         htim_.Init.CounterMode = TIM_COUNTERMODE_UP;
         htim_.Init.Period = kResolution;
         htim_.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

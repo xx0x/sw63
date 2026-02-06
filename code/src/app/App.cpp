@@ -7,7 +7,18 @@ void App::Init()
 {
     display.Init();
     battery.Init();
-    auto rtc_success = rtc.Init();
+
+    // Initialize RTC with retries in case of some issues at startup
+    bool rtc_success = false;
+    for (int i = 0; i < 10; i++)
+    {
+        rtc_success = rtc.Init();
+        if (rtc_success)
+        {
+            break;
+        }
+        System::Delay(200);
+    }
     if (!rtc_success)
     {
         while (1)
@@ -22,8 +33,9 @@ void App::Init()
             System::Delay(500);
         }
     }
+
     // Set test date (we don't care about the date here, just time)
-    rtc.SetDateTime({0, 45, 13, 1, 18, 8, 2025});
+    rtc.SetDateTime({0, 20, 16, 1, 18, 8, 2025});
 
     // Set default speed
     timings.SetSpeed(0);

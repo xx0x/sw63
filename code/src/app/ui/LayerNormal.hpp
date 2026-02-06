@@ -12,5 +12,4 @@ public:
 private:
     void IntroAnimation();
     void DisplayTime();
-    void ChargeAnimation();
 };

@@ -16,7 +16,7 @@ bool AnimationRunner::Update()
     if (current_time >= last_animation_update_ + animation_delay_remaining_)
     {
         // Handle pause between frames for time display animations
-        if (ShouldPauseBetweenFrames())
+        if (current_type_ == Animation::Type::TIME)
         {
             App::display.Clear();
             App::display.Update();

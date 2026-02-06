@@ -30,6 +30,11 @@ public:
         return HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8) == GPIO_PIN_RESET; // Active low
     }
 
+    static bool GetRawUsbPowerState()
+    {
+        return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_15) == GPIO_PIN_SET; // Active high
+    }
+
 private:
     System() = delete; // Prevent instantiation
 };

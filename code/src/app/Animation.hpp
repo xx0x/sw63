@@ -23,14 +23,19 @@ public:
         finished_ = false;
     }
 
-    void SetTime(const LocaleConfig::TimeParameters &time_params)
+    virtual void SetTime(const LocaleConfig::TimeParameters &time_params)
     {
         time_params_ = time_params;
     }
 
-    bool IsFinished() const
+    virtual bool IsFinished() const
     {
         return finished_;
+    }
+
+    virtual bool ShouldPauseBetweenFrames() const
+    {
+        return false;
     }
 
 protected:

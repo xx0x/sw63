@@ -37,28 +37,12 @@ void Button::Update()
                 {
                     // First press
                     first_press_time_ = release_time_;
-                    state_ = State::WAITING_FOR_DOUBLE;
-                }
-                else if (press_count_ == kDoublePressCount)
-                {
-                    // Check if second press was within 500ms of first press
-                    if ((release_time_ - first_press_time_) <= kDoublePressWindowMs)
-                    {
-                        events_[Event::DOUBLE_PRESS] = true;
-                        state_ = State::WAITING_FOR_DOUBLE; // Continue waiting for multi-press
-                    }
-                    else
-                    {
-                        // Too slow for double press, reset for new sequence
-                        press_count_ = 1;
-                        first_press_time_ = release_time_;
-                        state_ = State::WAITING_FOR_DOUBLE;
-                    }
+                    state_ = State::WAITING_FOR_MULTI;
                 }
                 else if (press_count_ == kMultiPressCount)
                 {
-                    // Check if all presses were within the multipress window (5 * double press window)
-                    if ((release_time_ - first_press_time_) <= (kDoublePressWindowMs * kMultiPressCount))
+                    // Check if all presses were within the multipress window
+                    if ((release_time_ - first_press_time_) <= (kMultiPressWindowMs * kMultiPressCount))
                     {
                         events_[Event::MULTI_PRESS] = true;
                         // Don't fire short press for multipress
@@ -72,7 +56,7 @@ void Button::Update()
                 else if (press_count_ > kMultiPressCount)
                 {
                     // Ignore subsequent presses after multipress - no events fired
-                    if ((release_time_ - first_press_time_) > (kDoublePressWindowMs * kMultiPressCount))
+                    if ((release_time_ - first_press_time_) > (kMultiPressWindowMs * kMultiPressCount))
                     {
                         ResetState();
                     }
@@ -106,20 +90,20 @@ void Button::Update()
     }
 
     // Handle timeout for waiting states
-    if (state_ == State::WAITING_FOR_DOUBLE)
+    if (state_ == State::WAITING_FOR_MULTI)
     {
-        if (press_count_ >= kDoublePressCount)
+        if (press_count_ >= kMultiPressCount)
         {
             // Wait for more presses or timeout for multi-press
-            if ((current_time - first_press_time_) > (kDoublePressWindowMs * kMultiPressCount))
+            if ((current_time - first_press_time_) > (kMultiPressWindowMs * kMultiPressCount))
             {
                 ResetState();
             }
         }
         else if (press_count_ == 1)
         {
-            // Wait for potential double press (no timeout needed since short press already fired)
-            if ((current_time - release_time_) > kDoublePressWindowMs)
+            // Wait for potential multi press
+            if ((current_time - release_time_) > kMultiPressWindowMs)
             {
                 ResetState();
             }

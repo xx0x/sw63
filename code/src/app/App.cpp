@@ -53,10 +53,6 @@ void App::Loop()
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MEDIUM_PRESS);
     }
-    if (button.Happened(Button::Event::DOUBLE_PRESS))
-    {
-        layers_[current_layer_]->OnEvent(Layer::Event::DOUBLE_PRESS);
-    }
     if (button.Happened(Button::Event::MULTI_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MULTI_PRESS);

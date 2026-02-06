@@ -14,13 +14,6 @@ void LayerNormal::OnEvent(Event event)
             DisplayTime();
         }
         break;
-    case Event::DOUBLE_PRESS:
-        if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
-        {
-            App::timings.SetSpeedOverride(0);
-            DisplayTime();
-        }
-        break;
     case Event::MEDIUM_PRESS:
         App::ChangeLayer(Layer::Type::SETTINGS);
         break;

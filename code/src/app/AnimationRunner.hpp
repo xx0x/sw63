@@ -101,6 +101,19 @@ private:
         return true;
     }
 
+    bool ShouldPauseBetweenFrames() const
+    {
+        if (current_type_ == Animation::Type::COUNT)
+        {
+            return false;
+        }
+        if (auto &animation = GetCurrentAnimation())
+        {
+            return animation->ShouldPauseBetweenFrames();
+        }
+        return true;
+    }
+
     Animation::Type GetCurrentAnimationType() const
     {
         return current_type_;

@@ -12,6 +12,11 @@ public:
     uint32_t ProcessNextFrame() override;
     void Reset() override;
 
+    bool ShouldPauseBetweenFrames() const override
+    {
+        return true;
+    }
+
 private:
     FrameSequence sequence_;
     uint32_t ProcessFrameElement(ClockFrame frame);

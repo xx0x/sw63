@@ -79,4 +79,10 @@ extern "C" void EXTI4_15_IRQHandler()
         __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_8);
         // Handle charge state change
     }
+    
+    if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_15) != RESET)
+    {
+        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_15);
+        // Handle power detect (power plugged in)
+    }
 }

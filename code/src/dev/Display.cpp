@@ -1,5 +1,6 @@
 #include "Display.hpp"
 #include "utils/math_utils.hpp"
+#include <algorithm>
 
 void Display::Init()
 {
@@ -72,7 +73,7 @@ void Display::TriggerAutoBrightness()
     }
     uint16_t ambient_reading = ambient_result.value();
 
-    // Map the ADC value (0-4095) to brightness range (10-1023)
+    // Map the ADC value (0-4095) to brightness range (1-1023)
     // We want some brightness even if there's no light
     uint16_t mapped_brightness = map(ambient_reading, 0, AdcInput::kResolution, 1, kMaxBrightness);
 

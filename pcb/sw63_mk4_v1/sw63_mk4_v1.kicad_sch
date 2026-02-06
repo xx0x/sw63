@@ -4945,6 +4945,17 @@
 		)
 		(uuid "b316ec34-85bd-42e1-8099-b535c669f15a")
 	)
+	(text "invalid package: 2 and 3 must be swapped"
+		(exclude_from_sim no)
+		(at 196.342 137.668 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.1588)
+			)
+		)
+		(uuid "b4d32911-e5a1-49f7-94fb-fd8245d067f5")
+	)
 	(junction
 		(at 171.45 125.73)
 		(diameter 0)

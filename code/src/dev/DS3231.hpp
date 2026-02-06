@@ -16,50 +16,12 @@ public:
      */
     struct DateTime
     {
-        uint8_t second;      // 0-59
-        uint8_t minute;      // 0-59
-        uint8_t hour;        // 0-23 (24-hour format)
-        uint8_t day_of_week; // 1-7 (1 = Monday)
-        uint8_t day;         // 1-31
-        uint8_t month;       // 1-12
-        uint16_t year;       // Full year (e.g., 2024)
-    };
-
-    /**
-     * DS3231 alarm one types
-     */
-    enum class AlarmOneType : uint8_t
-    {
-        EVERY_SECOND = 0x0F, // Trigger every second
-        SECONDS = 0x0E,      // Specify seconds
-        MINUTES = 0x0C,      // Specify minutes and seconds
-        HOURS = 0x08,        // Specify hours, minutes, and seconds
-        DATE = 0x00,         // Specify date, hours, minutes, and seconds
-        DAY = 0x10,          // Specify day of week, hours, minutes, and seconds
-    };
-
-    /**
-     * DS3231 alarm two types
-     */
-    enum class AlarmTwoType : uint8_t
-    {
-        EVERY_MINUTE = 0x8E, // Trigger every minute
-        MINUTES = 0x8C,      // Specify minutes (alarm 2)
-        HOURS = 0x88,        // Specify hours and minutes (alarm 2)
-        DATE = 0x80,         // Specify date, hours, and minutes (alarm 2)
-        DAY = 0x90           // Specify day of week, hours, and minutes (alarm 2)
-    };
-
-    /**
-     * Square wave output frequencies
-     */
-    enum class SquareWaveFreq : uint8_t
-    {
-        FREQ_1HZ = 0x00,
-        FREQ_1024HZ = 0x08,
-        FREQ_4096HZ = 0x10,
-        FREQ_8192HZ = 0x18,
-        DISABLED = 0xFF
+        uint8_t hour;   // 0-23 (24-hour format)
+        uint8_t minute; // 0-59
+        uint8_t second; // 0-59
+        uint8_t day;    // 1-31
+        uint8_t month;  // 1-12
+        uint16_t year;  // Full year (e.g., 2024)
     };
 
     // DS3231 I2C address
@@ -134,76 +96,6 @@ public:
      * @return Optional DateTime if successful, nullopt on error
      */
     std::optional<DateTime> GetDateTime() const;
-
-    /**
-     * Set alarm 1
-     * @param alarm_type Type of alarm to set
-     * @param date_time DateTime structure with alarm time
-     * @param enable Enable the alarm after setting
-     * @return true if successful
-     */
-    bool SetAlarm1(AlarmOneType alarm_type, const DateTime &date_time, bool enable = true);
-
-    /**
-     * Set alarm 2
-     * @param alarm_type Type of alarm to set (must be alarm 2 type)
-     * @param date_time DateTime structure with alarm time
-     * @param enable Enable the alarm after setting
-     * @return true if successful
-     */
-    bool SetAlarm2(AlarmTwoType alarm_type, const DateTime &date_time, bool enable = true);
-
-    /**
-     * Check if alarm 1 has triggered
-     * @return true if alarm 1 flag is set
-     */
-    bool CheckAlarm1() const;
-
-    /**
-     * Check if alarm 2 has triggered
-     * @return true if alarm 2 flag is set
-     */
-    bool CheckAlarm2() const;
-
-    /**
-     * Clear alarm 1 flag
-     * @return true if successful
-     */
-    bool ClearAlarm1();
-
-    /**
-     * Clear alarm 2 flag
-     * @return true if successful
-     */
-    bool ClearAlarm2();
-
-    /**
-     * Enable or disable alarm 1 interrupt
-     * @param enable true to enable, false to disable
-     * @return true if successful
-     */
-    bool EnableAlarm1Interrupt(bool enable);
-
-    /**
-     * Enable or disable alarm 2 interrupt
-     * @param enable true to enable, false to disable
-     * @return true if successful
-     */
-    bool EnableAlarm2Interrupt(bool enable);
-
-    /**
-     * Set square wave output frequency
-     * @param freq Desired frequency
-     * @return true if successful
-     */
-    bool SetSquareWave(SquareWaveFreq freq);
-
-    /**
-     * Enable or disable 32kHz output
-     * @param enable true to enable, false to disable
-     * @return true if successful
-     */
-    bool Enable32kHz(bool enable);
 
     /**
      * Get temperature from DS3231

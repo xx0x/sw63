@@ -35,7 +35,7 @@ void App::Init()
     }
 
     // Set test date (we don't care about the date here, just time)
-    rtc.SetDateTime({0, 20, 16, 1, 18, 8, 2025});
+    rtc.SetDateTime({16, 20, 0, 18, 8, 2025});
 
     // Set default speed
     timings.SetSpeed(0);

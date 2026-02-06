@@ -41,7 +41,7 @@ bool DS3231::SetDateTime(const DS3231::DateTime &date_time)
     data[0] = DecToBcd(date_time.second);
     data[1] = DecToBcd(date_time.minute);
     data[2] = DecToBcd(date_time.hour); // 24-hour format
-    data[3] = DecToBcd(date_time.day_of_week);
+    data[3] = 0;                        // Day of week not used
     data[4] = DecToBcd(date_time.day);
     data[5] = DecToBcd(date_time.month);
     data[6] = DecToBcd(date_time.year % 100); // Only last two digits
@@ -70,7 +70,6 @@ std::optional<DS3231::DateTime> DS3231::GetDateTime() const
     date_time.second = BcdToDec(data[0] & 0x7F);
     date_time.minute = BcdToDec(data[1] & 0x7F);
     date_time.hour = BcdToDec(data[2] & 0x3F); // Mask 12/24 hour bit
-    date_time.day_of_week = BcdToDec(data[3] & 0x07);
     date_time.day = BcdToDec(data[4] & 0x3F);
 
     const uint8_t month = data[5];
@@ -88,190 +87,6 @@ std::optional<DS3231::DateTime> DS3231::GetDateTime() const
     }
 
     return date_time;
-}
-
-bool DS3231::SetAlarm1(DS3231::AlarmOneType alarm_type, const DS3231::DateTime &date_time, bool enable)
-{
-    std::array<uint8_t, 4> data{};
-    const auto alarmMask = static_cast<uint8_t>(alarm_type);
-
-    // Set alarm 1 registers
-    data[0] = DecToBcd(date_time.second) | ((alarmMask & 0x01) ? ALARM_MASK : 0);
-    data[1] = DecToBcd(date_time.minute) | ((alarmMask & 0x02) ? ALARM_MASK : 0);
-    data[2] = DecToBcd(date_time.hour) | ((alarmMask & 0x04) ? ALARM_MASK : 0);
-
-    // Day/Date field
-    if (alarm_type == DS3231::AlarmOneType::DAY)
-    {
-        data[3] = DecToBcd(date_time.day_of_week) | DYDT_BIT;
-    }
-    else
-    {
-        data[3] = DecToBcd(date_time.day);
-    }
-    data[3] |= ((alarmMask & 0x08) ? ALARM_MASK : 0);
-
-    if (!WriteRegisters(REG_ALARM1_SECONDS, data.data(), data.size()))
-    {
-        return false;
-    }
-
-    // Enable/disable alarm interrupt
-    return EnableAlarm1Interrupt(enable);
-}
-
-bool DS3231::SetAlarm2(DS3231::AlarmTwoType alarm_type, const DS3231::DateTime &date_time, bool enable)
-{
-    std::array<uint8_t, 3> data{};
-    const auto alarmMask = static_cast<uint8_t>(alarm_type);
-
-    // Set alarm 2 registers (no seconds register for alarm 2)
-    data[0] = DecToBcd(date_time.minute) | ((alarmMask & 0x02) ? ALARM_MASK : 0);
-    data[1] = DecToBcd(date_time.hour) | ((alarmMask & 0x04) ? ALARM_MASK : 0);
-
-    // Day/Date field
-    if (alarm_type == DS3231::AlarmTwoType::DAY)
-    {
-        data[2] = DecToBcd(date_time.day_of_week) | DYDT_BIT;
-    }
-    else
-    {
-        data[2] = DecToBcd(date_time.day);
-    }
-    data[2] |= ((alarmMask & 0x08) ? ALARM_MASK : 0);
-
-    if (!WriteRegisters(REG_ALARM2_MINUTES, data.data(), data.size()))
-    {
-        return false;
-    }
-
-    // Enable/disable alarm interrupt
-    return EnableAlarm2Interrupt(enable);
-}
-
-bool DS3231::CheckAlarm1() const
-{
-    uint8_t status;
-    if (!ReadRegister(REG_STATUS, &status))
-    {
-        return false;
-    }
-    return (status & STAT_A1F) != 0;
-}
-
-bool DS3231::CheckAlarm2() const
-{
-    uint8_t status;
-    if (!ReadRegister(REG_STATUS, &status))
-    {
-        return false;
-    }
-    return (status & STAT_A2F) != 0;
-}
-
-bool DS3231::ClearAlarm1()
-{
-    uint8_t status;
-    if (!ReadRegister(REG_STATUS, &status))
-    {
-        return false;
-    }
-    status &= ~STAT_A1F;
-    return WriteRegister(REG_STATUS, status);
-}
-
-bool DS3231::ClearAlarm2()
-{
-    uint8_t status;
-    if (!ReadRegister(REG_STATUS, &status))
-    {
-        return false;
-    }
-    status &= ~STAT_A2F;
-    return WriteRegister(REG_STATUS, status);
-}
-
-bool DS3231::EnableAlarm1Interrupt(bool enable)
-{
-    uint8_t control;
-    if (!ReadRegister(REG_CONTROL, &control))
-    {
-        return false;
-    }
-
-    if (enable)
-    {
-        control |= CTRL_A1IE | CTRL_INTCN; // Enable alarm 1 interrupt and interrupt control
-    }
-    else
-    {
-        control &= ~CTRL_A1IE;
-    }
-
-    return WriteRegister(REG_CONTROL, control);
-}
-
-bool DS3231::EnableAlarm2Interrupt(bool enable)
-{
-    uint8_t control;
-    if (!ReadRegister(REG_CONTROL, &control))
-    {
-        return false;
-    }
-
-    if (enable)
-    {
-        control |= CTRL_A2IE | CTRL_INTCN; // Enable alarm 2 interrupt and interrupt control
-    }
-    else
-    {
-        control &= ~CTRL_A2IE;
-    }
-
-    return WriteRegister(REG_CONTROL, control);
-}
-
-bool DS3231::SetSquareWave(DS3231::SquareWaveFreq freq)
-{
-    uint8_t control;
-    if (!ReadRegister(REG_CONTROL, &control))
-    {
-        return false;
-    }
-
-    if (freq == DS3231::SquareWaveFreq::DISABLED)
-    {
-        // Disable square wave output
-        control |= CTRL_INTCN;
-    }
-    else
-    {
-        // Enable square wave and set frequency
-        control &= ~(CTRL_INTCN | CTRL_RS2 | CTRL_RS1);
-        control |= static_cast<uint8_t>(freq);
-    }
-
-    return WriteRegister(REG_CONTROL, control);
-}
-
-bool DS3231::Enable32kHz(bool enable)
-{
-    uint8_t status;
-    if (!ReadRegister(REG_STATUS, &status))
-    {
-        return false;
-    }
-
-    if (enable)
-    {
-        status |= STAT_EN32KHZ;
-    }
-    else
-    {
-        status &= ~STAT_EN32KHZ;
-    }
-
-    return WriteRegister(REG_STATUS, status);
 }
 
 std::optional<float> DS3231::GetTemperature() const

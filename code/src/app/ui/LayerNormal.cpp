@@ -27,9 +27,6 @@ void LayerNormal::OnEvent(Event event)
     case Event::MULTI_PRESS:
         IntroAnimation();
         break;
-    case Event::CHARGE_START:
-        ChargeAnimation();
-        break;
     case Event::ENTER:
         DisplayTime();
         break;
@@ -62,10 +59,4 @@ void LayerNormal::IntroAnimation()
 {
     App::display.TriggerAutoBrightness();
     App::animation_runner.SetAnimation(Animation::Type::INTRO);
-}
-
-void LayerNormal::ChargeAnimation()
-{
-    App::display.TriggerAutoBrightness();
-    App::animation_runner.SetAnimation(Animation::Type::CHARGE);
 }

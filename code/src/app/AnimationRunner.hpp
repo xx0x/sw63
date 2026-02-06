@@ -101,16 +101,6 @@ private:
         return true;
     }
 
-    bool IsShowingTime() const
-    {
-        return current_type_ == Animation::Type::TIME;
-    }
-
-    bool ShouldPauseBetweenFrames() const
-    {
-        return IsShowingTime();
-    }
-
     Animation::Type GetCurrentAnimationType() const
     {
         return current_type_;

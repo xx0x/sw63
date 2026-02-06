@@ -68,11 +68,19 @@ void App::Loop()
     // Process animations
     if (!animation_runner.Update())
     {
-        // No active animation, check for sleep
-        if (layers_[current_layer_]->SleepAllowed() &&
-            !System::GetRawButtonState())
+        if (System::GetRawChargeState())
         {
-            Sleep();
+            App::display.TriggerAutoBrightness();
+            App::animation_runner.SetAnimation(Animation::Type::CHARGE);
+        }
+        else
+        {
+            // No active animation, check for sleep
+            if (layers_[current_layer_]->SleepAllowed() &&
+                !System::GetRawButtonState())
+            {
+                Sleep();
+            }
         }
     }
 }

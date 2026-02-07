@@ -37,10 +37,8 @@ private:
     static constexpr uint8_t kMultiPressCount = 4;            // Number of presses for multi
 
     State state_ = State::IDLE;
-    bool previous_raw_state_ = false;
     bool now_pressed_ = false;
     bool prev_pressed_ = false;
-    uint32_t state_change_time_ = 0;
     uint32_t press_start_time_ = 0;
     uint32_t release_time_ = 0;
     uint32_t first_press_time_ = 0;

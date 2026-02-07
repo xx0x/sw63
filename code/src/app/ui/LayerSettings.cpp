@@ -153,6 +153,9 @@ void LayerSettings::Update()
     case Step::PM:
         App::display.SetLed(Display::Led::PM, time_setting_.pm);
         break;
+    case Step::COUNT:
+    default:
+        break;
     }
 
     App::display.Update();

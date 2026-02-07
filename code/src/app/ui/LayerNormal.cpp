@@ -25,6 +25,11 @@ void LayerNormal::OnEvent(Event event)
     case Event::LEAVE:
         App::animation_runner.Cancel();
         break;
+    case Event::JUST_RELEASED:
+    case Event::LONG_PRESS:
+    case Event::COUNT:
+    default:
+        break;
     }
 }
 

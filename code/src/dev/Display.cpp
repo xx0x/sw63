@@ -41,6 +41,7 @@ void Display::SetPower(bool on)
             .Mode = GPIO_MODE_OUTPUT_PP,
             .Pull = GPIO_NOPULL,
             .Speed = GPIO_SPEED_FREQ_VERY_HIGH,
+            .Alternate = 0,
         };
         HAL_GPIO_Init(kDisplayEnablePin.port, &GPIO_InitStruct);
         HAL_GPIO_WritePin(kDisplayEnablePin.port, kDisplayEnablePin.pin, GPIO_PIN_SET);
@@ -159,6 +160,9 @@ void Display::SetNumber(size_t number, NumStyle style)
         data_.set(static_cast<size_t>(kRevNumLeds[number - 1]), true);
         data_.set(static_cast<size_t>(kRevNumLeds[number % Display::kNumLedCount]), true);
         data_.set(static_cast<size_t>(kRevNumLeds[(number + 1) % Display::kNumLedCount]), true);
+        break;
+    case NumStyle::COUNT:
+    default:
         break;
     }
 }

@@ -31,7 +31,7 @@ public:
         }
         // Initialize timing for new animation
         animation_delay_remaining_ = 0;
-        last_animation_update_ = HAL_GetTick();
+        last_animation_update_ = System::Millis();
     }
 
     void SetAnimation(Animation::Type type, const LocaleConfig::TimeParameters &time_params)

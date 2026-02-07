@@ -4,7 +4,7 @@
 void Button::Update()
 {
     now_pressed_ = System::GetRawButtonState();
-    uint32_t current_time = HAL_GetTick();
+    uint32_t current_time = System::Millis();
 
     // Reset event flags at the beginning of each update
     ResetEvents();

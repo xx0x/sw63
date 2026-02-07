@@ -10,7 +10,7 @@ bool AnimationRunner::Update()
         return false;
     }
 
-    uint32_t current_time = HAL_GetTick();
+    uint32_t current_time = System::Millis();
 
     // Check if it's time for the next animation frame
     if (current_time >= last_animation_update_ + animation_delay_remaining_)
@@ -27,7 +27,7 @@ bool AnimationRunner::Update()
 
         // Process the next frame and get the delay until the next update
         animation_delay_remaining_ = ProcessNextFrame();
-        last_animation_update_ = HAL_GetTick();
+        last_animation_update_ = System::Millis();
 
         // If the animation finished, clear the display
         if (IsFinished())

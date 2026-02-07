@@ -104,6 +104,16 @@ public:
      */
     TimeParameters FixTime(const TimeParameters &params) const;
 
+    /**
+     * @brief     Determine if the hour should be decremented based on clock face and minutes.
+     * @details   Different languages have different rules for when the displayed hour
+     *            should be decremented based on the clock face position and minute offset.
+     * @param     face  The clock face position
+     * @param     minutes_offset  The calculated minutes offset (can be negative)
+     * @return    true if the hour should be decremented, false otherwise
+     */
+    bool ShouldDecrementHour(Display::ClockFace face, int minutes_offset) const;
+
 private:
     /**
      * @brief     Get the time coefficients for the current language.

@@ -109,12 +109,22 @@ void App::Loop()
 
 void App::Sleep()
 {
-
-    // Show battery level before sleep
-    // float battery_level = battery.GetLevel();
-    // display.SetNumber(battery_level * 12.f);
-    // display.Update();
-    // System::Delay(1000);
+    // Indicate low battery
+    float battery_level = battery.GetLevel();
+    if (battery_level < kLowBatteryThreshold)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            display.Clear();
+            display.Update();
+            System::Delay(200);
+            display.Clear();
+            display.SetLed(Display::Led::PM, true);
+            display.SetLed(Display::Led::NUM_1, true);
+            display.Update();
+            System::Delay(200);
+        }
+    }
 
     display.DeInit();
     battery.DeInit();
@@ -123,7 +133,4 @@ void App::Sleep()
 
     display.Init();
     battery.Init();
-
-    // current_layer_ = Layer::Type::NORMAL;
-    // layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
 }

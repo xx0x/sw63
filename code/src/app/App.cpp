@@ -53,9 +53,9 @@ void App::Loop()
     button.Update();
 
     // Call button events here
-    if (button.Happened(Button::Event::SHORT_PRESS))
+    if (button.Happened(Button::Event::JUST_PRESSED))
     {
-        layers_[current_layer_]->OnEvent(Layer::Event::SHORT_PRESS);
+        layers_[current_layer_]->OnEvent(Layer::Event::JUST_PRESSED);
     }
     if (button.Happened(Button::Event::LONG_PRESS))
     {

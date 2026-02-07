@@ -19,7 +19,7 @@ void Button::Update()
         long_triggered_ = false;
 
         // Fire short press immediately on press
-        events_[Event::SHORT_PRESS] = true;
+        events_[Event::JUST_PRESSED] = true;
     }
     else if (prev_pressed_ && !now_pressed_)
     {

@@ -35,7 +35,11 @@ void LayerSettings::OnEvent(Event event)
         }
         break;
     case Event::LONG_PRESS:
-        App::ChangeLayer(Layer::Type::SECRET);
+        // Enter secret only when on the first step to avoid accidents
+        if (settings_step_ == Step::LANGUAGE)
+        {
+            App::ChangeLayer(Layer::Type::SECRET);
+        }
         break;
     default:
         break;

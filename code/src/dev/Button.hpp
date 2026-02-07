@@ -31,9 +31,8 @@ private:
         WAITING_FOR_MULTI
     };
 
-    static constexpr uint32_t kDebounceTimeMs = 20;           // 20ms debounce
-    static constexpr uint32_t kMediumPressThresholdMs = 2000; // Min duration for medium press
-    static constexpr uint32_t kLongPressThresholdMs = 5000;   // Min duration for long press
+    static constexpr uint32_t kMediumPressThresholdMs = 1500; // Min duration for medium press
+    static constexpr uint32_t kLongPressThresholdMs = 3000;   // Min duration for long press
     static constexpr uint32_t kMultiPressWindowMs = 500;      // Max time between multi presses
     static constexpr uint8_t kMultiPressCount = 4;            // Number of presses for multi
 

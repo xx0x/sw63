@@ -7,7 +7,7 @@ void LayerNormal::OnEvent(Event event)
 {
     switch (event)
     {
-    case Event::SHORT_PRESS:
+    case Event::JUST_PRESSED:
         if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
         {
             App::timings.ClearSpeedOverride();

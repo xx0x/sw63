@@ -11,7 +11,7 @@ public:
     };
     enum class Event
     {
-        SHORT_PRESS,
+        JUST_PRESSED,
         MEDIUM_PRESS,
         LONG_PRESS,
         MULTI_PRESS,

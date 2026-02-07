@@ -9,7 +9,7 @@ void LayerSettings::OnEvent(Event event)
         menu_step_ = 0;
         App::animation_runner.Cancel();
         break;
-    case Event::SHORT_PRESS:
+    case Event::JUST_PRESSED:
         // Cycle through menu steps
         menu_step_ = (menu_step_ + 1) % 12; // Example: 12 menu steps
         break;

@@ -97,10 +97,8 @@ void LayerSettings::StoreSettings()
              time_setting_.minutes * past_to_offset;
     int hr = time_setting_.hours;
 
-    if (App::locale.ShouldDecrementHour(time_setting_.face, mn))
-    {
-        hr--;
-    }
+    hr += App::locale.HourOffsetWhenSaving(time_setting_.face, mn);
+
     if (mn < 0)
     {
         mn += 60;

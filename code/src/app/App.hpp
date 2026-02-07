@@ -39,6 +39,7 @@ public:
     }
 
     static constexpr uint32_t kInactivityTimeoutMs = 15000;
+    static constexpr float kLowBatteryThreshold = 0.1f;
 
 private:
     static void Sleep();

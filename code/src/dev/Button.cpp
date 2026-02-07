@@ -9,10 +9,10 @@ void Button::Update()
     // Reset event flags at the beginning of each update
     ResetEvents();
 
-    // State transitions based on debounced state
+    // State transitions
     if (!prev_pressed_ && now_pressed_)
     {
-        // Button just pressed (debounced)
+        // Button just pressed
         state_ = State::PRESSED;
         press_start_time_ = current_time;
         medium_triggered_ = false;
@@ -23,14 +23,15 @@ void Button::Update()
     }
     else if (prev_pressed_ && !now_pressed_)
     {
-        // Button just released (debounced)
+        // Button just released 
         uint32_t press_duration = current_time - press_start_time_;
         release_time_ = current_time;
 
         if (state_ == State::PRESSED)
         {
-            if (press_duration < kShortPressMaxMs) // Less than 2 seconds
+            if (press_duration < kMediumPressThresholdMs) // Less than 2 seconds
             {
+                events_[Event::JUST_RELEASED] = true;
                 press_count_++;
 
                 if (press_count_ == 1)
@@ -70,7 +71,7 @@ void Button::Update()
         }
     }
 
-    // Handle holding states (use debounced state)
+    // Handle holding states
     if (state_ == State::PRESSED && now_pressed_)
     {
         uint32_t press_duration = current_time - press_start_time_;

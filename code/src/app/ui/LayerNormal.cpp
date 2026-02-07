@@ -10,7 +10,6 @@ void LayerNormal::OnEvent(Event event)
     case Event::JUST_PRESSED:
         if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
         {
-            App::timings.ClearSpeedOverride();
             DisplayTime();
         }
         break;

@@ -9,12 +9,12 @@ void LayerSettings::OnEvent(Event event)
         menu_step_ = 0;
         App::animation_runner.Cancel();
         break;
-    case Event::JUST_PRESSED:
+    case Event::JUST_RELEASED:
         // Cycle through menu steps
         menu_step_ = (menu_step_ + 1) % 12; // Example: 12 menu steps
         break;
     case Event::MEDIUM_PRESS:
-        // Return to normal layer on long press
+        // Return to normal layer on medium press
         App::ChangeLayer(Layer::Type::NORMAL);
         break;
     default:

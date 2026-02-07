@@ -57,6 +57,10 @@ void App::Loop()
     {
         layers_[current_layer_]->OnEvent(Layer::Event::JUST_PRESSED);
     }
+    if (button.Happened(Button::Event::JUST_RELEASED))
+    {
+        layers_[current_layer_]->OnEvent(Layer::Event::JUST_RELEASED);
+    }
     if (button.Happened(Button::Event::LONG_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::LONG_PRESS);

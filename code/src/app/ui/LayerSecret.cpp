@@ -9,7 +9,6 @@ void LayerSecret::OnEvent(Event event)
     case Event::ENTER:
         current_setting_ = Settings::SPEED;
         setting_opened_ = false;
-        App::animation_runner.Cancel();
         break;
 
     case Event::JUST_RELEASED:

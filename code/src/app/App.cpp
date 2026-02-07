@@ -91,23 +91,13 @@ void App::Loop()
         ChangeLayer(Layer::Type::NORMAL);
     }
 
-    // Process animations
-    if (!animation_runner.Update())
+    // Check for sleep (only if no USB power and button not pressed)
+    if (
+        layers_[current_layer_]->SleepAllowed() &&
+        !System::GetRawUsbPowerState() &&
+        !System::GetRawButtonState())
     {
-        if (System::GetRawUsbPowerState())
-        {
-            App::display.TriggerAutoBrightness();
-            App::animation_runner.SetAnimation(AnimationRunner::AnimationType::CHARGE);
-        }
-        else
-        {
-            // No active animation, check for sleep
-            if (layers_[current_layer_]->SleepAllowed() &&
-                !System::GetRawButtonState())
-            {
-                Sleep();
-            }
-        }
+        Sleep();
     }
 }
 

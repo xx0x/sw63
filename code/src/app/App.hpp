@@ -1,6 +1,5 @@
 #pragma once
 
-#include "app/AnimationRunner.hpp"
 #include "app/LocaleConfig.hpp"
 #include "app/TimingsConfig.hpp"
 #include "dev/Battery.hpp"
@@ -10,6 +9,7 @@
 #include "dev/System.hpp"
 #include "ui/Layer.hpp"
 #include <cstdint>
+#include <memory>
 
 class App
 {
@@ -20,7 +20,6 @@ public:
     inline static Display display;
     inline static TimingsConfig timings;
     inline static LocaleConfig locale;
-    inline static AnimationRunner animation_runner;
     inline static DS3231 rtc = DS3231(&System::hi2c1);
     inline static Battery battery;
     inline static Button button;

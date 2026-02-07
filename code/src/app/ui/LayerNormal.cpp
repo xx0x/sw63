@@ -1,6 +1,5 @@
 
 #include "LayerNormal.hpp"
-#include "app/AnimationRunner.hpp"
 #include "app/App.hpp"
 #include "dev/System.hpp"
 
@@ -9,7 +8,8 @@ void LayerNormal::OnEvent(Event event)
     switch (event)
     {
     case Event::JUST_PRESSED:
-        if (App::animation_runner.GetAnimationType() != AnimationRunner::AnimationType::INTRO)
+        sleep_allowed_ = false;
+        if (animation_runner_.GetAnimationType() != AnimationRunner::AnimationType::INTRO)
         {
             DisplayTime();
         }
@@ -24,7 +24,7 @@ void LayerNormal::OnEvent(Event event)
         DisplayTime();
         break;
     case Event::LEAVE:
-        App::animation_runner.Cancel();
+        animation_runner_.Cancel();
         break;
     case Event::JUST_RELEASED:
     case Event::LONG_PRESS:
@@ -36,6 +36,23 @@ void LayerNormal::OnEvent(Event event)
 
 void LayerNormal::Update()
 {
+    // Process animations
+    if (!animation_runner_.Update())
+    {
+        if (System::GetRawUsbPowerState())
+        {
+            animation_runner_.SetAnimation(AnimationRunner::AnimationType::CHARGE);
+        }
+        else
+        {
+            sleep_allowed_ = true;
+        }
+    }
+}
+
+bool LayerNormal::SleepAllowed()
+{
+    return sleep_allowed_;
 }
 
 void LayerNormal::DisplayTime()
@@ -50,11 +67,10 @@ void LayerNormal::DisplayTime()
     auto time_params = App::locale.ProcessTime(now->hour, now->minute);
 
     // Set the time animation with the processed parameters
-    App::animation_runner.SetAnimation(AnimationRunner::AnimationType::TIME, time_params);
+    animation_runner_.SetAnimation(AnimationRunner::AnimationType::TIME, time_params);
 }
 
 void LayerNormal::IntroAnimation()
 {
-    App::display.TriggerAutoBrightness();
-    App::animation_runner.SetAnimation(AnimationRunner::AnimationType::INTRO);
+    animation_runner_.SetAnimation(AnimationRunner::AnimationType::INTRO);
 }

@@ -14,14 +14,15 @@ private:
     enum class Settings
     {
         SPEED,
-        COMPRESSED,
-        SAVER,
+        VISUAL_STYLE,
+        BATTERY_LEVEL,
         EXIT,
         COUNT
     };
 
     Settings current_setting_ = Settings::SPEED;
     bool setting_opened_ = false;
+    float battery_level_ = 0.f;
 
     void ShortPressAction();
 };

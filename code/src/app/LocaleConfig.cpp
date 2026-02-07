@@ -27,30 +27,27 @@ LocaleConfig::TimeCoefficients LocaleConfig::GetTimeCoefficients() const
     }
 }
 
-bool LocaleConfig::ShouldDecrementHour(Display::ClockFace face, int minutes_offset) const
+int32_t LocaleConfig::HourOffsetWhenSaving(Display::ClockFace face, int minutes) const
 {
     // Always decrement if minutes are negative (going to previous hour)
-    if (minutes_offset < 0)
+    if (minutes < 0)
     {
-        return true;
+        return -1;
     }
 
-    // Language-specific rules for when to decrement based on face position
-    switch (language_)
+    // Use time coefficients to determine when to decrement based on face position
+    TimeCoefficients coefficients = GetTimeCoefficients();
+    switch (face)
     {
-    case Language::CZECH:
-    case Language::HUNGARIAN:
-        return face != Display::ClockFace::UP; // Decrement for RIGHT, DOWN, LEFT faces
-
-    case Language::GERMAN:
-    case Language::POLISH:
-    case Language::NORWEGIAN:
-        return face == Display::ClockFace::DOWN ||
-               face == Display::ClockFace::LEFT; // Decrement for DOWN, LEFT faces
-
-    case Language::ENGLISH:
+    case Display::ClockFace::RIGHT:
+        return -coefficients.first_quarter;
+    case Display::ClockFace::DOWN:
+        return -coefficients.half;
+    case Display::ClockFace::LEFT:
+        return -coefficients.third_quarter;
+    case Display::ClockFace::UP:
     default:
-        return face == Display::ClockFace::LEFT; // Decrement only for LEFT face
+        return 0; // UP face never decrements
     }
 }
 

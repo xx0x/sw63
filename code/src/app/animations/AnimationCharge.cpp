@@ -36,7 +36,7 @@ uint32_t AnimationCharge::ProcessNextFrame()
     current_step_++;
 
     // Continue animation only while charging or USB power is connected
-    if (!charging && !usb_power)
+    if (!usb_power)
     {
         finished_ = true;
         return 0;

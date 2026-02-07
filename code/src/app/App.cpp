@@ -76,7 +76,7 @@ void App::Loop()
     // Process animations
     if (!animation_runner.Update())
     {
-        if (System::GetRawChargeState() || System::GetRawUsbPowerState())
+        if (System::GetRawUsbPowerState())
         {
             App::display.TriggerAutoBrightness();
             App::animation_runner.SetAnimation(Animation::Type::CHARGE);

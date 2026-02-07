@@ -45,8 +45,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TARGET_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -Wno-volatile")
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g3")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g3")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os -g3")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Os -g3")
 endif()
 if(CMAKE_BUILD_TYPE MATCHES Release)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os -g0")
@@ -67,7 +67,7 @@ project(sw63)
 set(ELF_FILE sw63.elf)
 set(HEX_FILE sw63.hex)
 set(JLINK_FILE sw63.jlink)
-set(LD_FILE ${CMAKE_SOURCE_DIR}/ld/stm32l052k8.ld)
+set(LD_FILE ${CMAKE_SOURCE_DIR}/ld/stm32l052k8_bootloader.ld)
 
 enable_language(C CXX ASM)
 
@@ -144,7 +144,7 @@ set_target_properties(sw63 PROPERTIES
     LINK_FLAGS ${CMAKE_C_LINK_FLAGS}
 )
 
-# Add linker script via target_link_options (modern CMake approach)
+# Add linker script via target_link_options
 target_link_options(sw63 PRIVATE "-T${LD_FILE}")
 
 # Post build commands
@@ -152,7 +152,8 @@ add_custom_command(TARGET sw63 POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary ${ELF_FILE} sw63.bin
     COMMAND ${CMAKE_OBJCOPY} -O ihex ${ELF_FILE} ${HEX_FILE}
     COMMAND ${CMAKE_SIZE} ${ELF_FILE}
-    COMMENT "Building sw63.bin and ${HEX_FILE}"
+    COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/uf2/utils/uf2conv.py -c -f STM32L0 ${HEX_FILE} -o sw63.uf2
+    COMMENT "Building sw63.bin, ${HEX_FILE} and sw63.uf2"
 )
 
 # Generate J-Link script

@@ -41,7 +41,8 @@ public:
     {
         EXACT,
         PAST,
-        TO
+        TO,
+        COUNT
     };
 
     /**

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Layer.hpp"
+#include "app/LocaleConfig.hpp"
 #include "dev/Display.hpp"
 #include <cstdint>
 
@@ -23,19 +24,12 @@ private:
         COUNT
     };
 
-    enum class PastTo : int8_t
-    {
-        PAST = 1,
-        TO = -1,
-        EXACT = 0
-    };
-
     struct TimeSetting
     {
         Display::ClockFace face = Display::ClockFace::UP;
-        uint8_t hours = 1;
-        uint8_t minutes = 1;
-        PastTo past_to = PastTo::PAST;
+        int32_t hours = 1;
+        int32_t minutes = 1;
+        LocaleConfig::TimeType past_to = LocaleConfig::TimeType::PAST;
         bool pm = true;
     };
 

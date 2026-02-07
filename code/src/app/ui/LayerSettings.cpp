@@ -23,7 +23,8 @@ void LayerSettings::OnEvent(Event event)
             StoreSettings();
             App::ChangeLayer(Layer::Type::NORMAL);
         }
-        else if (settings_step_ == Step::PAST_TO && time_setting_.past_to == PastTo::EXACT)
+        else if (settings_step_ == Step::PAST_TO &&
+                 time_setting_.past_to == LocaleConfig::TimeType::EXACT)
         {
             // Skip minutes step if EXACT is selected
             settings_step_ = Step::PM;
@@ -57,18 +58,7 @@ void LayerSettings::ShortPressAction()
         }
         break;
     case Step::PAST_TO:
-        switch (time_setting_.past_to)
-        {
-        case PastTo::PAST:
-            time_setting_.past_to = PastTo::TO;
-            break;
-        case PastTo::TO:
-            time_setting_.past_to = PastTo::EXACT;
-            break;
-        case PastTo::EXACT:
-            time_setting_.past_to = PastTo::PAST;
-            break;
-        }
+        time_setting_.past_to = EnumIncrement(time_setting_.past_to);
         break;
     case Step::MINUTES:
         time_setting_.minutes = (time_setting_.minutes + 1);
@@ -88,8 +78,23 @@ void LayerSettings::ShortPressAction()
 void LayerSettings::StoreSettings()
 {
     int face_offset = std::to_underlying(time_setting_.face);
+    int past_to_offset = 0;
+    switch (time_setting_.past_to)
+    {
+    case LocaleConfig::TimeType::PAST:
+        past_to_offset = 1;
+        break;
+    case LocaleConfig::TimeType::TO:
+        past_to_offset = -1;
+        break;
+    case LocaleConfig::TimeType::EXACT:
+    default:
+        past_to_offset = 0;
+        break;
+    }
+
     int mn = face_offset * 15 +
-             time_setting_.minutes * std::to_underlying(time_setting_.past_to);
+             time_setting_.minutes * past_to_offset;
     int hr = time_setting_.hours;
 
     if (App::locale.ShouldDecrementHour(time_setting_.face, mn))
@@ -132,13 +137,13 @@ void LayerSettings::Update()
         break;
     case Step::PAST_TO:
         App::display.SetLed(Display::Led::MINUTES, true);
-        App::display.SetLed(Display::Led::BEFORE, time_setting_.past_to == PastTo::TO);
-        App::display.SetLed(Display::Led::AFTER, time_setting_.past_to == PastTo::PAST);
+        App::display.SetLed(Display::Led::BEFORE, time_setting_.past_to == LocaleConfig::TimeType::TO);
+        App::display.SetLed(Display::Led::AFTER, time_setting_.past_to == LocaleConfig::TimeType::PAST);
         break;
     case Step::MINUTES:
         App::display.SetLed(Display::Led::MINUTES, true);
-        App::display.SetLed(Display::Led::BEFORE, time_setting_.past_to == PastTo::TO);
-        App::display.SetLed(Display::Led::AFTER, time_setting_.past_to == PastTo::PAST);
+        App::display.SetLed(Display::Led::BEFORE, time_setting_.past_to == LocaleConfig::TimeType::TO);
+        App::display.SetLed(Display::Led::AFTER, time_setting_.past_to == LocaleConfig::TimeType::PAST);
         App::display.SetNumber(time_setting_.minutes, Display::NumStyle::BAR_REVERSED);
         break;
     case Step::PM:

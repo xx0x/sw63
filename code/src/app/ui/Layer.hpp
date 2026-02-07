@@ -13,6 +13,7 @@ public:
 
     enum class Event
     {
+        INIT,
         ENTER,
         LEAVE,
         JUST_PRESSED,

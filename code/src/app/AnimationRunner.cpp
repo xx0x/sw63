@@ -15,6 +15,7 @@ AnimationRunner::AnimationRunner()
 void AnimationRunner::SetAnimation(AnimationType type)
 {
     App::display.TriggerAutoBrightness();
+    prev_type_ = current_type_;
     current_type_ = type;
     if (auto &animation = GetCurrentAnimation())
     {
@@ -88,6 +89,7 @@ bool AnimationRunner::Update()
     // If no animation is running, nothing to do
     if (IsFinished())
     {
+        prev_type_ = current_type_;
         current_type_ = AnimationType::COUNT;
         return false;
     }
@@ -116,6 +118,7 @@ bool AnimationRunner::Update()
         {
             App::display.Clear();
             App::display.Update();
+            prev_type_ = current_type_;
             current_type_ = AnimationType::COUNT;
             return false; // Animation is done
         }

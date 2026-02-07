@@ -45,8 +45,14 @@ void App::Init()
     layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
     layers_[Layer::Type::SECRET] = std::make_unique<LayerSecret>();
 
-    layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
-    // display.TestProcedure();
+    // Init all layers
+    for (auto &layer : layers_)
+    {
+        layer->OnEvent(Layer::Event::INIT);
+    }
+
+    // We don't call Layer::Event::ENTER here so the DisplayTime inside LayerNormal isn't triggered
+    // ...
 }
 
 void App::Loop()

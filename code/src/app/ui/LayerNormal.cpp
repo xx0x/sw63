@@ -7,6 +7,9 @@ void LayerNormal::OnEvent(Event event)
 {
     switch (event)
     {
+    case Event::INIT:
+        IntroAnimation();
+        break;
     case Event::ENTER:
         DisplayTime();
         break;
@@ -39,7 +42,17 @@ void LayerNormal::Update()
     // Process animations
     if (!animation_runner_.Update())
     {
-        if (System::GetRawUsbPowerState())
+        // Animation just finished - check what type it was
+        AnimationRunner::AnimationType finished_type = animation_runner_.GetPreviousAnimationType();
+
+        if (finished_type == AnimationRunner::AnimationType::INTRO)
+        {
+            // INTRO animation finished...
+            // Short delay after intro before showing time
+            System::Delay(500);
+            DisplayTime();
+        }
+        else if (System::GetRawUsbPowerState())
         {
             animation_runner_.SetAnimation(AnimationRunner::AnimationType::CHARGE);
         }

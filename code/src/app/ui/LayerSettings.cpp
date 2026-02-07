@@ -34,7 +34,9 @@ void LayerSettings::OnEvent(Event event)
             settings_step_ = EnumIncrement(settings_step_);
         }
         break;
-
+    case Event::LONG_PRESS:
+        App::ChangeLayer(Layer::Type::SECRET);
+        break;
     default:
         break;
     }

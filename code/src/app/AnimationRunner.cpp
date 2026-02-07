@@ -20,7 +20,7 @@ bool AnimationRunner::Update()
         // Handle pause between frames for time display animations
         if (ShouldPauseBetweenFrames())
         {
-            System::Delay(App::timings.GetSpeed().pause);
+            System::Delay(App::timings.GetSpeedConfig().pause);
         }
         // Update display brightness based on ambient light (the lights need to be off to read it properly)
         App::display.TriggerAutoBrightness();

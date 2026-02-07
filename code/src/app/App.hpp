@@ -32,9 +32,17 @@ public:
         layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     }
 
+    static constexpr uint32_t kInactivityTimeoutMs = 15000;
+
 private:
     static void Sleep();
 
     static inline EnumArray<Layer::Type, std::unique_ptr<Layer>> layers_;
     static inline Layer::Type current_layer_ = Layer::Type::NORMAL;
+
+    static void UpdateLastInteractionTime()
+    {
+        last_interaction_time_ = System::Millis();
+    }
+    static inline uint32_t last_interaction_time_ = 0;
 };

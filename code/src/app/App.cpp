@@ -1,7 +1,7 @@
 #include "App.hpp"
 #include "app/ui/LayerNormal.hpp"
-#include "app/ui/LayerSettings.hpp"
 #include "app/ui/LayerSecret.hpp"
+#include "app/ui/LayerSettings.hpp"
 #include "dev/System.hpp"
 
 void App::Init()
@@ -58,26 +58,38 @@ void App::Loop()
     if (button.Happened(Button::Event::JUST_PRESSED))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::JUST_PRESSED);
+        UpdateLastInteractionTime();
     }
     if (button.Happened(Button::Event::JUST_RELEASED))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::JUST_RELEASED);
+        UpdateLastInteractionTime();
     }
     if (button.Happened(Button::Event::LONG_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::LONG_PRESS);
+        UpdateLastInteractionTime();
     }
     if (button.Happened(Button::Event::MEDIUM_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MEDIUM_PRESS);
+        UpdateLastInteractionTime();
     }
     if (button.Happened(Button::Event::MULTI_PRESS))
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MULTI_PRESS);
+        UpdateLastInteractionTime();
     }
 
     // Process current layer
     layers_[current_layer_]->Update();
+
+    // Check for timeout
+    if (current_layer_ != Layer::Type::NORMAL &&
+        (System::Millis() - last_interaction_time_ >= kInactivityTimeoutMs))
+    {
+        ChangeLayer(Layer::Type::NORMAL);
+    }
 
     // Process animations
     if (!animation_runner.Update())

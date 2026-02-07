@@ -64,9 +64,13 @@ set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -Wl,--start-group -lc -lm -Wl,--en
 project(sw63)
 
 # File path variables
+set(BIN_FILE sw63.bin)
 set(ELF_FILE sw63.elf)
 set(HEX_FILE sw63.hex)
+set(HEX_FILE_WITH_BOOTLOADER sw63-with-bootloader.hex)
+set(UF2_FILE sw63.uf2)
 set(JLINK_FILE sw63.jlink)
+set(JLINK_FILE_WITH_BOOTLOADER sw63-with-bootloader.jlink)
 set(LD_FILE ${CMAKE_SOURCE_DIR}/ld/stm32l052k8_bootloader.ld)
 
 enable_language(C CXX ASM)
@@ -149,11 +153,12 @@ target_link_options(sw63 PRIVATE "-T${LD_FILE}")
 
 # Post build commands
 add_custom_command(TARGET sw63 POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${ELF_FILE} sw63.bin
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${ELF_FILE} ${BIN_FILE}
     COMMAND ${CMAKE_OBJCOPY} -O ihex ${ELF_FILE} ${HEX_FILE}
     COMMAND ${CMAKE_SIZE} ${ELF_FILE}
-    COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/uf2/utils/uf2conv.py -c -f STM32L0 ${HEX_FILE} -o sw63.uf2
-    COMMENT "Building sw63.bin, ${HEX_FILE} and sw63.uf2"
+    COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/uf2/utils/uf2conv.py -c -f STM32L0 ${HEX_FILE} -o ${UF2_FILE}
+    COMMAND srec_cat ${CMAKE_SOURCE_DIR}/bootloader/sw63-bootloader.hex -Intel ${HEX_FILE} -Intel -o ${HEX_FILE_WITH_BOOTLOADER} -Intel
+    COMMENT "Building ${BIN_FILE}, ${HEX_FILE}, ${UF2_FILE}, and merged ${HEX_FILE_WITH_BOOTLOADER}"
 )
 
 # Generate J-Link script
@@ -177,6 +182,27 @@ add_custom_target(flash
     COMMENT "Flashing sw63"
 )
 
+# Generate J-Link script for merged hex with bootloader
+add_custom_command(TARGET sw63 POST_BUILD
+    COMMAND echo "device ${DEVICE_NAME}" > ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "si SWD" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "speed 4000" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "connect" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "halt" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "loadfile ${HEX_FILE_WITH_BOOTLOADER}" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "r" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "g" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND echo "exit" >> ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMENT "Generating J-Link script for merged sw63-with-bootloader"
+)
+
+# Create flash target for merged hex with bootloader
+add_custom_target(flash-with-bootloader
+    COMMAND JLinkExe -CommanderScript ${JLINK_FILE_WITH_BOOTLOADER}
+    DEPENDS sw63
+    COMMENT "Flashing sw63 with bootloader"
+)
+
 # Print build information
 message(STATUS "Device: ${DEVICE_NAME}")
 message(STATUS "Target: sw63")
@@ -186,3 +212,4 @@ message(STATUS "Usage:")
 message(STATUS "  Configure: cmake ..")
 message(STATUS "  Build: make")
 message(STATUS "  Flash: make flash")
+message(STATUS "  Flash with bootloader: make flash-with-bootloader")

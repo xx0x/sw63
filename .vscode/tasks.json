@@ -34,6 +34,22 @@
             ]
         },
         {
+            "label": "flash_with_bootloader",
+            "type": "process",
+            "command": "make",
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+            "args": [
+                "flash-with-bootloader"
+            ]
+        },
+        {
             "label": "configure",
             "type": "shell",
             "command": "if [ -d build ]; then rm -rf build; fi && mkdir build && cd build && cmake ..",
@@ -45,20 +61,6 @@
                 "showReuseMessage": false,
                 "group": "cmake"
             },
-        },
-        {
-            "label": "build_all",
-            "type": "process",
-            "command": "make",
-            "options": {
-                "cwd": "${workspaceRoot}/code/build"
-            },
-            "presentation": {
-                "clear": true,
-                "showReuseMessage": false,
-                "group": "cmake"
-            },
-            "args": []
         },
         {
             "label": "build",
@@ -86,6 +88,19 @@
             "dependsOn": [
                 "build",
                 "flash"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "build_and_flash_with_bootloader",
+            "presentation": {
+                "clear": true,
+                "showReuseMessage": false,
+                "group": "cmake"
+            },
+            "dependsOn": [
+                "build",
+                "flash_with_bootloader"
             ],
             "dependsOrder": "sequence"
         },

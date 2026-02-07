@@ -1,6 +1,7 @@
 #include "App.hpp"
 #include "app/ui/LayerNormal.hpp"
 #include "app/ui/LayerSettings.hpp"
+#include "app/ui/LayerSecret.hpp"
 #include "dev/System.hpp"
 
 void App::Init()
@@ -42,6 +43,7 @@ void App::Init()
 
     layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
     layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
+    layers_[Layer::Type::SECRET] = std::make_unique<LayerSecret>();
 
     layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     // display.TestProcedure();

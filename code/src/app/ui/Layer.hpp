@@ -7,6 +7,7 @@ public:
     {
         NORMAL,
         SETTINGS,
+        SECRET,
         COUNT
     };
 

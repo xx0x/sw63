@@ -8,7 +8,6 @@ void LayerSettings::OnEvent(Event event)
 
     case Event::ENTER:
         settings_step_ = Step::LANGUAGE;
-        App::animation_runner.Cancel();
         time_setting_ = TimeSetting(); // Clear settings
         break;
 

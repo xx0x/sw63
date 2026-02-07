@@ -10,6 +10,7 @@ public:
     enum class Event
     {
         JUST_PRESSED,
+        JUST_RELEASED,
         MEDIUM_PRESS,
         LONG_PRESS,
         MULTI_PRESS,
@@ -31,7 +32,6 @@ private:
     };
 
     static constexpr uint32_t kDebounceTimeMs = 20;           // 20ms debounce
-    static constexpr uint32_t kShortPressMaxMs = 2000;        // Max duration for short press
     static constexpr uint32_t kMediumPressThresholdMs = 2000; // Min duration for medium press
     static constexpr uint32_t kLongPressThresholdMs = 5000;   // Min duration for long press
     static constexpr uint32_t kMultiPressWindowMs = 500;      // Max time between multi presses

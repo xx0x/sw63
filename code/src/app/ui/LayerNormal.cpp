@@ -7,6 +7,9 @@ void LayerNormal::OnEvent(Event event)
 {
     switch (event)
     {
+    case Event::ENTER:
+        DisplayTime();
+        break;
     case Event::JUST_PRESSED:
         sleep_allowed_ = false;
         if (animation_runner_.GetAnimationType() != AnimationRunner::AnimationType::INTRO)
@@ -19,9 +22,6 @@ void LayerNormal::OnEvent(Event event)
         break;
     case Event::MULTI_PRESS:
         IntroAnimation();
-        break;
-    case Event::ENTER:
-        DisplayTime();
         break;
     case Event::LEAVE:
         animation_runner_.Cancel();

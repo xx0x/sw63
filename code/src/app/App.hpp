@@ -35,6 +35,9 @@ public:
         App::display.Update();
         System::Delay(20);
 
+        // Update brightness on layer change
+        display.TriggerAutoBrightness();
+
         layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     }
 

@@ -97,7 +97,7 @@ void App::Loop()
         if (System::GetRawUsbPowerState())
         {
             App::display.TriggerAutoBrightness();
-            App::animation_runner.SetAnimation(Animation::Type::CHARGE);
+            App::animation_runner.SetAnimation(AnimationRunner::AnimationType::CHARGE);
         }
         else
         {

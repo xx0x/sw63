@@ -1,5 +1,6 @@
 
 #include "LayerNormal.hpp"
+#include "app/AnimationRunner.hpp"
 #include "app/App.hpp"
 #include "dev/System.hpp"
 
@@ -8,7 +9,7 @@ void LayerNormal::OnEvent(Event event)
     switch (event)
     {
     case Event::JUST_PRESSED:
-        if (App::animation_runner.GetAnimationType() != Animation::Type::INTRO)
+        if (App::animation_runner.GetAnimationType() != AnimationRunner::AnimationType::INTRO)
         {
             DisplayTime();
         }
@@ -49,11 +50,11 @@ void LayerNormal::DisplayTime()
     auto time_params = App::locale.ProcessTime(now->hour, now->minute);
 
     // Set the time animation with the processed parameters
-    App::animation_runner.SetAnimation(Animation::Type::TIME, time_params);
+    App::animation_runner.SetAnimation(AnimationRunner::AnimationType::TIME, time_params);
 }
 
 void LayerNormal::IntroAnimation()
 {
     App::display.TriggerAutoBrightness();
-    App::animation_runner.SetAnimation(Animation::Type::INTRO);
+    App::animation_runner.SetAnimation(AnimationRunner::AnimationType::INTRO);
 }

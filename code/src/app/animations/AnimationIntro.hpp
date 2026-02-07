@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../Animation.hpp"
-#include "../TimingsConfig.hpp"
+#include "Animation.hpp"
 
 class AnimationIntro : public Animation
 {

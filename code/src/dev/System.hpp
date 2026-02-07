@@ -20,6 +20,11 @@ public:
         HAL_Delay(ms);
     }
 
+    static inline uint32_t Millis()
+    {
+        return HAL_GetTick();
+    }
+
     static bool GetRawButtonState()
     {
         return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET; // Active low

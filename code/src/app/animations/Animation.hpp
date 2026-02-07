@@ -1,19 +1,11 @@
 #pragma once
 
-#include "LocaleConfig.hpp"
+#include "app/LocaleConfig.hpp"
 #include <cstdint>
 
 class Animation
 {
 public:
-    enum class Type
-    {
-        INTRO,
-        TIME,
-        CHARGE,
-        COUNT
-    };
-
     // Returns delay in milliseconds until next frame
     virtual uint32_t ProcessNextFrame() = 0;
 

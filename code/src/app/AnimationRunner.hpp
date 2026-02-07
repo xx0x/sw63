@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Animation.hpp"
 #include "LocaleConfig.hpp"
+#include "animations/Animation.hpp"
 #include "animations/AnimationCharge.hpp"
 #include "animations/AnimationIntro.hpp"
 #include "animations/AnimationTime.hpp"
@@ -15,14 +15,22 @@
 class AnimationRunner
 {
 public:
+    enum class AnimationType
+    {
+        INTRO,
+        TIME,
+        CHARGE,
+        COUNT
+    };
+
     AnimationRunner()
     {
-        animations_[Animation::Type::INTRO] = std::make_unique<AnimationIntro>();
-        animations_[Animation::Type::TIME] = std::make_unique<AnimationTime>();
-        animations_[Animation::Type::CHARGE] = std::make_unique<AnimationCharge>();
+        animations_[AnimationType::INTRO] = std::make_unique<AnimationIntro>();
+        animations_[AnimationType::TIME] = std::make_unique<AnimationTime>();
+        animations_[AnimationType::CHARGE] = std::make_unique<AnimationCharge>();
     }
 
-    void SetAnimation(Animation::Type type)
+    void SetAnimation(AnimationType type)
     {
         current_type_ = type;
         if (auto &animation = GetCurrentAnimation())
@@ -34,7 +42,7 @@ public:
         last_animation_update_ = System::Millis();
     }
 
-    void SetAnimation(Animation::Type type, const LocaleConfig::TimeParameters &time_params)
+    void SetAnimation(AnimationType type, const LocaleConfig::TimeParameters &time_params)
     {
         SetAnimation(type);
         if (auto &animation = GetCurrentAnimation())
@@ -43,7 +51,7 @@ public:
         }
     }
 
-    Animation::Type GetAnimationType() const
+    AnimationType GetAnimationType() const
     {
         return current_type_;
     }
@@ -53,12 +61,12 @@ public:
 
     void Cancel()
     {
-        current_type_ = Animation::Type::COUNT;
+        current_type_ = AnimationType::COUNT;
     }
 
 private:
-    Animation::Type current_type_ = Animation::Type::COUNT;
-    EnumArray<Animation::Type, std::unique_ptr<Animation>> animations_;
+    AnimationType current_type_ = AnimationType::COUNT;
+    EnumArray<AnimationType, std::unique_ptr<Animation>> animations_;
 
     // Animation timing state
     uint32_t animation_delay_remaining_ = 0;
@@ -77,7 +85,7 @@ private:
     // Returns delay in milliseconds until next frame, or 0 if finished
     uint32_t ProcessNextFrame()
     {
-        if (current_type_ == Animation::Type::COUNT)
+        if (current_type_ == AnimationType::COUNT)
         {
             return 0;
         }
@@ -90,7 +98,7 @@ private:
 
     bool IsFinished() const
     {
-        if (current_type_ == Animation::Type::COUNT)
+        if (current_type_ == AnimationType::COUNT)
         {
             return true;
         }
@@ -103,7 +111,7 @@ private:
 
     bool ShouldPauseBetweenFrames() const
     {
-        if (current_type_ == Animation::Type::COUNT)
+        if (current_type_ == AnimationType::COUNT)
         {
             return false;
         }
@@ -114,7 +122,7 @@ private:
         return true;
     }
 
-    Animation::Type GetCurrentAnimationType() const
+    AnimationType GetCurrentAnimationType() const
     {
         return current_type_;
     }

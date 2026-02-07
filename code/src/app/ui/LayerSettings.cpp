@@ -90,31 +90,12 @@ void LayerSettings::StoreSettings()
     int face_offset = std::to_underlying(time_setting_.face);
     int mn = face_offset * 15 +
              time_setting_.minutes * std::to_underlying(time_setting_.past_to);
-    uint8_t hr = time_setting_.hours;
+    int hr = time_setting_.hours;
 
-    auto language = App::locale.GetLanguage();
-    if (language == LocaleConfig::Language::CZECH || language == LocaleConfig::Language::HUNGARIAN)
+    if (App::locale.ShouldDecrementHour(time_setting_.face, mn))
     {
-        if (face_offset > 0 || mn < 0)
-        {
-            hr--;
-        }
+        hr--;
     }
-    else if (language == LocaleConfig::Language::ENGLISH)
-    {
-        if (face_offset > 2 || mn < 0)
-        {
-            hr--;
-        }
-    }
-    else if (language == LocaleConfig::Language::GERMAN || language == LocaleConfig::Language::POLISH)
-    {
-        if (face_offset > 1 || mn < 0)
-        {
-            hr--;
-        }
-    }
-
     if (mn < 0)
     {
         mn += 60;
@@ -128,7 +109,7 @@ void LayerSettings::StoreSettings()
         hr = 0;
     }
 
-    App::rtc.SetDateTime({hr, static_cast<uint8_t>(mn), 0, 18, 8, 2025});
+    App::rtc.SetDateTime({static_cast<uint8_t>(hr), static_cast<uint8_t>(mn), 0, 18, 8, 2025});
 }
 
 void LayerSettings::Update()

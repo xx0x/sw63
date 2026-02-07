@@ -6,6 +6,7 @@ void LayerSecret::OnEvent(Event event)
     switch (event)
     {
 
+    case Event::INIT:
     case Event::ENTER:
         current_setting_ = Settings::SPEED;
         setting_opened_ = false;

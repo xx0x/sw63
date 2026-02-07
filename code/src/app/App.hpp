@@ -28,6 +28,13 @@ public:
     {
         layers_[current_layer_]->OnEvent(Layer::Event::LEAVE);
         current_layer_ = layer_type;
+
+        // Short delay before entering new layer
+        // Just a visual thing
+        App::display.Clear();
+        App::display.Update();
+        System::Delay(20);
+
         layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     }
 

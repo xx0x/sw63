@@ -32,11 +32,19 @@ public:
 
     void Cancel()
     {
+        prev_type_ = current_type_;
         current_type_ = AnimationType::COUNT;
+
+    }
+
+    AnimationType GetPreviousAnimationType() const
+    {
+        return prev_type_;
     }
 
 private:
     AnimationType current_type_ = AnimationType::COUNT;
+    AnimationType prev_type_ = AnimationType::COUNT;
     EnumArray<AnimationType, std::unique_ptr<Animation>> animations_;
 
     // Animation timing state

@@ -6,6 +6,7 @@ void LayerSettings::OnEvent(Event event)
     switch (event)
     {
 
+    case Event::INIT:
     case Event::ENTER:
         settings_step_ = Step::LANGUAGE;
         time_setting_ = TimeSetting(); // Clear settings

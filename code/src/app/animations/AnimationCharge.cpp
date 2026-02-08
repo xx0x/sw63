@@ -26,7 +26,7 @@ uint32_t AnimationCharge::ProcessNextFrame()
     else
     {
         // Blink the full bar if charged and on USB power
-        if (current_step_ % 2 == 0)
+        if (current_step_ % 2 == 1)
         {
             App::display.SetNumber(12, Display::NumStyle::BAR);
         }

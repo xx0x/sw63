@@ -4,6 +4,7 @@
 #include "app/Settings.hpp"
 #include "dev/Battery.hpp"
 #include "dev/Button.hpp"
+#include "dev/Communication.hpp"
 #include "dev/DS3231.hpp"
 #include "dev/Display.hpp"
 #include "dev/System.hpp"
@@ -23,6 +24,7 @@ public:
     inline static DS3231 rtc = DS3231(&System::hi2c1);
     inline static Battery battery;
     inline static Button button;
+    inline static Communication com;
 
     static void ChangeLayer(Layer::Type layer_type)
     {

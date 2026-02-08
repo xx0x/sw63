@@ -2,6 +2,7 @@
 #include "dev/System.hpp"
 #include "stm32l052xx.h"
 #include "stm32l0xx_hal.h"
+#include "tusb.h"
 #include <bitset>
 
 /**
@@ -85,4 +86,13 @@ extern "C" void EXTI4_15_IRQHandler()
         __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_15);
         // Handle power detect (power plugged in)
     }
+}
+
+/**
+ * @brief USB interrupt handler
+ * @note Handles USB interrupts for TinyUSB stack
+ */
+extern "C" void USB_IRQHandler(void)
+{
+    tud_int_handler(0);
 }

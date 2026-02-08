@@ -9,6 +9,9 @@ void App::Init()
     display.Init();
     battery.Init();
 
+    // Initialize Communication (USB CDC)
+    com.Init();
+
     // Initialize RTC with retries in case of some issues at startup
     bool rtc_success = false;
     for (int i = 0; i < 10; i++)
@@ -54,6 +57,9 @@ void App::Init()
 
 void App::Loop()
 {
+    // Process USB communication
+    com.Process();
+
     // Update button state
     button.Update();
 

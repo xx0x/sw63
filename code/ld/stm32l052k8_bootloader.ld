@@ -1,9 +1,11 @@
 /**
  ******************************************************************************
- * @file      stm32l052k8.ld
- * @author    STM32 Blink Example  
+ * @file      stm32l052k8_bootloader.ld
+ * @author    STM32 Example  
  * @brief     Linker script for STM32L052K8 Device with
  *            64KByte FLASH, 8KByte RAM
+ *
+ *            First 16 KB of Flash is reserved for bootloader, application code starts at 0x08004000.
  *
  *            Set heap size, stack size and stack location according
  *            to application requirements.
@@ -29,7 +31,7 @@ ENTRY(Reset_Handler)
 _estack = ORIGIN(RAM) + LENGTH(RAM); /* end of RAM */
 
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x0;      /* required amount of heap - can be 0 for simple blink */
+_Min_Heap_Size = 0x0;      /* required amount of heap - can be 0 for simple program */
 _Min_Stack_Size = 0x200;   /* required amount of stack - 512 bytes should be enough */
 
 /* Specify the memory areas */

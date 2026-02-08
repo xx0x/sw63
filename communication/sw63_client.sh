@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# SW63 Client Script
+# SW63 Communication
 # Automatically sets up virtual environment and runs the Python client
 
 set -e  # Exit on any error
@@ -8,7 +8,7 @@ set -e  # Exit on any error
 # Change to the script directory
 cd "$(dirname "$0")"
 
-# Function to create requirements.txt content
+# Function to the virtual environment and install dependencies
 setup_venv() {
     echo "Setting up SW63 communication environment..."
     
@@ -31,9 +31,9 @@ setup_venv() {
     echo "Upgrading pip..."
     pip install --upgrade pip
     
-    # Install requirements directly (embedded in script)
+    # Install requirements directly
     echo "Installing Python dependencies..."
-    pip install pyserial>=3.5
+    pip install pyserial
     
     echo "✅ Setup complete!"
     echo ""
@@ -42,16 +42,6 @@ setup_venv() {
 # Check if virtual environment exists
 if [ ! -d "venv" ]; then
     setup_venv
-fi
-
-# Check if virtual environment has the required packages
-if [ ! -f "venv/bin/python" ] || ! venv/bin/python -c "import serial" &>/dev/null; then
-    echo "Virtual environment exists but dependencies are missing."
-    echo "Reinstalling dependencies..."
-    source venv/bin/activate
-    pip install --upgrade pip
-    pip install pyserial>=3.5
-    echo "✅ Dependencies updated!"
 fi
 
 # Activate virtual environment and run the Python client

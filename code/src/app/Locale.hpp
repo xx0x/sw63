@@ -3,12 +3,12 @@
 #include "animations/ClockFrame.hpp"
 #include "dev/Display.hpp"
 
-class LocaleConfig
+class Locale
 {
 public:
     /**
      * @brief Supported languages for the clock.
-     * @details When adding a new language, ensure to update LocaleConfig.cpp:
+     * @details When adding a new language, ensure to update Locale.cpp:
      *          - GetTimeCoefficients() with appropriate coefficients
      *          - GetSequence() with the correct frame sequences
      *          - ProcessTime() if any special handling is needed (hopefully not needed)
@@ -58,28 +58,6 @@ public:
     };
 
     /**
-     * @brief Default language for the clock.
-     */
-    static constexpr Language kDefaultLanguage = static_cast<Language>(0);
-
-    /**
-     * @brief     Constructor for LocaleConfig.
-     */
-    LocaleConfig() : language_(kDefaultLanguage) {}
-
-    /**
-     * @brief     Set the current language.
-     * @param     language  The language to set.
-     */
-    void SetLanguage(Language language);
-
-    /**
-     * @brief     Get the current language.
-     * @return    The current language.
-     */
-    Language GetLanguage() const;
-
-    /**
      * @brief     Get the sequence of frames for the given time type and language.
      * @param     time_type  The type of time (EXACT, PAST, TO).
      * @return    A FrameSequence containing the frames to display.
@@ -119,9 +97,4 @@ private:
      * @return    TimeCoefficients structure with the coefficients.
      */
     TimeCoefficients GetTimeCoefficients() const;
-
-    /**
-     * @brief Current language setting.
-     */
-    Language language_;
 };

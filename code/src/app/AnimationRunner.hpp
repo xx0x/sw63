@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LocaleConfig.hpp"
+#include "Locale.hpp"
 #include "animations/Animation.hpp"
 #include "utils/EnumTools.hpp"
 #include <memory>
@@ -20,7 +20,7 @@ public:
 
     void SetAnimation(AnimationType type);
 
-    void SetAnimation(AnimationType type, const LocaleConfig::TimeParameters &time_params);
+    void SetAnimation(AnimationType type, const Locale::TimeParameters &time_params);
 
     AnimationType GetAnimationType() const
     {

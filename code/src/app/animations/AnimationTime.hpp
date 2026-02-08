@@ -2,8 +2,6 @@
 
 #include "Animation.hpp"
 #include "ClockFrame.hpp"
-#include "app/LocaleConfig.hpp"
-#include "app/TimingsConfig.hpp"
 
 class AnimationTime : public Animation
 {

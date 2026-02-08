@@ -76,7 +76,7 @@ void LayerNormal::DisplayTime()
         return; // Failed to get time
     }
 
-    // Use LocaleConfig to process the time and determine animation parameters
+    // Use Locale to process the time and determine animation parameters
     auto time_params = App::locale.ProcessTime(now->hour, now->minute);
 
     // Set the time animation with the processed parameters

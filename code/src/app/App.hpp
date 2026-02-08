@@ -1,7 +1,7 @@
 #pragma once
 
-#include "app/LocaleConfig.hpp"
-#include "app/TimingsConfig.hpp"
+#include "app/Locale.hpp"
+#include "app/Settings.hpp"
 #include "dev/Battery.hpp"
 #include "dev/Button.hpp"
 #include "dev/DS3231.hpp"
@@ -18,8 +18,8 @@ public:
     static void Loop();
 
     inline static Display display;
-    inline static TimingsConfig timings;
-    inline static LocaleConfig locale;
+    inline static Settings settings;
+    inline static Locale locale;
     inline static DS3231 rtc = DS3231(&System::hi2c1);
     inline static Battery battery;
     inline static Button button;
@@ -40,9 +40,6 @@ public:
 
         layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     }
-
-    static constexpr uint32_t kInactivityTimeoutMs = 15000;
-    static constexpr float kLowBatteryThreshold = 0.1f;
 
 private:
     static void Sleep();

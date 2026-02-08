@@ -1,18 +1,10 @@
-#include "LocaleConfig.hpp"
+#include "Locale.hpp"
+#include "App.hpp"
 
-void LocaleConfig::SetLanguage(Language language)
+Locale::TimeCoefficients Locale::GetTimeCoefficients() const
 {
-    language_ = language;
-}
-
-LocaleConfig::Language LocaleConfig::GetLanguage() const
-{
-    return language_;
-}
-
-LocaleConfig::TimeCoefficients LocaleConfig::GetTimeCoefficients() const
-{
-    switch (language_)
+    auto language = App::settings.GetLanguage();
+    switch (language)
     {
     case Language::CZECH:
     case Language::HUNGARIAN:
@@ -27,7 +19,7 @@ LocaleConfig::TimeCoefficients LocaleConfig::GetTimeCoefficients() const
     }
 }
 
-int32_t LocaleConfig::HourOffsetWhenSaving(Display::ClockFace face, int minutes) const
+int32_t Locale::HourOffsetWhenSaving(Display::ClockFace face, int minutes) const
 {
     // Always decrement if minutes are negative (going to previous hour)
     if (minutes < 0)
@@ -51,7 +43,7 @@ int32_t LocaleConfig::HourOffsetWhenSaving(Display::ClockFace face, int minutes)
     }
 }
 
-FrameSequence LocaleConfig::GetSequence(TimeType time_type) const
+FrameSequence Locale::GetSequence(TimeType time_type) const
 {
     switch (time_type)
     {
@@ -60,7 +52,7 @@ FrameSequence LocaleConfig::GetSequence(TimeType time_type) const
         return {ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};
 
     case TimeType::PAST:
-        switch (language_)
+        switch (App::settings.GetLanguage())
         {
         case Language::HUNGARIAN:
             return {ClockFrame::AFTER, ClockFrame::MINUTES_NUM, ClockFrame::MINUTES,
@@ -78,7 +70,7 @@ FrameSequence LocaleConfig::GetSequence(TimeType time_type) const
         }
 
     case TimeType::TO:
-        switch (language_)
+        switch (App::settings.GetLanguage())
         {
         case Language::CZECH:
         case Language::POLISH:
@@ -98,7 +90,7 @@ FrameSequence LocaleConfig::GetSequence(TimeType time_type) const
     }
 }
 
-LocaleConfig::TimeParameters LocaleConfig::FixTime(const TimeParameters &params) const
+Locale::TimeParameters Locale::FixTime(const TimeParameters &params) const
 {
     TimeParameters fixed_params = params;
 
@@ -114,7 +106,7 @@ LocaleConfig::TimeParameters LocaleConfig::FixTime(const TimeParameters &params)
     return fixed_params;
 }
 
-LocaleConfig::TimeParameters LocaleConfig::ProcessTime(const uint32_t hours, const uint32_t minutes) const
+Locale::TimeParameters Locale::ProcessTime(const uint32_t hours, const uint32_t minutes) const
 {
     TimeCoefficients coefficients = GetTimeCoefficients();
     uint32_t hours12 = hours % 12;

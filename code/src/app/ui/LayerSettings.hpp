@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Layer.hpp"
-#include "app/LocaleConfig.hpp"
+#include "app/Locale.hpp"
 #include "dev/Display.hpp"
 #include <cstdint>
 
@@ -29,7 +29,7 @@ private:
         Display::ClockFace face = Display::ClockFace::UP;
         int32_t hours = 1;
         int32_t minutes = 1;
-        LocaleConfig::TimeType past_to = LocaleConfig::TimeType::PAST;
+        Locale::TimeType past_to = Locale::TimeType::PAST;
         bool pm = true;
     };
 

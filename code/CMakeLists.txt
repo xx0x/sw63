@@ -112,7 +112,7 @@ set(SOURCES
     src/main.cpp
     src/app/App.cpp
     src/app/AnimationRunner.cpp
-    src/app/LocaleConfig.cpp
+    src/app/Locale.cpp
     src/app/animations/AnimationTime.cpp
     src/app/animations/AnimationIntro.cpp
     src/app/animations/AnimationCharge.cpp

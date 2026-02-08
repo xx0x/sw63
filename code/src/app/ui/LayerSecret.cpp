@@ -42,7 +42,7 @@ void LayerSecret::ShortPressAction()
     switch (current_setting_)
     {
     case Settings::SPEED:
-        App::timings.SetSpeed((App::timings.GetSpeed() + 1) % App::timings.GetSpeedCount());
+        App::settings.SetSpeed((App::settings.GetSpeed() + 1) % App::settings.GetSpeedCount());
         break;
     case Settings::VISUAL_STYLE:
     // Todo: implement visual style
@@ -82,7 +82,7 @@ void LayerSecret::Update()
         switch (current_setting_)
         {
         case Settings::SPEED:
-            App::display.SetNumber(App::timings.GetSpeed() + 1, Display::NumStyle::BAR_REVERSED);
+            App::display.SetNumber(App::settings.GetSpeed() + 1, Display::NumStyle::BAR_REVERSED);
             break;
         case Settings::VISUAL_STYLE:
             // Todo: implement visual style

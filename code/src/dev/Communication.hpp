@@ -19,7 +19,8 @@ public:
         GET_TIME = 0x02,
         SET_CONFIG = 0x03,
         GET_CONFIG = 0x04,
-        GET_BATTERY_LEVEL = 0x05
+        GET_BATTERY_LEVEL = 0x05,
+        DISPLAY_TIME = 0x06
     };
 
     // Response status codes
@@ -108,6 +109,11 @@ private:
      * Handle GET_BATTERY_LEVEL command
      */
     void HandleGetBatteryLevel();
+
+    /**
+     * Handle DISPLAY_TIME command
+     */
+    void HandleDisplayTime();
 
     /**
      * Reset the receive buffer

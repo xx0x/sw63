@@ -81,6 +81,9 @@ void Communication::HandleMessage(Command command, const uint8_t* data, uint8_t 
         case Command::GET_BATTERY_LEVEL:
             HandleGetBatteryLevel();
             break;
+        case Command::DISPLAY_TIME:
+            HandleDisplayTime();
+            break;
         default:
             SendResponse(command, Status::INVALID_COMMAND);
             break;
@@ -131,6 +134,8 @@ void Communication::HandleSetTime(const uint8_t* data, uint8_t length)
     
     if (success) {
         SendResponse(Command::SET_TIME, Status::OK);
+        // Force display the time
+        App::ChangeLayer(Layer::Type::NORMAL);
     } else {
         SendResponse(Command::SET_TIME, Status::ERROR);
     }
@@ -191,6 +196,14 @@ void Communication::HandleGetBatteryLevel()
     
     SendResponse(Command::GET_BATTERY_LEVEL, Status::OK, 
                 &battery_level_percent, sizeof(uint8_t));
+}
+
+void Communication::HandleDisplayTime()
+{
+    // Force display the time
+    App::ChangeLayer(Layer::Type::NORMAL);
+    
+    SendResponse(Command::DISPLAY_TIME, Status::OK);
 }
 
 void Communication::ResetReceiveBuffer()

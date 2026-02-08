@@ -104,5 +104,25 @@
             ],
             "dependsOrder": "sequence"
         },
+        {
+            "label": "sw63_set_time",
+            "type": "shell",
+            "command": "./sw63_client.sh --set-time;",
+            "options": {
+                "cwd": "${workspaceRoot}/communication"
+            },
+        },
+        {
+            "label": "sw63_vaclav_config",
+            "type": "shell",
+            "command": "./sw63_client.sh --set-config 4 0 0",
+            "options": {
+                "cwd": "${workspaceRoot}/communication"
+            },
+            "dependsOn": [
+                "sw63_set_time",
+            ],
+            "dependsOrder": "sequence"
+        },
     ]
 }

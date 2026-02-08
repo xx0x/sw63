@@ -1,19 +1,7 @@
 #!/usr/bin/env python3
 """
-SW63 Electronic Watch Communication Client
-
-This script provides command-line interface to communicate with the SW63 watch
-via USB CDC serial port. It can set/get time and configuration.
-
-Usage examples:
-    python sw63_client.py --set-time     # Set time from system clock
-    python sw63_client.py --get-time     # Get time from watch
-    python sw63_client.py --set-config SPEED LANGUAGE NUM_STYLE
-    python sw63_client.py --get-config   # Get config from watch
-    
-    # Set config examples:
-    python sw63_client.py --set-config 0 1 2
-    python sw63_client.py --list-ports    # List available serial ports
+SW63 Communication
+Use sw63_client.sh to install virtual enviroment, dependencies and run this file.
 """
 
 import serial
@@ -25,7 +13,8 @@ import sys
 import time
 from typing import Optional, Tuple
 
-# Protocol constants
+# Protocol definitions
+# Need to match code/src/dev/Communication.hpp
 class Command:
     SET_TIME = 0x01
     GET_TIME = 0x02
@@ -47,7 +36,7 @@ class Status:
 TIME_OFFSET_SECONDS = 15
 
 class SW63Client:
-    """SW63 Watch Communication Client"""
+    """SW63 Communication Client"""
     
     def __init__(self, port: str, timeout: float = 5.0):
         """
@@ -63,7 +52,7 @@ class SW63Client:
         
     def connect(self) -> bool:
         """
-        Connect to the watch
+        Connect to the SW63
         
         Returns:
             True if connected successfully, False otherwise
@@ -83,14 +72,14 @@ class SW63Client:
             return False
     
     def disconnect(self):
-        """Disconnect from the watch"""
+        """Disconnect from the SW63"""
         if self.serial and self.serial.is_open:
             self.serial.close()
             print("Disconnected")
     
     def send_command(self, command: int, data: bytes = b'') -> Tuple[bool, int, bytes]:
         """
-        Send command to watch and receive response
+        Send command to SW63 and receive response
         
         Args:
             command: Command ID
@@ -139,7 +128,7 @@ class SW63Client:
     
     def set_time(self, dt: Optional[datetime.datetime] = None) -> bool:
         """
-        Set watch time
+        Set the time
         
         Args:
             dt: Datetime to set. If None, uses current system time with an offset.
@@ -170,7 +159,7 @@ class SW63Client:
     
     def get_time(self) -> Optional[datetime.datetime]:
         """
-        Get watch time
+        Get the time
         
         Returns:
             Datetime object or None if failed
@@ -183,7 +172,7 @@ class SW63Client:
             
             try:
                 dt = datetime.datetime(year, month, day, hour, minute, second)
-                print(f"Watch time: {dt.strftime('%Y-%m-%d %H:%M:%S')}")
+                print(f"SW63 time: {dt.strftime('%Y-%m-%d %H:%M:%S')}")
                 return dt
             except ValueError as e:
                 print(f"Invalid datetime received: {e}")
@@ -194,7 +183,7 @@ class SW63Client:
     
     def set_config(self, speed: int, language: int, num_style: int) -> bool:
         """
-        Set watch configuration
+        Set the configuration
         
         Args:
             speed: Speed setting (0-based index)
@@ -220,7 +209,7 @@ class SW63Client:
     
     def get_config(self) -> Optional[Tuple[int, int, int]]:
         """
-        Get watch configuration
+        Get the configuration
         
         Returns:
             Tuple of (speed, language, num_style) or None if failed
@@ -229,7 +218,7 @@ class SW63Client:
         
         if success and status == Status.OK and len(data) == 3:
             speed, language, num_style = struct.unpack('<BBB', data)
-            print(f"Watch config: speed={speed}, language={language}, num_style={num_style}")
+            print(f"SW63 config: speed={speed}, language={language}, num_style={num_style}")
             return speed, language, num_style
         else:
             print(f"Failed to get config. Status: {status:02X}")
@@ -237,7 +226,7 @@ class SW63Client:
     
     def get_battery_level(self) -> Optional[int]:
         """
-        Get watch battery level
+        Get the battery level
         
         Returns:
             Battery level as percentage (0-100) or None if failed
@@ -246,10 +235,10 @@ class SW63Client:
         
         if success and status == Status.OK and len(data) == 1:
             battery_level = struct.unpack('<B', data)[0]
-            print(f"Battery level: {battery_level}%")
+            print(f"SW63 battery level: {battery_level}%")
             return battery_level
         else:
-            print(f"Failed to get battery level. Status: {status:02X}")
+            print(f"Failed to get SW63 battery level. Status: {status:02X}")
             return None
     
     def display_time(self) -> bool:
@@ -302,20 +291,20 @@ Examples:
   %(prog)s --set-config 0 1 2            # Set config (speed=0, lang=1, style=2)
   %(prog)s --get-config                  # Get current config
   %(prog)s --get-battery                 # Get battery level
-  %(prog)s --display-time                # Force watch to show time
+  %(prog)s --display-time                # Force show time
   %(prog)s --list-ports                  # List available ports
   %(prog)s --port COM3 --get-time        # Use specific port
         """
     )
     
     parser.add_argument('--port', help='Serial port (auto-detect if not specified)')
-    parser.add_argument('--set-time', action='store_true', help='Set watch time from system clock')
-    parser.add_argument('--get-time', action='store_true', help='Get watch time')
+    parser.add_argument('--set-time', action='store_true', help='Set time from system clock')
+    parser.add_argument('--get-time', action='store_true', help='Get time')
     parser.add_argument('--set-config', nargs=3, type=int, metavar=('SPEED', 'LANGUAGE', 'NUM_STYLE'),
                        help='Set watch configuration (all 3 values required)')
-    parser.add_argument('--get-config', action='store_true', help='Get watch configuration')
-    parser.add_argument('--get-battery', action='store_true', help='Get watch battery level')
-    parser.add_argument('--display-time', action='store_true', help='Force watch to display time')
+    parser.add_argument('--get-config', action='store_true', help='Get configuration')
+    parser.add_argument('--get-battery', action='store_true', help='Get battery level')
+    parser.add_argument('--display-time', action='store_true', help='Force show time')
     parser.add_argument('--list-ports', action='store_true', help='List available serial ports')
     
     args = parser.parse_args()
@@ -329,7 +318,7 @@ Examples:
     if not port:
         port = find_sw63_port()
         if not port:
-            print("Error: Could not find SW63 watch. Please specify port manually with --port")
+            print("Error: Could not find SW63. Please specify port manually with --port")
             list_serial_ports()
             return
     

@@ -1,4 +1,5 @@
 #include "Display.hpp"
+#include "app/App.hpp"
 #include "utils/math_utils.hpp"
 #include <algorithm>
 
@@ -117,7 +118,7 @@ void Display::SetNumber(size_t number, NumStyle style)
 {
     if (style == NumStyle::COUNT)
     {
-        style = num_style_;
+        style = App::settings.GetConfig().num_style;
     }
 
     for (auto led : kNumLeds)

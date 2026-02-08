@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Locale.hpp"
+#include "dev/Display.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -12,6 +13,7 @@ public:
     {
         uint8_t speed = kDefaultSpeed;
         Locale::Language language = kDefaultLanguage;
+        Display::NumStyle num_style = kDefaultNumStyle;
     };
 
     struct SpeedOption
@@ -20,6 +22,21 @@ public:
         uint32_t hold_digits;
         uint32_t pause;
     };
+
+    Config GetConfig() const
+    {
+        return config_;
+    }
+
+    Config &GetConfig()
+    {
+        return config_;
+    }
+
+    void SetConfig(const Config &config)
+    {
+        config_ = config;
+    }
 
     void SetLanguage(Locale::Language language)
     {
@@ -63,6 +80,8 @@ public:
      * @brief Default to the slowest speed option.
      */
     static constexpr uint32_t kDefaultSpeed = 0;
+
+    static constexpr Display::NumStyle kDefaultNumStyle = Display::NumStyle::BAR_REVERSED;
 
     static constexpr uint32_t kInactivityTimeoutMs = 15000;
     static constexpr float kLowBatteryThreshold = 0.1f;

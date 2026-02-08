@@ -26,7 +26,7 @@ void AnimationRunner::SetAnimation(AnimationType type)
     last_animation_update_ = System::Millis();
 }
 
-void AnimationRunner::SetAnimation(AnimationType type, const LocaleConfig::TimeParameters &time_params)
+void AnimationRunner::SetAnimation(AnimationType type, const Locale::TimeParameters &time_params)
 {
     SetAnimation(type);
     if (auto &animation = GetCurrentAnimation())
@@ -104,7 +104,7 @@ bool AnimationRunner::Update()
         // Handle pause between frames for time display animations
         if (ShouldPauseBetweenFrames())
         {
-            System::Delay(App::timings.GetSpeedConfig().pause);
+            System::Delay(App::settings.GetSpeedOption().pause);
         }
         // Update display brightness based on ambient light (the lights need to be off to read it properly)
         App::display.TriggerAutoBrightness();

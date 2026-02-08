@@ -38,9 +38,6 @@ void App::Init()
     // Set test date (we don't care about the date here, just time)
     rtc.SetDateTime({0, 0, 0, 18, 8, 2025});
 
-    // Set default speed
-    timings.SetSpeed(0);
-
     layers_[Layer::Type::NORMAL] = std::make_unique<LayerNormal>();
     layers_[Layer::Type::SETTINGS] = std::make_unique<LayerSettings>();
     layers_[Layer::Type::SECRET] = std::make_unique<LayerSecret>();
@@ -92,7 +89,7 @@ void App::Loop()
 
     // Check for timeout
     if (current_layer_ != Layer::Type::NORMAL &&
-        (System::Millis() - last_interaction_time_ >= kInactivityTimeoutMs))
+        (System::Millis() - last_interaction_time_ >= Settings::kInactivityTimeoutMs))
     {
         ChangeLayer(Layer::Type::NORMAL);
     }
@@ -111,7 +108,7 @@ void App::Sleep()
 {
     // Indicate low battery
     float battery_level = battery.GetLevel();
-    if (battery_level < kLowBatteryThreshold)
+    if (battery_level < Settings::kLowBatteryThreshold)
     {
         for (int i = 0; i < 3; i++)
         {

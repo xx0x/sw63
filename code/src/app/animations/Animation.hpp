@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app/LocaleConfig.hpp"
+#include "app/Locale.hpp"
 #include <cstdint>
 
 class Animation
@@ -15,7 +15,7 @@ public:
         finished_ = false;
     }
 
-    virtual void SetTime(const LocaleConfig::TimeParameters &time_params)
+    virtual void SetTime(const Locale::TimeParameters &time_params)
     {
         time_params_ = time_params;
     }
@@ -31,7 +31,7 @@ public:
     }
 
 protected:
-    LocaleConfig::TimeParameters time_params_;
+    Locale::TimeParameters time_params_;
     uint32_t current_step_ = 0;
     bool finished_ = false;
 };

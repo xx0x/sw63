@@ -39,7 +39,7 @@ uint32_t AnimationIntro::ProcessNextFrame()
     else
     {
         // Show language indicator
-        uint32_t lang_num = static_cast<uint32_t>(App::locale.GetLanguage()) + 1;
+        uint32_t lang_num = std::to_underlying(App::settings.GetLanguage()) + 1;
         App::display.SetNumber(current_step_ % 2 == 0 ? lang_num : 0);
     }
 

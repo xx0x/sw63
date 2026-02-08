@@ -32,6 +32,7 @@ class Command:
     SET_CONFIG = 0x03
     GET_CONFIG = 0x04
     GET_BATTERY_LEVEL = 0x05
+    DISPLAY_TIME = 0x06
 
 class Status:
     OK = 0x00
@@ -39,6 +40,11 @@ class Status:
     INVALID_COMMAND = 0x02
     INVALID_LENGTH = 0x03
     INVALID_DATA = 0x04
+
+# Time offset to compensate for transmission delay and display update time
+# Transmission takes a few ms and the actual time display takes a few seconds,
+# so it's good to set it a little bit into the future
+TIME_OFFSET_SECONDS = 15
 
 class SW63Client:
     """SW63 Watch Communication Client"""
@@ -136,13 +142,16 @@ class SW63Client:
         Set watch time
         
         Args:
-            dt: Datetime to set. If None, uses current system time
+            dt: Datetime to set. If None, uses current system time with an offset.
             
         Returns:
             True if successful
         """
         if dt is None:
             dt = datetime.datetime.now()
+            # Add time offset to compensate for transmission and display delays
+            dt = dt + datetime.timedelta(seconds=TIME_OFFSET_SECONDS)
+        
         
         # Pack datetime according to DS3231::DateTime structure
         # struct DateTime { uint8_t hour, minute, second, day, month; uint16_t year; }
@@ -242,6 +251,22 @@ class SW63Client:
         else:
             print(f"Failed to get battery level. Status: {status:02X}")
             return None
+    
+    def display_time(self) -> bool:
+        """
+        Force the watch to display the time layer
+        
+        Returns:
+            True if successful
+        """
+        success, status, _ = self.send_command(Command.DISPLAY_TIME)
+        
+        if success and status == Status.OK:
+            print("Display time command sent successfully")
+            return True
+        else:
+            print(f"Failed to send display time command. Status: {status:02X}")
+            return False
 
 def list_serial_ports():
     """List available serial ports"""
@@ -277,6 +302,7 @@ Examples:
   %(prog)s --set-config 0 1 2            # Set config (speed=0, lang=1, style=2)
   %(prog)s --get-config                  # Get current config
   %(prog)s --get-battery                 # Get battery level
+  %(prog)s --display-time                # Force watch to show time
   %(prog)s --list-ports                  # List available ports
   %(prog)s --port COM3 --get-time        # Use specific port
         """
@@ -289,6 +315,7 @@ Examples:
                        help='Set watch configuration (all 3 values required)')
     parser.add_argument('--get-config', action='store_true', help='Get watch configuration')
     parser.add_argument('--get-battery', action='store_true', help='Get watch battery level')
+    parser.add_argument('--display-time', action='store_true', help='Force watch to display time')
     parser.add_argument('--list-ports', action='store_true', help='List available serial ports')
     
     args = parser.parse_args()
@@ -307,7 +334,7 @@ Examples:
             return
     
     # Check if any action was specified
-    if not (args.set_time or args.get_time or args.set_config or args.get_config or args.get_battery):
+    if not (args.set_time or args.get_time or args.set_config or args.get_config or args.get_battery or args.display_time):
         parser.print_help()
         return
     
@@ -333,6 +360,9 @@ Examples:
         
         if args.get_battery:
             client.get_battery_level()
+        
+        if args.display_time:
+            client.display_time()
     
     finally:
         client.disconnect()

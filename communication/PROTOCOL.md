@@ -36,8 +36,8 @@ All messages follow this structure:
 ```
 
 - **Command ID**: 1 byte - Identifies the command type
-- **Length**: 1 byte - Length of the data field (0-255)
-- **Data**: 0-255 bytes - Command-specific data
+- **Length**: 1 byte - Length of the data field (0-32)
+- **Data**: 0-32 bytes - Command-specific data
 
 ### Response Format
 
@@ -49,8 +49,8 @@ All responses follow this structure:
 
 - **Command ID**: 1 byte - Echo of the original command
 - **Status**: 1 byte - Status code (see Status Codes section)
-- **Length**: 1 byte - Length of the response data field (0-255)
-- **Data**: 0-255 bytes - Response data (if any)
+- **Length**: 1 byte - Length of the response data field (0-32)
+- **Data**: 0-32 bytes - Response data (if any)
 
 ## Commands
 
@@ -63,7 +63,7 @@ All responses follow this structure:
 | SET_CONFIG | 0x03 | Set watch configuration |
 | GET_CONFIG | 0x04 | Get watch configuration |
 | GET_BATTERY_LEVEL | 0x05 | Get battery level (0-100%) |
-
+| DISPLAY_TIME | 0x06 | Force watch to display time |
 ### Status Codes
 
 | Status | Code | Description |
@@ -194,6 +194,26 @@ Request:  05 00
 Response: 05 00 01 4B  # Battery at 75%
 ```
 
+### DISPLAY_TIME (0x06)
+
+Forces the watch to display the time layer (normal time display). This command can be used to return to the time display from any other screen/layer.
+
+**Request:**
+```
+[0x06] [0x00]
+```
+
+**Response:**
+```
+[0x06] [status] [0x00]
+```
+
+**Example:**
+```
+Request:  06 00
+Response: 06 00 00  # Successfully switched to time display
+```
+
 ## Error Handling
 
 If an error occurs, the watch will respond with an appropriate status code:
@@ -298,4 +318,4 @@ The protocol is designed to be extensible. Future commands could include:
 - Alarm settings
 - Configuration backup/restore
 
-New commands should use IDs starting from 0x06 and follow the same message structure.
+New commands should use IDs starting from 0x07 and follow the same message structure.

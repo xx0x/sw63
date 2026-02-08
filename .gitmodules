@@ -10,3 +10,6 @@
 [submodule "code/lib/uf2"]
 	path = code/lib/uf2
 	url = https://github.com/microsoft/uf2.git
+[submodule "code/lib/tinyusb"]
+	path = code/lib/tinyusb
+	url = https://github.com/hathach/tinyusb.git

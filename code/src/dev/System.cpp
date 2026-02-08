@@ -20,6 +20,9 @@ void System::Init()
 
     // Initialize I2C
     System::I2cInit();
+
+    // Initialize USB
+    System::UsbInit();
 }
 
 /**
@@ -37,9 +40,10 @@ void System::ClockConfig()
 
     // Initialize the RCC Oscillators according to the specified parameters
     // Use HSI (High Speed Internal) 16MHz oscillator
-    // Explicitly disable LSE, LSI, and RTC for minimum power consumption
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_LSI;
+    // Enable HSI48 for USB
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_HSI48 | RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_LSI;
     RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.HSI48State = RCC_HSI48_ON; // Enable HSI48 for USB
     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
     RCC_OscInitStruct.LSEState = RCC_LSE_OFF;      // Disable LSE for power saving
     RCC_OscInitStruct.LSIState = RCC_LSI_OFF;      // Disable LSI for power saving
@@ -166,6 +170,40 @@ void System::I2cInit()
     {
         ErrorHandler();
     }
+}
+
+/**
+ * @brief USB Initialization Function
+ * @details Configures USB for TinyUSB CDC communication
+ */
+void System::UsbInit()
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {};
+
+    // Enable USB and GPIOA clocks
+    __HAL_RCC_USB_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    // Configure USB pins: PA11 (USB_DM) and PA12 (USB_DP)
+    GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF2_USB;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // Configure USB clock source to use HSI48
+    RCC_PeriphCLKInitTypeDef PeriphClkInit = {};
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
+    PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+        ErrorHandler();
+    }
+
+    // Enable USB interrupt
+    HAL_NVIC_SetPriority(USB_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USB_IRQn);
 }
 
 /**

@@ -79,11 +79,13 @@ enable_language(C CXX ASM)
 add_definitions(-DSTM32L052xx)
 add_definitions(-DUSE_HAL_DRIVER)
 add_definitions(-DMSI_VALUE=2097000U)
+add_definitions(-DCFG_TUSB_MCU=OPT_MCU_STM32L0)
 
 # Paths to core libraries
 set(HAL_DRIVER_PATH ${CMAKE_SOURCE_DIR}/lib/stm32l0xx-hal-driver)
 set(CMSIS_6_PATH ${CMAKE_SOURCE_DIR}/lib/CMSIS_6)
 set(CMSIS_DEVICE_L0_PATH ${CMAKE_SOURCE_DIR}/lib/cmsis-device-l0)
+set(TINYUSB_PATH ${CMAKE_SOURCE_DIR}/lib/tinyusb)
 
 # All source files
 set(SOURCES
@@ -107,6 +109,8 @@ set(SOURCES
     ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_i2c_ex.c
     ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_adc.c
     ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_adc_ex.c
+    ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_pcd.c
+    ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_pcd_ex.c
     
     # Application sources
     src/main.cpp
@@ -123,6 +127,20 @@ set(SOURCES
     src/dev/Display.cpp
     src/dev/System.cpp
     src/dev/DS3231.cpp
+    src/dev/Communication.cpp
+    
+    # TinyUSB sources
+    ${TINYUSB_PATH}/src/tusb.c
+    ${TINYUSB_PATH}/src/common/tusb_fifo.c
+    ${TINYUSB_PATH}/src/device/usbd.c
+    ${TINYUSB_PATH}/src/device/usbd_control.c
+    ${TINYUSB_PATH}/src/class/cdc/cdc_device.c
+    ${TINYUSB_PATH}/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.c
+    ${TINYUSB_PATH}/src/portable/st/stm32_fsdev/fsdev_common.c
+    
+    # USB support sources
+    src/usb_descriptors.c
+    src/usb_app.cpp
 )
 
 # Include directories
@@ -130,6 +148,7 @@ set(INCLUDES
     ${CMSIS_6_PATH}/CMSIS/Core/Include
     ${CMSIS_DEVICE_L0_PATH}/Include
     ${HAL_DRIVER_PATH}/Inc
+    ${TINYUSB_PATH}/src
     src
 )
 

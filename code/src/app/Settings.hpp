@@ -9,7 +9,13 @@
 class Settings
 {
 public:
-    struct Config
+    /**
+     * @brief Configuration structure for watch settings
+     * @note This structure is packed to ensure consistent memory layout
+     *       for serial communication. Total size: 3 bytes (3×uint8_t)
+     *       without padding for proper protocol compatibility.
+     */
+    struct __attribute__((packed)) Config
     {
         uint8_t speed = kDefaultSpeed;
         Locale::Language language = kDefaultLanguage;

@@ -12,9 +12,12 @@ class DS3231
 {
 public:
     /**
-     * Structure to hold date and time information
+     * @brief Structure to hold date and time information
+     * @note This structure is packed to ensure consistent memory layout
+     *       for serial communication. Total size: 7 bytes (5×uint8_t + 1×uint16_t)
+     *       without padding for proper protocol compatibility.
      */
-    struct DateTime
+    struct __attribute__((packed)) DateTime
     {
         uint8_t hour;   // 0-23 (24-hour format)
         uint8_t minute; // 0-59

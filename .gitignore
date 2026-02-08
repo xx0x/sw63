@@ -11,3 +11,4 @@ pcb/sw63_mk4_v1/jlcpcb/gerber
 pcb/sw63_mk4_v1/sw63_mk4_v1-backups
 .vscode/settings.json
 code/build
+communication/venv

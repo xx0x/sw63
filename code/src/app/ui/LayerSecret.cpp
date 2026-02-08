@@ -45,7 +45,17 @@ void LayerSecret::ShortPressAction()
         App::settings.SetSpeed((App::settings.GetSpeed() + 1) % App::settings.GetSpeedCount());
         break;
     case Settings::VISUAL_STYLE:
-    // Todo: implement visual style
+    {
+        auto style = App::settings.GetConfig().num_style;
+        style = EnumIncrement(style);
+        // Skip snake styles, they are not ideal for specific numbers
+        while (style == Display::NumStyle::SNAKE || style == Display::NumStyle::SNAKE_REVERSED)
+        {
+            style = EnumIncrement(style);
+        }
+        App::settings.GetConfig().num_style = style;
+        break;
+    }
     case Settings::BATTERY_LEVEL:
     case Settings::EXIT:
     default:
@@ -85,7 +95,7 @@ void LayerSecret::Update()
             App::display.SetNumber(App::settings.GetSpeed() + 1, Display::NumStyle::BAR_REVERSED);
             break;
         case Settings::VISUAL_STYLE:
-            // Todo: implement visual style
+            App::display.SetNumber(std::to_underlying(App::settings.GetConfig().num_style) + 1, Display::NumStyle::BAR_REVERSED);
             break;
         case Settings::BATTERY_LEVEL:
             App::display.SetNumber(battery_level_ * 12.f + 1, Display::NumStyle::BAR_REVERSED);

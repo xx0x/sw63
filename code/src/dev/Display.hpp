@@ -54,14 +54,14 @@ public:
         COUNT,
     };
 
-    enum class NumStyle
+    enum class NumStyle : uint8_t
     {
-        SINGLE,
+        BAR_REVERSED,   // OG behavior
         SINGLE_REVERSED,
         BAR,
-        BAR_REVERSED,   // OG behavior
-        SNAKE,          // Shows 3 LEDs in a row for snake effect (not ideal for specific numbers)
+        SINGLE,
         SNAKE_REVERSED, // Shows 3 LEDs in a row for snake effect (not ideal for specific numbers)
+        SNAKE,          // Shows 3 LEDs in a row for snake effect (not ideal for specific numbers)
         COUNT
     };
 
@@ -99,7 +99,6 @@ private:
     ShiftRegister<kLedCount> display_register_;
     PwmBrightness brightness_;
     AdcInput ambient_light_;
-    NumStyle num_style_ = NumStyle::BAR_REVERSED;
 
     // Lookup tables for different modes
     // Don't change the order of these arrays.

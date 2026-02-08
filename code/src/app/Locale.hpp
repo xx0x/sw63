@@ -13,7 +13,7 @@ public:
      *          - GetSequence() with the correct frame sequences
      *          - ProcessTime() if any special handling is needed (hopefully not needed)
      */
-    enum class Language
+    enum class Language : uint8_t
     {
         CZECH, // Also works for: SLOVAK, EAST GERMAN
         ENGLISH,

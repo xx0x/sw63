@@ -10,18 +10,19 @@ class PwmBrightness
 public:
     static constexpr uint16_t kResolution = 4095; // 12-bit max value
 
-    /*
-    // Unused for now
-    struct Config
+    /**
+     * @brief This makes sure the OE is enabled (active low) so the display doesn't glitch on startup
+     */
+    void PreInit()
     {
-        GPIO_TypeDef *port;
-        uint16_t pin;
-        uint32_t alternate;
-        TIM_TypeDef *tim_instance;
-        uint32_t tim_channel;
-        uint16_t resolution;
-    };
-    */
+        GPIO_InitTypeDef GPIO_InitStruct = {};
+        GPIO_InitStruct.Pin = GPIO_PIN_6;
+        GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+    }
 
     /**
      * @brief Initializes PWM for brightness control on TIM22_CH1 (PA6)
@@ -29,6 +30,9 @@ public:
      */
     bool Init()
     {
+        // Clear the preinit
+        HAL_GPIO_DeInit(GPIOA, GPIO_PIN_6);
+
         TIM_OC_InitTypeDef sConfigOC = {};
         GPIO_InitTypeDef GPIO_InitStruct = {};
 
@@ -88,6 +92,7 @@ public:
         }
         HAL_TIM_PWM_Stop(&htim_, TIM_CHANNEL_1);
         HAL_TIM_PWM_DeInit(&htim_);
+        HAL_GPIO_DeInit(GPIOA, GPIO_PIN_6);
         initialized_ = false;
         return true;
     }

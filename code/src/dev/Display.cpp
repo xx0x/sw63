@@ -5,19 +5,16 @@
 
 void Display::Init()
 {
+    // Prevent startup LED driver glitches
+    brightness_.PreInit();
+
     // Enable display power
     SetPower(true);
-
-    // Initialize PWM brightness control
-    brightness_.Init();
 
     // Initialize ambient light sensor (PA2)
     ambient_light_.Init({.port = GPIOA,
                          .pin = GPIO_PIN_2,
                          .channel = ADC_CHANNEL_2});
-
-    // Set initial brightness based on ambient light
-    TriggerAutoBrightness();
 
     // Shift register for LEDs
     display_register_.Init({
@@ -31,6 +28,12 @@ void Display::Init()
 
     // Update display
     Update();
+
+    // Initialize PWM brightness control
+    brightness_.Init();
+
+    // Set brightness based on ambient light
+    TriggerAutoBrightness();
 }
 
 void Display::SetPower(bool on)

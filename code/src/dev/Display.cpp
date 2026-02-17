@@ -79,9 +79,6 @@ void Display::TriggerAutoBrightness()
     // We want some brightness even if there's no light
     uint16_t mapped_brightness = map(ambient_reading, 0, AdcInput::kResolution, 1, kMaxBrightness);
 
-    // Brightness compensation (limiting is done in PwmBrightness::Set):
-    mapped_brightness *= 2; 
-
     // Set the brightness
     brightness_.Set(mapped_brightness);
 }

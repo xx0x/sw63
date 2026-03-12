@@ -109,7 +109,7 @@
             "type": "shell",
             "command": "./sw63_client.sh --set-time;",
             "options": {
-                "cwd": "${workspaceRoot}/communication"
+                "cwd": "${workspaceRoot}/communication/python"
             },
         },
         {
@@ -117,7 +117,7 @@
             "type": "shell",
             "command": "./sw63_client.sh --set-config 4 0 0",
             "options": {
-                "cwd": "${workspaceRoot}/communication"
+                "cwd": "${workspaceRoot}/communication/python"
             },
             "dependsOn": [
                 "sw63_set_time",

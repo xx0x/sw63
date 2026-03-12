@@ -1,4 +1,4 @@
-# SW63 Communication
+# SW63 Communication: Python Client
 
 Tools for communicating with the SW63 via USB CDC.
 

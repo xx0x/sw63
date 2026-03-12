@@ -1,5 +1,5 @@
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { SW63Client } from './SW63Client'
 
 function App() {
@@ -15,7 +15,9 @@ function App() {
     const [watchTime, setWatchTime] = useState('N/A')
     const [batteryLevel, setBatteryLevel] = useState('N/A')
 
-    const configOptions = useMemo(() => [0, 1, 2, 3, 4], [])
+    const [speedOptions, setSpeedOptions] = useState([])
+    const [languageOptions, setLanguageOptions] = useState([])
+    const [styleOptions, setStyleOptions] = useState([])
 
     async function loadAllData() {
         const config = await client.getConfig()
@@ -28,6 +30,28 @@ function App() {
 
         const battery = await client.getBattery()
         setBatteryLevel(String(battery))
+
+        // Load available options for each config field
+        try {
+            const speeds = await client.getConfigOptions(0)
+            setSpeedOptions(speeds)
+        } catch (error) {
+            console.warn('Failed to load speed options:', error)
+        }
+
+        try {
+            const languages = await client.getConfigOptions(1)
+            setLanguageOptions(languages)
+        } catch (error) {
+            console.warn('Failed to load language options:', error)
+        }
+
+        try {
+            const styles = await client.getConfigOptions(2)
+            setStyleOptions(styles)
+        } catch (error) {
+            console.warn('Failed to load style options:', error)
+        }
     }
 
     async function connect() {
@@ -79,6 +103,12 @@ function App() {
         try {
             await client.setConfig(nextSpeed, nextLanguage, nextStyle)
             setStatusMessage('Configuration updated')
+
+            setTimeout(async () => {
+                // Show time after config update
+                await sendDisplayTime();
+            }, 500);
+
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
@@ -170,9 +200,9 @@ function App() {
                     onChange={handleSpeedChange}
                     disabled={!isConnected || isBusy}
                 >
-                    {configOptions.map((value) => (
-                        <option key={`speed-${value}`} value={value}>
-                            {value}
+                    {speedOptions.map((name, index) => (
+                        <option key={`speed-${index}`} value={index}>
+                            {name}
                         </option>
                     ))}
                 </select>
@@ -186,9 +216,9 @@ function App() {
                     onChange={handleLanguageChange}
                     disabled={!isConnected || isBusy}
                 >
-                    {configOptions.map((value) => (
-                        <option key={`language-${value}`} value={value}>
-                            {value}
+                    {languageOptions.map((name, index) => (
+                        <option key={`language-${index}`} value={index}>
+                            {name}
                         </option>
                     ))}
                 </select>
@@ -202,9 +232,9 @@ function App() {
                     onChange={handleStyleChange}
                     disabled={!isConnected || isBusy}
                 >
-                    {configOptions.map((value) => (
-                        <option key={`style-${value}`} value={value}>
-                            {value}
+                    {styleOptions.map((name, index) => (
+                        <option key={`style-${index}`} value={index}>
+                            {name}
                         </option>
                     ))}
                 </select>

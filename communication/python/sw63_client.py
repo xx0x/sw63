@@ -11,7 +11,7 @@ import argparse
 import datetime
 import sys
 import time
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 
 # Protocol definitions
 # Need to match code/src/dev/Communication.hpp
@@ -22,6 +22,7 @@ class Command:
     GET_CONFIG = 0x04
     GET_BATTERY_LEVEL = 0x05
     DISPLAY_TIME = 0x06
+    GET_CONFIG_OPTIONS = 0x07
 
 class Status:
     OK = 0x00
@@ -115,9 +116,15 @@ class SW63Client:
             # Read response data if any
             response_data = b''
             if resp_length > 0:
-                response_data = self.serial.read(resp_length)
+                while len(response_data) < resp_length:
+                    chunk = self.serial.read(resp_length - len(response_data))
+                    if not chunk:
+                        break
+                    response_data += chunk
                 if len(response_data) != resp_length:
                     print("Error: Incomplete response data")
+                    print(f"Expected {resp_length} bytes, received {len(response_data)} bytes")
+                    print(f"Received data: {response_data}")
                     return False, Status.ERROR, b''
             
             return True, status, response_data
@@ -257,6 +264,35 @@ class SW63Client:
             print(f"Failed to send display time command. Status: {status:02X}")
             return False
 
+    def get_config_options(self, option: int) -> Optional[List[str]]:
+        """
+        Get list of available values for a config option.
+
+        Args:
+            option: Option index (0=speed, 1=language, 2=num style)
+
+        Returns:
+            List of option strings or None if failed
+        """
+        data = struct.pack('<B', option)
+        success, status, response_data = self.send_command(Command.GET_CONFIG_OPTIONS, data)
+
+        if success and status == Status.OK:
+            try:
+                text = response_data.decode('utf-8')
+            except UnicodeDecodeError:
+                print("Failed to decode config options response")
+                return None
+
+            options = text.split(';') if text else []
+            print(f"SW63 config options for {option}:")
+            for i, value in enumerate(options):
+                print(f"  {i}: {value}")
+            return options
+
+        print(f"Failed to get config options. Status: {status:02X}")
+        return None
+
 def list_serial_ports():
     """List available serial ports"""
     ports = serial.tools.list_ports.comports()
@@ -290,6 +326,7 @@ Examples:
   %(prog)s --get-time                    # Get time from watch
   %(prog)s --set-config 0 1 2            # Set config (speed=0, lang=1, style=2)
   %(prog)s --get-config                  # Get current config
+    %(prog)s --get-config-options 1        # Get language options
   %(prog)s --get-battery                 # Get battery level
   %(prog)s --display-time                # Force show time
   %(prog)s --list-ports                  # List available ports
@@ -303,6 +340,8 @@ Examples:
     parser.add_argument('--set-config', nargs=3, type=int, metavar=('SPEED', 'LANGUAGE', 'NUM_STYLE'),
                        help='Set watch configuration (all 3 values required)')
     parser.add_argument('--get-config', action='store_true', help='Get configuration')
+    parser.add_argument('--get-config-options', type=int, choices=[0, 1, 2], metavar='OPTION',
+                       help='Get available values for config option: 0=speed, 1=language, 2=num_style')
     parser.add_argument('--get-battery', action='store_true', help='Get battery level')
     parser.add_argument('--display-time', action='store_true', help='Force show time')
     parser.add_argument('--list-ports', action='store_true', help='List available serial ports')
@@ -323,7 +362,8 @@ Examples:
             return
     
     # Check if any action was specified
-    if not (args.set_time or args.get_time or args.set_config or args.get_config or args.get_battery or args.display_time):
+    if not (args.set_time or args.get_time or args.set_config or args.get_config or
+            args.get_config_options is not None or args.get_battery or args.display_time):
         parser.print_help()
         return
     
@@ -346,6 +386,9 @@ Examples:
         
         if args.get_config:
             client.get_config()
+
+        if args.get_config_options is not None:
+            client.get_config_options(args.get_config_options)
         
         if args.get_battery:
             client.get_battery_level()

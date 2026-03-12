@@ -11,7 +11,7 @@ Locale::TimeCoefficients Locale::GetTimeCoefficients() const
         return {.first_quarter = 1, .half = 1, .third_quarter = 1};
     case Language::GERMAN:
     case Language::POLISH:
-    case Language::NORWEGIAN:
+    case Language::NORDIC:
         return {.first_quarter = 0, .half = 1, .third_quarter = 1};
     case Language::ENGLISH:
     default:
@@ -57,7 +57,7 @@ FrameSequence Locale::GetSequence(TimeType time_type) const
         case Language::HUNGARIAN:
             return {ClockFrame::AFTER, ClockFrame::MINUTES_NUM, ClockFrame::MINUTES,
                     ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};
-        case Language::NORWEGIAN:
+        case Language::NORDIC:
             return {ClockFrame::MINUTES_NUM, ClockFrame::MINUTES, ClockFrame::AFTER,
                     ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};
         case Language::CZECH:
@@ -79,7 +79,7 @@ FrameSequence Locale::GetSequence(TimeType time_type) const
         case Language::HUNGARIAN:
         case Language::ENGLISH:
         case Language::GERMAN:
-        case Language::NORWEGIAN:
+        case Language::NORDIC:
         default:
             return {ClockFrame::MINUTES_NUM, ClockFrame::MINUTES, ClockFrame::BEFORE,
                     ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};

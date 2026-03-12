@@ -20,9 +20,21 @@ public:
         GERMAN, // Also works for: DUTCH
         POLISH,
         HUNGARIAN,
-        NORWEGIAN, // Also works for: DANISH, SWEDISH, FINNISH
+        NORDIC, // Also works for: NORWEGIAN, DANISH, SWEDISH, FINNISH
         COUNT
     };
+
+    /**
+     * @brief     Human-readable names for the supported languages.
+     * @details   This array needs to be in the same order as the Language enum.
+     */
+    static constexpr const char *kLanguageNames[static_cast<size_t>(Language::COUNT)] = {
+        "Czech, Slovak, East German",
+        "English",
+        "German, Dutch",
+        "Polish",
+        "Hungarian",
+        "Nordic"};
 
     /**
      * @brief Each language has its own coefficients for quarter/half/to adjustments.

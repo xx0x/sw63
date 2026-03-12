@@ -65,6 +65,14 @@ public:
         COUNT
     };
 
+    // We omit the SNAKE styles from the kNumStyles array since they are not ideal for specific numbers and are more of a special effect.
+    static constexpr const char *kNumStyles[4] = {
+        "Bar reversed (original)",
+        "Single reversed",
+        "Bar",
+        "Single",
+    };
+
     void Init();
 
     void DeInit();

@@ -18,6 +18,10 @@ Tools for communicating with the SW63 via USB CDC.
 # Get current configuration
 ./sw63_client.sh --get-config
 
+# Get possible values for one config field:
+# 0=speed, 1=language, 2=num_style
+./sw63_client.sh --get-config-options 1
+
 # Get battery level
 ./sw63_client.sh --get-battery
 
@@ -49,6 +53,7 @@ The script automatically sets up Python environment and dependencies on first ru
 | GET_TIME          | 0x02 | 0x00        | Get the current time       |
 | SET_CONFIG        | 0x03 | 0x03        | Set configuration          |
 | GET_CONFIG        | 0x04 | 0x00        | Get configuration          |
+| GET_CONFIG_OPTIONS| 0x07 | 0x01        | Get semicolon-separated options for one config field |
 | GET_BATTERY_LEVEL | 0x05 | 0x00        | Get battery level (0-100%) |
 | DISPLAY_TIME      | 0x06 | 0x00        | Force display time         |
 
@@ -92,6 +97,18 @@ Response: 02 00 07 0E 1E 19 12 08 E8 07
 Request:  03 03 01 02 00
 Response: 03 00 00
 ```
+
+**Get language options (option=1):**
+```
+Request:  07 01 01
+Response: 07 00 NN 43 7A 65 63 68 2C ...
+```
+
+The response payload is UTF-8 text with values separated by semicolons.
+Option index mapping:
+- `0`: speed options
+- `1`: language options
+- `2`: number style options
 
 **Get battery level:**
 ```

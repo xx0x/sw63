@@ -20,7 +20,8 @@ public:
         SET_CONFIG = 0x03,
         GET_CONFIG = 0x04,
         GET_BATTERY_LEVEL = 0x05,
-        DISPLAY_TIME = 0x06
+        DISPLAY_TIME = 0x06,
+        GET_CONFIG_OPTIONS = 0x07,
     };
 
     // Response status codes
@@ -35,7 +36,7 @@ public:
 
     // Protocol message structure
     // [Command ID][Length][Data...]
-    static constexpr uint8_t MAX_MESSAGE_LENGTH = 32;
+    static constexpr uint8_t MAX_MESSAGE_LENGTH = 250;
     static constexpr uint8_t HEADER_SIZE = 2; // Command + Length
     static constexpr size_t MAX_PACKET_SIZE = HEADER_SIZE + MAX_MESSAGE_LENGTH;
 
@@ -114,6 +115,11 @@ private:
      * Handle DISPLAY_TIME command
      */
     void HandleDisplayTime();
+
+    /**
+     * Handle GET_CONFIG_OPTIONS command
+     */
+    void HandleGetConfigOptions(uint8_t option);
 
     /**
      * Reset the receive buffer

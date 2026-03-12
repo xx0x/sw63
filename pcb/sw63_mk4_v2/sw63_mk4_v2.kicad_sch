@@ -4913,12 +4913,13 @@
 	)
 	(text "BAT current when MCU sleeps (BAT is 4V)\nMCP73832T-2ACI/OT: approx 21uA - little worse\nDIO5518BST5: approx 15uA (10-20 based on ambient temperature) - little better"
 		(exclude_from_sim no)
-		(at 235.712 24.638 0)
+		(at 192.024 26.162 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 				(thickness 0.1588)
 			)
+			(justify left)
 		)
 		(uuid "42f0e122-1fb0-4297-882b-9eb94448de67")
 	)
@@ -4934,16 +4935,29 @@
 		)
 		(uuid "6e813711-bcbb-465a-a3df-9f79a535cc77")
 	)
-	(text "22k = approx 50mA charge current"
+	(text "R3: 22k = approx 50mA charge current"
 		(exclude_from_sim no)
-		(at 237.236 29.464 0)
+		(at 169.164 67.564 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 				(thickness 0.1588)
 			)
+			(justify left)
 		)
 		(uuid "b316ec34-85bd-42e1-8099-b535c669f15a")
+	)
+	(text "Compatible LED drivers:\nTLC5916IPWR\nTLC5917IPWR\nSCT2167CSSG\nSTP08CP05TTR"
+		(exclude_from_sim no)
+		(at 211.074 133.858 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.1588)
+			)
+			(justify left)
+		)
+		(uuid "e05dca29-0408-45e6-83c7-c0b3c05ab9f8")
 	)
 	(junction
 		(at 171.45 125.73)

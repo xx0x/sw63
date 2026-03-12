@@ -1,3 +1,18 @@
-:root {
+body {
+	margin: 16px;
+	font-family: sans-serif;
+}
 
+main {
+	max-width: 720px;
+}
+
+section {
+	margin-top: 16px;
+}
+
+button,
+select {
+	margin-top: 4px;
+	margin-bottom: 8px;
 }

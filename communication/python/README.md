@@ -47,15 +47,16 @@ The script automatically sets up Python environment and dependencies on first ru
 
 ### Commands
 
-| Command           | ID   | Data Length | Description                |
-| ----------------- | ---- | ----------- | -------------------------- |
-| SET_TIME          | 0x01 | 0x07        | Set the time               |
-| GET_TIME          | 0x02 | 0x00        | Get the current time       |
-| SET_CONFIG        | 0x03 | 0x03        | Set configuration          |
-| GET_CONFIG        | 0x04 | 0x00        | Get configuration          |
-| GET_CONFIG_OPTIONS| 0x07 | 0x01        | Get semicolon-separated options for one config field |
-| GET_BATTERY_LEVEL | 0x05 | 0x00        | Get battery level (0-100%) |
-| DISPLAY_TIME      | 0x06 | 0x00        | Force display time         |
+| Command            | ID   | Data Length | Description                                          |
+| ------------------ | ---- | ----------- | ---------------------------------------------------- |
+| GET_VERSION        | 0x01 | 0x07        | Set the time                                         |
+| GET_BATTERY_LEVEL  | 0x0B | 0x00        | Get battery level (0-100%)                           |
+| SET_TIME           | 0x10 | 0x07        | Set the time                                         |
+| GET_TIME           | 0x11 | 0x00        | Get the current time                                 |
+| DISPLAY_TIME       | 0x12 | 0x00        | Force display time                                   |
+| SET_CONFIG         | 0x20 | 0x03        | Set configuration                                    |
+| GET_CONFIG         | 0x21 | 0x00        | Get configuration                                    |
+| GET_CONFIG_OPTIONS | 0x22 | 0x01        | Get semicolon-separated options for one config field |
 
 ### Status Codes
 

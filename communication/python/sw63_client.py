@@ -16,14 +16,17 @@ from typing import Optional, Tuple, List
 # Protocol definitions
 # Need to match code/src/dev/Communication.hpp
 class Command:
-    SET_TIME = 0x01
-    GET_TIME = 0x02
-    SET_CONFIG = 0x03
-    GET_CONFIG = 0x04
-    GET_BATTERY_LEVEL = 0x05
-    DISPLAY_TIME = 0x06
-    GET_CONFIG_OPTIONS = 0x07
-    GET_VERSION = 0x08
+    # 0x01-0x0F = General
+    GET_VERSION = 0x01
+    GET_BATTERY_LEVEL = 0x0B
+    # 0x10-0x1F = Time
+    SET_TIME = 0x10
+    GET_TIME = 0x11
+    DISPLAY_TIME = 0x12
+    # 0x20-0x2F = Configuration
+    SET_CONFIG = 0x20
+    GET_CONFIG = 0x21
+    GET_CONFIG_OPTIONS = 0x22
 
 class Status:
     OK = 0x00

@@ -104,6 +104,16 @@ void Communication::HandleMessage(Command command, const uint8_t *data, uint8_t 
             SendResponse(command, Status::INVALID_LENGTH);
         }
         break;
+    case Command::GET_VERSION:
+        if (length == 0)
+        {
+            HandleGetVersion();
+        }
+        else
+        {
+            SendResponse(command, Status::INVALID_LENGTH);
+        }
+        break;
     default:
         SendResponse(command, Status::INVALID_COMMAND);
         break;
@@ -320,6 +330,21 @@ void Communication::HandleDisplayTime()
     App::ChangeLayer(Layer::Type::NORMAL);
 
     SendResponse(Command::DISPLAY_TIME, Status::OK);
+}
+
+void Communication::HandleGetVersion()
+{
+    const char *version = App::kVersion;
+    size_t version_len = std::strlen(version);
+
+    if (version_len > MAX_MESSAGE_LENGTH)
+    {
+        version_len = MAX_MESSAGE_LENGTH;
+    }
+
+    SendResponse(Command::GET_VERSION, Status::OK,
+                 reinterpret_cast<const uint8_t *>(version),
+                 static_cast<uint8_t>(version_len));
 }
 
 void Communication::ResetReceiveBuffer()

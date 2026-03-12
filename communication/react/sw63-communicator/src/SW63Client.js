@@ -6,6 +6,7 @@ const COMMANDS = {
     GET_BATTERY_LEVEL: 0x05,
     DISPLAY_TIME: 0x06,
     GET_CONFIG_OPTIONS: 0x07,
+    GET_VERSION: 0x08,
 }
 
 const STATUS_TEXT = {
@@ -166,6 +167,14 @@ export class SW63Client {
         const text = decoder.decode(new Uint8Array(data))
         // Split by semicolon and filter empty strings
         return text.split(';').filter((s) => s.length > 0)
+    }
+
+    async getVersion() {
+        const data = await this.sendCommand(COMMANDS.GET_VERSION)
+        // Decode response as UTF-8 string
+        const decoder = new TextDecoder()
+        const version = decoder.decode(new Uint8Array(data))
+        return version
     }
 
     static formatTime(data) {

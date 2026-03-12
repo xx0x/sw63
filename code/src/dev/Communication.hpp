@@ -22,6 +22,7 @@ public:
         GET_BATTERY_LEVEL = 0x05,
         DISPLAY_TIME = 0x06,
         GET_CONFIG_OPTIONS = 0x07,
+        GET_VERSION = 0x08,
     };
 
     // Response status codes
@@ -120,6 +121,11 @@ private:
      * Handle GET_CONFIG_OPTIONS command
      */
     void HandleGetConfigOptions(uint8_t option);
+
+    /**
+     * Handle GET_VERSION command
+     */
+    void HandleGetVersion();
 
     /**
      * Reset the receive buffer

@@ -23,6 +23,7 @@ class Command:
     GET_BATTERY_LEVEL = 0x05
     DISPLAY_TIME = 0x06
     GET_CONFIG_OPTIONS = 0x07
+    GET_VERSION = 0x08
 
 class Status:
     OK = 0x00
@@ -293,6 +294,27 @@ class SW63Client:
         print(f"Failed to get config options. Status: {status:02X}")
         return None
 
+    def get_version(self) -> Optional[str]:
+        """
+        Get the firmware version
+
+        Returns:
+            Version string or None if failed
+        """
+        success, status, response_data = self.send_command(Command.GET_VERSION)
+
+        if success and status == Status.OK:
+            try:
+                version = response_data.decode('utf-8')
+                print(f"SW63 version: {version}")
+                return version
+            except UnicodeDecodeError:
+                print("Failed to decode version response")
+                return None
+        else:
+            print(f"Failed to get version. Status: {status:02X}")
+            return None
+
 def list_serial_ports():
     """List available serial ports"""
     ports = serial.tools.list_ports.comports()
@@ -326,7 +348,8 @@ Examples:
   %(prog)s --get-time                    # Get time from watch
   %(prog)s --set-config 0 1 2            # Set config (speed=0, lang=1, style=2)
   %(prog)s --get-config                  # Get current config
-    %(prog)s --get-config-options 1        # Get language options
+  %(prog)s --get-config-options 1        # Get language options
+  %(prog)s --get-version                 # Get firmware version
   %(prog)s --get-battery                 # Get battery level
   %(prog)s --display-time                # Force show time
   %(prog)s --list-ports                  # List available ports
@@ -342,6 +365,7 @@ Examples:
     parser.add_argument('--get-config', action='store_true', help='Get configuration')
     parser.add_argument('--get-config-options', type=int, choices=[0, 1, 2], metavar='OPTION',
                        help='Get available values for config option: 0=speed, 1=language, 2=num_style')
+    parser.add_argument('--get-version', action='store_true', help='Get firmware version')
     parser.add_argument('--get-battery', action='store_true', help='Get battery level')
     parser.add_argument('--display-time', action='store_true', help='Force show time')
     parser.add_argument('--list-ports', action='store_true', help='List available serial ports')
@@ -363,7 +387,7 @@ Examples:
     
     # Check if any action was specified
     if not (args.set_time or args.get_time or args.set_config or args.get_config or
-            args.get_config_options is not None or args.get_battery or args.display_time):
+            args.get_config_options is not None or args.get_version or args.get_battery or args.display_time):
         parser.print_help()
         return
     
@@ -389,7 +413,10 @@ Examples:
 
         if args.get_config_options is not None:
             client.get_config_options(args.get_config_options)
-        
+
+        if args.get_version:
+            client.get_version()
+
         if args.get_battery:
             client.get_battery_level()
         

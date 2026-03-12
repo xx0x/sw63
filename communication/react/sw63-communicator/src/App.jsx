@@ -14,6 +14,7 @@ function App() {
     const [style, setStyle] = useState(0)
     const [watchTime, setWatchTime] = useState('N/A')
     const [batteryLevel, setBatteryLevel] = useState('N/A')
+    const [version, setVersion] = useState('N/A')
 
     const [speedOptions, setSpeedOptions] = useState([])
     const [languageOptions, setLanguageOptions] = useState([])
@@ -51,6 +52,13 @@ function App() {
             setStyleOptions(styles)
         } catch (error) {
             console.warn('Failed to load style options:', error)
+        }
+
+        try {
+            const ver = await client.getVersion()
+            setVersion(ver)
+        } catch (error) {
+            console.warn('Failed to load version:', error)
         }
     }
 
@@ -248,6 +256,11 @@ function App() {
                         Set Current Computer Time
                     </button>
                 </p>
+                <p>
+                    <button onClick={sendDisplayTime} disabled={!isConnected || isBusy} type="button">
+                        Display Time
+                    </button>
+                </p>
             </section>
 
             <section>
@@ -256,9 +269,8 @@ function App() {
             </section>
 
             <section>
-                <button onClick={sendDisplayTime} disabled={!isConnected || isBusy} type="button">
-                    Display Time
-                </button>
+                <h2>Firmware</h2>
+                <p>Version: {version}</p>
             </section>
         </main>
     )

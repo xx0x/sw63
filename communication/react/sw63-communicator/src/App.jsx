@@ -1,80 +1,10 @@
 
 import { useMemo, useState } from 'react'
-
-const COMMANDS = {
-    SET_TIME: 0x01,
-    GET_TIME: 0x02,
-    SET_CONFIG: 0x03,
-    GET_CONFIG: 0x04,
-    GET_BATTERY_LEVEL: 0x05,
-    DISPLAY_TIME: 0x06,
-}
-
-const STATUS_TEXT = {
-    0x00: 'OK',
-    0x01: 'ERROR',
-    0x02: 'INVALID_COMMAND',
-    0x03: 'INVALID_LENGTH',
-    0x04: 'INVALID_DATA',
-}
-
-function getCurrentTimePayload() {
-    const now = new Date()
-    const year = now.getFullYear()
-    return [
-        now.getHours(),
-        now.getMinutes(),
-        now.getSeconds(),
-        now.getDate(),
-        now.getMonth() + 1,
-        year & 0xff,
-        (year >> 8) & 0xff,
-    ]
-}
-
-function pad2(value) {
-    return String(value).padStart(2, '0')
-}
-
-function formatWatchTime(data) {
-    if (!data || data.length !== 7) {
-        return 'N/A'
-    }
-
-    const [hour, minute, second, day, month, yearLo, yearHi] = data
-    const year = yearLo | (yearHi << 8)
-    return `${year}-${pad2(month)}-${pad2(day)} ${pad2(hour)}:${pad2(minute)}:${pad2(second)}`
-}
-
-async function readProtocolResponse(serialPort) {
-    const reader = serialPort.readable.getReader()
-    const buffer = []
-
-    try {
-        while (true) {
-            const { value, done } = await reader.read()
-            if (done) {
-                throw new Error('Connection closed before full response was received.')
-            }
-
-            buffer.push(...value)
-
-            if (buffer.length >= 3) {
-                const dataLength = buffer[2]
-                const messageLength = 3 + dataLength
-
-                if (buffer.length >= messageLength) {
-                    return buffer.slice(0, messageLength)
-                }
-            }
-        }
-    } finally {
-        reader.releaseLock()
-    }
-}
+import { SW63Client } from './SW63Client'
 
 function App() {
-    const [port, setPort] = useState(null)
+    const [client] = useState(() => new SW63Client())
+    const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [statusMessage, setStatusMessage] = useState('Disconnected')
@@ -87,98 +17,35 @@ function App() {
 
     const configOptions = useMemo(() => [0, 1, 2, 3, 4], [])
 
-    const isConnected = Boolean(port)
+    async function loadAllData() {
+        const config = await client.getConfig()
+        setSpeed(config.speed)
+        setLanguage(config.language)
+        setStyle(config.style)
 
-    async function sendCommand(activePort, commandId, data = []) {
-        if (!activePort) {
-            throw new Error('Not connected to a device.')
-        }
+        const time = await client.getTime()
+        setWatchTime(time)
 
-        if (!activePort.writable || !activePort.readable) {
-            throw new Error('Serial port is not open.')
-        }
-
-        const writer = activePort.writable.getWriter()
-        try {
-            const request = new Uint8Array([commandId, data.length, ...data])
-            await writer.write(request)
-        } finally {
-            writer.releaseLock()
-        }
-
-        const response = await readProtocolResponse(activePort)
-        const [responseCommand, status, dataLength, ...responseData] = response
-
-        if (responseCommand !== commandId) {
-            throw new Error(`Unexpected response command: 0x${responseCommand.toString(16)}`)
-        }
-
-        if (status !== 0x00) {
-            const label = STATUS_TEXT[status] ?? `UNKNOWN_STATUS_${status}`
-            throw new Error(`Device returned error: ${label}`)
-        }
-
-        if (responseData.length !== dataLength) {
-            throw new Error('Malformed response payload length.')
-        }
-
-        return responseData
-    }
-
-    async function loadAllData(activePort) {
-        const configData = await sendCommand(activePort, COMMANDS.GET_CONFIG)
-        if (configData.length !== 3) {
-            throw new Error('GET_CONFIG returned invalid payload length.')
-        }
-        setSpeed(configData[0])
-        setLanguage(configData[1])
-        setStyle(configData[2])
-
-        const timeData = await sendCommand(activePort, COMMANDS.GET_TIME)
-        setWatchTime(formatWatchTime(timeData))
-
-        const batteryData = await sendCommand(activePort, COMMANDS.GET_BATTERY_LEVEL)
-        if (batteryData.length !== 1) {
-            throw new Error('GET_BATTERY_LEVEL returned invalid payload length.')
-        }
-        setBatteryLevel(String(batteryData[0]))
+        const battery = await client.getBattery()
+        setBatteryLevel(String(battery))
     }
 
     async function connect() {
-        if (!('serial' in navigator)) {
-            setErrorMessage('Web Serial API is not available in this browser.')
-            return
-        }
-
-        let selectedPort = null
-
         setIsBusy(true)
         setErrorMessage('')
         setStatusMessage('Connecting...')
 
         try {
-            selectedPort = await navigator.serial.requestPort()
-
-            if (!selectedPort.readable || !selectedPort.writable) {
-                await selectedPort.open({ baudRate: 115200 })
-            }
-
+            await client.connect()
             setStatusMessage('Connected. Loading watch data...')
 
-            await loadAllData(selectedPort)
-            setPort(selectedPort)
+            await loadAllData()
+            setIsConnected(true)
             setStatusMessage('Connected')
         } catch (error) {
-            if (selectedPort && (selectedPort.readable || selectedPort.writable)) {
-                try {
-                    await selectedPort.close()
-                } catch {
-                    // Ignore close errors and preserve original connection error.
-                }
-            }
-
+            await client.disconnect()
+            setIsConnected(false)
             setStatusMessage('Disconnected')
-            setPort(null)
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
             setIsBusy(false)
@@ -186,18 +53,12 @@ function App() {
     }
 
     async function disconnect() {
-        if (!port) {
-            return
-        }
-
         setIsBusy(true)
         setErrorMessage('')
 
         try {
-            if (port.readable || port.writable) {
-                await port.close()
-            }
-            setPort(null)
+            await client.disconnect()
+            setIsConnected(false)
             setStatusMessage('Disconnected')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
@@ -207,7 +68,7 @@ function App() {
     }
 
     async function updateConfig(nextSpeed, nextLanguage, nextStyle) {
-        if (!port) {
+        if (!isConnected) {
             setErrorMessage('Not connected to a device.')
             return
         }
@@ -216,7 +77,7 @@ function App() {
         setErrorMessage('')
 
         try {
-            await sendCommand(port, COMMANDS.SET_CONFIG, [nextSpeed, nextLanguage, nextStyle])
+            await client.setConfig(nextSpeed, nextLanguage, nextStyle)
             setStatusMessage('Configuration updated')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
@@ -244,7 +105,7 @@ function App() {
     }
 
     async function setCurrentTime() {
-        if (!port) {
+        if (!isConnected) {
             setErrorMessage('Not connected to a device.')
             return
         }
@@ -253,9 +114,8 @@ function App() {
         setErrorMessage('')
 
         try {
-            await sendCommand(port, COMMANDS.SET_TIME, getCurrentTimePayload())
-            const timeData = await sendCommand(port, COMMANDS.GET_TIME)
-            setWatchTime(formatWatchTime(timeData))
+            const time = await client.setTime()
+            setWatchTime(time)
             setStatusMessage('Time updated')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
@@ -265,7 +125,7 @@ function App() {
     }
 
     async function sendDisplayTime() {
-        if (!port) {
+        if (!isConnected) {
             setErrorMessage('Not connected to a device.')
             return
         }
@@ -274,7 +134,7 @@ function App() {
         setErrorMessage('')
 
         try {
-            await sendCommand(port, COMMANDS.DISPLAY_TIME)
+            await client.displayTime()
             setStatusMessage('Display time command sent')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))

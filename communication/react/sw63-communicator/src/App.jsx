@@ -31,7 +31,7 @@ function App() {
         setWatchTime(time)
 
         const battery = await client.getBattery()
-        setBatteryLevel(String(battery))
+        setBatteryLevel(String(battery) + '%')
 
         // Load available options for each config field
         try {
@@ -213,7 +213,7 @@ function App() {
                         >
                             {speedOptions.map((name, index) => (
                                 <option key={`speed-${index}`} value={index}>
-                                    {name}
+                                    {parseInt(name, 10) + 1}
                                 </option>
                             ))}
                         </select>

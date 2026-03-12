@@ -20,6 +20,11 @@ const STATUS_TEXT = {
     0x04: 'INVALID_DATA',
 }
 
+// Time offset to compensate for transmission delay and display update time
+// Transmission takes a few ms and the actual time display takes a few seconds,
+// so it's good to set it a little bit into the future
+const TIME_OFFSET_SECONDS = 15
+
 function pad2(value) {
     return String(value).padStart(2, '0')
 }
@@ -192,6 +197,7 @@ export class SW63Client {
 
     static getCurrentTimePayload() {
         const now = new Date()
+        now.setSeconds(now.getSeconds() + TIME_OFFSET_SECONDS)
         const year = now.getFullYear()
         return [
             now.getHours(),

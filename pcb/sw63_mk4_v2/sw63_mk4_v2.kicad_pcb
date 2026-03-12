@@ -7,6 +7,15 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "SW63 mk4")
+		(date "2026-01-26")
+		(rev "v2")
+		(company "github.com/xx0x/sw63")
+		(comment 1 "License: CERN-OHL-P-2.0")
+		(comment 2 "Sci-fi Inspired Watch")
+		(comment 3 "SW63")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(4 "In1.Cu" signal)
@@ -7660,7 +7669,7 @@
 			(solder_mask_margin 0.1016)
 			(solder_paste_margin 0)
 			(thermal_bridge_angle 0)
-			(uuid "b0d648e0-a414-41a0-ab89-10d0644936d9")
+			(uuid "8d9a3594-771b-4072-9210-4d906036a93e")
 		)
 		(pad "S1" smd rect
 			(at 5.72 0 270)
@@ -7672,7 +7681,7 @@
 			(solder_mask_margin 0.1016)
 			(solder_paste_margin 0)
 			(thermal_bridge_angle 0)
-			(uuid "b0d648e0-a414-41a0-ab89-10d0644936d9")
+			(uuid "5fc4bc09-4a72-4b2a-90c3-cc541d814b60")
 		)
 		(pad "S1" smd rect
 			(at 5.72 3 270)
@@ -7684,7 +7693,7 @@
 			(solder_mask_margin 0.1016)
 			(solder_paste_margin 0)
 			(thermal_bridge_angle 0)
-			(uuid "b0d648e0-a414-41a0-ab89-10d0644936d9")
+			(uuid "18fc64e2-da7f-4090-abab-30b8628d3c57")
 		)
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/3d_models/GT-USB-7070C.step"

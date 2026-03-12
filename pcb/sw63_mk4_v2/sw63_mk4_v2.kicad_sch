@@ -7,7 +7,7 @@
 	(title_block
 		(title "SW63 mk4")
 		(date "2026-01-26")
-		(rev "v1")
+		(rev "v2")
 		(company "github.com/xx0x/sw63")
 		(comment 1 "License: CERN-OHL-P-2.0")
 		(comment 2 "Sci-fi Inspired Watch")

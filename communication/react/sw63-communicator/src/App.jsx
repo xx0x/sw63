@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import { SW63Client } from './SW63Client'
+import TickingWatchTime from './components/TickingWatchTime'
 
 function App() {
     const [client] = useState(() => new SW63Client())
@@ -198,80 +199,83 @@ function App() {
             <p>Status: {statusMessage}</p>
             {errorMessage ? <p>Error: {errorMessage}</p> : null}
 
-            <section>
-                <h2>Configuration</h2>
+            {isConnected &&
+                <>
+                    <section>
+                        <h2>Configuration</h2>
 
-                <label htmlFor="speed-select">Speed: </label>
-                <select
-                    id="speed-select"
-                    value={speed}
-                    onChange={handleSpeedChange}
-                    disabled={!isConnected || isBusy}
-                >
-                    {speedOptions.map((name, index) => (
-                        <option key={`speed-${index}`} value={index}>
-                            {name}
-                        </option>
-                    ))}
-                </select>
+                        <label htmlFor="speed-select">Speed: </label>
+                        <select
+                            id="speed-select"
+                            value={speed}
+                            onChange={handleSpeedChange}
+                            disabled={!isConnected || isBusy}
+                        >
+                            {speedOptions.map((name, index) => (
+                                <option key={`speed-${index}`} value={index}>
+                                    {name}
+                                </option>
+                            ))}
+                        </select>
 
-                <br />
+                        <br />
 
-                <label htmlFor="language-select">Language: </label>
-                <select
-                    id="language-select"
-                    value={language}
-                    onChange={handleLanguageChange}
-                    disabled={!isConnected || isBusy}
-                >
-                    {languageOptions.map((name, index) => (
-                        <option key={`language-${index}`} value={index}>
-                            {name}
-                        </option>
-                    ))}
-                </select>
+                        <label htmlFor="language-select">Language: </label>
+                        <select
+                            id="language-select"
+                            value={language}
+                            onChange={handleLanguageChange}
+                            disabled={!isConnected || isBusy}
+                        >
+                            {languageOptions.map((name, index) => (
+                                <option key={`language-${index}`} value={index}>
+                                    {name}
+                                </option>
+                            ))}
+                        </select>
 
-                <br />
+                        <br />
 
-                <label htmlFor="style-select">Style: </label>
-                <select
-                    id="style-select"
-                    value={style}
-                    onChange={handleStyleChange}
-                    disabled={!isConnected || isBusy}
-                >
-                    {styleOptions.map((name, index) => (
-                        <option key={`style-${index}`} value={index}>
-                            {name}
-                        </option>
-                    ))}
-                </select>
-            </section>
+                        <label htmlFor="style-select">Style: </label>
+                        <select
+                            id="style-select"
+                            value={style}
+                            onChange={handleStyleChange}
+                            disabled={!isConnected || isBusy}
+                        >
+                            {styleOptions.map((name, index) => (
+                                <option key={`style-${index}`} value={index}>
+                                    {name}
+                                </option>
+                            ))}
+                        </select>
+                    </section>
 
-            <section>
-                <h2>Time</h2>
-                <p>
-                    {watchTime}{' '}
-                    <button onClick={setCurrentTime} disabled={!isConnected || isBusy} type="button">
-                        Set Current Computer Time
-                    </button>
-                </p>
-                <p>
-                    <button onClick={sendDisplayTime} disabled={!isConnected || isBusy} type="button">
-                        Display Time
-                    </button>
-                </p>
-            </section>
+                    <section>
+                        <h2>Time</h2>
+                        <p>
+                            <TickingWatchTime key={watchTime} baseTime={watchTime} />{' '}
+                            <button onClick={setCurrentTime} disabled={!isConnected || isBusy} type="button">
+                                Set Current Computer Time
+                            </button>
+                        </p>
+                        <p>
+                            <button onClick={sendDisplayTime} disabled={!isConnected || isBusy} type="button">
+                                Display Time
+                            </button>
+                        </p>
+                    </section>
 
-            <section>
-                <h2>Battery</h2>
-                <p>{batteryLevel}</p>
-            </section>
+                    <section>
+                        <h2>Battery</h2>
+                        <p>{batteryLevel}</p>
+                    </section>
 
-            <section>
-                <h2>Firmware</h2>
-                <p>Version: {version}</p>
-            </section>
+                    <section>
+                        <h2>Firmware</h2>
+                        <p>Version: {version}</p>
+                    </section>
+                </>}
         </main>
     )
 }

@@ -95,11 +95,14 @@ public:
 private:
     // Speed configuration arrays (slowest to fastest)
     static constexpr std::array kSpeedOptions = {
+        SpeedOption{.hold = 1200, .hold_digits = 1200, .pause = 180},
         SpeedOption{.hold = 1000, .hold_digits = 1000, .pause = 150},
         SpeedOption{.hold = 800, .hold_digits = 800, .pause = 120},
         SpeedOption{.hold = 600, .hold_digits = 600, .pause = 90},
         SpeedOption{.hold = 400, .hold_digits = 400, .pause = 60},
         SpeedOption{.hold = 300, .hold_digits = 300, .pause = 45},
+        SpeedOption{.hold = 225, .hold_digits = 225, .pause = 30},
+        SpeedOption{.hold = 180, .hold_digits = 180, .pause = 27},
         SpeedOption{.hold = 150, .hold_digits = 150, .pause = 23}};
 
     static constexpr size_t kSpeedOptionsCount = kSpeedOptions.size();

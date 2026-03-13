@@ -115,7 +115,7 @@
         {
             "label": "sw63_vaclav_config",
             "type": "shell",
-            "command": "./sw63_client.sh --set-config 4 0 0",
+            "command": "./sw63_client.sh --set-config 6 0 0",
             "options": {
                 "cwd": "${workspaceRoot}/communication/python"
             },
@@ -124,5 +124,21 @@
             ],
             "dependsOrder": "sequence"
         },
+        {
+            "label": "upload_uf2",
+            "type": "shell",
+            "command": "echo 'Starting flashing, this takes a while...'; cp sw63.uf2 /Volumes/SW63BOOT/; echo 'SW63 probably flashed (ignore the errors).'",
+            "options": {
+                "cwd": "${workspaceRoot}/code/build"
+            },
+        },
+        {
+            "label": "build_and_upload_uf2",
+            "dependsOn": [
+                "build",
+                "upload_uf2"
+            ],
+            "dependsOrder": "sequence"
+        }
     ]
 }

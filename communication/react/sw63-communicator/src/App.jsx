@@ -182,6 +182,26 @@ function App() {
         }
     }
 
+
+    async function sendDisplayIntro() {
+        if (!isConnected) {
+            setErrorMessage('Not connected to a device.')
+            return
+        }
+
+        setIsBusy(true)
+        setErrorMessage('')
+
+        try {
+            await client.displayIntro()
+            setStatusMessage('Display intro command sent')
+        } catch (error) {
+            setErrorMessage(error instanceof Error ? error.message : String(error))
+        } finally {
+            setIsBusy(false)
+        }
+    }
+    
     return (
         <main>
             <h1>SW63 Communicator</h1>
@@ -274,6 +294,11 @@ function App() {
                     <section>
                         <h2>Firmware</h2>
                         <p>Version: {version}</p>
+                    </section>
+                    <section>
+                       <button onClick={sendDisplayIntro} disabled={!isConnected || isBusy} type="button">
+                            Display Intro
+                        </button>
                     </section>
                 </>}
         </main>

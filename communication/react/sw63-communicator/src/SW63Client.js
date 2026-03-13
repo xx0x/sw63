@@ -1,6 +1,7 @@
 const COMMANDS = {
     // 0x01-0x0F = General
     GET_VERSION: 0x01,
+    DISPLAY_INTRO: 0x02,
     GET_BATTERY_LEVEL: 0x0B,
     // 0x10-0x1F = Time
     SET_TIME: 0x10,
@@ -166,6 +167,10 @@ export class SW63Client {
 
     async displayTime() {
         await this.sendCommand(COMMANDS.DISPLAY_TIME)
+    }
+    
+    async displayIntro() {
+        await this.sendCommand(COMMANDS.DISPLAY_INTRO)
     }
 
     async getConfigOptions(optionIndex) {

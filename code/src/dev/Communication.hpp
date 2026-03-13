@@ -17,6 +17,7 @@ public:
     {
         // 0x01-0x0F = General
         GET_VERSION = 0x01,
+        DISPLAY_INTRO = 0x02,
         GET_BATTERY_LEVEL = 0x0B,
         // 0x10-0x1F = Time
         SET_TIME = 0x10,
@@ -119,6 +120,11 @@ private:
      * Handle DISPLAY_TIME command
      */
     void HandleDisplayTime();
+
+    /**
+     * Handle DISPLAY_INTRO command
+     */
+    void HandleDisplayIntro();
 
     /**
      * Handle GET_CONFIG_OPTIONS command

@@ -84,10 +84,11 @@ void App::Loop()
         layers_[current_layer_]->OnEvent(Layer::Event::MEDIUM_PRESS);
         UpdateLastInteractionTime();
     }
-    if (button.Happened(Button::Event::MULTI_PRESS))
+    if (button.Happened(Button::Event::MULTI_PRESS) || trigger_intro_flag_)
     {
         layers_[current_layer_]->OnEvent(Layer::Event::MULTI_PRESS);
         UpdateLastInteractionTime();
+        trigger_intro_flag_ = false;
     }
 
     // Process current layer

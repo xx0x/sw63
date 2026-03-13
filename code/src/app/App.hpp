@@ -45,6 +45,11 @@ public:
         layers_[current_layer_]->OnEvent(Layer::Event::ENTER);
     }
 
+    static void TriggerIntro()
+    {
+        trigger_intro_flag_ = true;
+    }
+
 private:
     static void Sleep();
 
@@ -56,4 +61,5 @@ private:
         last_interaction_time_ = System::Millis();
     }
     static inline uint32_t last_interaction_time_ = 0;
+    static inline bool trigger_intro_flag_ = false;
 };

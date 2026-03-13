@@ -94,6 +94,9 @@ void Communication::HandleMessage(Command command, const uint8_t *data, uint8_t 
     case Command::DISPLAY_TIME:
         HandleDisplayTime();
         break;
+    case Command::DISPLAY_INTRO:
+        HandleDisplayIntro();
+        break;
     case Command::GET_CONFIG_OPTIONS:
         if (length == 1)
         {
@@ -351,4 +354,10 @@ void Communication::ResetReceiveBuffer()
 {
     rx_index_ = 0;
     message_ready_ = false;
+}
+
+void Communication::HandleDisplayIntro()
+{
+    App::TriggerIntro();
+    SendResponse(Command::DISPLAY_INTRO, Status::OK);
 }

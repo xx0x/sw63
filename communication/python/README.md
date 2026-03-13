@@ -12,13 +12,13 @@ Tools for communicating with the SW63 via USB CDC.
 ./sw63_client.sh --get-time
 
 # Set configuration (speed=0, language=1, style=2)
-# Note that the values are zero-indexed (the watch shows them as one-indexed)
+# Note that the values are zero-indexed (the watch and react app shows them as one-indexed)
 ./sw63_client.sh --set-config 0 1 2
 
 # Get current configuration
 ./sw63_client.sh --get-config
 
-# Get possible values for one config field:
+# Get possible values for one config field as semicolon separated strings:
 # 0=speed, 1=language, 2=num_style
 ./sw63_client.sh --get-config-options 1
 
@@ -50,6 +50,7 @@ The script automatically sets up Python environment and dependencies on first ru
 | Command            | ID   | Data Length | Description                                          |
 | ------------------ | ---- | ----------- | ---------------------------------------------------- |
 | GET_VERSION        | 0x01 | 0x07        | Set the time                                         |
+| DISPLAY_INTRO      | 0x02 | 0x00        | Displays the party animation                         |
 | GET_BATTERY_LEVEL  | 0x0B | 0x00        | Get battery level (0-100%)                           |
 | SET_TIME           | 0x10 | 0x07        | Set the time                                         |
 | GET_TIME           | 0x11 | 0x00        | Get the current time                                 |

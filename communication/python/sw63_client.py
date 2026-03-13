@@ -18,6 +18,7 @@ from typing import Optional, Tuple, List
 class Command:
     # 0x01-0x0F = General
     GET_VERSION = 0x01
+    DISPLAY_INTRO = 0x02
     GET_BATTERY_LEVEL = 0x0B
     # 0x10-0x1F = Time
     SET_TIME = 0x10
@@ -268,6 +269,22 @@ class SW63Client:
             print(f"Failed to send display time command. Status: {status:02X}")
             return False
 
+    def display_intro(self) -> bool:
+        """
+        Force the watch to display the intro layer
+
+        Returns:
+            True if successful
+        """
+        success, status, _ = self.send_command(Command.DISPLAY_INTRO)
+
+        if success and status == Status.OK:
+            print("Display intro command sent successfully")
+            return True
+        else:
+            print(f"Failed to send display intro command. Status: {status:02X}")
+            return False
+
     def get_config_options(self, option: int) -> Optional[List[str]]:
         """
         Get list of available values for a config option.
@@ -355,6 +372,7 @@ Examples:
   %(prog)s --get-version                 # Get firmware version
   %(prog)s --get-battery                 # Get battery level
   %(prog)s --display-time                # Force show time
+    %(prog)s --display-intro               # Force show intro
   %(prog)s --list-ports                  # List available ports
   %(prog)s --port COM3 --get-time        # Use specific port
         """
@@ -371,6 +389,7 @@ Examples:
     parser.add_argument('--get-version', action='store_true', help='Get firmware version')
     parser.add_argument('--get-battery', action='store_true', help='Get battery level')
     parser.add_argument('--display-time', action='store_true', help='Force show time')
+    parser.add_argument('--display-intro', action='store_true', help='Force show intro')
     parser.add_argument('--list-ports', action='store_true', help='List available serial ports')
     
     args = parser.parse_args()
@@ -390,7 +409,8 @@ Examples:
     
     # Check if any action was specified
     if not (args.set_time or args.get_time or args.set_config or args.get_config or
-            args.get_config_options is not None or args.get_version or args.get_battery or args.display_time):
+            args.get_config_options is not None or args.get_version or args.get_battery or
+            args.display_time or args.display_intro):
         parser.print_help()
         return
     
@@ -425,6 +445,9 @@ Examples:
         
         if args.display_time:
             client.display_time()
+
+        if args.display_intro:
+            client.display_intro()
     
     finally:
         client.disconnect()

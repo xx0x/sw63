@@ -17,6 +17,11 @@ function App() {
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
 
+    function isDeviceLostError(error) {
+        const message = error instanceof Error ? error.message : String(error)
+        return message.includes('The device has been lost')
+    }
+
     function setConfigValue(optionIndex, optionValue) {
         setConfigOptionsValues((prevValues) => {
             const nextValues = [...prevValues]
@@ -103,7 +108,12 @@ function App() {
                 await runClientCommand('displayTime', 'Display time command sent')
             }, 500)
         } catch (error) {
-            setErrorMessage(error instanceof Error ? error.message : String(error))
+            if (isDeviceLostError(error)) {
+                setIsConnected(false)
+                setStatusMessage('Disconnected')
+            } else {
+                setErrorMessage(error instanceof Error ? error.message : String(error))
+            }
         } finally {
             setIsBusy(false)
         }
@@ -129,7 +139,12 @@ function App() {
             }
             setStatusMessage(successMessage)
         } catch (error) {
-            setErrorMessage(error instanceof Error ? error.message : String(error))
+            if (isDeviceLostError(error)) {
+                setIsConnected(false)
+                setStatusMessage('Disconnected')
+            } else {
+                setErrorMessage(error instanceof Error ? error.message : String(error))
+            }
         } finally {
             setIsBusy(false)
         }

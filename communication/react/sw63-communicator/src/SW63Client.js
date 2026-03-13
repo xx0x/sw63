@@ -10,8 +10,10 @@ const COMMANDS = {
     // 0x20-0x2F = Configuration
     SET_CONFIG: 0x20,
     GET_CONFIG: 0x21,
-    GET_CONFIG_OPTION_VALUES: 0x22
-}
+    GET_CONFIG_OPTION_VALUES: 0x22,
+    SET_CONFIG_OPTION: 0x23,
+    GET_CONFIG_OPTION: 0x24,
+};
 
 const STATUS_TEXT = {
     0x00: 'OK',
@@ -19,7 +21,13 @@ const STATUS_TEXT = {
     0x02: 'INVALID_COMMAND',
     0x03: 'INVALID_LENGTH',
     0x04: 'INVALID_DATA',
-}
+};
+
+export const CONFIG_OPTIONS = {
+    SPEED: 0,
+    LANGUAGE: 1,
+    STYLE: 2,
+};
 
 // Time offset to compensate for transmission delay and display update time
 // Transmission takes a few ms and the actual time display takes a few seconds,
@@ -146,6 +154,18 @@ export class SW63Client {
         await this.sendCommand(COMMANDS.SET_CONFIG, [speed, language, style])
     }
 
+    async setConfigOption(optionIndex, optionValue) {
+        await this.sendCommand(COMMANDS.SET_CONFIG_OPTION, [optionIndex, optionValue])
+    }
+
+    async getConfigOption(optionIndex) {
+        const data = await this.sendCommand(COMMANDS.GET_CONFIG_OPTION, [optionIndex])
+        if (data.length !== 1) {
+            throw new Error('GET_CONFIG_OPTION returned invalid payload length.')
+        }
+        return data[0]
+    }
+
     async getTime() {
         const data = await this.sendCommand(COMMANDS.GET_TIME)
         return SW63Client.formatTime(data)
@@ -168,7 +188,7 @@ export class SW63Client {
     async displayTime() {
         await this.sendCommand(COMMANDS.DISPLAY_TIME)
     }
-    
+
     async displayIntro() {
         await this.sendCommand(COMMANDS.DISPLAY_INTRO)
     }

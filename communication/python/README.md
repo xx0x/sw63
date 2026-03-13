@@ -18,6 +18,12 @@ Tools for communicating with the SW63 via USB CDC.
 # Get current configuration
 ./sw63_client.sh --get-config
 
+# Set one config field (option=1(language), value=2)
+./sw63_client.sh --set-config-option 1 2
+
+# Get one config field value (option=1(language))
+./sw63_client.sh --get-config-option 1
+
 # Get possible values for one config field as semicolon separated strings:
 # 0=speed, 1=language, 2=num_style
 ./sw63_client.sh --get-config-options 1
@@ -49,7 +55,7 @@ The script automatically sets up Python environment and dependencies on first ru
 
 | Command                  | ID   | Data Length | Description                                          |
 | ------------------------ | ---- | ----------- | ---------------------------------------------------- |
-| GET_VERSION              | 0x01 | 0x07        | Set the time                                         |
+| GET_VERSION              | 0x01 | 0x00        | Get firmware version                                 |
 | DISPLAY_INTRO            | 0x02 | 0x00        | Displays the party animation                         |
 | GET_BATTERY_LEVEL        | 0x0B | 0x00        | Get battery level (0-100%)                           |
 | SET_TIME                 | 0x10 | 0x07        | Set the time                                         |
@@ -58,6 +64,8 @@ The script automatically sets up Python environment and dependencies on first ru
 | SET_CONFIG               | 0x20 | 0x03        | Set configuration                                    |
 | GET_CONFIG               | 0x21 | 0x00        | Get configuration                                    |
 | GET_CONFIG_OPTION_VALUES | 0x22 | 0x01        | Get semicolon-separated option values for one config field |
+| SET_CONFIG_OPTION        | 0x23 | 0x02        | Set one config field (option, value)                 |
+| GET_CONFIG_OPTION        | 0x24 | 0x01        | Get one config field value (option)                  |
 
 ### Status Codes
 
@@ -84,26 +92,38 @@ The script automatically sets up Python environment and dependencies on first ru
 
 **Set time to 2024-08-18 14:30:25:**
 ```
-Request:  01 07 0E 1E 19 12 08 E8 07
-Response: 01 00 00
+Request:  10 07 0E 1E 19 12 08 E8 07
+Response: 10 00 00
 ```
 
 **Get current time:**
 ```
-Request:  02 00
-Response: 02 00 07 0E 1E 19 12 08 E8 07
+Request:  11 00
+Response: 11 00 07 0E 1E 19 12 08 E8 07
 ```
 
 **Set config (speed=1, language=2, style=0):**
 ```
-Request:  03 03 01 02 00
-Response: 03 00 00
+Request:  20 03 01 02 00
+Response: 20 00 00
+```
+
+**Set one config option (option=1/language, value=2):**
+```
+Request:  23 02 01 02
+Response: 23 00 00
+```
+
+**Get one config option (option=1/language):**
+```
+Request:  24 01 01
+Response: 24 00 01 02
 ```
 
 **Get language options (option=1):**
 ```
-Request:  07 01 01
-Response: 07 00 NN 43 7A 65 63 68 2C ...
+Request:  22 01 01
+Response: 22 00 NN 43 7A 65 63 68 2C ...
 ```
 
 The response payload is UTF-8 text with values separated by semicolons.
@@ -114,8 +134,8 @@ Option index mapping:
 
 **Get battery level:**
 ```
-Request:  05 00
-Response: 05 00 01 4B  # 75%
+Request:  0B 00
+Response: 0B 00 01 4B  # 75%
 ```
 
 ## Troubleshooting

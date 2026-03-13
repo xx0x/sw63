@@ -27,6 +27,8 @@ public:
         SET_CONFIG = 0x20,
         GET_CONFIG = 0x21,
         GET_CONFIG_OPTION_VALUES = 0x22,
+        SET_CONFIG_OPTION = 0x23,
+        GET_CONFIG_OPTION = 0x24,
     };
 
     // Response status codes
@@ -110,6 +112,16 @@ private:
      * Handle GET_CONFIG command
      */
     void HandleGetConfig();
+
+    /**
+     * Handle SET_CONFIG_OPTION command
+     */
+    void HandleSetConfigOption(uint8_t option, uint8_t value);
+
+    /**
+     * Handle GET_CONFIG_OPTION command
+     */
+    void HandleGetConfigOption(uint8_t option);
 
     /**
      * Handle GET_BATTERY_LEVEL command

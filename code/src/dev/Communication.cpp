@@ -88,6 +88,26 @@ void Communication::HandleMessage(Command command, const uint8_t *data, uint8_t 
     case Command::GET_CONFIG:
         HandleGetConfig();
         break;
+    case Command::SET_CONFIG_OPTION:
+        if (length == 2)
+        {
+            HandleSetConfigOption(data[0], data[1]);
+        }
+        else
+        {
+            SendResponse(command, Status::INVALID_LENGTH);
+        }
+        break;
+    case Command::GET_CONFIG_OPTION:
+        if (length == 1)
+        {
+            HandleGetConfigOption(data[0]);
+        }
+        else
+        {
+            SendResponse(command, Status::INVALID_LENGTH);
+        }
+        break;
     case Command::GET_BATTERY_LEVEL:
         HandleGetBatteryLevel();
         break;
@@ -243,6 +263,69 @@ void Communication::HandleGetConfig()
     SendResponse(Command::GET_CONFIG, Status::OK,
                  reinterpret_cast<const uint8_t *>(&config),
                  sizeof(Settings::Config));
+}
+
+void Communication::HandleSetConfigOption(uint8_t option, uint8_t value)
+{
+    Settings::Config config = App::settings.GetConfig();
+
+    switch (option)
+    {
+    case 0:
+        if (value >= Settings::GetSpeedCount())
+        {
+            SendResponse(Command::SET_CONFIG_OPTION, Status::INVALID_DATA);
+            return;
+        }
+        config.speed = value;
+        break;
+    case 1:
+        if (value >= static_cast<uint8_t>(Locale::Language::COUNT))
+        {
+            SendResponse(Command::SET_CONFIG_OPTION, Status::INVALID_DATA);
+            return;
+        }
+        config.language = static_cast<Locale::Language>(value);
+        break;
+    case 2:
+        if (value >= static_cast<uint8_t>(Display::NumStyle::COUNT))
+        {
+            SendResponse(Command::SET_CONFIG_OPTION, Status::INVALID_DATA);
+            return;
+        }
+        config.num_style = static_cast<Display::NumStyle>(value);
+        break;
+    default:
+        SendResponse(Command::SET_CONFIG_OPTION, Status::INVALID_DATA);
+        return;
+    }
+
+    App::settings.SetConfig(config);
+    SendResponse(Command::SET_CONFIG_OPTION, Status::OK);
+}
+
+void Communication::HandleGetConfigOption(uint8_t option)
+{
+    Settings::Config config = App::settings.GetConfig();
+    uint8_t value = 0;
+
+    switch (option)
+    {
+    case 0:
+        value = config.speed;
+        break;
+    case 1:
+        value = static_cast<uint8_t>(config.language);
+        break;
+    case 2:
+        value = static_cast<uint8_t>(config.num_style);
+        break;
+    default:
+        SendResponse(Command::GET_CONFIG_OPTION, Status::INVALID_DATA);
+        return;
+    }
+
+    SendResponse(Command::GET_CONFIG_OPTION, Status::OK, &value, sizeof(value));
 }
 
 void Communication::HandleGetConfigOptionValues(uint8_t option)

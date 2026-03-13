@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { SW63Client } from './SW63Client'
+import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import TickingWatchTime from './components/TickingWatchTime'
 
 function App() {
@@ -10,22 +10,29 @@ function App() {
     const [errorMessage, setErrorMessage] = useState('')
     const [statusMessage, setStatusMessage] = useState('Disconnected')
 
-    const [speed, setSpeed] = useState(0)
-    const [language, setLanguage] = useState(0)
-    const [style, setStyle] = useState(0)
+    const [configOptions, setConfigOptions] = useState(() => Object.values(CONFIG_OPTIONS).map(() => []))
+    const [configValues, setConfigValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
+
     const [watchTime, setWatchTime] = useState('N/A')
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
 
-    const [speedOptions, setSpeedOptions] = useState([])
-    const [languageOptions, setLanguageOptions] = useState([])
-    const [styleOptions, setStyleOptions] = useState([])
+
+    function setConfigValue(optionIndex, optionValue) {
+        setConfigValues((prevValues) => {
+            const nextValues = [...prevValues]
+            nextValues[optionIndex] = optionValue
+            return nextValues
+        })
+    }
 
     async function loadAllData() {
-        const config = await client.getConfig()
-        setSpeed(config.speed)
-        setLanguage(config.language)
-        setStyle(config.style)
+        const optionIndices = Object.values(CONFIG_OPTIONS)
+        const loadedConfigValues = []
+        for (const optionIndex of optionIndices) {
+            loadedConfigValues.push(await client.getConfigOption(optionIndex))
+        }
+        setConfigValues(loadedConfigValues)
 
         const time = await client.getTime()
         setWatchTime(time)
@@ -33,27 +40,15 @@ function App() {
         const battery = await client.getBattery()
         setBatteryLevel(String(battery) + '%')
 
-        // Load available options for each config field
-        try {
-            const speeds = await client.getConfigOptionValues(0)
-            setSpeedOptions(speeds)
-        } catch (error) {
-            console.warn('Failed to load speed options:', error)
+        const nextConfigOptions = optionIndices.map(() => [])
+        for (let i = 0; i < optionIndices.length; i++) {
+            try {
+                nextConfigOptions[i] = await client.getConfigOptionValues(optionIndices[i])
+            } catch (error) {
+                console.warn(`Failed to load #${optionIndices[i]} options:`, error)
+            }
         }
-
-        try {
-            const languages = await client.getConfigOptionValues(1)
-            setLanguageOptions(languages)
-        } catch (error) {
-            console.warn('Failed to load language options:', error)
-        }
-
-        try {
-            const styles = await client.getConfigOptionValues(2)
-            setStyleOptions(styles)
-        } catch (error) {
-            console.warn('Failed to load style options:', error)
-        }
+        setConfigOptions(nextConfigOptions)
 
         try {
             const ver = await client.getVersion()
@@ -98,7 +93,7 @@ function App() {
         }
     }
 
-    async function updateConfig(nextSpeed, nextLanguage, nextStyle) {
+    async function updateConfigOption(optionIndex, optionValue, successMessage) {
         if (!isConnected) {
             setErrorMessage('Not connected to a device.')
             return
@@ -108,8 +103,9 @@ function App() {
         setErrorMessage('')
 
         try {
-            await client.setConfig(nextSpeed, nextLanguage, nextStyle)
-            setStatusMessage('Configuration updated')
+            await client.setConfigOption(optionIndex, optionValue)
+            setConfigValue(optionIndex, optionValue)
+            setStatusMessage(successMessage)
             setTimeout(async () => {
                 // Show time after config update
                 await runClientCommand('displayTime', 'Display time command sent')
@@ -119,24 +115,6 @@ function App() {
         } finally {
             setIsBusy(false)
         }
-    }
-
-    async function handleSpeedChange(event) {
-        const nextValue = Number(event.target.value)
-        setSpeed(nextValue)
-        await updateConfig(nextValue, language, style)
-    }
-
-    async function handleLanguageChange(event) {
-        const nextValue = Number(event.target.value)
-        setLanguage(nextValue)
-        await updateConfig(speed, nextValue, style)
-    }
-
-    async function handleStyleChange(event) {
-        const nextValue = Number(event.target.value)
-        setStyle(nextValue)
-        await updateConfig(speed, language, nextValue)
     }
 
     async function runClientCommand(methodName, successMessage, onSuccess) {
@@ -190,11 +168,11 @@ function App() {
                         <label htmlFor="speed-select">Speed: </label>
                         <select
                             id="speed-select"
-                            value={speed}
-                            onChange={handleSpeedChange}
+                            value={configValues[CONFIG_OPTIONS.SPEED]}
+                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.SPEED, Number(e.target.value), 'Speed updated')}
                             disabled={!isConnected || isBusy}
                         >
-                            {speedOptions.map((name, index) => (
+                            {configOptions[CONFIG_OPTIONS.SPEED].map((name, index) => (
                                 <option key={`speed-${index}`} value={index}>
                                     {parseInt(name, 10) + 1}
                                 </option>
@@ -206,11 +184,11 @@ function App() {
                         <label htmlFor="language-select">Language: </label>
                         <select
                             id="language-select"
-                            value={language}
-                            onChange={handleLanguageChange}
+                            value={configValues[CONFIG_OPTIONS.LANGUAGE]}
+                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.LANGUAGE, Number(e.target.value), 'Language updated')}
                             disabled={!isConnected || isBusy}
                         >
-                            {languageOptions.map((name, index) => (
+                            {configOptions[CONFIG_OPTIONS.LANGUAGE].map((name, index) => (
                                 <option key={`language-${index}`} value={index}>
                                     {name}
                                 </option>
@@ -222,11 +200,11 @@ function App() {
                         <label htmlFor="style-select">Style: </label>
                         <select
                             id="style-select"
-                            value={style}
-                            onChange={handleStyleChange}
+                            value={configValues[CONFIG_OPTIONS.STYLE]}
+                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.STYLE, Number(e.target.value), 'Style updated')}
                             disabled={!isConnected || isBusy}
                         >
-                            {styleOptions.map((name, index) => (
+                            {configOptions[CONFIG_OPTIONS.STYLE].map((name, index) => (
                                 <option key={`style-${index}`} value={index}>
                                     {name}
                                 </option>

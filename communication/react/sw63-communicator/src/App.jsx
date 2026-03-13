@@ -11,15 +11,14 @@ function App() {
     const [statusMessage, setStatusMessage] = useState('Disconnected')
 
     const [configOptions, setConfigOptions] = useState(() => Object.values(CONFIG_OPTIONS).map(() => []))
-    const [configValues, setConfigValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
+    const [configOptionsValues, setConfigOptionsValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
 
     const [watchTime, setWatchTime] = useState('N/A')
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
 
-
     function setConfigValue(optionIndex, optionValue) {
-        setConfigValues((prevValues) => {
+        setConfigOptionsValues((prevValues) => {
             const nextValues = [...prevValues]
             nextValues[optionIndex] = optionValue
             return nextValues
@@ -27,12 +26,19 @@ function App() {
     }
 
     async function loadAllData() {
+
         const optionIndices = Object.values(CONFIG_OPTIONS)
-        const loadedConfigValues = []
-        for (const optionIndex of optionIndices) {
-            loadedConfigValues.push(await client.getConfigOption(optionIndex))
+
+        const loadedConfigOptions = []
+        const loadedConfigOptionsValues = []
+
+        for (const i of optionIndices) {
+            loadedConfigOptionsValues.push(await client.getConfigOption(i))
+            loadedConfigOptions.push(await client.getConfigOptionValues(i))
         }
-        setConfigValues(loadedConfigValues)
+
+        setConfigOptions(loadedConfigOptions)
+        setConfigOptionsValues(loadedConfigOptionsValues)
 
         const time = await client.getTime()
         setWatchTime(time)
@@ -40,22 +46,8 @@ function App() {
         const battery = await client.getBattery()
         setBatteryLevel(String(battery) + '%')
 
-        const nextConfigOptions = optionIndices.map(() => [])
-        for (let i = 0; i < optionIndices.length; i++) {
-            try {
-                nextConfigOptions[i] = await client.getConfigOptionValues(optionIndices[i])
-            } catch (error) {
-                console.warn(`Failed to load #${optionIndices[i]} options:`, error)
-            }
-        }
-        setConfigOptions(nextConfigOptions)
-
-        try {
-            const ver = await client.getVersion()
-            setVersion(ver)
-        } catch (error) {
-            console.warn('Failed to load version:', error)
-        }
+        const ver = await client.getVersion()
+        setVersion(ver)
     }
 
     async function connect() {
@@ -168,7 +160,7 @@ function App() {
                         <label htmlFor="speed-select">Speed: </label>
                         <select
                             id="speed-select"
-                            value={configValues[CONFIG_OPTIONS.SPEED]}
+                            value={configOptionsValues[CONFIG_OPTIONS.SPEED]}
                             onChange={(e) => updateConfigOption(CONFIG_OPTIONS.SPEED, Number(e.target.value), 'Speed updated')}
                             disabled={!isConnected || isBusy}
                         >
@@ -184,7 +176,7 @@ function App() {
                         <label htmlFor="language-select">Language: </label>
                         <select
                             id="language-select"
-                            value={configValues[CONFIG_OPTIONS.LANGUAGE]}
+                            value={configOptionsValues[CONFIG_OPTIONS.LANGUAGE]}
                             onChange={(e) => updateConfigOption(CONFIG_OPTIONS.LANGUAGE, Number(e.target.value), 'Language updated')}
                             disabled={!isConnected || isBusy}
                         >
@@ -200,7 +192,7 @@ function App() {
                         <label htmlFor="style-select">Style: </label>
                         <select
                             id="style-select"
-                            value={configValues[CONFIG_OPTIONS.STYLE]}
+                            value={configOptionsValues[CONFIG_OPTIONS.STYLE]}
                             onChange={(e) => updateConfigOption(CONFIG_OPTIONS.STYLE, Number(e.target.value), 'Style updated')}
                             disabled={!isConnected || isBusy}
                         >

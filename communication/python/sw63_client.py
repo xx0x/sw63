@@ -333,7 +333,7 @@ def find_sw63_port() -> Optional[str]:
     
     # Look for SW63 device (using the VID/PID from usb_descriptors.c)
     for port in ports:
-        if port.vid == 0xCAFE and port.pid == 0x4001:
+        if port.vid == 0xF055 and port.pid == 0x0063:
             return port.device
         # Also check for common CDC device patterns
         if "SW63" in port.description or "CDC" in port.description:

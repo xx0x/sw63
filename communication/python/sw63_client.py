@@ -27,7 +27,7 @@ class Command:
     # 0x20-0x2F = Configuration
     SET_CONFIG = 0x20
     GET_CONFIG = 0x21
-    GET_CONFIG_OPTIONS = 0x22
+    GET_CONFIG_OPTION_VALUES = 0x22
 
 class Status:
     OK = 0x00
@@ -285,7 +285,7 @@ class SW63Client:
             print(f"Failed to send display intro command. Status: {status:02X}")
             return False
 
-    def get_config_options(self, option: int) -> Optional[List[str]]:
+    def GET_CONFIG_OPTION_VALUES(self, option: int) -> Optional[List[str]]:
         """
         Get list of available values for a config option.
 
@@ -296,7 +296,7 @@ class SW63Client:
             List of option strings or None if failed
         """
         data = struct.pack('<B', option)
-        success, status, response_data = self.send_command(Command.GET_CONFIG_OPTIONS, data)
+        success, status, response_data = self.send_command(Command.GET_CONFIG_OPTION_VALUES, data)
 
         if success and status == Status.OK:
             try:
@@ -409,7 +409,7 @@ Examples:
     
     # Check if any action was specified
     if not (args.set_time or args.get_time or args.set_config or args.get_config or
-            args.get_config_options is not None or args.get_version or args.get_battery or
+            args.GET_CONFIG_OPTION_VALUES is not None or args.get_version or args.get_battery or
             args.display_time or args.display_intro):
         parser.print_help()
         return
@@ -434,8 +434,8 @@ Examples:
         if args.get_config:
             client.get_config()
 
-        if args.get_config_options is not None:
-            client.get_config_options(args.get_config_options)
+        if args.GET_CONFIG_OPTION_VALUES is not None:
+            client.GET_CONFIG_OPTION_VALUES(args.GET_CONFIG_OPTION_VALUES)
 
         if args.get_version:
             client.get_version()

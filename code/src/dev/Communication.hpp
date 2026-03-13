@@ -26,7 +26,7 @@ public:
         // 0x20-0x2F = Configuration
         SET_CONFIG = 0x20,
         GET_CONFIG = 0x21,
-        GET_CONFIG_OPTIONS = 0x22,
+        GET_CONFIG_OPTION_VALUES = 0x22,
     };
 
     // Response status codes
@@ -127,9 +127,9 @@ private:
     void HandleDisplayIntro();
 
     /**
-     * Handle GET_CONFIG_OPTIONS command
+     * Handle GET_CONFIG_OPTION_VALUES command
      */
-    void HandleGetConfigOptions(uint8_t option);
+    void HandleGetConfigOptionValues(uint8_t option);
 
     /**
      * Handle GET_VERSION command

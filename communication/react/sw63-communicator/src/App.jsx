@@ -35,21 +35,21 @@ function App() {
 
         // Load available options for each config field
         try {
-            const speeds = await client.getConfigOptions(0)
+            const speeds = await client.getConfigOptionValues(0)
             setSpeedOptions(speeds)
         } catch (error) {
             console.warn('Failed to load speed options:', error)
         }
 
         try {
-            const languages = await client.getConfigOptions(1)
+            const languages = await client.getConfigOptionValues(1)
             setLanguageOptions(languages)
         } catch (error) {
             console.warn('Failed to load language options:', error)
         }
 
         try {
-            const styles = await client.getConfigOptions(2)
+            const styles = await client.getConfigOptionValues(2)
             setStyleOptions(styles)
         } catch (error) {
             console.warn('Failed to load style options:', error)

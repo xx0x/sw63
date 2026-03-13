@@ -97,10 +97,10 @@ void Communication::HandleMessage(Command command, const uint8_t *data, uint8_t 
     case Command::DISPLAY_INTRO:
         HandleDisplayIntro();
         break;
-    case Command::GET_CONFIG_OPTIONS:
+    case Command::GET_CONFIG_OPTION_VALUES:
         if (length == 1)
         {
-            HandleGetConfigOptions(data[0]);
+            HandleGetConfigOptionValues(data[0]);
         }
         else
         {
@@ -245,7 +245,7 @@ void Communication::HandleGetConfig()
                  sizeof(Settings::Config));
 }
 
-void Communication::HandleGetConfigOptions(uint8_t option)
+void Communication::HandleGetConfigOptionValues(uint8_t option)
 {
     std::string options_text;
 
@@ -296,7 +296,7 @@ void Communication::HandleGetConfigOptions(uint8_t option)
         break;
     }
     default:
-        SendResponse(Command::GET_CONFIG_OPTIONS, Status::INVALID_DATA);
+        SendResponse(Command::GET_CONFIG_OPTION_VALUES, Status::INVALID_DATA);
         return;
     }
 
@@ -305,7 +305,7 @@ void Communication::HandleGetConfigOptions(uint8_t option)
         options_text.resize(MAX_MESSAGE_LENGTH);
     }
 
-    SendResponse(Command::GET_CONFIG_OPTIONS,
+    SendResponse(Command::GET_CONFIG_OPTION_VALUES,
                  Status::OK,
                  reinterpret_cast<const uint8_t *>(options_text.data()),
                  static_cast<uint8_t>(options_text.size()));

@@ -10,7 +10,7 @@ const COMMANDS = {
     // 0x20-0x2F = Configuration
     SET_CONFIG: 0x20,
     GET_CONFIG: 0x21,
-    GET_CONFIG_OPTIONS: 0x22
+    GET_CONFIG_OPTION_VALUES: 0x22
 }
 
 const STATUS_TEXT = {
@@ -173,8 +173,8 @@ export class SW63Client {
         await this.sendCommand(COMMANDS.DISPLAY_INTRO)
     }
 
-    async getConfigOptions(optionIndex) {
-        const data = await this.sendCommand(COMMANDS.GET_CONFIG_OPTIONS, [optionIndex])
+    async getConfigOptionValues(optionIndex) {
+        const data = await this.sendCommand(COMMANDS.GET_CONFIG_OPTION_VALUES, [optionIndex])
         // Decode response as UTF-8 string
         const decoder = new TextDecoder()
         const text = decoder.decode(new Uint8Array(data))

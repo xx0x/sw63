@@ -71,7 +71,6 @@ function App() {
         try {
             await client.connect()
             setStatusMessage('Connected. Loading watch data...')
-
             await loadAllData()
             setIsConnected(true)
             setStatusMessage('Connected')
@@ -88,7 +87,6 @@ function App() {
     async function disconnect() {
         setIsBusy(true)
         setErrorMessage('')
-
         try {
             await client.disconnect()
             setIsConnected(false)
@@ -112,12 +110,10 @@ function App() {
         try {
             await client.setConfig(nextSpeed, nextLanguage, nextStyle)
             setStatusMessage('Configuration updated')
-
             setTimeout(async () => {
                 // Show time after config update
-                await sendDisplayTime();
-            }, 500);
-
+                await runClientCommand('displayTime', 'Display time command sent')
+            }, 500)
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
@@ -143,7 +139,7 @@ function App() {
         await updateConfig(speed, language, nextValue)
     }
 
-    async function setCurrentTime() {
+    async function runClientCommand(methodName, successMessage, onSuccess) {
         if (!isConnected) {
             setErrorMessage('Not connected to a device.')
             return
@@ -153,9 +149,15 @@ function App() {
         setErrorMessage('')
 
         try {
-            const time = await client.setTime()
-            setWatchTime(time)
-            setStatusMessage('Time updated')
+            const clientMethod = client[methodName]
+            if (typeof clientMethod !== 'function') {
+                throw new Error(`Client method not found: ${methodName}`)
+            }
+            const result = await clientMethod.call(client)
+            if (onSuccess) {
+                onSuccess(result)
+            }
+            setStatusMessage(successMessage)
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
@@ -163,45 +165,6 @@ function App() {
         }
     }
 
-    async function sendDisplayTime() {
-        if (!isConnected) {
-            setErrorMessage('Not connected to a device.')
-            return
-        }
-
-        setIsBusy(true)
-        setErrorMessage('')
-
-        try {
-            await client.displayTime()
-            setStatusMessage('Display time command sent')
-        } catch (error) {
-            setErrorMessage(error instanceof Error ? error.message : String(error))
-        } finally {
-            setIsBusy(false)
-        }
-    }
-
-
-    async function sendDisplayIntro() {
-        if (!isConnected) {
-            setErrorMessage('Not connected to a device.')
-            return
-        }
-
-        setIsBusy(true)
-        setErrorMessage('')
-
-        try {
-            await client.displayIntro()
-            setStatusMessage('Display intro command sent')
-        } catch (error) {
-            setErrorMessage(error instanceof Error ? error.message : String(error))
-        } finally {
-            setIsBusy(false)
-        }
-    }
-    
     return (
         <main>
             <h1>SW63 Communicator</h1>
@@ -275,12 +238,20 @@ function App() {
                         <h2>Time</h2>
                         <p>
                             <TickingWatchTime key={watchTime} baseTime={watchTime} />{' '}
-                            <button onClick={setCurrentTime} disabled={!isConnected || isBusy} type="button">
+                            <button
+                                onClick={() => runClientCommand('setTime', 'Time updated', setWatchTime)}
+                                disabled={!isConnected || isBusy}
+                                type="button"
+                            >
                                 Set Current Computer Time
                             </button>
                         </p>
                         <p>
-                            <button onClick={sendDisplayTime} disabled={!isConnected || isBusy} type="button">
+                            <button
+                                onClick={() => runClientCommand('displayTime', 'Display time command sent')}
+                                disabled={!isConnected || isBusy}
+                                type="button"
+                            >
                                 Display Time
                             </button>
                         </p>
@@ -296,7 +267,11 @@ function App() {
                         <p>Version: {version}</p>
                     </section>
                     <section>
-                       <button onClick={sendDisplayIntro} disabled={!isConnected || isBusy} type="button">
+                        <button
+                            onClick={() => runClientCommand('displayIntro', 'Display intro command sent')}
+                            disabled={!isConnected || isBusy}
+                            type="button"
+                        >
                             Display Intro
                         </button>
                     </section>

@@ -52,7 +52,7 @@ function TickingWatchTime({ baseTime }) {
     const current = new Date(parsedBaseTime.getTime() + secondsElapsed * 1000)
     const displayTime = formatDateTime(current)
 
-    return <>{displayTime}</>
+    return <span style={{display: 'inline-block', minWidth: '11rem'}}>{displayTime}</span>
 }
 
 export default TickingWatchTime

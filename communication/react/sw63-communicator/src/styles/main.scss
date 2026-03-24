@@ -1,0 +1,15 @@
+@use './common' as *;
+@use './_reset' as *;
+
+html,
+body {
+    color: $text-color;
+    background-color: $background-color;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    font-family: $font-family;
+}
+
+body {
+    padding: $main-padding;
+}

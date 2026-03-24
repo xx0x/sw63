@@ -1,0 +1,34 @@
+@use "../styles/common.scss" as *;
+
+.container {
+    border: $border-width solid $box-border-color;
+    background-color: $box-background-color;
+    width: 100%;
+    margin-top: $box-padding;
+}
+
+.header {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem $box-padding 0;
+}
+
+.title {
+    font-family: $header-font-family;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+.content {
+    color: #fff;
+    padding: $box-padding;
+    padding-top: 0.5rem;
+}
+
+.action {
+    display: flex;
+    gap: $box-padding;
+}

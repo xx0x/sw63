@@ -1,7 +1,12 @@
 
+import styles from './App.module.scss'
 import { useState } from 'react'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import TickingWatchTime from './components/TickingWatchTime'
+import Box from './components/Box'
+import Button from './components/Button'
+import Row from './components/Row'
+import Dropdown from './components/Dropdown'
 
 function App() {
     const [client] = useState(() => new SW63Client())
@@ -151,117 +156,116 @@ function App() {
     }
 
     return (
-        <main>
-            <h1>SW63 Communicator</h1>
+        <main className={styles.main}>
+            <h1 className={styles.title}>
+                SW63 Communicator
+            </h1>
 
-            <p>
-                <button onClick={connect} disabled={isBusy || isConnected} type="button">
-                    Connect
-                </button>
-                {' '}
-                <button onClick={disconnect} disabled={isBusy || !isConnected} type="button">
-                    Disconnect
-                </button>
-            </p>
+            <Box
+                title="Connection"
+            >
+                <Row>
+                    <Button onClick={connect} disabled={isBusy || isConnected}>
+                        Connect
+                    </Button>
+                    <Button onClick={disconnect} disabled={isBusy || !isConnected}>
+                        Disconnect
+                    </Button>
+                </Row>
 
-            <p>Status: {statusMessage}</p>
-            {errorMessage ? <p>Error: {errorMessage}</p> : null}
+                <p>Status: {statusMessage}</p>
+                {errorMessage ? <p>Error: {errorMessage}</p> : null}
+            </Box>
+
 
             {isConnected &&
                 <>
-                    <section>
-                        <h2>Configuration</h2>
+                    <Box
+                        title="Configuration"
+                    >
+                        <Row>
+                            <span className={styles.configLabel}>Time: </span>
+                            <TickingWatchTime key={watchTime} baseTime={watchTime} />
 
-                        <label htmlFor="speed-select">Speed: </label>
-                        <select
-                            id="speed-select"
-                            value={configOptionsValues[CONFIG_OPTIONS.SPEED]}
-                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.SPEED, Number(e.target.value), 'Speed updated')}
-                            disabled={!isConnected || isBusy}
-                        >
-                            {configOptions[CONFIG_OPTIONS.SPEED].map((name, index) => (
-                                <option key={`speed-${index}`} value={index}>
-                                    {parseInt(name, 10) + 1}
-                                </option>
-                            ))}
-                        </select>
 
-                        <br />
-
-                        <label htmlFor="language-select">Language: </label>
-                        <select
-                            id="language-select"
-                            value={configOptionsValues[CONFIG_OPTIONS.LANGUAGE]}
-                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.LANGUAGE, Number(e.target.value), 'Language updated')}
-                            disabled={!isConnected || isBusy}
-                        >
-                            {configOptions[CONFIG_OPTIONS.LANGUAGE].map((name, index) => (
-                                <option key={`language-${index}`} value={index}>
-                                    {name}
-                                </option>
-                            ))}
-                        </select>
-
-                        <br />
-
-                        <label htmlFor="style-select">Style: </label>
-                        <select
-                            id="style-select"
-                            value={configOptionsValues[CONFIG_OPTIONS.STYLE]}
-                            onChange={(e) => updateConfigOption(CONFIG_OPTIONS.STYLE, Number(e.target.value), 'Style updated')}
-                            disabled={!isConnected || isBusy}
-                        >
-                            {configOptions[CONFIG_OPTIONS.STYLE].map((name, index) => (
-                                <option key={`style-${index}`} value={index}>
-                                    {name}
-                                </option>
-                            ))}
-                        </select>
-                    </section>
-
-                    <section>
-                        <h2>Time</h2>
-                        <p>
-                            <TickingWatchTime key={watchTime} baseTime={watchTime} />{' '}
-                            <button
+                        </Row>
+                        <Row>
+                            <label className={styles.configLabel} htmlFor="speed-select">Speed: </label>
+                            <Dropdown
+                                id="speed-select"
+                                value={configOptionsValues[CONFIG_OPTIONS.SPEED]}
+                                onChange={(v) => updateConfigOption(CONFIG_OPTIONS.SPEED, Number(v), 'Speed updated')}
+                                disabled={!isConnected || isBusy}
+                                options={configOptions[CONFIG_OPTIONS.SPEED].map((name, index) => ({
+                                    value: index,
+                                    label: parseInt(name, 10) + 1
+                                }))}
+                            />
+                        </Row>
+                        <Row>
+                            <label className={styles.configLabel} htmlFor="language-select">Language: </label>
+                            <Dropdown
+                                id="language-select"
+                                value={configOptionsValues[CONFIG_OPTIONS.LANGUAGE]}
+                                onChange={(v) => updateConfigOption(CONFIG_OPTIONS.LANGUAGE, Number(v), 'Language updated')}
+                                disabled={!isConnected || isBusy}
+                                options={configOptions[CONFIG_OPTIONS.LANGUAGE].map((name, index) => ({
+                                    value: index,
+                                    label: name
+                                }))}
+                            />
+                        </Row>
+                        <Row>
+                            <label className={styles.configLabel} htmlFor="style-select">Style: </label>
+                            <Dropdown
+                                id="style-select"
+                                value={configOptionsValues[CONFIG_OPTIONS.STYLE]}
+                                onChange={(v) => updateConfigOption(CONFIG_OPTIONS.STYLE, Number(v), 'Style updated')}
+                                disabled={!isConnected || isBusy}
+                                options={configOptions[CONFIG_OPTIONS.STYLE].map((name, index) => ({
+                                    value: index,
+                                    label: name
+                                }))}
+                            />
+                        </Row>
+                    </Box>
+                    <Box
+                        title="Actions"
+                    >
+                        <Row>
+                            <Button
                                 onClick={() => runClientCommand('setTime', 'Time updated', setWatchTime)}
                                 disabled={!isConnected || isBusy}
-                                type="button"
                             >
-                                Set Current Computer Time
-                            </button>
-                        </p>
-                        <p>
-                            <button
+                                Update time from computer
+                            </Button>
+                            <Button
                                 onClick={() => runClientCommand('displayTime', 'Display time command sent')}
                                 disabled={!isConnected || isBusy}
-                                type="button"
                             >
                                 Display Time
-                            </button>
-                        </p>
-                    </section>
+                            </Button>
+                            <Button
+                                onClick={() => runClientCommand('displayIntro', 'Display intro command sent')}
+                                disabled={!isConnected || isBusy}
+                            >
+                                Display Intro
+                            </Button>
+                        </Row>
+                    </Box>
 
-                    <section>
-                        <h2>Battery</h2>
-                        <p>{batteryLevel}</p>
-                    </section>
 
-                    <section>
-                        <h2>Firmware</h2>
-                        <p>Version: {version}</p>
-                    </section>
-                    <section>
-                        <button
-                            onClick={() => runClientCommand('displayIntro', 'Display intro command sent')}
-                            disabled={!isConnected || isBusy}
-                            type="button"
-                        >
-                            Display Intro
-                        </button>
-                    </section>
+
+                    <Box
+                        title="Device Information"
+                    >
+                        <Row>
+                            <p>Battery: {batteryLevel}</p>
+                            <p>Firmware: {version}</p>
+                        </Row>
+                    </Box>
                 </>}
-        </main>
+        </main >
     )
 }
 

@@ -1,0 +1,41 @@
+@use "../styles/common.scss" as *;
+
+.container {
+    font-size: inherit;
+    background-color: transparent;
+    color: inherit;
+    padding: 7px 27px 7px 11px;
+    text-decoration: none;
+    border: $border-width solid $text-color;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.2;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDggMzAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ4IDMwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGRkZGRjt9PC9zdHlsZT48Zz48Zz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMCwwLjVsMjQsMjguOUw0OCwwLjVDNDgsMC41LDAsMC41LDAsMC41eiBNOCw0LjNINDBMMjQsMjMuNkw4LDQuM3oiLz48L2c+PC9nPjwvc3ZnPg==);
+    background-size: 12px auto;
+    background-position: top 48% right 7px;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    transition: opacity 0.3s 0.05s;
+
+    &:focus {
+        outline: 2px dashed $primary-color;
+        outline-offset: 4px;
+    }
+
+    option {
+        background-color: $background-color;
+        color: $text-color;
+    }
+
+    &.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}

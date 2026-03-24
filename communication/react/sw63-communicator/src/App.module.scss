@@ -1,6 +1,14 @@
+@use "./styles/common.scss" as *;
+
 .main {
     max-width: 60rem;
     margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .title {
@@ -10,4 +18,20 @@
 
 .configLabel {
     min-width: 5.5rem;
+}
+
+.connected {
+    // color: $primary-color;
+    // font-weight: bold;
+}
+
+.disconnected {
+    // font-weight: bold;
+    // color: $secondary-color;
+}
+
+.error {
+    color: $secondary-color;
+    font-weight: bold;
+    margin: 1rem 0;
 }

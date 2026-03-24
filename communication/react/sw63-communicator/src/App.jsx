@@ -157,25 +157,37 @@ function App() {
 
     return (
         <main className={styles.main}>
-            <h1 className={styles.title}>
-                SW63 Communicator
-            </h1>
-
-            <Box
-                title="Connection"
-            >
-                <Row>
-                    <Button onClick={connect} disabled={isBusy || isConnected}>
+            <div className={styles.header}>
+                <div>
+                    <h1 className={styles.title}>
+                        SW63 Communicator
+                    </h1>
+                    <div className={styles.status}>
+                        <p>
+                            {isConnected && <span className={styles.connected}>Status: Connected</span>}
+                            {!isConnected && <span className={styles.disconnected}>Disconnected. Plug in the device and click on “Connect”.</span>}
+                        </p>
+                    </div>
+                </div>
+                {!isConnected &&
+                    <Button onClick={connect} disabled={isBusy}>
                         Connect
                     </Button>
-                    <Button onClick={disconnect} disabled={isBusy || !isConnected}>
+                }
+                {isConnected &&
+                    <Button onClick={disconnect} disabled={isBusy}>
                         Disconnect
                     </Button>
-                </Row>
+                }
+            </div>
 
-                <p>Status: {statusMessage}</p>
-                {errorMessage ? <p>Error: {errorMessage}</p> : null}
-            </Box>
+
+            {/* <p>Status: {statusMessage}</p> */}
+            {errorMessage &&
+                <div className={styles.error}>
+                    <p>Error: {errorMessage}</p>
+                </div>
+            }
 
 
             {isConnected &&
@@ -230,7 +242,7 @@ function App() {
                         </Row>
                     </Box>
                     <Box
-                        title="Actions"
+                        title="Commands"
                     >
                         <Row>
                             <Button
@@ -249,7 +261,7 @@ function App() {
                                 onClick={() => runClientCommand('displayIntro', 'Display intro command sent')}
                                 disabled={!isConnected || isBusy}
                             >
-                                Display Intro
+                                Display Animation
                             </Button>
                         </Row>
                     </Box>
@@ -257,7 +269,7 @@ function App() {
 
 
                     <Box
-                        title="Device Information"
+                        title="Device Info"
                     >
                         <Row>
                             <p>Battery: {batteryLevel}</p>

@@ -7,6 +7,7 @@ function Button({
     primary,
     secondary,
     disabled,
+    pulse,
     children
 }) {
     return (
@@ -18,6 +19,7 @@ function Button({
                 [style.primary]: primary,
                 [style.secondary]: secondary,
                 [style.disabled]: disabled,
+                [style.pulse]: pulse
             })}
             disabled={disabled}
         >

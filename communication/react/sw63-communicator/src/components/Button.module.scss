@@ -3,7 +3,7 @@
 .container {
     background-color: transparent;
     color: $text-color;
-    background-color: $background-color;
+    background-color: transparent;
     padding: 0.5rem 0.75rem;
     text-decoration: none;
     border: $border-width solid $text-color;
@@ -33,6 +33,10 @@
     &:not(:disabled):hover {
         background-color: $text-color;
         color: $background-color;
+    }
+
+    &.pulse {
+        animation: pulse 1.5s infinite;
     }
 }
 

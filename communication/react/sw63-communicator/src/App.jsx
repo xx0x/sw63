@@ -7,8 +7,8 @@ import Button from './components/Button'
 import Dropdown from './components/Dropdown'
 import Row from './components/Row'
 import TickingWatchTime from './components/TickingWatchTime'
-import logo from './images/sw63-mk4-rgb.svg'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
+import Sw63Logo from './Sw63Logo'
 
 function App() {
     const [client] = useState(() => new SW63Client())
@@ -159,9 +159,7 @@ function App() {
 
     return (
         <main className={styles.main}>
-            <img
-                src={logo}
-                alt="SW63 Logo"
+            <Sw63Logo
                 className={classNames(styles.logo, { [styles.inactive]: !isConnected })}
             />
             <div className={styles.header}>
@@ -177,7 +175,7 @@ function App() {
                     </div>
                 </div>
                 {!isConnected &&
-                    <Button onClick={connect} disabled={isBusy}>
+                    <Button onClick={connect} disabled={isBusy} pulse>
                         Connect
                     </Button>
                 }
@@ -202,13 +200,11 @@ function App() {
                     <Box
                         title="Configuration"
                     >
-                        <Row>
+                        <Row alignedHeight style={{ marginTop: '-0.6rem' }}>
                             <span className={styles.configLabel}>Time: </span>
                             <TickingWatchTime key={watchTime} baseTime={watchTime} />
-
-
                         </Row>
-                        <Row>
+                        <Row alignedHeight>
                             <label className={styles.configLabel} htmlFor="speed-select">Speed: </label>
                             <Dropdown
                                 id="speed-select"
@@ -221,7 +217,7 @@ function App() {
                                 }))}
                             />
                         </Row>
-                        <Row>
+                        <Row alignedHeight>
                             <label className={styles.configLabel} htmlFor="language-select">Language: </label>
                             <Dropdown
                                 id="language-select"
@@ -234,7 +230,7 @@ function App() {
                                 }))}
                             />
                         </Row>
-                        <Row>
+                        <Row alignedHeight>
                             <label className={styles.configLabel} htmlFor="style-select">Style: </label>
                             <Dropdown
                                 id="style-select"
@@ -256,7 +252,7 @@ function App() {
                                 onClick={() => runClientCommand('setTime', 'Time updated', setWatchTime)}
                                 disabled={!isConnected || isBusy}
                             >
-                                Update time from computer
+                                Sync time with computer
                             </Button>
                             <Button
                                 onClick={() => runClientCommand('displayTime', 'Display time command sent')}
@@ -272,9 +268,6 @@ function App() {
                             </Button>
                         </Row>
                     </Box>
-
-
-
                     <Box
                         title="Device Info"
                     >

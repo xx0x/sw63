@@ -5,19 +5,47 @@ $line-height: 1.5;
 
 $header-font-family: "Space Grotesk", sans-serif;
 $header-font-weight: bold;
-$header-line-height: 1.2;
+$header-line-height: 1;
 
 $background-color: #000;
 $text-color: #eee;
 
 $border-width: 1px;
 
-$primary-color: #03ec54;
-$secondary-color: #f50a64;
+$primary-color: #00ff00;
+$secondary-color: #ff0000;
+$highlight-color: #b533cd;
 
 $box-border-color: #333;
-$box-background-color: #000;
+$box-background-color: #111;
 
 $main-padding: 2rem;
-$box-padding: 1rem;
+$box-padding: 1.5rem;
 
+@mixin largeDisplay {
+    @media (min-width: 600px) {
+        @content;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba($highlight-color, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba($highlight-color, 0.7);
+    }
+}

@@ -4,7 +4,7 @@
     font-size: inherit;
     background-color: transparent;
     color: inherit;
-    padding: 7px 27px 7px 11px;
+    padding: 0.5em 1.9em 0.5em 0.7em;
     text-decoration: none;
     border: $border-width solid $text-color;
     font-family: inherit;
@@ -23,6 +23,7 @@
     background-repeat: no-repeat;
     border-radius: 0;
     transition: opacity 0.3s 0.05s;
+    min-width: 5em;
 
     &:focus {
         outline: 2px dashed $primary-color;

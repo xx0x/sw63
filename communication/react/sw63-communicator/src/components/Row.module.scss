@@ -1,6 +1,26 @@
+@use "../styles/common.scss" as *;
+
 .row {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-height: 2.6rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    @include largeDisplay {
+        gap: 1rem;
+        flex-direction: row;
+        align-items: center;
+
+        &.aligned-height {
+            min-height: 2.8rem;
+        }
+    }
+
+    &+& {
+        margin-top: $box-padding * 0.75;
+
+        @include largeDisplay {
+            margin-top: 0;
+        }
+    }
 }

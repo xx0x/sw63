@@ -3,17 +3,32 @@
 .main {
     max-width: 60rem;
     margin: 0 auto;
+    animation-name: fadeIn;
+    animation-duration: 0.1s;
 }
 
 .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+
+    @include largeDisplay {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 .title {
-    font-size: 3em;
     font-weight: bold;
+    line-height: $header-line-height;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+
+    @include largeDisplay {
+        font-size: 3em;
+    }
 }
 
 .configLabel {
@@ -32,14 +47,10 @@
     }
 }
 
-.connected {
-    // color: $primary-color;
-    // font-weight: bold;
-}
-
+.connected,
 .disconnected {
-    // font-weight: bold;
-    // color: $secondary-color;
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
 }
 
 .error {

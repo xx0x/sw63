@@ -8,10 +8,26 @@ body {
     font-weight: $font-weight;
     line-height: $line-height;
     font-family: $font-family;
+    scrollbar-color: #444 #222;
 }
 
 body {
     padding: $main-padding;
+}
+
+*::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #222;
+    border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 0px;
 }
 
 *::selection {

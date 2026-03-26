@@ -16,8 +16,8 @@ import { getTimeNow } from './utils'
 const serial_available = ('serial' in navigator);
 
 const appLanguageOptions = [
-    { value: 'en', label: 'English' },
-    { value: 'cs', label: 'Čeština' }
+    { value: 'cs', label: 'Čeština' },
+    { value: 'en', label: 'English' }
 ];
 
 function App() {
@@ -254,7 +254,7 @@ function App() {
                                 disabled={!isConnected || isBusy}
                                 options={configOptions[CONFIG_OPTIONS.LANGUAGE].map((name, index) => ({
                                     value: index,
-                                    label: name
+                                    label: t(`options.${name}`, name)
                                 }))}
                             />
                         </Row>
@@ -267,7 +267,7 @@ function App() {
                                 disabled={!isConnected || isBusy}
                                 options={configOptions[CONFIG_OPTIONS.STYLE].map((name, index) => ({
                                     value: index,
-                                    label: name
+                                    label: t(`options.${name}`, name)
                                 }))}
                             />
                         </Row>

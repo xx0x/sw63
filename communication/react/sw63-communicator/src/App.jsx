@@ -1,6 +1,7 @@
 
 import classNames from 'classnames'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from './App.module.scss'
 import Box from './components/Box'
 import Button from './components/Button'
@@ -16,10 +17,12 @@ const serial_available = ('serial' in navigator);
 
 const appLanguageOptions = [
     { value: 'en', label: 'English' },
-    { value: 'cs', label: 'Czech' }
+    { value: 'cs', label: 'Čeština' }
 ];
 
 function App() {
+
+    const { t, i18n } = useTranslation()
 
     const [client] = useState(() => new SW63Client())
     const [isConnected, setIsConnected] = useState(false)
@@ -39,7 +42,6 @@ function App() {
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
 
-    const [appLanguage, setAppLanguage] = useState('en')
 
     function isDeviceLostError(error) {
         const message = error instanceof Error ? error.message : String(error)
@@ -115,7 +117,6 @@ function App() {
 
     async function updateConfigOption(optionIndex, optionValue, successMessage) {
         if (!isConnected) {
-            setErrorMessage('Not connected to a device.')
             return
         }
         setIsBusy(true)
@@ -142,7 +143,6 @@ function App() {
 
     async function runClientCommand(methodName, successMessage, onSuccess) {
         if (!isConnected) {
-            setErrorMessage('Not connected to a device.')
             return
         }
         setIsBusy(true)
@@ -180,27 +180,26 @@ function App() {
                 <div
                     className={styles.appLanguage}
                 >
-                    App Language:
+                    {t('appLanguage')}:
                     <Dropdown
-
                         options={appLanguageOptions}
-                        value={appLanguage}
-                        onChange={(v) => setAppLanguage(v)}
+                        value={i18n.language}
+                        onChange={(v) => i18n.changeLanguage(v)}
                     />
                 </div>
             </div>
             <div className={styles.header}>
                 <div>
                     <h1 className={styles.title}>
-                        SW63 Communicator
+                        {t('title')}
                     </h1>
                     <div className={styles.status}>
                         <p>
-                            {isConnected && <span className={styles.connected}>Status: Connected. The changes you make will be applied immediately.</span>}
+                        {isConnected && <span className={styles.connected}>{t('connected')}</span>}
                             {!isConnected &&
                                 <span className={styles.disconnected}>
-                                    {!serial_available && <>This browser does not support the Web Serial API.<br />Please use a compatible browser (e.g. Chrome on Desktop) to connect to the device.</>}
-                                    {serial_available && <>Disconnected. Plug in the device and click on “Connect” &#8702;</>}
+                                    {!serial_available && t('noSerialApi')}
+                                    {serial_available && t('disconnectedPrompt')}
                                 </span>
                             }
                         </p>
@@ -208,33 +207,33 @@ function App() {
                 </div>
                 {!isConnected && serial_available &&
                     <Button onClick={connect} disabled={isBusy} pulse>
-                        Connect
+                        {t('connect')}
                     </Button>
                 }
                 {isConnected && serial_available &&
                     <Button onClick={disconnect} disabled={isBusy}>
-                        Disconnect
+                        {t('disconnect')}
                     </Button>
                 }
             </div>
 
             {errorMessage &&
                 <div className={styles.error}>
-                    <p>Error: {errorMessage}</p>
+                    <p>{t('error', { message: errorMessage })}</p>
                 </div>
             }
 
             {isConnected &&
                 <>
                     <Box
-                        title="Configuration"
+                        title={t('configBox')}
                     >
                         <Row alignedHeight style={{ marginTop: '-0.6rem' }}>
-                            <span className={styles.configLabel}>Time: </span>
+                            <span className={styles.configLabel}>{t('timeLabel')}: </span>
                             <TickingWatchTime key={watchTime} baseTime={watchTime} />
                         </Row>
                         <Row alignedHeight>
-                            <label className={styles.configLabel} htmlFor="speed-select">Speed: </label>
+                            <label className={styles.configLabel} htmlFor="speed-select">{t('speedLabel')}: </label>
                             <Dropdown
                                 id="speed-select"
                                 value={configOptionsValues[CONFIG_OPTIONS.SPEED]}
@@ -247,7 +246,7 @@ function App() {
                             />
                         </Row>
                         <Row alignedHeight>
-                            <label className={styles.configLabel} htmlFor="language-select">Language: </label>
+                            <label className={styles.configLabel} htmlFor="language-select">{t('languageLabel')}: </label>
                             <Dropdown
                                 id="language-select"
                                 value={configOptionsValues[CONFIG_OPTIONS.LANGUAGE]}
@@ -260,7 +259,7 @@ function App() {
                             />
                         </Row>
                         <Row alignedHeight>
-                            <label className={styles.configLabel} htmlFor="style-select">Style: </label>
+                            <label className={styles.configLabel} htmlFor="style-select">{t('styleLabel')}: </label>
                             <Dropdown
                                 id="style-select"
                                 value={configOptionsValues[CONFIG_OPTIONS.STYLE]}
@@ -274,35 +273,35 @@ function App() {
                         </Row>
                     </Box>
                     <Box
-                        title="Commands"
+                        title={t('commandsBox')}
                     >
                         <Row>
                             <Button
                                 onClick={() => runClientCommand('setTime', 'Time synced', setWatchTime)}
                                 disabled={!isConnected || isBusy}
                             >
-                                Sync time with computer
+                                {t('syncTime')}
                             </Button>
                             <Button
                                 onClick={() => runClientCommand('displayTime', 'Display time command sent')}
                                 disabled={!isConnected || isBusy}
                             >
-                                Display Time
+                                {t('displayTime')}
                             </Button>
                             <Button
                                 onClick={() => runClientCommand('displayIntro', 'Display animation command sent')}
                                 disabled={!isConnected || isBusy}
                             >
-                                Display Animation
+                                {t('displayAnimation')}
                             </Button>
                         </Row>
                     </Box>
                     <Box
-                        title="Device Info"
+                        title={t('deviceInfoBox')}
                     >
                         <Row>
-                            <p>Battery: {batteryLevel}</p>
-                            <p>Firmware: {version}</p>
+                            <p>{t('battery')}: {batteryLevel}</p>
+                            <p>{t('firmware')}: {version}</p>
                         </Row>
                     </Box>
                     <Log contents={deviceLog} />

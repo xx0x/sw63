@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef, } from "react";
+import { useTranslation } from 'react-i18next'
 import styles from './Log.module.scss'
 
 export default function Log({ contents }) {
+
+    const { t } = useTranslation()
 
     const logRef = useRef(null)
     const [showLog, setShowLog] = useState(false);
@@ -24,12 +27,12 @@ export default function Log({ contents }) {
             <div className={styles.toggleContainer}>
                 {showLog &&
                     <button className={styles.toggle} onClick={() => setShowLog(false)}>
-                        Hide Log
+                        {t('hideLog')}
                     </button>
                 }
                 {!showLog &&
                     <button className={styles.toggle} onClick={() => setShowLog(true)}>
-                        Show Log
+                        {t('showLog')}
                     </button>
                 }
             </div>

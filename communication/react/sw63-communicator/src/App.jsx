@@ -1,10 +1,11 @@
 
 import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import styles from './App.module.scss'
 import Box from './components/Box'
 import Button from './components/Button'
 import Dropdown from './components/Dropdown'
+import Log from './components/Log'
 import Row from './components/Row'
 import TickingWatchTime from './components/TickingWatchTime'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
@@ -14,19 +15,17 @@ import { getTimeNow } from './utils'
 const serial_available = ('serial' in navigator);
 
 function App() {
-    const logRef = useRef(null)
 
     const [client] = useState(() => new SW63Client())
     const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+
     const [deviceLog, setDeviceLog] = useState('')
     const appendDeviceLog = (message, clear = false) => {
         const timeString = `${getTimeNow()} — `
         setDeviceLog((prevLog) => (clear ? '' : prevLog) + timeString + message + '\n')
     }
-    const [showLog, setShowLog] = useState(false)
-
 
     const [configOptions, setConfigOptions] = useState(() => Object.values(CONFIG_OPTIONS).map(() => []))
     const [configOptionsValues, setConfigOptionsValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
@@ -77,7 +76,6 @@ function App() {
         setIsBusy(true)
         setErrorMessage('')
         appendDeviceLog('Connecting...', true)
-
         try {
             await client.connect()
             appendDeviceLog('Loading watch data...')
@@ -113,10 +111,8 @@ function App() {
             setErrorMessage('Not connected to a device.')
             return
         }
-
         setIsBusy(true)
         setErrorMessage('')
-
         try {
             await client.setConfigOption(optionIndex, optionValue)
             setConfigValue(optionIndex, optionValue)
@@ -142,10 +138,8 @@ function App() {
             setErrorMessage('Not connected to a device.')
             return
         }
-
         setIsBusy(true)
         setErrorMessage('')
-
         try {
             const clientMethod = client[methodName]
             if (typeof clientMethod !== 'function') {
@@ -167,14 +161,6 @@ function App() {
             setIsBusy(false)
         }
     }
-
-    useEffect(() => {
-        if (!showLog || !logRef.current) {
-            return
-        }
-
-        logRef.current.scrollTop = logRef.current.scrollHeight
-    }, [deviceLog, showLog])
 
     return (
         <main className={styles.main}>
@@ -212,14 +198,11 @@ function App() {
                 }
             </div>
 
-
-            {/* <p>Status: {statusMessage}</p> */}
             {errorMessage &&
                 <div className={styles.error}>
                     <p>Error: {errorMessage}</p>
                 </div>
             }
-
 
             {isConnected &&
                 <>
@@ -302,23 +285,7 @@ function App() {
                             <p>Firmware: {version}</p>
                         </Row>
                     </Box>
-                    {showLog &&
-                        <pre ref={logRef} className={styles.log}>
-                            {deviceLog}
-                        </pre>
-                    }
-                    <div className={styles.footer}>
-                        {showLog &&
-                            <button className={styles.toggleLogButton} onClick={() => setShowLog(false)}>
-                                Hide Log
-                            </button>
-                        }
-                        {!showLog &&
-                            <button className={styles.toggleLogButton} onClick={() => setShowLog(true)}>
-                                Show Log
-                            </button>
-                        }
-                    </div>
+                    <Log contents={deviceLog} />
                 </>}
         </main >
     )

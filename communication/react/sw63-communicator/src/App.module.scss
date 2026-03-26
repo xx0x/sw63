@@ -58,33 +58,3 @@
     font-weight: bold;
     margin: 1rem 0;
 }
-
-.footer {
-    display: flex;
-
-    @include largeDisplay {
-        justify-content: flex-end;
-    }
-}
-
-.toggleLogButton {
-    margin-top: 1rem;
-    background: transparent;
-    color: inherit;
-    border: none;
-    cursor: pointer;
-    text-decoration: underline;
-    opacity: 0.2;
-    text-transform: lowercase;
-}
-
-.log {
-    margin-top: $box-padding;
-    background-color: $box-background-color;
-    padding: $box-padding;
-    height: 20em;
-    overflow-y: auto;
-    font-family: monospace;
-    animation-name: fadeIn;
-    animation-duration: 0.2s;
-}

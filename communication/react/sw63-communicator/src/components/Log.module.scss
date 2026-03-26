@@ -1,0 +1,31 @@
+@use "../styles/common.scss" as *;
+
+.container {
+    margin-top: $box-padding;
+    background-color: $box-background-color;
+    padding: $box-padding;
+    height: 20em;
+    overflow-y: auto;
+    font-family: monospace;
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
+}
+
+.toggleContainer {
+    margin-top: 1rem;
+    display: flex;
+
+    @include largeDisplay {
+        justify-content: flex-end;
+    }
+}
+
+.toggle {
+    background: transparent;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.2;
+    text-transform: lowercase;
+}

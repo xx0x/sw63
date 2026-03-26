@@ -25,10 +25,7 @@
     transition: opacity 0.3s 0.05s;
     min-width: 5em;
 
-    &:focus {
-        outline: 2px dashed $primary-color;
-        outline-offset: 4px;
-    }
+    @include accessibilityFocus;
 
     option {
         background-color: $background-color;

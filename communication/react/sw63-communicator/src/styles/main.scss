@@ -13,3 +13,13 @@ body {
 body {
     padding: $main-padding;
 }
+
+*::selection {
+    background-color: $highlight-color;
+    color: #333;
+}
+
+*::-moz-selection {
+    background-color: $highlight-color;
+    color: #333;
+}

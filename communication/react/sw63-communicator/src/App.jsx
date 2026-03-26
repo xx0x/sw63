@@ -10,6 +10,8 @@ import TickingWatchTime from './components/TickingWatchTime'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import Sw63Logo from './Sw63Logo'
 
+const serial_available = ('serial' in navigator);
+
 function App() {
     const [client] = useState(() => new SW63Client())
     const [isConnected, setIsConnected] = useState(false)
@@ -160,7 +162,9 @@ function App() {
     return (
         <main className={styles.main}>
             <Sw63Logo
-                className={classNames(styles.logo, { [styles.inactive]: !isConnected })}
+                className={classNames(styles.logo, {
+                    [styles.inactive]: !isConnected
+                })}
             />
             <div className={styles.header}>
                 <div>
@@ -169,17 +173,22 @@ function App() {
                     </h1>
                     <div className={styles.status}>
                         <p>
-                            {isConnected && <span className={styles.connected}>Status: Connected</span>}
-                            {!isConnected && <span className={styles.disconnected}>Disconnected. Plug in the device and click on “Connect”.</span>}
+                            {isConnected && <span className={styles.connected}>Status: Connected. The changes you make will be applied immediately.</span>}
+                            {!isConnected &&
+                                <span className={styles.disconnected}>
+                                    {!serial_available && <>This browser does not support the Web Serial API.<br />Please use a compatible browser (e.g. Chrome on Desktop) to connect to the device.</>}
+                                    {serial_available && <>Disconnected. Plug in the device and click on “Connect” &#8702;</>}
+                                </span>
+                            }
                         </p>
                     </div>
                 </div>
-                {!isConnected &&
+                {!isConnected && serial_available &&
                     <Button onClick={connect} disabled={isBusy} pulse>
                         Connect
                     </Button>
                 }
-                {isConnected &&
+                {isConnected && serial_available &&
                     <Button onClick={disconnect} disabled={isBusy}>
                         Disconnect
                     </Button>

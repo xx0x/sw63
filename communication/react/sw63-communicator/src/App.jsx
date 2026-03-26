@@ -1,6 +1,6 @@
 
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './App.module.scss'
 import Box from './components/Box'
@@ -9,20 +9,20 @@ import Dropdown from './components/Dropdown'
 import Log from './components/Log'
 import Row from './components/Row'
 import TickingWatchTime from './components/TickingWatchTime'
+import { languageOptions } from './i18n'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import Sw63Logo from './Sw63Logo'
 import { getTimeNow } from './utils'
 
 const serial_available = ('serial' in navigator);
 
-const appLanguageOptions = [
-    { value: 'cs', label: 'Čeština' },
-    { value: 'en', label: 'English' }
-];
-
 function App() {
 
     const { t, i18n } = useTranslation()
+
+    useEffect(() => {
+        document.title = t('title')
+    }, [i18n.language, t])
 
     const [client] = useState(() => new SW63Client())
     const [isConnected, setIsConnected] = useState(false)
@@ -182,7 +182,7 @@ function App() {
                 >
                     {t('appLanguage')}:
                     <Dropdown
-                        options={appLanguageOptions}
+                        options={languageOptions}
                         value={i18n.language}
                         onChange={(v) => i18n.changeLanguage(v)}
                     />
@@ -195,7 +195,7 @@ function App() {
                     </h1>
                     <div className={styles.status}>
                         <p>
-                        {isConnected && <span className={styles.connected}>{t('connected')}</span>}
+                            {isConnected && <span className={styles.connected}>{t('connected')}</span>}
                             {!isConnected &&
                                 <span className={styles.disconnected}>
                                     {!serial_available && t('noSerialApi')}

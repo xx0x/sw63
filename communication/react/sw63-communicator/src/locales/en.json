@@ -21,5 +21,17 @@
     "battery": "Battery",
     "firmware": "Firmware",
     "showLog": "Show Log",
-    "hideLog": "Hide Log"
+    "hideLog": "Hide Log",
+    "options": {
+        "Czech, Slovak, East German": "Czech, Slovak, East German",
+        "English": "English",
+        "German, Dutch": "German, Dutch",
+        "Polish": "Polish",
+        "Hungarian": "Hungarian",
+        "Nordic": "Nordic",
+        "Bar reversed (original)": "Bar reversed (original)",
+        "Single reversed": "Single reversed",
+        "Bar": "Bar",
+        "Single": "Single"
+    }
 }

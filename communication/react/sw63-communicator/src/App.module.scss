@@ -81,7 +81,7 @@
 .log {
     margin-top: $box-padding;
     background-color: $box-background-color;
-    padding: 1rem;
+    padding: $box-padding;
     height: 20em;
     overflow-y: auto;
     font-family: monospace;

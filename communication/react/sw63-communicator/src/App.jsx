@@ -1,6 +1,6 @@
 
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './App.module.scss'
 import Box from './components/Box'
 import Button from './components/Button'
@@ -14,6 +14,8 @@ import { getTimeNow } from './utils'
 const serial_available = ('serial' in navigator);
 
 function App() {
+    const logRef = useRef(null)
+
     const [client] = useState(() => new SW63Client())
     const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
@@ -166,6 +168,14 @@ function App() {
         }
     }
 
+    useEffect(() => {
+        if (!showLog || !logRef.current) {
+            return
+        }
+
+        logRef.current.scrollTop = logRef.current.scrollHeight
+    }, [deviceLog, showLog])
+
     return (
         <main className={styles.main}>
             <Sw63Logo
@@ -293,7 +303,7 @@ function App() {
                         </Row>
                     </Box>
                     {showLog &&
-                        <pre className={styles.log}>
+                        <pre ref={logRef} className={styles.log}>
                             {deviceLog}
                         </pre>
                     }

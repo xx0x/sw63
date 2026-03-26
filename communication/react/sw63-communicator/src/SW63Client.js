@@ -38,6 +38,14 @@ function pad2(value) {
     return String(value).padStart(2, '0')
 }
 
+function formatHexByte(value) {
+    return `0x${Number(value).toString(16).padStart(2, '0').toUpperCase()}`
+}
+
+function formatHexBytes(data) {
+    return Array.from(data, (value) => formatHexByte(value)).join(' ')
+}
+
 async function readProtocolResponse(serialPort) {
     const reader = serialPort.readable.getReader()
     const buffer = []
@@ -66,8 +74,16 @@ async function readProtocolResponse(serialPort) {
 }
 
 export class SW63Client {
-    constructor() {
+    constructor(logMessage) {
         this.port = null
+        this.logMessage = typeof logMessage === 'function' ? logMessage : null
+    }
+
+    logProtocolMessage(direction, payload) {
+        if (!this.logMessage) {
+            return
+        }
+        this.logMessage(`${direction}: ${formatHexBytes(payload)}`)
     }
 
     async connect() {
@@ -112,14 +128,16 @@ export class SW63Client {
         }
 
         const writer = this.port.writable.getWriter()
+        const request = new Uint8Array([commandId, data.length, ...data])
         try {
-            const request = new Uint8Array([commandId, data.length, ...data])
+            this.logProtocolMessage('TX', request)
             await writer.write(request)
         } finally {
             writer.releaseLock()
         }
 
         const response = await readProtocolResponse(this.port)
+        this.logProtocolMessage('RX', response)
         const [responseCommand, status, dataLength, ...responseData] = response
 
         if (responseCommand !== commandId) {

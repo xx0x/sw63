@@ -24,16 +24,16 @@ function App() {
         document.title = t('title')
     }, [i18n.language, t])
 
-    const [client] = useState(() => new SW63Client())
-    const [isConnected, setIsConnected] = useState(false)
-    const [isBusy, setIsBusy] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
-
     const [deviceLog, setDeviceLog] = useState('')
     const appendDeviceLog = (message, clear = false) => {
         const timeString = `${getTimeNow()} — `
         setDeviceLog((prevLog) => (clear ? '' : prevLog) + timeString + message + '\n')
     }
+
+    const [client] = useState(() => new SW63Client(appendDeviceLog))
+    const [isConnected, setIsConnected] = useState(false)
+    const [isBusy, setIsBusy] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const [configOptions, setConfigOptions] = useState(() => Object.values(CONFIG_OPTIONS).map(() => []))
     const [configOptionsValues, setConfigOptionsValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
@@ -84,18 +84,21 @@ function App() {
     async function connect() {
         setIsBusy(true)
         setErrorMessage('')
-        appendDeviceLog('Connecting...', true)
+        appendDeviceLog('Connecting.', true)
         try {
             await client.connect()
-            appendDeviceLog('Loading watch data...')
+            appendDeviceLog('Loading watch data.')
             await loadAllData()
             setIsConnected(true)
-            appendDeviceLog('Connected')
+            appendDeviceLog('Connected.')
         } catch (error) {
             await client.disconnect()
             setIsConnected(false)
-            appendDeviceLog('Disconnected')
-            setErrorMessage(error instanceof Error ? error.message : String(error))
+            const errorText = error instanceof Error ? error.message : String(error);
+            if (!errorText.includes('No port selected by the user.')) {
+                appendDeviceLog('Disconnected.')
+                setErrorMessage(errorText)
+            }
         } finally {
             setIsBusy(false)
         }
@@ -107,7 +110,7 @@ function App() {
         try {
             await client.disconnect()
             setIsConnected(false)
-            appendDeviceLog('Disconnected')
+            appendDeviceLog('Disconnected.')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
@@ -127,12 +130,12 @@ function App() {
             appendDeviceLog(successMessage)
             setTimeout(async () => {
                 // Show time after config update
-                await runClientCommand('displayTime', 'Display time command sent')
+                await runClientCommand('displayTime', 'Display time command sent.')
             }, 500)
         } catch (error) {
             if (isDeviceLostError(error)) {
                 setIsConnected(false)
-                appendDeviceLog('Disconnected')
+                appendDeviceLog('Disconnected.')
             } else {
                 setErrorMessage(error instanceof Error ? error.message : String(error))
             }
@@ -160,7 +163,7 @@ function App() {
         } catch (error) {
             if (isDeviceLostError(error)) {
                 setIsConnected(false)
-                appendDeviceLog('Disconnected')
+                appendDeviceLog('Disconnected.')
             } else {
                 setErrorMessage(error instanceof Error ? error.message : String(error))
             }
@@ -277,19 +280,19 @@ function App() {
                     >
                         <Row>
                             <Button
-                                onClick={() => runClientCommand('setTime', 'Time synced', setWatchTime)}
+                                onClick={() => runClientCommand('setTime', 'Time synced.', setWatchTime)}
                                 disabled={!isConnected || isBusy}
                             >
                                 {t('syncTime')}
                             </Button>
                             <Button
-                                onClick={() => runClientCommand('displayTime', 'Display time command sent')}
+                                onClick={() => runClientCommand('displayTime', 'Display time command sent.')}
                                 disabled={!isConnected || isBusy}
                             >
                                 {t('displayTime')}
                             </Button>
                             <Button
-                                onClick={() => runClientCommand('displayIntro', 'Display animation command sent')}
+                                onClick={() => runClientCommand('displayIntro', 'Display animation command sent.')}
                                 disabled={!isConnected || isBusy}
                             >
                                 {t('displayAnimation')}

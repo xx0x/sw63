@@ -6,6 +6,7 @@
     padding: $box-padding;
     height: 20em;
     overflow-y: auto;
+    overflow-x: hidden;
     font-family: monospace;
     animation-name: fadeIn;
     animation-duration: 0.2s;

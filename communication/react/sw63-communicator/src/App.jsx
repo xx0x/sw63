@@ -9,6 +9,7 @@ import Row from './components/Row'
 import TickingWatchTime from './components/TickingWatchTime'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import Sw63Logo from './Sw63Logo'
+import { getTimeNow } from './utils'
 
 const serial_available = ('serial' in navigator);
 
@@ -17,7 +18,13 @@ function App() {
     const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-    const [statusMessage, setStatusMessage] = useState('Disconnected')
+    const [deviceLog, setDeviceLog] = useState('')
+    const appendDeviceLog = (message, clear = false) => {
+        const timeString = `${getTimeNow()} — `
+        setDeviceLog((prevLog) => (clear ? '' : prevLog) + timeString + message + '\n')
+    }
+    const [showLog, setShowLog] = useState(false)
+
 
     const [configOptions, setConfigOptions] = useState(() => Object.values(CONFIG_OPTIONS).map(() => []))
     const [configOptionsValues, setConfigOptionsValues] = useState(() => Object.values(CONFIG_OPTIONS).map(() => 0))
@@ -67,18 +74,18 @@ function App() {
     async function connect() {
         setIsBusy(true)
         setErrorMessage('')
-        setStatusMessage('Connecting...')
+        appendDeviceLog('Connecting...', true)
 
         try {
             await client.connect()
-            setStatusMessage('Connected. Loading watch data...')
+            appendDeviceLog('Loading watch data...')
             await loadAllData()
             setIsConnected(true)
-            setStatusMessage('Connected')
+            appendDeviceLog('Connected')
         } catch (error) {
             await client.disconnect()
             setIsConnected(false)
-            setStatusMessage('Disconnected')
+            appendDeviceLog('Disconnected')
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
             setIsBusy(false)
@@ -91,7 +98,7 @@ function App() {
         try {
             await client.disconnect()
             setIsConnected(false)
-            setStatusMessage('Disconnected')
+            appendDeviceLog('Disconnected')
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : String(error))
         } finally {
@@ -111,7 +118,7 @@ function App() {
         try {
             await client.setConfigOption(optionIndex, optionValue)
             setConfigValue(optionIndex, optionValue)
-            setStatusMessage(successMessage)
+            appendDeviceLog(successMessage)
             setTimeout(async () => {
                 // Show time after config update
                 await runClientCommand('displayTime', 'Display time command sent')
@@ -119,7 +126,7 @@ function App() {
         } catch (error) {
             if (isDeviceLostError(error)) {
                 setIsConnected(false)
-                setStatusMessage('Disconnected')
+                appendDeviceLog('Disconnected')
             } else {
                 setErrorMessage(error instanceof Error ? error.message : String(error))
             }
@@ -146,11 +153,11 @@ function App() {
             if (onSuccess) {
                 onSuccess(result)
             }
-            setStatusMessage(successMessage)
+            appendDeviceLog(successMessage)
         } catch (error) {
             if (isDeviceLostError(error)) {
                 setIsConnected(false)
-                setStatusMessage('Disconnected')
+                appendDeviceLog('Disconnected')
             } else {
                 setErrorMessage(error instanceof Error ? error.message : String(error))
             }
@@ -258,7 +265,7 @@ function App() {
                     >
                         <Row>
                             <Button
-                                onClick={() => runClientCommand('setTime', 'Time updated', setWatchTime)}
+                                onClick={() => runClientCommand('setTime', 'Time synced', setWatchTime)}
                                 disabled={!isConnected || isBusy}
                             >
                                 Sync time with computer
@@ -270,7 +277,7 @@ function App() {
                                 Display Time
                             </Button>
                             <Button
-                                onClick={() => runClientCommand('displayIntro', 'Display intro command sent')}
+                                onClick={() => runClientCommand('displayIntro', 'Display animation command sent')}
                                 disabled={!isConnected || isBusy}
                             >
                                 Display Animation
@@ -285,6 +292,23 @@ function App() {
                             <p>Firmware: {version}</p>
                         </Row>
                     </Box>
+                    {showLog &&
+                        <pre className={styles.log}>
+                            {deviceLog}
+                        </pre>
+                    }
+                    <div className={styles.footer}>
+                        {showLog &&
+                            <button className={styles.toggleLogButton} onClick={() => setShowLog(false)}>
+                                Hide Log
+                            </button>
+                        }
+                        {!showLog &&
+                            <button className={styles.toggleLogButton} onClick={() => setShowLog(true)}>
+                                Show Log
+                            </button>
+                        }
+                    </div>
                 </>}
         </main >
     )

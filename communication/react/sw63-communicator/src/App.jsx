@@ -1,12 +1,14 @@
 
-import styles from './App.module.scss'
+import classNames from 'classnames'
 import { useState } from 'react'
-import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
-import TickingWatchTime from './components/TickingWatchTime'
+import styles from './App.module.scss'
 import Box from './components/Box'
 import Button from './components/Button'
-import Row from './components/Row'
 import Dropdown from './components/Dropdown'
+import Row from './components/Row'
+import TickingWatchTime from './components/TickingWatchTime'
+import logo from './images/sw63-mk4-rgb.svg'
+import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 
 function App() {
     const [client] = useState(() => new SW63Client())
@@ -157,6 +159,11 @@ function App() {
 
     return (
         <main className={styles.main}>
+            <img
+                src={logo}
+                alt="SW63 Logo"
+                className={classNames(styles.logo, { [styles.inactive]: !isConnected })}
+            />
             <div className={styles.header}>
                 <div>
                     <h1 className={styles.title}>

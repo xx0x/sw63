@@ -20,6 +20,18 @@
     min-width: 5.5rem;
 }
 
+.logo {
+    display: block;
+    width: 100%;
+    max-width: 10rem;
+    margin: 0 0 1.5rem -0.5rem;
+    transition: filter 0.3s ease;
+
+    &.inactive {
+        filter: grayscale(1);
+    }
+}
+
 .connected {
     // color: $primary-color;
     // font-weight: bold;

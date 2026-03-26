@@ -35,17 +35,38 @@
     min-width: 5.5rem;
 }
 
+.logoContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+
+    @include largeDisplay {
+        margin-left: -0.5rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+.appLanguage {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+}
+
 .logo {
     display: block;
     width: 100%;
     max-width: 10rem;
-    margin: 0 0 1.5rem -0.5rem;
     transition: filter 0.3s ease, opacity 0.1s ease;
 
     &.inactive {
         filter: grayscale(1);
     }
 }
+
 
 .connected,
 .disconnected {

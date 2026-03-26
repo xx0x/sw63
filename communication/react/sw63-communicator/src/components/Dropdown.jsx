@@ -8,7 +8,7 @@ export default function Dropdown(props) {
             className={classNames({
                 [style.container]: true,
                 [style.disabled]: props.disabled
-            })}
+            }, props.className)}
             id={props.id}
             disabled={props.disabled}
             value={props.value}

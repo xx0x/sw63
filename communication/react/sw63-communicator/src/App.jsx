@@ -14,6 +14,11 @@ import { getTimeNow } from './utils'
 
 const serial_available = ('serial' in navigator);
 
+const appLanguageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'cs', label: 'Czech' }
+];
+
 function App() {
 
     const [client] = useState(() => new SW63Client())
@@ -33,6 +38,8 @@ function App() {
     const [watchTime, setWatchTime] = useState('N/A')
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
+
+    const [appLanguage, setAppLanguage] = useState('en')
 
     function isDeviceLostError(error) {
         const message = error instanceof Error ? error.message : String(error)
@@ -164,11 +171,24 @@ function App() {
 
     return (
         <main className={styles.main}>
-            <Sw63Logo
-                className={classNames(styles.logo, {
-                    [styles.inactive]: !isConnected
-                })}
-            />
+            <div className={styles.logoContainer}>
+                <Sw63Logo
+                    className={classNames(styles.logo, {
+                        [styles.inactive]: !isConnected
+                    })}
+                />
+                <div
+                    className={styles.appLanguage}
+                >
+                    App Language:
+                    <Dropdown
+
+                        options={appLanguageOptions}
+                        value={appLanguage}
+                        onChange={(v) => setAppLanguage(v)}
+                    />
+                </div>
+            </div>
             <div className={styles.header}>
                 <div>
                     <h1 className={styles.title}>

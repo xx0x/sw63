@@ -23,15 +23,15 @@
     "showLog": "Log anzeigen",
     "hideLog": "Log ausblenden",
     "options": {
-        "Czech, Slovak, East German": "Tschechisch, Slowakisch, Deutsch (Ost)",
+        "Czech, Slovak, German (East)": "Tschechisch, Slowakisch, Deutsch (Ost)",
         "English": "Englisch",
         "German, Dutch": "Deutsch, Niederländisch",
         "Polish": "Polnisch",
         "Hungarian": "Ungarisch",
         "Nordic": "Nordische Sprachen",
-        "Bar reversed (original)": "Balken umgekehrt (Original)",
-        "Single reversed": "Einzeln umgekehrt",
+        "Bar reversed (default)": "Balken umgekehrt (Original)",
         "Bar": "Balken",
+        "Single reversed": "Einzeln umgekehrt",
         "Single": "Einzeln"
     }
 }

@@ -23,15 +23,15 @@
     "showLog": "Показати журнал",
     "hideLog": "Приховати журнал",
     "options": {
-        "Czech, Slovak, East German": "Чеська, словацька, східна німецька",
+        "Czech, Slovak, German (East)": "Чеська, словацька, східна німецька",
         "English": "Англійська",
         "German, Dutch": "Німецька, голландська",
         "Polish": "Польська",
         "Hungarian": "Угорська",
         "Nordic": "Північногермансько",
-        "Bar reversed (original)": "Смуга перевернута (оригінал)",
-        "Single reversed": "Одна перевернута",
+        "Bar reversed (default)": "Смуга перевернута (оригінал)",
         "Bar": "Смуга",
+        "Single reversed": "Одна перевернута",
         "Single": "Одна"
     }
 }

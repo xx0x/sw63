@@ -33,7 +33,7 @@ public:
         NUM_1 = 20u,
         NUM_2 = 21u,
         NUM_3 = 22u,
-        NUM_4 = 23u,
+        NUM_4 = 23u
     };
 
     enum class ClockFace
@@ -42,7 +42,7 @@ public:
         RIGHT = 1,
         DOWN = 2,
         LEFT = 3,
-        COUNT,
+        COUNT
     };
 
     enum class TopLed
@@ -51,14 +51,14 @@ public:
         AFTER,
         HOURS,
         MINUTES,
-        COUNT,
+        COUNT
     };
 
     enum class NumStyle : uint8_t
     {
-        BAR_REVERSED,   // OG behavior
-        SINGLE_REVERSED,
+        BAR_REVERSED, // OG behavior
         BAR,
+        SINGLE_REVERSED,
         SINGLE,
         SNAKE_REVERSED, // Shows 3 LEDs in a row for snake effect (not ideal for specific numbers)
         SNAKE,          // Shows 3 LEDs in a row for snake effect (not ideal for specific numbers)
@@ -67,9 +67,9 @@ public:
 
     // We omit the SNAKE styles from the kNumStyles array since they are not ideal for specific numbers and are more of a special effect.
     static constexpr const char *kNumStyles[4] = {
-        "Bar reversed (original)",
-        "Single reversed",
+        "Bar reversed (default)",
         "Bar",
+        "Single reversed",
         "Single",
     };
 

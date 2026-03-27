@@ -23,15 +23,15 @@
     "showLog": "Zobrazit log",
     "hideLog": "Skrýt log",
     "options": {
-        "Czech, Slovak, East German": "Čeština, Slovenština, Němčina (východ)",
+        "Czech, Slovak, German (East)": "Čeština, Slovenština, Němčina (východ)",
         "English": "Angličtina",
         "German, Dutch": "Němčina, Nizozemština",
         "Polish": "Polština",
         "Hungarian": "Maďarština",
         "Nordic": "Severské jazyky",
-        "Bar reversed (original)": "Řada obrácená (originál)",
-        "Single reversed": "Jedna LED obrácená",
+        "Bar reversed (default)": "Řada obrácená (originál)",
         "Bar": "Řada",
+        "Single reversed": "Jedna LED obrácená",
         "Single": "Jedna LED"
     }
 }

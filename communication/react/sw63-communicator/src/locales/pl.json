@@ -23,15 +23,15 @@
     "showLog": "Pokaż dziennik",
     "hideLog": "Ukryj dziennik",
     "options": {
-        "Czech, Slovak, East German": "Czeski, słowacki, niemiecki (wschód)",
+        "Czech, Slovak, German (East)": "Czeski, słowacki, niemiecki (wschód)",
         "English": "Angielski",
         "German, Dutch": "Niemiecki, holenderski",
         "Polish": "Polski",
         "Hungarian": "Węgierski",
         "Nordic": "Północny",
-        "Bar reversed (original)": "Pasek odwrócony (oryginalny)",
-        "Single reversed": "Pojedynczy odwrócony",
+        "Bar reversed (default)": "Pasek odwrócony (oryginalny)",
         "Bar": "Pasek",
+        "Single reversed": "Pojedynczy odwrócony",
         "Single": "Pojedynczy"
     }
 }

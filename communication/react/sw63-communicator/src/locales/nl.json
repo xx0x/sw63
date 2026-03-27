@@ -23,15 +23,15 @@
     "showLog": "Log tonen",
     "hideLog": "Log verbergen",
     "options": {
-        "Czech, Slovak, East German": "Tsjechisch, Slowaaks, Duits (Oost)",
+        "Czech, Slovak, German (East)": "Tsjechisch, Slowaaks, Duits (Oost)",
         "English": "Engels",
         "German, Dutch": "Duits, Nederlands",
         "Polish": "Pools",
         "Hungarian": "Hongaars",
         "Nordic": "Noordse",
-        "Bar reversed (original)": "Balk omgekeerd (origineel)",
-        "Single reversed": "Enkel omgekeerd",
+        "Bar reversed (default)": "Balk omgekeerd (origineel)",
         "Bar": "Balk",
+        "Single reversed": "Enkel omgekeerd",
         "Single": "Enkel"
     }
 }

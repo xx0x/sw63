@@ -23,15 +23,15 @@
     "showLog": "Napló megjelenítése",
     "hideLog": "Napló elrejtése",
     "options": {
-        "Czech, Slovak, East German": "Cseh, szlovák, keletnémet",
+        "Czech, Slovak, German (East)": "Cseh, szlovák, keletnémet",
         "English": "Angol",
         "German, Dutch": "Német, holland",
         "Polish": "Lengyel",
         "Hungarian": "Magyar",
         "Nordic": "Skandináv",
-        "Bar reversed (original)": "Fordított sáv (eredeti)",
-        "Single reversed": "Fordított egyedi",
+        "Bar reversed (default)": "Fordított sáv (eredeti)",
         "Bar": "Sáv",
+        "Single reversed": "Fordított egyedi",
         "Single": "Egyedi"
     }
 }

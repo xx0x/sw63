@@ -23,15 +23,15 @@
     "showLog": "Show Log",
     "hideLog": "Hide Log",
     "options": {
-        "Czech, Slovak, East German": "Czech, Slovak, East German",
+        "Czech, Slovak, German (East)": "Czech, Slovak, German (East)",
         "English": "English",
         "German, Dutch": "German, Dutch",
         "Polish": "Polish",
         "Hungarian": "Hungarian",
         "Nordic": "Nordic",
-        "Bar reversed (original)": "Bar reversed (original)",
-        "Single reversed": "Single reversed",
+        "Bar reversed (default)": "Bar reversed (default)",
         "Bar": "Bar",
+        "Single reversed": "Single reversed",
         "Single": "Single"
     }
 }

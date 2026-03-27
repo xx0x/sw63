@@ -15,7 +15,7 @@ public:
      */
     enum class Language : uint8_t
     {
-        CZECH, // Also works for: SLOVAK, EAST GERMAN
+        CZECH, // Also works for: SLOVAK, GERMAN (EAST)
         ENGLISH,
         GERMAN, // Also works for: DUTCH
         POLISH,
@@ -29,7 +29,7 @@ public:
      * @details   This array needs to be in the same order as the Language enum.
      */
     static constexpr const char *kLanguageNames[static_cast<size_t>(Language::COUNT)] = {
-        "Czech, Slovak, East German",
+        "Czech, Slovak, German (East)",
         "English",
         "German, Dutch",
         "Polish",

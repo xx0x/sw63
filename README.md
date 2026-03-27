@@ -1,3 +1,5 @@
+<img src="./images/sw63-mk4.svg" alt="SW63 Electronic Watch" width="150" />
+
 # Space Watch SW63
 
 A sci-fi inspired electornic watch.

@@ -22,6 +22,8 @@
     "firmware": "Firmware",
     "showLog": "Show Log",
     "hideLog": "Hide Log",
+    "speedSlowest": "{{speed}} - Slowest",
+    "speedFastest": "{{speed}} - Fastest",
     "options": {
         "Czech, Slovak, German (East)": "Czech, Slovak, German (East)",
         "English": "English",

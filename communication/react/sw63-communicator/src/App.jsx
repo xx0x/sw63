@@ -242,10 +242,20 @@ function App() {
                                 value={configOptionsValues[CONFIG_OPTIONS.SPEED]}
                                 onChange={(v) => updateConfigOption(CONFIG_OPTIONS.SPEED, Number(v), 'Speed updated')}
                                 disabled={!isConnected || isBusy}
-                                options={configOptions[CONFIG_OPTIONS.SPEED].map((name, index) => ({
-                                    value: index,
-                                    label: parseInt(name, 10) + 1
-                                }))}
+                                options={configOptions[CONFIG_OPTIONS.SPEED].map((name, index) => {
+                                    const num = parseInt(name, 10) + 1;
+                                    let label = num;
+                                    if (index == 0) {
+                                        label = t('speedSlowest', { speed: num })
+                                    }
+                                    if (index == configOptions[CONFIG_OPTIONS.SPEED].length - 1) {
+                                        label = t('speedFastest', { speed: num })
+                                    }
+                                    return ({
+                                        value: index,
+                                        label: label
+                                    });
+                                })}
                             />
                         </Row>
                         <Row alignedHeight>

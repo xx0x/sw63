@@ -22,6 +22,8 @@
     "firmware": "Oprogramowanie",
     "showLog": "Pokaż dziennik",
     "hideLog": "Ukryj dziennik",
+    "speedSlowest": "{{speed}} - Najwolniej",
+    "speedFastest": "{{speed}} - Najszybciej",
     "options": {
         "Czech, Slovak, German (East)": "Czeski, słowacki, niemiecki (wschód)",
         "English": "Angielski",

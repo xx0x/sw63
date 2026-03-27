@@ -22,6 +22,8 @@
     "firmware": "Firmware",
     "showLog": "Zobrazit log",
     "hideLog": "Skrýt log",
+    "speedSlowest": "{{speed}} – Nejpomalejší",
+    "speedFastest": "{{speed}} – Nejrychlejší",
     "options": {
         "Czech, Slovak, German (East)": "Čeština, Slovenština, Němčina (východ)",
         "English": "Angličtina",

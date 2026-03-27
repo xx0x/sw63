@@ -22,6 +22,8 @@
     "firmware": "Прошивка",
     "showLog": "Показати журнал",
     "hideLog": "Приховати журнал",
+    "speedSlowest": "{{speed}} - Найповільніше",
+    "speedFastest": "{{speed}} - Найшвидше",
     "options": {
         "Czech, Slovak, German (East)": "Чеська, словацька, східна німецька",
         "English": "Англійська",

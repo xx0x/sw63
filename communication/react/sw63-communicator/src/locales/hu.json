@@ -22,6 +22,8 @@
     "firmware": "Firmware",
     "showLog": "Napló megjelenítése",
     "hideLog": "Napló elrejtése",
+    "speedSlowest": "{{speed}} - Leglassabb",
+    "speedFastest": "{{speed}} - Leggyorsabb",
     "options": {
         "Czech, Slovak, German (East)": "Cseh, szlovák, keletnémet",
         "English": "Angol",

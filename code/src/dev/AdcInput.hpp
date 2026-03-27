@@ -1,16 +1,48 @@
+/*
+MIT License
+
+Copyright (c) 2026 Vaclav Mach (xx0x)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #pragma once
 
 #include <optional>
 #include "stm32l0xx_hal.h"
 
 /**
- * @brief Class to manage ADC input for single shot readings
+ * @brief Reads ADC channels in single-shot mode.
+ * @author Vaclav Mach (xx0x)
+ * @date 2026-02-02
  */
 class AdcInput
 {
 public:
+    /**
+     * @brief Maximum 12-bit ADC conversion value.
+     */
     static constexpr uint16_t kResolution = 4095; // 12-bit max value
 
+    /**
+     * @brief Defines GPIO and channel mapping for an ADC input.
+     */
     struct Config
     {
         GPIO_TypeDef *port;
@@ -19,9 +51,9 @@ public:
     };
 
     /**
-     * @brief Initializes ADC for single shot reading
-     * @param config ADC configuration (port, pin, channel)
-     * @return True if initialization was successful, false otherwise
+     * @brief Initializes ADC input with selected channel configuration.
+     * @param config ADC port, pin, and channel configuration.
+     * @return True when initialization succeeds.
      */
     bool Init(const Config &config)
     {
@@ -47,8 +79,8 @@ public:
     }
 
     /**
-     * @brief Deinitializes the ADC
-     * @return True if deinitialization was successful, false otherwise
+     * @brief Deinitializes ADC input and associated GPIO.
+     * @return True when deinitialization succeeds.
      */
     bool DeInit()
     {
@@ -68,8 +100,8 @@ public:
     }
 
     /**
-     * @brief Performs a single shot ADC reading
-     * @return ADC value (0 to kResolution) or std::nullopt if error
+     * @brief Performs one ADC conversion.
+     * @return ADC value or std::nullopt on failure.
      */
     std::optional<uint16_t> ReadSingleShot()
     {
@@ -113,6 +145,10 @@ public:
     }
 
 private:
+    /**
+     * @brief Initializes shared ADC peripheral.
+     * @return True when peripheral initialization succeeds.
+     */
     static bool InitAdc()
     {
         if (init_count_ > 0)
@@ -158,6 +194,9 @@ private:
         return true;
     }
 
+    /**
+     * @brief Deinitializes shared ADC peripheral when unused.
+     */
     static void DeInitAdc()
     {
         init_count_--;

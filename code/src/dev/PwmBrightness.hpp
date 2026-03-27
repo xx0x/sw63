@@ -1,17 +1,46 @@
+/*
+MIT License
+
+Copyright (c) 2026 Vaclav Mach (xx0x)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #pragma once
 
 #include "stm32l0xx_hal.h"
 
 /**
- * @brief Class to manage PWM brightness control
+ * @brief Drives display brightness with PWM on the OE pin.
+ * @author Vaclav Mach (xx0x)
+ * @date 2026-02-02
  */
 class PwmBrightness
 {
 public:
+    /**
+     * @brief Maximum 12-bit PWM compare value.
+     */
     static constexpr uint16_t kResolution = 4095; // 12-bit max value
 
     /**
-     * @brief This makes sure the OE is enabled (active low) so the display doesn't glitch on startup
+     * @brief Preconfigures OE pin to avoid startup display glitches.
      */
     void PreInit()
     {
@@ -25,8 +54,8 @@ public:
     }
 
     /**
-     * @brief Initializes PWM for brightness control on TIM22_CH1 (PA6)
-     * @return True if initialization was successful, false otherwise
+     * @brief Initializes TIM22 PWM channel for brightness control.
+     * @return True when initialization succeeds.
      */
     bool Init()
     {
@@ -84,6 +113,10 @@ public:
         return true;
     }
 
+    /**
+     * @brief Stops PWM output and releases related resources.
+     * @return True when deinitialization succeeds.
+     */
     bool DeInit()
     {
         if (!initialized_)
@@ -98,8 +131,8 @@ public:
     }
 
     /**
-     * @brief Sets brightness level from 0 to PwmBrightness::kResolution
-     * @param brightness Brightness level (0 = minimum, PwmBrightness::kResolution = full brightness)
+     * @brief Sets display brightness level.
+     * @param brightness Brightness value in range 0 to kResolution.
      */
     void Set(uint16_t brightness)
     {
@@ -123,7 +156,7 @@ public:
     }
 
     /**
-     * @brief Sets the lowest brightness
+     * @brief Sets minimum brightness level.
      */
     void Min()
     {
@@ -131,7 +164,7 @@ public:
     }
 
     /**
-     * @brief Sets the full brightness
+     * @brief Sets maximum brightness level.
      */
     void Max()
     {

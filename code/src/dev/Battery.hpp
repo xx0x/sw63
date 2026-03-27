@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2026 Vaclav Mach (xx0x)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #pragma once
 #include "dev/AdcInput.hpp"
 #include "dev/Pin.hpp"
@@ -5,10 +29,18 @@
 #include "stm32l0xx_hal.h"
 #include <algorithm>
 
+/**
+ * @brief Measures battery level using ADC and voltage reference compensation.
+ * @author Vaclav Mach (xx0x)
+ * @date 2026-02-02
+ */
 class Battery
 {
 
 public:
+    /**
+     * @brief Initializes ADC channels required for battery measurement.
+     */
     void Init()
     {
         // Initialize battery ADC (PA3)
@@ -22,6 +54,10 @@ public:
                            .channel = ADC_CHANNEL_VREFINT});
     }
 
+    /**
+     * @brief Reads and returns normalized battery level.
+     * @return Battery level in range 0.0 to 1.0.
+     */
     float GetLevel()
     {
         // Initialize GPIO for battery measurement enable (PB1)
@@ -74,6 +110,9 @@ public:
         return std::clamp(level, 0.0f, 1.0f);
     }
 
+    /**
+     * @brief Deinitializes battery measurement resources.
+     */
     void DeInit()
     {
         // Deactivate ADCs
@@ -95,6 +134,10 @@ private:
     // Internal voltage reference specifications for STM32L0
     static constexpr float VREFINT_VOLTAGE = 1.224f; // Typical VREFINT voltage in volts
 
+    /**
+     * @brief Calculates actual ADC reference voltage from VREFINT.
+     * @return Actual ADC reference voltage in volts.
+     */
     float GetActualVref()
     {
         // Read the internal voltage reference

@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2026 Vaclav Mach (xx0x)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #pragma once
 
 #include <bitset>
@@ -6,9 +30,17 @@
 #include "stm32l0xx_hal.h"
 
 template <size_t N>
+/**
+ * @brief Writes bit data to cascaded shift register outputs.
+ * @author Vaclav Mach (xx0x)
+ * @date 2026-02-02
+ */
 class ShiftRegister
 {
 public:
+    /**
+     * @brief Defines GPIO assignments for shift register signals.
+     */
     struct Config
     {
         Pin data;
@@ -16,6 +48,11 @@ public:
         Pin latch;
     };
 
+    /**
+     * @brief Initializes shift register GPIO pins.
+     * @param config Data, clock, and latch pin configuration.
+     * @return True when initialization succeeds.
+     */
     bool Init(const Config &config)
     {
         config_ = config;
@@ -45,6 +82,10 @@ public:
         return true;
     }
 
+    /**
+     * @brief Deinitializes shift register GPIO pins.
+     * @return True when deinitialization succeeds.
+     */
     bool DeInit()
     {
         if (!initialized_)
@@ -58,6 +99,10 @@ public:
         return true;
     }
 
+    /**
+     * @brief Shifts one full bitset frame to the output chain.
+     * @param data Bitset payload to write.
+     */
     void Write(const std::bitset<N> &data)
     {
         if (!initialized_)

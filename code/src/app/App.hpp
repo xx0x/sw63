@@ -18,7 +18,7 @@ public:
     static void Init();
     static void Loop();
 
-    static constexpr const char *kVersion = "1.0.0";
+    static constexpr const char *kVersion = "0.9";
 
     inline static Display display;
     inline static Settings settings;

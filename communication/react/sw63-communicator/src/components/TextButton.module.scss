@@ -1,0 +1,21 @@
+@use "../styles/common.scss" as *;
+
+.container {
+    background: transparent;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-transform: lowercase;
+    transition: text-shadow 0.2s, opacity 0.2s;
+
+    @include accessibilityFocus;
+
+    &.translucent {
+        opacity: 0.2;
+    }
+
+    &:hover {
+        text-shadow: 0 0 5px rgba(#fff, 0.9);
+    }
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, } from "react";
 import { useTranslation } from 'react-i18next'
 import styles from './Log.module.scss'
+import TextButton from "./TextButton";
 
 export default function Log({ contents }) {
 
@@ -26,14 +27,14 @@ export default function Log({ contents }) {
             }
             <div className={styles.toggleContainer}>
                 {showLog &&
-                    <button className={styles.toggle} onClick={() => setShowLog(false)}>
+                    <TextButton translucent onClick={() => setShowLog(false)}>
                         {t('hideLog')}
-                    </button>
+                    </TextButton>
                 }
                 {!showLog &&
-                    <button className={styles.toggle} onClick={() => setShowLog(true)}>
+                    <TextButton translucent onClick={() => setShowLog(true)}>
                         {t('showLog')}
-                    </button>
+                    </TextButton>
                 }
             </div>
         </>

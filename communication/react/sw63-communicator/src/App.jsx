@@ -13,6 +13,7 @@ import { languageOptions } from './i18n'
 import { CONFIG_OPTIONS, SW63Client } from './SW63Client'
 import Sw63Logo from './Sw63Logo'
 import { getTimeNow } from './utils'
+import TextButton from './components/TextButton'
 
 const serial_available = ('serial' in navigator);
 
@@ -42,6 +43,7 @@ function App() {
     const [batteryLevel, setBatteryLevel] = useState('N/A')
     const [version, setVersion] = useState('N/A')
 
+    const [languageModalOpen, setLanguageModalOpen] = useState(false)
 
     function isDeviceLostError(error) {
         const message = error instanceof Error ? error.message : String(error)
@@ -270,6 +272,11 @@ function App() {
                                     label: t(`options.${name}`, name)
                                 }))}
                             />
+                            <TextButton
+                                onClick={()=>setLanguageModalOpen(true)}
+                            >
+                                Info
+                            </TextButton>
                         </Row>
                         <Row alignedHeight>
                             <label className={styles.configLabel} htmlFor="style-select">{t('styleLabel')}: </label>

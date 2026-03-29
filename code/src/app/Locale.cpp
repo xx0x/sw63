@@ -19,30 +19,6 @@ Locale::TimeCoefficients Locale::GetTimeCoefficients() const
     }
 }
 
-int32_t Locale::HourOffsetWhenSaving(Display::ClockFace face, int minutes) const
-{
-    // Always decrement if minutes are negative (going to previous hour)
-    if (minutes < 0)
-    {
-        return -1;
-    }
-
-    // Use time coefficients to determine when to decrement based on face position
-    TimeCoefficients coefficients = GetTimeCoefficients();
-    switch (face)
-    {
-    case Display::ClockFace::RIGHT:
-        return -coefficients.first_quarter;
-    case Display::ClockFace::DOWN:
-        return -coefficients.half;
-    case Display::ClockFace::LEFT:
-        return -coefficients.third_quarter;
-    case Display::ClockFace::UP:
-    default:
-        return 0; // UP face never decrements
-    }
-}
-
 FrameSequence Locale::GetSequence(TimeType time_type) const
 {
     switch (time_type)
@@ -58,10 +34,10 @@ FrameSequence Locale::GetSequence(TimeType time_type) const
             return {ClockFrame::AFTER, ClockFrame::MINUTES_NUM, ClockFrame::MINUTES,
                     ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};
         case Language::DANISH:
+        case Language::POLISH:
             return {ClockFrame::MINUTES_NUM, ClockFrame::MINUTES, ClockFrame::AFTER,
                     ClockFrame::CLOCKFACE, ClockFrame::HOURS_NUM, ClockFrame::HOURS, ClockFrame::PM};
         case Language::CZECH:
-        case Language::POLISH:
         case Language::ENGLISH:
         case Language::GERMAN:
         default:
@@ -87,6 +63,30 @@ FrameSequence Locale::GetSequence(TimeType time_type) const
 
     default:
         return {};
+    }
+}
+
+int32_t Locale::HourOffsetWhenSaving(Display::ClockFace face, int minutes) const
+{
+    // Always decrement if minutes are negative (going to previous hour)
+    if (minutes < 0)
+    {
+        return -1;
+    }
+
+    // Use time coefficients to determine when to decrement based on face position
+    TimeCoefficients coefficients = GetTimeCoefficients();
+    switch (face)
+    {
+    case Display::ClockFace::RIGHT:
+        return -coefficients.first_quarter;
+    case Display::ClockFace::DOWN:
+        return -coefficients.half;
+    case Display::ClockFace::LEFT:
+        return -coefficients.third_quarter;
+    case Display::ClockFace::UP:
+    default:
+        return 0; // UP face never decrements
     }
 }
 

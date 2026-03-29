@@ -44,12 +44,12 @@ public:
      */
     enum class Language : uint8_t
     {
-        CZECH, // Also works for: SLOVAK, GERMAN (EAST)
+        CZECH, // Also works for: SLOVAK, UKRAINIAN, GERMAN (EAST)
         ENGLISH,
         GERMAN, // Also works for: DUTCH
         POLISH,
         HUNGARIAN,
-        NORDIC, // Also works for: NORWEGIAN, DANISH, SWEDISH, FINNISH
+        DANISH, // Also works for: NORWEGIAN, SWEDISH, FINNISH
         COUNT
     };
 
@@ -58,12 +58,12 @@ public:
      * @details   This array needs to be in the same order as the Language enum.
      */
     static constexpr const char *kLanguageNames[static_cast<size_t>(Language::COUNT)] = {
-        "Czech, Slovak, German (East)",
+        "Czech, Slovak, Ukrainian, German (East)",
         "English",
         "German, Dutch",
         "Polish",
         "Hungarian",
-        "Nordic"};
+        "Danish, Norwegian, Swedish, Finnish"};
 
     /**
      * @brief Each language has its' own coefficients for quarter/half/to adjustments.

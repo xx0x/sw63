@@ -4,8 +4,32 @@
 
 Sci-fi inspired electronic watch.
 
-*Currently MK4 in the development (out in 2026).*
+*MK4 in the development, out in 2026.*
 
+## How to tell the time?
+
+When the button is briefly pressed, SW63 tells you the time using a sequence of LED blinks. It's not a binary clock, it's inspired by the analog clock hands movement and uses quarters, halves and so on; similar to how people used to tell the time before the digital clock became popular.
+  
+**16:35**  
+*half past - four - hours - and - five - minutes - PM*
+
+**6:57**  
+*three - minutes - to - whole - seven - hours*
+
+Language can be changed in the watch menu to reflect the different ways different languages express the time ("half past five" in English is "half of six" in German etc).
+
+See [LANGUAGES.md](./LANGUAGES.md) for the full list and examples.
+
+## Controls
+
+**Short press:** Show the time  
+**Long press:** Enter Menu (setting the language and time)  
+**Extra long press:** Enter Secret settings  
+**Multiple short presses:** Show animation
+
+*In Menu / Secret settings:*  
+**Short press:** Change  
+**Long press:** Confirm and go to next
 
 ## BOM (DIY Kits)
 

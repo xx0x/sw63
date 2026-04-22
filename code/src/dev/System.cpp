@@ -92,23 +92,23 @@ void System::GpioInit()
     // GPIO_InitStruct.Pull = GPIO_NOPULL;          // No pull-up/pull-down
     // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Low speed is sufficient for LED
     // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    
+
     // Configure GPIO pin PA00 for BUTTON with interrupt
     GPIO_InitStruct.Pin = GPIO_PIN_0;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING; // Interrupt on falling edge (button press)
     GPIO_InitStruct.Pull = GPIO_PULLUP;          // Pull-up resistor
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Low speed is sufficient for button
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    
-    GPIO_InitStruct.Pin = GPIO_PIN_15;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; // Interrupt on rising edge (power plugged in)
-    GPIO_InitStruct.Pull = GPIO_NOPULL;          // No pull-up/pull-down
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Low speed is sufficient for power detect
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
 
-    // Configure GPIO pin PB08 for CHARGE_STATE with interrupt
+    GPIO_InitStruct.Pin = GPIO_PIN_15;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;  // Interrupt on rising edge (power plugged in)
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;        // Keep line stable in stop mode to avoid false wakeups
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Low speed is sufficient for power detect
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // Configure GPIO pin PB08 for CHARGE_STATE (no need for interrupt, just input)
     GPIO_InitStruct.Pin = GPIO_PIN_8;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING; // Interrupt on falling edge (charging detect)
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;      // Input mode for charging detect
     GPIO_InitStruct.Pull = GPIO_PULLUP;          // Pull-up resistor
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // Low speed is sufficient for CHARGE_STATE
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -117,7 +117,7 @@ void System::GpioInit()
     HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 
-    // Enable EXTI4_15 interrupt for CHARGE_STATE and POWER plugged in
+    // Enable EXTI4_15 interrupt for POWER plugged in
     HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
 }
@@ -224,15 +224,37 @@ void System::ErrorHandler()
 
 void System::Sleep()
 {
+    // SysTick and USB IRQ can otherwise wake STOP mode without a valid wake condition.
+    HAL_SuspendTick();
+    HAL_NVIC_DisableIRQ(USB_IRQn);
+
+    // Hard shutdown USB peripheral before STOP to avoid stale high-current states.
+    __HAL_RCC_USB_FORCE_RESET();
+    __HAL_RCC_USB_RELEASE_RESET();
+    __HAL_RCC_USB_CLK_DISABLE();
+
+    GPIO_InitTypeDef GPIO_InitStruct = {};
+    GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
-    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_8);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_15);
 
+    HAL_NVIC_ClearPendingIRQ(EXTI0_1_IRQn);
+    HAL_NVIC_ClearPendingIRQ(EXTI4_15_IRQn);
+    HAL_NVIC_ClearPendingIRQ(USB_IRQn);
+
     // Enter Stop mode
-    // The system will wake up on EXTI interrupt (button press)
+    // The system will wake up on EXTI interrupt (button or USB power detect).
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
     // When we wake up from Stop mode, the system clock needs to be reconfigured
     // because the HSI oscillator was stopped
     System::ClockConfig();
+    System::UsbInit();
+
+    HAL_NVIC_ClearPendingIRQ(USB_IRQn);
+    HAL_ResumeTick();
 }

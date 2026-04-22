@@ -92,6 +92,17 @@ public:
     bool Init();
 
     /**
+     * @brief Fully deinitializes USB stack before entering low-power mode.
+     */
+    void SuspendForSleep();
+
+    /**
+     * @brief Reinitializes USB stack after wakeup.
+     * @return True when reinitialization succeeds.
+     */
+    bool ResumeAfterWakeup();
+
+    /**
      * @brief Processes incoming protocol packets. Should be called regularly from the main loop to handle USB events and dispatch messages.
      */
     void Process();

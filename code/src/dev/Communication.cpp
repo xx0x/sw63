@@ -17,6 +17,32 @@ bool Communication::Init()
     return true;
 }
 
+void Communication::SuspendForSleep()
+{
+    if (!tusb_inited())
+    {
+        return;
+    }
+
+    // Tell host we disconnect before dropping the USB peripheral.
+    tud_disconnect();
+    tud_task();
+
+    tusb_deinit(0);
+    ResetReceiveBuffer();
+}
+
+bool Communication::ResumeAfterWakeup()
+{
+    if (!tusb_init())
+    {
+        return false;
+    }
+
+    ResetReceiveBuffer();
+    return true;
+}
+
 void Communication::Process()
 {
     // Process TinyUSB tasks

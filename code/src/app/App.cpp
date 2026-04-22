@@ -132,9 +132,11 @@ void App::Sleep()
 
     display.DeInit();
     battery.DeInit();
+    com.SuspendForSleep();
 
     System::Sleep();
 
+    com.ResumeAfterWakeup();
     display.Init();
     battery.Init();
 }

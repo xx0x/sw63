@@ -98,7 +98,7 @@ void LayerSecret::Update()
             App::display.SetNumber(std::to_underlying(App::settings.GetConfig().num_style) + 1, Display::NumStyle::BAR_REVERSED);
             break;
         case Settings::BATTERY_LEVEL:
-            App::display.SetNumber(battery_level_ * 12.f + 1, Display::NumStyle::BAR_REVERSED);
+            App::display.SetNumber(constrain(battery_level_ * 12.f + 1, 1, 12), Display::NumStyle::BAR_REVERSED);
             break;
         case Settings::EXIT:
         default:

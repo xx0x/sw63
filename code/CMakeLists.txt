@@ -63,6 +63,9 @@ set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -Wl,--start-group -lc -lm -Wl,--en
 
 project(sw63)
 
+# Build date in YYYYMMDD format for firmware version string.
+string(TIMESTAMP SW63_BUILD_DATE "%Y%m%d")
+
 # File path variables
 set(BIN_FILE sw63.bin)
 set(ELF_FILE sw63.elf)
@@ -159,6 +162,7 @@ add_executable(sw63 ${SOURCES})
 target_compile_definitions(sw63 PRIVATE
     USE_HAL_DRIVER 
     STM32L052xx
+    SW63_BUILD_DATE="${SW63_BUILD_DATE}"
     $<$<CONFIG:Debug>:DEBUG>
 )
 

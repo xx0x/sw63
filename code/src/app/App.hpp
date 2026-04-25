@@ -36,6 +36,12 @@ SOFTWARE.
 #include <cstdint>
 #include <memory>
 
+#ifdef SW63_BUILD_DATE
+#define SW63_VERSION_BUILD_SUFFIX " (build " SW63_BUILD_DATE ")"
+#else
+#define SW63_VERSION_BUILD_SUFFIX ""
+#endif
+
 /**
  * @brief Coordinates application initialization and runtime loop.
  * @author Vaclav Mach (xx0x)
@@ -57,7 +63,7 @@ public:
     /**
      * @brief Firmware version string exposed by the app to the Web App (not available through the watch UI).
      */
-    static constexpr const char *kVersion = "0.9.1";
+    static constexpr const char *kVersion = "0.9.1" SW63_VERSION_BUILD_SUFFIX;
 
     /**
      * @brief Display controller.
@@ -143,3 +149,5 @@ private:
 
     static inline bool trigger_intro_flag_ = false;
 };
+
+#undef SW63_VERSION_BUILD_SUFFIX

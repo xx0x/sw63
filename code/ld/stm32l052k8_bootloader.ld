@@ -38,7 +38,7 @@ _Min_Stack_Size = 0x200;   /* required amount of stack - 512 bytes should be eno
 MEMORY
 {
     FLASH (rx)  : ORIGIN = 0x08004000, LENGTH = 64K - 16K    /* STM32L052K8 has 64KB Flash, first 16 KB is bootloader */
-    RAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 8K     /* STM32L052K8 has 8KB RAM */
+    RAM (rw)    : ORIGIN = 0x20000000, LENGTH = 8K     /* STM32L052K8 has 8KB RAM */
 }
 
 /* Define output sections */
@@ -85,20 +85,20 @@ SECTIONS
         __exidx_end = .;
     } >FLASH
 
-    .preinit_array     :
+    .preinit_array (READONLY) :
     {
         PROVIDE_HIDDEN (__preinit_array_start = .);
         KEEP (*(.preinit_array*))
         PROVIDE_HIDDEN (__preinit_array_end = .);
     } >FLASH
-    .init_array :
+    .init_array (READONLY) :
     {
         PROVIDE_HIDDEN (__init_array_start = .);
         KEEP (*(SORT(.init_array.*)))
         KEEP (*(.init_array*))
         PROVIDE_HIDDEN (__init_array_end = .);
     } >FLASH
-    .fini_array :
+    .fini_array (READONLY) :
     {
         PROVIDE_HIDDEN (__fini_array_start = .);
         KEEP (*(SORT(.fini_array.*)))

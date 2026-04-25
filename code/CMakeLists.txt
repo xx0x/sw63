@@ -113,6 +113,7 @@ set(SOURCES
     ${HAL_DRIVER_PATH}/Src/stm32l0xx_hal_pcd_ex.c
     
     # Application sources
+    src/syscalls.c
     src/main.cpp
     src/app/App.cpp
     src/app/AnimationRunner.cpp

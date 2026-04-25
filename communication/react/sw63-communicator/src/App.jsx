@@ -31,7 +31,15 @@ function App() {
         setDeviceLog((prevLog) => (clear ? '' : prevLog) + timeString + message + '\n')
     }
 
-    const [client] = useState(() => new SW63Client(appendDeviceLog))
+    const [client] = useState(() => new SW63Client({
+        logMessage: appendDeviceLog,
+        serialDisconnectHandler: async () => {
+            setIsConnected(false)
+            setIsBusy(false)
+            setErrorMessage('')
+        }
+    }))
+    
     const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')

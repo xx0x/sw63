@@ -74,9 +74,58 @@ async function readProtocolResponse(serialPort) {
 }
 
 export class SW63Client {
-    constructor(logMessage) {
+    constructor(options = {}) {
+        const normalizedOptions = options ?? {}
+
         this.port = null
-        this.logMessage = typeof logMessage === 'function' ? logMessage : null
+        this.options = { ...normalizedOptions }
+        this.logMessage = typeof normalizedOptions.logMessage === 'function' ? normalizedOptions.logMessage : null
+        this.disconnectHandler = typeof normalizedOptions.serialDisconnectHandler === 'function'
+            ? normalizedOptions.serialDisconnectHandler
+            : null
+        this.serialDisconnectListener = null
+    }
+
+    setDisconnectHandler(handler) {
+        this.disconnectHandler = typeof handler === 'function' ? handler : null
+    }
+
+    attachSerialDisconnectListener() {
+        if (!('serial' in navigator) || this.serialDisconnectListener) {
+            return
+        }
+
+        this.serialDisconnectListener = async (event) => {
+            if (!this.port || event.target !== this.port) {
+                return
+            }
+
+            const disconnectedPort = this.port
+            this.port = null
+            this.detachSerialDisconnectListener()
+
+            try {
+                if (disconnectedPort.readable || disconnectedPort.writable) {
+                    await disconnectedPort.close()
+                }
+            } catch {
+                // Device is already gone; state has been updated above.
+            }
+
+            if (this.disconnectHandler) {
+                await this.disconnectHandler()
+            }
+        }
+
+        navigator.serial.addEventListener('disconnect', this.serialDisconnectListener)
+    }
+
+    detachSerialDisconnectListener() {
+        if (!('serial' in navigator) || !this.serialDisconnectListener) {
+            return
+        }
+        navigator.serial.removeEventListener('disconnect', this.serialDisconnectListener)
+        this.serialDisconnectListener = null
     }
 
     logProtocolMessage(direction, payload) {
@@ -98,12 +147,16 @@ export class SW63Client {
         }
 
         this.port = selectedPort
+        this.attachSerialDisconnectListener()
     }
 
     async disconnect() {
         if (!this.port) {
+            this.detachSerialDisconnectListener()
             return
         }
+
+        this.detachSerialDisconnectListener()
 
         try {
             if (this.port.readable || this.port.writable) {

@@ -12,6 +12,7 @@ pcb/sw63_mk4_v1/sw63_mk4_v1-backups
 pcb/sw63_mk4_v2/jlcpcb/gerber
 pcb/sw63_mk4_v2/sw63_mk4_v2-backups
 .vscode/settings.json
+.vscode/task-history.ndjson
 code/build
 communication/python/venv
 pcb/sw63_mk4_v2/.history/

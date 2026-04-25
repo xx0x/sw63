@@ -115,7 +115,7 @@
         {
             "label": "sw63_vaclav_config",
             "type": "shell",
-            "command": "./sw63_client.sh --set-config 6 0 0",
+            "command": "./sw63_client.sh --set-config 5 0 0",
             "options": {
                 "cwd": "${workspaceRoot}/communication/python"
             },

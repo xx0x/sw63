@@ -39,7 +39,6 @@ function App() {
             setErrorMessage('')
         }
     }))
-    
     const [isConnected, setIsConnected] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -189,6 +188,7 @@ function App() {
                     className={classNames(styles.logo, {
                         [styles.inactive]: !isConnected
                     })}
+                    onButtonClick={isConnected ? () => runClientCommand('displayTime', 'Display time command sent.') : null}
                 />
                 <div
                     className={styles.appLanguage}
@@ -281,7 +281,7 @@ function App() {
                                 }))}
                             />
                             <TextButton
-                                onClick={()=>setLanguageModalOpen(true)}
+                                onClick={() => setLanguageModalOpen(true)}
                             >
                                 Info
                             </TextButton>

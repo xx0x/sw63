@@ -57,7 +57,7 @@ public:
     /**
      * @brief Firmware version string exposed by the app to the Web App (not available through the watch UI).
      */
-    static constexpr const char *kVersion = "0.9";
+    static constexpr const char *kVersion = "0.9.1";
 
     /**
      * @brief Display controller.

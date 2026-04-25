@@ -104,7 +104,7 @@ public:
 
         // Map battery voltage range to 0.0-1.0
         // 4.2V = full (1.0), 2.8V = empty (0.0)
-        float level = mapf(battery_voltage, 2.8f, 4.15f, 0.0f, 1.0f);
+        float level = map(battery_voltage, 2.8f, 4.15f, 0.0f, 1.0f, MapClamp::TRUE);
 
         // Clamp to valid range
         return std::clamp(level, 0.0f, 1.0f);

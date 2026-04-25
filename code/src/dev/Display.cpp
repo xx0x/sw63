@@ -78,9 +78,12 @@ void Display::TriggerAutoBrightness()
     }
     uint16_t ambient_reading = ambient_result.value();
 
-    // Map the ADC value (0-4095) to brightness range (1-1023)
-    // We want some brightness even if there's no light
-    uint16_t mapped_brightness = map(ambient_reading, 0, AdcInput::kResolution, 1, kMaxBrightness);
+    // Map the ADC reading using a linear mapping table
+    // Makes it lighter in dark light compared to a direct mapping (also prevents 0 brightness)
+    static constexpr MapDef<int, 5> kBrightnessMap = {
+        {0, 512, 2048, 3072, 4095}, // in
+        {16, 1024, 2048, 3072, 4095}}; // out
+    uint16_t mapped_brightness = curve_map(ambient_reading, kBrightnessMap, MapClamp::TRUE);
 
     // Set the brightness
     brightness_.Set(mapped_brightness);

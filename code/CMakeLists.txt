@@ -201,7 +201,7 @@ add_custom_command(TARGET sw63 POST_BUILD
 
 # Create flash target
 add_custom_target(flash
-    COMMAND JLinkExe -CommanderScript ${JLINK_FILE}
+    COMMAND JLinkExe -NoGui 1 -CommanderScript ${JLINK_FILE}
     DEPENDS sw63
     COMMENT "Flashing sw63"
 )
@@ -222,7 +222,7 @@ add_custom_command(TARGET sw63 POST_BUILD
 
 # Create flash target for merged hex with bootloader
 add_custom_target(flash-with-bootloader
-    COMMAND JLinkExe -CommanderScript ${JLINK_FILE_WITH_BOOTLOADER}
+    COMMAND JLinkExe -NoGui 1 -CommanderScript ${JLINK_FILE_WITH_BOOTLOADER}
     DEPENDS sw63
     COMMENT "Flashing sw63 with bootloader"
 )
